@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float sensitivity = 1.0f;
 
     [SerializeField] private Transform viewTarget = null;
-    [SerializeField] private Vector3 offset = Vector3.zero;
+    [SerializeField] private Vector3 targetOffset = Vector3.zero;
 
     private void LateUpdate()
     {
@@ -17,6 +17,6 @@ public class CameraController : MonoBehaviour
 
         transform.eulerAngles = new Vector3(-pitch, yaw);
 
-        transform.position = viewTarget.position - (transform.forward * offset.z) + (transform.up * offset.y) + (transform.right * offset.x);
+        transform.position = viewTarget.position - (transform.forward * targetOffset.z) + (transform.up * targetOffset.y) + (transform.right * targetOffset.x);
     }
 }

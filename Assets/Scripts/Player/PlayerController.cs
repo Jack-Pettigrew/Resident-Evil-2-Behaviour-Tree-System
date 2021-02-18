@@ -37,24 +37,40 @@ namespace DD.Core.Control
         {
             inputDir =  ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
-            if(inputDir.sqrMagnitude > 0)
+            isSprinting = Input.GetKey(KeyCode.LeftShift);
+
+            Turn();
+
+            Move();
+        }
+
+        /// <summary>
+        /// Turns Player according to movement type (Strafe or Input Direction).
+        /// </summary>
+        private void Turn()
+        {
+            if (inputDir.sqrMagnitude > 0)
             {
                 float targetAngle;
 
                 if (!isSprinting) // STRAFE (Camera Forward)
                 {
                     targetAngle = cameraTransform.eulerAngles.y;
-                    transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothingVar, turnSpeedScalar);
-
-                    inputDir = transform.rotation * inputDir;
                 }
                 else    // Input Forward
                 {
-
+                    targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + cameraTransform.localEulerAngles.y;
                 }
-            }
 
-            // Gravity
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothingVar, turnSpeedScalar);
+            }
+        }
+
+        /// <summary>
+        /// Moves Player according to movement type (strafe or Input Direction).
+        /// </summary>
+        private void Move()
+        {
             if (controller.isGrounded)
             {
                 yVelocity = groundedGravity;
@@ -64,9 +80,18 @@ namespace DD.Core.Control
                 yVelocity += gravity * Time.deltaTime;
             }
 
-            // Move
-            velocity = (inputDir * inputDir.magnitude * walkSpeed) + (Vector3.up * yVelocity);
-            controller.Move(velocity * Time.deltaTime);
+            if (!isSprinting) // Strafing
+            {
+                inputDir = transform.rotation * inputDir;
+                velocity = (inputDir * inputDir.magnitude * walkSpeed) + (Vector3.up * yVelocity);
+                controller.Move(velocity * Time.deltaTime);
+            }
+            else // Input Forward Based
+            {
+                velocity = (transform.forward * inputDir.magnitude * runSpeed) + (Vector3.up * yVelocity);
+                controller.Move(velocity * Time.deltaTime);
+            }
         }
     }
+
 }
