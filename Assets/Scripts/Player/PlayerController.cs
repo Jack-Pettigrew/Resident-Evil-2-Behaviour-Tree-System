@@ -25,7 +25,7 @@ namespace DD.Core.Control
         [SerializeField] private float gravity = Physics.gravity.y;
 
         [SerializeField] private Transform cameraTransform = null;
-        [SerializeField] private float turnSpeedScalar = 5.0f;
+        [SerializeField] private float turnSpeedScalar = 0.5f;
         private float turnSmoothingVar = 0.0f;
 
         private void Awake()
