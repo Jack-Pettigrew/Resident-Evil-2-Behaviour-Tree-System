@@ -10,6 +10,7 @@ namespace DD.Core.Control
         [SerializeField] private bool ignoreInput = false;
 
         private CharacterController controller = null;
+        [SerializeField] private Animator ani = null;
 
         [Header("Locomotion")]
         [SerializeField] private float walkSpeed = 1.0f;
@@ -31,17 +32,27 @@ namespace DD.Core.Control
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+
+            if(ani == null)
+            {
+                ani = GetComponentInChildren<Animator>();
+
+                if(ani == null)
+                {
+                    Debug.LogError($"No Animator found for {name}");
+                }
+            }
         }
 
         void Update()
         {
             inputDir =  ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
-            isSprinting = Input.GetKey(KeyCode.LeftShift);
-
             Turn();
 
             Move();
+
+            UpdateAnimations();
         }
 
         /// <summary>
@@ -71,6 +82,7 @@ namespace DD.Core.Control
         /// </summary>
         private void Move()
         {
+            // Gravity
             if (controller.isGrounded)
             {
                 yVelocity = groundedGravity;
@@ -80,10 +92,20 @@ namespace DD.Core.Control
                 yVelocity += gravity * Time.deltaTime;
             }
 
+            // Sprint Check
+            if(isSprinting && inputDir.sqrMagnitude <= 0)
+            {
+                isSprinting = false;
+            }
+            else if(!isSprinting)
+            {
+                isSprinting = Input.GetKeyDown(KeyCode.LeftShift);
+            }
+
+            // Move
             if (!isSprinting) // Strafing
             {
-                inputDir = transform.rotation * inputDir;
-                velocity = (inputDir * inputDir.magnitude * walkSpeed) + (Vector3.up * yVelocity);
+                velocity = ((transform.rotation * inputDir) * inputDir.magnitude * walkSpeed) + (Vector3.up * yVelocity);
                 controller.Move(velocity * Time.deltaTime);
             }
             else // Input Forward Based
@@ -91,6 +113,13 @@ namespace DD.Core.Control
                 velocity = (transform.forward * inputDir.magnitude * runSpeed) + (Vector3.up * yVelocity);
                 controller.Move(velocity * Time.deltaTime);
             }
+        }
+
+        private void UpdateAnimations()
+        {
+            ani.SetFloat("VelX", inputDir.x);
+            ani.SetFloat("VelY", inputDir.z);
+            ani.SetBool("isSprinting", isSprinting);
         }
     }
 
