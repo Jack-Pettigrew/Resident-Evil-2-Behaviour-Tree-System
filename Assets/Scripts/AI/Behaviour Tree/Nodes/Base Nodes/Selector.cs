@@ -34,6 +34,7 @@ namespace DD.AI.BehaviourTree
 
         public override NodeState Evaluate()
         {
+            // Process all until Success
             foreach (Node node in nodes)
             {
                 switch (node.Evaluate())
