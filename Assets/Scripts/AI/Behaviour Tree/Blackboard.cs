@@ -16,7 +16,11 @@ namespace DD.AI.BehaviourTree
 
         public static object GetFromBlackboard(string keyName)
         {
-            return blackboardDictionary[keyName.ToLower()];
+            object temp = null;
+
+            blackboardDictionary.TryGetValue(keyName.ToLower(), out temp);
+
+            return temp;
         }
 
         public static void RemoveFromBlackboard(string keyName)

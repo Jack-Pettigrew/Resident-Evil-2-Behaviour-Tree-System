@@ -13,7 +13,7 @@ namespace DD.AI.BehaviourTree
         public MoveToNode(AIController ai)
         {
             this.ai = ai;
-            this.target = (Transform)Blackboard.GetFromBlackboard("Spawn");
+            this.target = (Transform)Blackboard.GetFromBlackboard("Player");
         }
 
         public override NodeState Evaluate()

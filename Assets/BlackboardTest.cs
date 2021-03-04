@@ -9,7 +9,7 @@ namespace DD.AI.BehaviourTree
         // Start is called before the first frame update
         void Awake()
         {
-            Blackboard.AddToBlackboard("Spawn", FindObjectOfType<CharacterController>().transform);
+            Blackboard.AddToBlackboard("Player", FindObjectOfType<CharacterController>().transform);
         }
     }
 
