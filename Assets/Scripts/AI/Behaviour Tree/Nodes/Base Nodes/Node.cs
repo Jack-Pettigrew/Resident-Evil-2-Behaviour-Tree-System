@@ -6,8 +6,6 @@ namespace DD.AI.BehaviourTree
 {
     public abstract class Node
     {
-        public NodeState NodeState { private set; get; }
-
         public abstract NodeState Evaluate();
     }
 
