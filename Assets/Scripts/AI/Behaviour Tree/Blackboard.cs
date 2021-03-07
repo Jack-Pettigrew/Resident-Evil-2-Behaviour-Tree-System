@@ -14,13 +14,37 @@ namespace DD.AI.BehaviourTree
             blackboardDictionary.Add(keyName.ToLower(), value);
         }
 
+        /// <summary>
+        /// Returns variable from Blackboard dictionary. Allocates memory.
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns>'object' typed variable. NULL on not found.</returns>
         public static object GetFromBlackboard(string keyName)
         {
-            object temp = null;
+            object temp;
 
             blackboardDictionary.TryGetValue(keyName.ToLower(), out temp);
 
             return temp;
+        }
+
+        /// <summary>
+        /// Retrieves variable from Blackboard dictionary without allocating memory (Faster than GetFromBlackboard).
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="blackboardObject"></param>
+        /// <returns>Success?</returns>
+        public static bool GetFromBlackboardNonAlloc(string keyName, out object blackboardObject)
+        {
+            if(blackboardDictionary.TryGetValue(keyName.ToLower(), out blackboardObject))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public static void RemoveFromBlackboard(string keyName)
