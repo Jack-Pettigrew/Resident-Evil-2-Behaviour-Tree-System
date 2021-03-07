@@ -11,6 +11,8 @@ namespace DD.AI.Controllers
 
         [SerializeField] private LayerMask layerMask;
 
+        private float currentRotVel = 0;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -31,7 +33,12 @@ namespace DD.AI.Controllers
 
         public void Move(Vector3 dir)
         {
-            transform.position = transform.position - (dir.normalized * 1.0f * Time.deltaTime);
+            dir = dir.normalized;
+            Vector3 vel = dir * 1.0f;
+            transform.position += vel * Time.deltaTime;
+
+            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, 1.0f);
         }
     }
 

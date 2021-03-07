@@ -13,12 +13,15 @@ namespace DD.AI.BehaviourTree
         public MoveToNode(AIController ai)
         {
             this.ai = ai;
-            this.target = (Transform)Blackboard.GetFromBlackboard("Player");
+
+            object result;
+            Blackboard.GetFromBlackboardNonAlloc("Player", out result);
+            target = (Transform)result;
         }
 
         public override NodeState Evaluate()
         {
-            Vector3 targetDir = ai.transform.position - target.position;
+            Vector3 targetDir = target.position - ai.transform.position;
 
             if(targetDir.sqrMagnitude >= 0.5f)
             {
