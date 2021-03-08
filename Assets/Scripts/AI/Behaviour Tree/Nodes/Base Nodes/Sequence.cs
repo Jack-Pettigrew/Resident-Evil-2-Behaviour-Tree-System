@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
     public class Sequence : Node
     {
         protected List<Node> nodes = new List<Node>();
         private int currentNodeIndex = 0;
 
-        public Sequence(List<Node> nodes)
+        public Sequence(BehaviourTree tree, List<Node> nodes) : base(tree)
         {
             this.nodes = nodes;
         }

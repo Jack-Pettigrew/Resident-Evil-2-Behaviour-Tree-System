@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
     public class Selector : Node
     {
@@ -27,7 +27,7 @@ namespace DD.AI.BehaviourTree
          */
 
 
-        public Selector(List<Node> nodes)
+        public Selector(BehaviourTree tree, List<Node> nodes) : base(tree)
         {
             this.nodes = nodes;
         }

@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
-    public abstract class Node
+    [System.Serializable]
+    public class Node
     {
-        public abstract NodeState Evaluate();
+        private BehaviourTree behaviourTree;
+
+        public Node(BehaviourTree tree)
+        {
+            behaviourTree = tree;
+        }
+
+        public virtual NodeState Evaluate()
+        {
+            return NodeState.FAILED;
+        }
     }
 
     public enum NodeState

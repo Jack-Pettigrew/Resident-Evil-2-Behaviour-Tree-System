@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
     public class MoveToNode : Node
     {
-        private AIController ai = null;
+        private AIBeahviourTreeController ai = null;
         private Transform target = null;
 
-        public MoveToNode(AIController ai)
+        public MoveToNode(BehaviourTree tree, AIBeahviourTreeController ai) : base(tree)
         {
             this.ai = ai;
 
             object result;
-            Blackboard.GetFromBlackboardNonAlloc("Player", out result);
+            Blackboard.GetFromStaticBlackboardNonAlloc("Player", out result);
             target = (Transform)result;
         }
 

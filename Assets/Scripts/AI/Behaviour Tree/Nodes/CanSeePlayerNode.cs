@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
     public class CanSeePlayerNode : Node
     {
@@ -11,7 +11,7 @@ namespace DD.AI.BehaviourTree
         private float fovRange = 2.0f;
         private LayerMask layerMask = new LayerMask();
 
-        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange)
+        public CanSeePlayerNode(BehaviourTree tree, Transform transform, float fovAngle, float fovRange) : base(tree)
         {
             this.transform = transform;
             this.fovAngle = fovAngle;
@@ -19,7 +19,7 @@ namespace DD.AI.BehaviourTree
             this.layerMask = LayerMask.NameToLayer("Player");
         }
 
-        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange, LayerMask layerMask)
+        public CanSeePlayerNode(BehaviourTree tree,Transform transform, float fovAngle, float fovRange, LayerMask layerMask) : base(tree)
         {
             this.transform = transform;
             this.fovAngle = fovAngle;
@@ -37,12 +37,12 @@ namespace DD.AI.BehaviourTree
 
                 if (Mathf.Abs(Vector3.Angle(transform.forward, targetDir)) <= fovAngle) // Can See Player
                 {
-                    Debug.Log("Can See");
+                    //Debug.Log("Can See");
                     return NodeState.SUCCESSFUL;
                 }
             }
 
-            Debug.Log("Can't See");
+            //Debug.Log("Can't See");
             return NodeState.FAILED;
         }
     }

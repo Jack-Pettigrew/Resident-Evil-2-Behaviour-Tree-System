@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
     public class DeleteSelfNode : Node
     {
         private Transform transform = null;
 
-        public DeleteSelfNode(Transform transform)
+        public DeleteSelfNode(BehaviourTree tree, Transform transform) : base(tree)
         {
             this.transform = transform;
         }

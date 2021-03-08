@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.AI.Controllers;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
     public class JumpNode : Node
     {
-        private AIController ai = null;
+        private AIBeahviourTreeController ai = null;
 
         private const float TIMERLENGTH = 3.0f;
         private float timer = TIMERLENGTH;
 
-        public JumpNode(AIController ai)
+        public JumpNode(BehaviourTree tree, AIBeahviourTreeController ai) : base(tree)
         {
             this.ai = ai;
         }
