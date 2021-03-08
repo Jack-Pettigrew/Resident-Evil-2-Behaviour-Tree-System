@@ -7,7 +7,7 @@ namespace DD.AI.BehaviourTreeSystem
     [System.Serializable]
     public class Node
     {
-        private BehaviourTree behaviourTree;
+        protected BehaviourTree behaviourTree;
 
         public Node(BehaviourTree tree)
         {

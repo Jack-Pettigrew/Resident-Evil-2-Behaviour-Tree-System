@@ -10,6 +10,12 @@ namespace DD.AI.BehaviourTreeSystem
         private Node rootNode = null;
 
         // Blackboard Solution Here
+        public Blackboard Blackboard { private set; get; }
+
+        public BehaviourTree()
+        {
+            Blackboard = new Blackboard();
+        }
 
         public void SetBehaviourTree(Node rootNode)
         {

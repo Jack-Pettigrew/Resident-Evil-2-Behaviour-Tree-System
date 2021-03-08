@@ -15,7 +15,7 @@ namespace DD.AI.BehaviourTreeSystem
             this.ai = ai;
 
             object result;
-            Blackboard.GetFromStaticBlackboardNonAlloc("Player", out result);
+            behaviourTree.Blackboard.GetFromBlackboardNonAlloc("Player", out result);
             target = (Transform)result;
         }
 

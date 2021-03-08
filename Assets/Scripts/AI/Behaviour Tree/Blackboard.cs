@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace DD.AI.BehaviourTree
+namespace DD.AI.BehaviourTreeSystem
 {
-    public static class Blackboard
+    public class Blackboard
     {
-        private static Dictionary<string, object> blackboardDictionary = new Dictionary<string, object>();
+        private Dictionary<string, object> blackboard;
 
-        public static void AddToBlackboard(string keyName, object value)
+        public Blackboard()
         {
-            blackboardDictionary.Add(keyName.ToLower(), value);
+            blackboard = new Dictionary<string, object>();
+        }
+
+        public void AddToBlackboard(string keyName, object value)
+        {
+            blackboard.Add(keyName.ToLower(), value);
         }
 
         /// <summary>
@@ -19,11 +24,11 @@ namespace DD.AI.BehaviourTree
         /// </summary>
         /// <param name="keyName"></param>
         /// <returns>'object' typed variable. NULL on not found.</returns>
-        public static object GetFromBlackboard(string keyName)
+        public object GetFromBlackboard(string keyName)
         {
             object temp;
 
-            blackboardDictionary.TryGetValue(keyName.ToLower(), out temp);
+            blackboard.TryGetValue(keyName.ToLower(), out temp);
 
             return temp;
         }
@@ -34,9 +39,9 @@ namespace DD.AI.BehaviourTree
         /// <param name="keyName"></param>
         /// <param name="blackboardObject"></param>
         /// <returns>Success?</returns>
-        public static bool GetFromBlackboardNonAlloc(string keyName, out object blackboardObject)
+        public bool GetFromBlackboardNonAlloc(string keyName, out object blackboardObject)
         {
-            if(blackboardDictionary.TryGetValue(keyName.ToLower(), out blackboardObject))
+            if (blackboard.TryGetValue(keyName.ToLower(), out blackboardObject))
             {
                 return true;
             }
@@ -44,20 +49,18 @@ namespace DD.AI.BehaviourTree
             {
                 return false;
             }
-
         }
 
-        public static void RemoveFromBlackboard(string keyName)
+        public bool RemoveFromBlackboard(string keyName)
         {
-            if(blackboardDictionary.Remove(keyName.ToLower()))
+            if (blackboard.Remove(keyName.ToLower()))
             {
-                // Success
+                return true;
             }
             else
             {
-                // Not found
+                return false;
             }
         }
     }
-
 }
