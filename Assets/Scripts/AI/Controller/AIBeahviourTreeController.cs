@@ -20,9 +20,9 @@ namespace DD.AI.Controllers
             behaviourTree = new BehaviourTree();
 
             // Player Test
-            behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
+            Blackboard.AddToSharedBlackboard("PlayerTransform", FindObjectOfType<Core.Control.PlayerController>().transform);
 
-            Sequence followSequence = new Sequence(behaviourTree, new List<Node> { new MoveToNode(behaviourTree, this), new JumpNode(behaviourTree,this) });
+            Sequence followSequence = new Sequence(behaviourTree, new List<Node> { new MoveToPlayerNode(behaviourTree, this), new JumpNode(behaviourTree,this) });
 
             CanSeePlayerNode canSeePlayerNode = new CanSeePlayerNode(behaviourTree,transform, 45.0f, 2.0f, playerLayerMask);
             DeleteSelfNode deleteSelfNode = new DeleteSelfNode(behaviourTree,transform);

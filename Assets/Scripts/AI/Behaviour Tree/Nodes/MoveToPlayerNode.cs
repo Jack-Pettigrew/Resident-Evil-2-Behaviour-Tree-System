@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class MoveToNode : Node
+    public class MoveToPlayerNode : Node
     {
         private AIBeahviourTreeController ai = null;
         private Transform target = null;
 
-        public MoveToNode(BehaviourTree tree, AIBeahviourTreeController ai) : base(tree)
+        public MoveToPlayerNode(BehaviourTree tree, AIBeahviourTreeController ai) : base(tree)
         {
             this.ai = ai;
 
             object result;
-            behaviourTree.Blackboard.GetFromBlackboardNonAlloc("Player", out result);
+            Blackboard.GetFromSharedBlackboardNonAlloc("PlayerTransform", out result);
             target = (Transform)result;
         }
 
