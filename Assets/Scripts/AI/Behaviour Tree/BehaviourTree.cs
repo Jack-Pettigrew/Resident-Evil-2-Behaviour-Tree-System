@@ -9,7 +9,7 @@ namespace DD.AI.BehaviourTreeSystem
         // Change this to a custom BehaviourTreeAsset later (it'll have all the nodes in it - or will at least be able to generate one from the asset)
         private Node rootNode = null;
 
-        // Blackboard Solution Here
+        // Behaviour Tree's Blackboard
         public Blackboard Blackboard { private set; get; }
 
         public BehaviourTree()
