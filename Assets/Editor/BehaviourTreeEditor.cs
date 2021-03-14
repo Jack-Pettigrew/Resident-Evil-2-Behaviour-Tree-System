@@ -9,6 +9,8 @@ namespace DD.Editor.BehaviourTreeEditor
     {
         private Event e = null;
 
+        private bool clickedOnNode = false;
+        private Node selectedNode = null;
         private List<Node> nodes = new List<Node>();
 
         [MenuItem("Window/Behaviour Tree Editor")]
@@ -27,7 +29,7 @@ namespace DD.Editor.BehaviourTreeEditor
             e = Event.current;
             ProcessInput();
 
-            // LAYOUT
+            // Editor Window Layout
             //EditorGUILayout.BeginHorizontal();
 
             //EditorGUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
@@ -59,17 +61,64 @@ namespace DD.Editor.BehaviourTreeEditor
 
         private void ProcessInput()
         {
+            // Right Click
             if (e.type == EventType.ContextClick)
             {
-                GenericMenu menu = new GenericMenu();
-                menu.AddItem(new GUIContent("Add Node"), false, ContextCallback, null);
+                HandleRightClick();
+            }
+        }
+
+        private void HandleRightClick()
+        {
+            GenericMenu menu = new GenericMenu();
+
+            selectedNode = null;
+            clickedOnNode = false;
+            foreach (Node node in nodes)
+            {
+                if (node.NodeRect.Contains(e.mousePosition))
+                {
+                    clickedOnNode = true;
+                    selectedNode = node;
+                    break;
+                }
+            }
+
+            if(clickedOnNode)
+            {
+                // INSIDE NODE CONTEXT MENU
+                // Node Type context menu checks here
+
+                menu.AddItem(new GUIContent("Delete Node"), false, ContextCallback, UserAction.DeleteNode);
                 menu.ShowAsContext();
+                e.Use();
+            }
+            else
+            {
+                // OUTSIDE NODE CONTEXT MENU
+                menu.AddItem(new GUIContent("Add Test Node"), false, ContextCallback, UserAction.AddNode);
+                menu.ShowAsContext();
+                e.Use();
+
             }
         }
 
         private void ContextCallback(object userData)
         {
-            nodes.Add(new TestNode(new Vector2(e.mousePosition.x, e.mousePosition.y)));
+            switch ((UserAction)userData)
+            {
+                case UserAction.AddNode:
+                    nodes.Add(new TestNode(new Vector2(e.mousePosition.x, e.mousePosition.y)));
+                    break;
+                case UserAction.DeleteNode:
+                    if(selectedNode != null)
+                    {
+                        nodes.Remove(selectedNode);
+                    }
+                    break;
+            }
         }
     }
+
+    public enum UserAction { AddNode, DeleteNode }
 }
