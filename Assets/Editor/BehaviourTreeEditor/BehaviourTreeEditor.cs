@@ -29,6 +29,8 @@ namespace DD.Editor.BehaviourTreeEditor
             e = Event.current;
             ProcessInput();
 
+            
+
             // Editor Window Layout
             //EditorGUILayout.BeginHorizontal();
 
@@ -89,6 +91,7 @@ namespace DD.Editor.BehaviourTreeEditor
                 // INSIDE NODE CONTEXT MENU
                 // Node Type context menu checks here
 
+                menu.AddSeparator("");
                 menu.AddItem(new GUIContent("Delete Node"), false, ContextCallback, UserAction.DeleteNode);
                 menu.ShowAsContext();
                 e.Use();
@@ -96,7 +99,9 @@ namespace DD.Editor.BehaviourTreeEditor
             else
             {
                 // OUTSIDE NODE CONTEXT MENU
-                menu.AddItem(new GUIContent("Add Test Node"), false, ContextCallback, UserAction.AddNode);
+                menu.AddItem(new GUIContent("Add Test Node"), false, ContextCallback, UserAction.AddTestNode);
+                menu.AddItem(new GUIContent("Add Leaf Node"), false, ContextCallback, UserAction.AddLeafNode);
+                menu.AddItem(new GUIContent("Add Sequence Node"), false, ContextCallback, UserAction.AddSequence);
                 menu.ShowAsContext();
                 e.Use();
 
@@ -107,8 +112,14 @@ namespace DD.Editor.BehaviourTreeEditor
         {
             switch ((UserAction)userData)
             {
-                case UserAction.AddNode:
-                    nodes.Add(new TestNode(new Vector2(e.mousePosition.x, e.mousePosition.y)));
+                case UserAction.AddTestNode:
+                    nodes.Add(new TestNode(e.mousePosition));
+                    break;
+                case UserAction.AddLeafNode:
+                    nodes.Add(new LeafNode(e.mousePosition));
+                    break;
+                case UserAction.AddSequence:
+                    nodes.Add(new SequenceNode(e.mousePosition));
                     break;
                 case UserAction.DeleteNode:
                     if(selectedNode != null)
@@ -120,5 +131,5 @@ namespace DD.Editor.BehaviourTreeEditor
         }
     }
 
-    public enum UserAction { AddNode, DeleteNode }
+    public enum UserAction { AddTestNode, AddLeafNode, AddSequence, DeleteNode }
 }

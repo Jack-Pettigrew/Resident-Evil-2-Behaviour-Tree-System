@@ -25,7 +25,6 @@ namespace DD.AI.Controllers
             Sequence followSequence = new Sequence(behaviourTree, new List<Node> { new MoveToPlayerNode(behaviourTree, this), new JumpNode(behaviourTree,this) });
 
             CanSeePlayerNode canSeePlayerNode = new CanSeePlayerNode(behaviourTree,transform, 45.0f, 2.0f, playerLayerMask);
-            //DeleteSelfNode deleteSelfNode = new DeleteSelfNode(behaviourTree,transform);
             SpinNode spinNode = new SpinNode(behaviourTree, transform);
             Sequence spinSelfSequence = new Sequence(behaviourTree, new List<Node> { canSeePlayerNode, spinNode });
 

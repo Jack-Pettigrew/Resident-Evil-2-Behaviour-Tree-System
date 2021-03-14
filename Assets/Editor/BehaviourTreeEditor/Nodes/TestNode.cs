@@ -9,8 +9,7 @@ namespace DD.Editor.BehaviourTreeEditor
         public TestNode(Vector2 position)
         {
             NodeRect = new Rect(position, new Vector2(300, 200));
-            nodeLinkIn = Vector2.zero;
-            nodeLinkOut = Vector2.zero;
+            nodeLinkInPos = Vector2.zero;
         }
 
         public override void DrawNode(int windowID)
