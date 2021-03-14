@@ -8,10 +8,37 @@ namespace DD.Editor.BehaviourTreeEditor
     {
         public TestNode(Vector2 position)
         {
-            nodeRect = new Rect(position, new Vector2(300, 200));
-            nodeInPos = Vector2.zero;
-            nodeOutPos = Vector2.zero;
+            NodeRect = new Rect(position, new Vector2(300, 200));
+            nodeLinkIn = Vector2.zero;
+            nodeLinkOut = Vector2.zero;
         }
 
+        public override void DrawNode(int windowID)
+        {
+            NodeRect = GUILayout.Window(windowID, NodeRect, DrawNodeContentCallback, "Test Node");
+        }
+
+        protected override void DrawNodeContentCallback(int windowID)
+        {
+            GUILayout.Label("Test Label");
+
+            GUILayout.BeginHorizontal();
+
+            GUILayout.BeginVertical("box", GUILayout.ExpandHeight(true));
+
+            GUILayout.Label("This is the Node View");
+
+            GUILayout.EndVertical();
+
+            GUILayout.BeginVertical("box", GUILayout.MaxWidth(400), GUILayout.ExpandHeight(true));
+
+            GUILayout.Label("This is the Side Panel");
+
+            GUILayout.EndVertical();
+
+            GUILayout.EndHorizontal();
+
+            GUI.DragWindow(new Rect(0, 0, NodeRect.width, 20));
+        }
     }
 }

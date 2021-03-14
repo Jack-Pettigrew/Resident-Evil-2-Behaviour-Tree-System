@@ -5,29 +5,26 @@ using UnityEditor;
 
 namespace DD.Editor.BehaviourTreeEditor
 {
-    public class Node
+    public abstract class Node
     {
-        protected Rect nodeRect;
+        // Window
+        public Rect NodeRect { protected set; get; }
 
-        protected Vector2 nodeInPos;
-        protected Vector2 nodeOutPos;
-
+        // Links
+        protected Vector2 nodeLinkIn;
+        protected Vector2 nodeLinkOut;
         protected List<Node> childNodes = new List<Node>();
 
         /// <summary>
-        /// Draws this Node.
+        /// Draws this Node (Window) within the editor.
         /// </summary>
-        public virtual void DrawNode(int windowID)
-        {
-            nodeRect = GUI.Window(windowID, nodeRect, DrawNodeCallback, new GUIContent("Test Node"));
-
-            DrawLinksToChildren();
-        }
-
-        protected void DrawNodeCallback(int id)
-        {
-            GUI.DragWindow();
-        }
+        /// <param name="windowID">A unique ID for this window (e.g. for loop index).</param>
+        public abstract void DrawNode(int windowID);
+        /// <summary>
+        /// Draws the actual contents inside this Node (Window).
+        /// </summary>
+        /// <param name="windowID">A unique ID for this window (e.g. for loop index).</param>
+        protected abstract void DrawNodeContentCallback(int windowID);
 
         /// <summary>
         /// Draws the Link from this Node to it's children.
@@ -42,17 +39,25 @@ namespace DD.Editor.BehaviourTreeEditor
 
             foreach (Node child in childNodes)
             {
-                Handles.DrawLine(nodeOutPos, child.nodeInPos, 2.0f);
+                Handles.DrawLine(nodeLinkOut, child.nodeLinkIn, 2.0f);
             }
 
             Handles.EndGUI();
         }
 
+        /// <summary>
+        /// Adds given Nodes as children to this Node.
+        /// </summary>
+        /// <param name="nodes">Nodes to add.</param>
         public void AddChildren(Node[] nodes)
         {
             childNodes.AddRange(nodes);
         }
 
+        /// <summary>
+        /// Removes the given Nodes as children from this Node.
+        /// </summary>
+        /// <param name="nodes">Nodes to remove.</param>
         public void RemoveChildren(Node[] nodes)
         {
             childNodes.RemoveAll(x => nodes.Contains(x));
