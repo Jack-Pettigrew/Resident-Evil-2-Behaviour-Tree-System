@@ -9,16 +9,14 @@ namespace DD.Editor.BehaviourTreeEditor
         // Window
         public Rect NodeRect { protected set; get; }
 
-        // Links
-        protected Vector2 nodeLinkInPos;
-
         /// <summary>
-        /// Draws this Node (Window) within the editor.
+        /// Draws this Node Window (basically extention of onGUI).
         /// </summary>
         /// <param name="windowID">A unique ID for this window (e.g. for loop index).</param>
         public abstract void DrawNode(int windowID);
+
         /// <summary>
-        /// Draws the actual contents inside this Node (Window).
+        /// Draws the contents of this Node Window.
         /// </summary>
         /// <param name="windowID">A unique ID for this window (e.g. for loop index).</param>
         protected abstract void DrawNodeContentCallback(int windowID);

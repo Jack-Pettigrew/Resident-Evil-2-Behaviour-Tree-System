@@ -8,8 +8,7 @@ namespace DD.Editor.BehaviourTreeEditor
 {
     public abstract class CompositeNode : Node
     {
-        // Links
-        protected Vector2 nodeLinkOutPos;
+
         protected List<Node> childNodes = new List<Node>();
 
         protected void DrawNodeIcon(string path)
@@ -20,9 +19,35 @@ namespace DD.Editor.BehaviourTreeEditor
         /// <summary>
         /// Draws the Link from this Node to it's children.
         /// </summary>
-        public void DrawLinksToChildren()
+        protected void DrawLinksToChildren()
         {
-            throw new System.NotImplementedException();
+            if(childNodes.Count == 0)
+            {
+                return;
+            }
+
+            foreach (Node node in childNodes)
+            {
+                Vector2 start = NodeRect.center + Vector2.up * (NodeRect.height / 2);
+                Vector2 end = node.NodeRect.center - Vector2.up * (node.NodeRect.height / 2);
+                Vector2 startCurve = start + Vector2.up * 20;
+                Vector2 endCurve = end - Vector2.up * 20;
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Handles.DrawBezier(start, end, startCurve, endCurve, Color.white, null, 2.0f);
+                }
+            }
+
+            DrawChildLinkExtras();
+        }
+
+        /// <summary>
+        /// Draws optional extras for Composite child links (e.g. use to draw the order of the node each node attached to a SequenceNode).
+        /// </summary>
+        protected virtual void DrawChildLinkExtras()
+        {
+            // Default: Does Nothing.
         }
 
         /// <summary>

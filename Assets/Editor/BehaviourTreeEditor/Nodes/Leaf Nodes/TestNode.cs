@@ -9,7 +9,6 @@ namespace DD.Editor.BehaviourTreeEditor
         public TestNode(Vector2 position)
         {
             NodeRect = new Rect(position, new Vector2(300, 200));
-            nodeLinkInPos = Vector2.zero;
         }
 
         public override void DrawNode(int windowID)
@@ -37,7 +36,7 @@ namespace DD.Editor.BehaviourTreeEditor
 
             GUILayout.EndHorizontal();
 
-            GUI.DragWindow(new Rect(0, 0, NodeRect.width, 20));
-        }
+            MakeDraggable();
+         }
     }
 }
