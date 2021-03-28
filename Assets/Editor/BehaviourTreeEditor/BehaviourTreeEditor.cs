@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 namespace DD.Editor.BehaviourTreeEditor
 {
     public class BehaviourTreeEditor : ExtendedEditorWindow
     {
         private Event e = null;
+        private bool GUIChanged = false;
+
+        private Vector2 drag = Vector2.zero;
 
         private bool clickedOnNode = false;
         private Node selectedNode = null;
-
         private bool isLinkingNodes = false;
 
         private List<Node> nodes = new List<Node>();
@@ -35,45 +38,52 @@ namespace DD.Editor.BehaviourTreeEditor
 
             GUILayout.EndHorizontal();
 
-        }
+            ProcessInput();
 
-        private void BlackboardInspector()
-        {
-            GUILayout.BeginVertical("box", GUILayout.MaxWidth(400), GUILayout.ExpandHeight(true));
-
-            GUILayout.Label("This is the Side Panel");
-
-            GUILayout.EndVertical();
+            if (GUIChanged)
+            {
+                GUIChanged = false;
+                Repaint();
+            }
         }
 
         private void NodeEditor()
         {
             GUILayout.BeginVertical("box", GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
 
-            if (isLinkingNodes)
-            {
-                Vector2 start = selectedNode.NodeRect.center;
-                Vector2 end = e.mousePosition;
-                Vector2 startCurve = start + (end - start).normalized * 20;
-                Vector2 endCurve = e.mousePosition + (start - end).normalized * 20;
+            GUIContent content = EditorGUIUtility.TrTextContentWithIcon("Text", MessageType.Warning);
 
-                for (int i = 0; i < 3; i++)
-                {
-                    Handles.DrawBezier(start, end, startCurve, endCurve, Color.white, null, 1.0f);
-                }
+            GUILayout.Box(content, GUILayout.ExpandWidth(true));
 
-                Repaint();
-            }
+            DrawNodeActiveLinking();
 
             DrawNodes();
 
-            e = Event.current;
+            GUILayout.EndVertical();
+        }
 
-            if (e.isKey || e.isMouse || e.isScrollWheel)
+        private void BlackboardInspector()
+        {
+            GUILayout.BeginVertical(GUILayout.MaxWidth(400), GUILayout.ExpandHeight(true));
+
+            GUILayout.Label("This is the Side Panel");
+
+            GUILayout.Label("Static Variables");
+
+            GUIContent content = new GUIContent();
+            content.text = "Add BB Variable";
+            content.tooltip = "Add a variable for this BB Asset's nodes to be able to access.";
+            bool clicked = GUILayout.Button(content, GUILayout.ExpandWidth(false));
+
+            if(clicked)
             {
-                ProcessInput();
+                Debug.Log("Clicked");
             }
 
+            GUILayout.Label(AssetDatabase.LoadAssetAtPath<Texture>("Assets/Editor/BehaviourTreeEditor/Resources/Sequence.psd"));
+
+            GUILayout.Box(AssetDatabase.LoadAssetAtPath<Texture>("Assets/Editor/BehaviourTreeEditor/Resources/Sequence.psd"));
+            
             GUILayout.EndVertical();
         }
 
@@ -90,12 +100,43 @@ namespace DD.Editor.BehaviourTreeEditor
         }
 
         /// <summary>
+        /// Draws the link between selected node and the mouse while linking two nodes.
+        /// </summary>
+        private void DrawNodeActiveLinking()
+        {
+            if (!isLinkingNodes)
+                return;
+
+            Vector2 start = selectedNode.NodeRect.center;
+            Vector2 end = e.mousePosition;
+            Vector2 startCurve = start + (end - start).normalized * 20;
+            Vector2 endCurve = e.mousePosition + (start - end).normalized * 20;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Handles.DrawBezier(start, end, startCurve, endCurve, Color.white, null, 1.0f);
+            }
+
+            GUIChanged = true;
+        }
+
+        private void OnEditorBackgroundDrag()
+        {
+            foreach (Node node in nodes)
+            {
+                node.Drag(e.delta);
+            }
+        }
+
+        /// <summary>
         /// Handle User Input
         /// </summary>
         private void ProcessInput()
         {
+            e = Event.current;                
+
             // Linking
-            if(isLinkingNodes)
+            if (isLinkingNodes)
             {
                 isLinkingNodes = false;
 
@@ -112,10 +153,18 @@ namespace DD.Editor.BehaviourTreeEditor
                 }
             }
 
-            // Right Click
-            if (e.type == EventType.ContextClick)
+            switch (e.type)
             {
-                HandleRightClick();
+                case EventType.ContextClick:
+                    HandleRightClick();
+                    break;
+                case EventType.MouseDrag:
+                    if(e.button == 0 && GetHoveredOverNode() == null)
+                    {
+                        OnEditorBackgroundDrag();
+                        GUIChanged = true;
+                    }
+                    break;
             }
         }
 
