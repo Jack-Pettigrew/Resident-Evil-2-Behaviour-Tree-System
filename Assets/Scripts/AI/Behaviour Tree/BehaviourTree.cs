@@ -24,7 +24,11 @@ namespace DD.AI.BehaviourTreeSystem
 
         public void EvaluateTree()
         {
+            // Currently evaluating entire tree each tick
             rootNode?.Evaluate();
+
+            // TO DO:
+            // Bubbled up returned NodeState handling (mainly if failed or running).
         }
     }
 }

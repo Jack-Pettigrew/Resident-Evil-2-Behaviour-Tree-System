@@ -14,7 +14,7 @@ namespace DD.AI.BehaviourTreeSystem
 
         public override NodeState Evaluate()
         {
-            // Process all one at a time, stopping instantly at failure.
+            // Process one at a time, stopping instantly at failure or haulting at running.
             switch (nodes[currentNodeIndex].Evaluate())
             {
                 case NodeState.RUNNING:
