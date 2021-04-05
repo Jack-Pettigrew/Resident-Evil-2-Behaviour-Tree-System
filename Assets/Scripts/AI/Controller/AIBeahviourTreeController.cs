@@ -11,23 +11,20 @@ namespace DD.AI.Controllers
     {
         private BehaviourTree behaviourTree = null;
 
-        // Animation
-        private Animator ani = null;
-
-        // Locomotion
+        // AI MOVEMENT
+        [SerializeField] private float moveSpeed = 2.0f;
         private float currentRotVel = 0;
-        private Transform agentTarget;
+        public Transform MoveTarget { private set; get; }
 
         // FOV (seperate component that updates tree via event)
         [SerializeField] private LayerMask playerLayerMask;
 
         // COMPONENTS
-        private NavMeshAgent agent;
+        private Animator ani = null;
 
         void Awake()
         {
             ani = GetComponent<Animator>();
-            agent = GetComponent<NavMeshAgent>();
 
             behaviourTree = new BehaviourTree();
 
@@ -43,7 +40,8 @@ namespace DD.AI.Controllers
             //Selector root = new Selector(new List<Node> { spinSelfSequence, followSequence });
 
             //SetAIDestination root = new SetAIDestination("Player", SetNavAgentTarget);
-            Sequence root = new Sequence(new List<Node> { new SetAIDestination("Player", SetNavAgentTarget), new MoveToAIDestination(MoveTowardsTarget) });
+
+            Sequence root = new Sequence(new List<Node> { new SetAIDestination("Player", this), new MoveToAIDestination(this) });
             behaviourTree.SetBehaviourTree(root);
         }
 
@@ -51,42 +49,23 @@ namespace DD.AI.Controllers
         {
             behaviourTree.EvaluateTree();
 
-            ani.SetFloat("Speed", Mathf.Clamp01(agent.velocity.magnitude));
+            // Anims
+            ani.SetFloat("Speed", Mathf.Clamp01((MoveTarget.position - transform.position).magnitude));
         }
 
         public void Move(Vector3 dir)
         {
             dir = dir.normalized;
             Vector3 vel = dir * 1.0f;
-            transform.position += vel * Time.deltaTime;
+            transform.position += vel * Time.deltaTime * moveSpeed;
 
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, 1.0f);
         }
 
-        private void SetNavAgentTarget(Transform target)
+        public void SetNavAgentTarget(Transform target)
         {
-            agentTarget = target;
-        }
-        
-        private bool MoveTowardsTarget()
-        {
-            if (agent.isStopped)
-                agent.isStopped = false;
-
-            NavMeshPath path = new NavMeshPath();
-            agent.CalculatePath(agentTarget.position, path);
-            agent.SetPath(path);
-
-            if (agent.remainingDistance < agent.stoppingDistance)
-            {
-                agent.isStopped = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            MoveTarget = target;
         }
     }
 }

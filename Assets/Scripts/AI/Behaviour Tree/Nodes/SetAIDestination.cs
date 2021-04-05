@@ -2,27 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.AI.Controllers;
 
 namespace DD.AI.BehaviourTreeSystem
 {
     public class SetAIDestination : Node
     {
-        string bbVariable = string.Empty;
-        Action<Transform> aiSetDestination;
+        private AIBeahviourTreeController ai = null;
+        private string targetBBName = string.Empty;
 
-        public SetAIDestination(string bbVariable, Action<Transform> setDestinationCallback)
+        public SetAIDestination(string bbVariable, AIBeahviourTreeController ai)
         {
-            this.bbVariable = bbVariable;
-            aiSetDestination = setDestinationCallback;
+            this.targetBBName = bbVariable;
+            this.ai = ai;
         }
 
         public override NodeState Evaluate()
         {
             object player;
             
-            if(Blackboard.GetFromSharedBlackboardNonAlloc(bbVariable, out player))
+            if(Blackboard.GetFromSharedBlackboardNonAlloc(targetBBName, out player))
             {
-                aiSetDestination(((Transform)player));
+                ai.SetNavAgentTarget(((Transform)player));
                 return NodeState.SUCCESSFUL;
             }
             else
