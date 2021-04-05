@@ -22,7 +22,7 @@ namespace DD.AI.BehaviourTreeSystem
         public override NodeState Evaluate()
         {
             RecalculatePath();
-            if(path.corners.Length == 0)
+            if(path.status == NavMeshPathStatus.PathInvalid)
             {
                 return NodeState.RUNNING;
             }
@@ -54,10 +54,12 @@ namespace DD.AI.BehaviourTreeSystem
         {
             timer -= Time.deltaTime;
 
-            if(timer <= 0 || path.corners.Length == 0)
+            if(timer <= 0 || path.status == NavMeshPathStatus.PathInvalid)
             {
                 NavMesh.CalculatePath(ai.transform.position, ai.MoveTarget.position, NavMesh.AllAreas, path);
                 pathCornerIndex = 0;
+
+                Debug.Log(path.status);
 
                 timer = RECALC_TIMER;
             }

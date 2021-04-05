@@ -13,6 +13,12 @@ namespace DD.AI.Controllers
 
         // AI MOVEMENT
         [SerializeField] private float moveSpeed = 2.0f;
+        private Vector3 velocity = Vector3.zero;
+        private float yVelocity = 0;
+        [SerializeField] private float groundedGravity = -0.2f;
+        [SerializeField] private float gravity = Physics.gravity.y;
+
+        [SerializeField] private float rotSpeedScalar = 0.5f;
         private float currentRotVel = 0;
         public Transform MoveTarget { private set; get; }
 
@@ -21,9 +27,11 @@ namespace DD.AI.Controllers
 
         // COMPONENTS
         private Animator ani = null;
+        private CharacterController controller = null;
 
         void Awake()
         {
+            controller = GetComponent<CharacterController>();
             ani = GetComponent<Animator>();
 
             behaviourTree = new BehaviourTree();
@@ -49,18 +57,42 @@ namespace DD.AI.Controllers
         {
             behaviourTree.EvaluateTree();
 
+            ApplyPhysics();
+
             // Anims
-            ani.SetFloat("Speed", Mathf.Clamp01((MoveTarget.position - transform.position).magnitude));
+            ani.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
+        }
+
+        private void ApplyPhysics()
+        {
+            if (controller.isGrounded)
+            {
+                yVelocity = groundedGravity;
+            }
+            else
+            {
+                yVelocity += gravity * Time.deltaTime;
+            }
+
+            velocity.y = yVelocity;
+            
+            controller.Move(velocity * Time.deltaTime);
+            //velocity = Vector3.zero + Vector3.up * yVelocity;
+
         }
 
         public void Move(Vector3 dir)
         {
-            dir = dir.normalized;
-            Vector3 vel = dir * 1.0f;
-            transform.position += vel * Time.deltaTime * moveSpeed;
+            //dir = dir.normalized;
+            //Vector3 vel = dir * 1.0f;
+            //transform.position += vel * Time.deltaTime * moveSpeed;
+
+            //transform.position += transform.forward * Time.deltaTime * moveSpeed;
+
+            velocity = transform.forward * moveSpeed;
 
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, 1.0f);
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
         }
 
         public void SetNavAgentTarget(Transform target)
