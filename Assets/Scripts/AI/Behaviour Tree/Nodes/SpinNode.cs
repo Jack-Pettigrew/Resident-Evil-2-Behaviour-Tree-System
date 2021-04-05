@@ -7,7 +7,7 @@ namespace DD.AI.BehaviourTreeSystem
         private Transform ai = null;
         private float degrees = 0.0f;
 
-        public SpinNode(BehaviourTree tree, Transform ai) : base(tree)
+        public SpinNode(Transform ai)
         {
             this.ai = ai;
         }

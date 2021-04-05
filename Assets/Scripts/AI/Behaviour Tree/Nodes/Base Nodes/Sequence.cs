@@ -7,7 +7,7 @@ namespace DD.AI.BehaviourTreeSystem
         protected List<Node> nodes = new List<Node>();
         private int currentNodeIndex = 0;
 
-        public Sequence(BehaviourTree tree, List<Node> nodes) : base(tree)
+        public Sequence(List<Node> nodes)
         {
             this.nodes = nodes;
         }

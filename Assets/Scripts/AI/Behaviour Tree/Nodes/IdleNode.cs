@@ -8,7 +8,7 @@ public class IdleNode : Node
     private float idleLength = 5.0f;
     private float timer = 0.0f;
 
-    public IdleNode(BehaviourTree tree) : base(tree)
+    public IdleNode()
     {
         timer = idleLength;
     }

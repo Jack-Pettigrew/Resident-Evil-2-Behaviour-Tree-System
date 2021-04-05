@@ -27,7 +27,7 @@ namespace DD.AI.BehaviourTreeSystem
          */
 
 
-        public Selector(BehaviourTree tree, List<Node> nodes) : base(tree)
+        public Selector(List<Node> nodes)
         {
             this.nodes = nodes;
         }

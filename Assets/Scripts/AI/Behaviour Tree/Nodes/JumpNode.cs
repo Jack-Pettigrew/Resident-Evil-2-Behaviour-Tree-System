@@ -12,7 +12,7 @@ namespace DD.AI.BehaviourTreeSystem
         private const float TIMERLENGTH = 3.0f;
         private float timer = TIMERLENGTH;
 
-        public JumpNode(BehaviourTree tree, AIBeahviourTreeController ai) : base(tree)
+        public JumpNode(AIBeahviourTreeController ai)
         {
             this.ai = ai;
         }

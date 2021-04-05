@@ -6,7 +6,7 @@ namespace DD.AI.BehaviourTreeSystem
     {
         private Transform transform = null;
 
-        public DeleteSelfNode(BehaviourTree tree, Transform transform) : base(tree)
+        public DeleteSelfNode(Transform transform)
         {
             this.transform = transform;
         }

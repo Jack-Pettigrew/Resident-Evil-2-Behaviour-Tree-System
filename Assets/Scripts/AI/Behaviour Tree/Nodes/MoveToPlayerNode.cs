@@ -10,12 +10,12 @@ namespace DD.AI.BehaviourTreeSystem
         private AIBeahviourTreeController ai = null;
         private Transform target = null;
 
-        public MoveToPlayerNode(BehaviourTree tree, AIBeahviourTreeController ai) : base(tree)
+        public MoveToPlayerNode(AIBeahviourTreeController ai)
         {
             this.ai = ai;
 
             object result;
-            Blackboard.GetFromSharedBlackboardNonAlloc("PlayerTransform", out result);
+            Blackboard.GetFromSharedBlackboardNonAlloc("Player", out result);
             target = (Transform)result;
         }
 

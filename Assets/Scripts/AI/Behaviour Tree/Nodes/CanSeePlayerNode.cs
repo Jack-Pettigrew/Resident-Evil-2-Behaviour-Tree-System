@@ -11,7 +11,7 @@ namespace DD.AI.BehaviourTreeSystem
         private float fovRange = 2.0f;
         private LayerMask layerMask = new LayerMask();
 
-        public CanSeePlayerNode(BehaviourTree tree, Transform transform, float fovAngle, float fovRange) : base(tree)
+        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange)
         {
             this.transform = transform;
             this.fovAngle = fovAngle;
@@ -19,7 +19,7 @@ namespace DD.AI.BehaviourTreeSystem
             this.layerMask = LayerMask.NameToLayer("Player");
         }
 
-        public CanSeePlayerNode(BehaviourTree tree,Transform transform, float fovAngle, float fovRange, LayerMask layerMask) : base(tree)
+        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange, LayerMask layerMask)
         {
             this.transform = transform;
             this.fovAngle = fovAngle;

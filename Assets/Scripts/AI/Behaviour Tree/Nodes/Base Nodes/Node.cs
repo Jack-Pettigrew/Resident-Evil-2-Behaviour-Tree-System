@@ -5,19 +5,16 @@ using UnityEngine;
 namespace DD.AI.BehaviourTreeSystem
 {
     [System.Serializable]
-    public class Node
+    public abstract class Node
     {
-        protected BehaviourTree behaviourTree;
+        //protected BehaviourTree behaviourTree;
 
-        public Node(BehaviourTree tree)
-        {
-            behaviourTree = tree;
-        }
+        //public Node(BehaviourTree tree)
+        //{
+        //    behaviourTree = tree;
+        //}
 
-        public virtual NodeState Evaluate()
-        {
-            return NodeState.FAILED;
-        }
+        public abstract NodeState Evaluate();
     }
 
     public enum NodeState
