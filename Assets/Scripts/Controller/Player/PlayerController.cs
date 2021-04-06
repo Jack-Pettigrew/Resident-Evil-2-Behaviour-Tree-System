@@ -15,7 +15,6 @@ namespace DD.Core.Control
         [Header("Locomotion")]
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float runSpeed = 2.0f;
-        [SerializeField] private float crouchSpeed = 0.5f;
 
         private bool isSprinting = false;
         private Vector3 inputDir = Vector3.zero;

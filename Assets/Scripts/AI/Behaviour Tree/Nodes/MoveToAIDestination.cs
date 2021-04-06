@@ -9,6 +9,8 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class MoveToAIDestination : Node
     {
+        private const float NAV_UPDATE_TIMER = 0.25f;
+        private float timer = NAV_UPDATE_TIMER;
         private int pathCornerIndex = 0;
         private NavMeshPath path;
         private AIBeahviourTreeController ai;
@@ -21,6 +23,7 @@ namespace DD.AI.BehaviourTreeSystem
 
         public override NodeState Evaluate()
         {
+            // Pathing
             RecalculatePath();
             if(path.status == NavMeshPathStatus.PathInvalid)
             {
@@ -47,9 +50,6 @@ namespace DD.AI.BehaviourTreeSystem
             }
         }
 
-        private const float RECALC_TIMER = .5f;
-        private float timer = RECALC_TIMER;
-
         private void RecalculatePath()
         {
             timer -= Time.deltaTime;
@@ -61,7 +61,7 @@ namespace DD.AI.BehaviourTreeSystem
 
                 Debug.Log(path.status);
 
-                timer = RECALC_TIMER;
+                timer = NAV_UPDATE_TIMER;
             }
         }
     }
