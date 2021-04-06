@@ -21,11 +21,26 @@ namespace DD.AI.BehaviourTreeSystem
         #region Instance Blackboard Methods
         public bool AddToBlackboard(string keyName, object value)
         {
-            if(blackboard.ContainsKey(keyName.ToLower()))
+            string key = keyName.ToLower();
+
+            if (blackboard.ContainsKey(key))
                 return false;
 
-            blackboard.Add(keyName.ToLower(), value);
+            blackboard.Add(key, value);
             return true;
+        }
+
+        public bool UpdateBlackboardVariable(string keyName, object value)
+        {
+            string key = keyName.ToLower();
+
+            if (blackboard.ContainsKey(key))
+            {
+                blackboard[key] = value;
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -76,11 +91,26 @@ namespace DD.AI.BehaviourTreeSystem
         #region Shared Blackboard Methods
         public static bool AddToSharedBlackboard(string keyName, object value)
         {
-            if (sharedBlackboard.ContainsKey(keyName.ToLower()))
+            string key = keyName.ToLower();
+
+            if (sharedBlackboard.ContainsKey(key))
                 return false;
 
-            sharedBlackboard.Add(keyName.ToLower(), value);
+            sharedBlackboard.Add(key, value);
             return true;
+        }
+
+        public static bool UpdateSharedBlackboardVariable(string keyName, object value)
+        {
+            string key = keyName.ToLower();
+
+            if (sharedBlackboard.ContainsKey(key))
+            {
+                sharedBlackboard[key] = value;
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
