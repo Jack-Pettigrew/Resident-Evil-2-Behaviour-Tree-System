@@ -9,15 +9,18 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class MoveToAIDestination : Node
     {
-        private const float NAV_UPDATE_TIMER = 0.25f;
+        private const float NAV_UPDATE_TIMER = 0.1f;
         private float timer = NAV_UPDATE_TIMER;
 
+        private float navTargetDistThreshold = 0.5f;
+        private Vector3 moveTarget = Vector3.zero;
         private float arrivedDistance = 1.0f;
         private int pathCornerIndex = 0;
         private NavMeshPath path;
-        private AIBeahviourTreeController ai;
 
-        public MoveToAIDestination(AIBeahviourTreeController ai, float arrivedDistance)
+        private IAIBehaviour ai;
+
+        public MoveToAIDestination(IAIBehaviour ai, float arrivedDistance)
         {
             this.ai = ai;
             this.arrivedDistance = arrivedDistance;
@@ -33,23 +36,23 @@ namespace DD.AI.BehaviourTreeSystem
                 return NodeState.RUNNING;
             }
 
-            Vector3 targetDir = path.corners[pathCornerIndex] - ai.transform.position;
-            float targetDist = targetDir.magnitude;
+            Vector3 navTargetDir = path.corners[pathCornerIndex] - ai.GetAITransform().position;
+            float navTargetDist = navTargetDir.magnitude;
+            float targetDist = (moveTarget - ai.GetAITransform().position).magnitude;
 
             if(targetDist > arrivedDistance)
             {
-                ai.MoveEvent(targetDir);
+                if(navTargetDist <= navTargetDistThreshold)
+                {
+                    pathCornerIndex++;
+                }
+
+                ai.MoveEvent(navTargetDir);
                 return NodeState.RUNNING;
             }
             else
             {
-                if (pathCornerIndex == path.corners.Length - 1)
-                {
-                    return NodeState.SUCCESSFUL;
-                }
-                
-                pathCornerIndex++;
-                return NodeState.RUNNING;
+                return NodeState.SUCCESSFUL;
             }
         }
 
@@ -59,7 +62,9 @@ namespace DD.AI.BehaviourTreeSystem
 
             if(timer <= 0 || path.status == NavMeshPathStatus.PathInvalid)
             {
-                NavMesh.CalculatePath(ai.transform.position, ai.MoveTarget.position, NavMesh.AllAreas, path);
+                moveTarget = ai.GetAIMoveTarget().position;
+
+                NavMesh.CalculatePath(ai.GetAITransform().position, moveTarget, NavMesh.AllAreas, path);
                 pathCornerIndex = 0;
 
                 Debug.Log(path.status);
