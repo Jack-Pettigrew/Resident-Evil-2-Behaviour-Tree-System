@@ -12,6 +12,9 @@ namespace DD.AI.Controllers
         #region AI Events
         public Action<Transform> SetMoveTarget { get; set; }
         public Action<Vector3> MoveEvent { get; set; }
+
+        public Func<Transform> GetAITransform { get; set; }
+        public Func<Transform> GetAIMoveTarget { get; set; }
         #endregion
 
         private BehaviourTree behaviourTree = null;
@@ -34,34 +37,34 @@ namespace DD.AI.Controllers
         private Animator ani = null;
         private CharacterController controller = null;
 
-        private void InitAIEvents()
+        private void OnEnable()
         {
-            SetMoveTarget += SetMoveTarget;
+            SetMoveTarget += SetNavAgentTarget;
             MoveEvent += Move;
+            GetAITransform += GetTransform;
+            GetAIMoveTarget += GetMoveTarget;
+        }
+
+        private void OnDisable()
+        {
+            SetMoveTarget -= SetNavAgentTarget;
+            MoveEvent -= Move;
+            GetAITransform -= GetTransform;
+            GetAIMoveTarget -= GetMoveTarget;
         }
 
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
             ani = GetComponent<Animator>();
-
             behaviourTree = new BehaviourTree();
 
             // BB: Player Reference
             Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
 
-            // BT: Init
-            //Sequence followSequence = new Sequence(new List<Node> { new MoveToPlayerNode(this), new JumpNode(this) });
-            //CanSeePlayerNode canSeePlayerNode = new CanSeePlayerNode(transform, 45.0f, 2.0f, playerLayerMask);
-            //SpinNode spinNode = new SpinNode( transform);
-            //Sequence spinSelfSequence = new Sequence( new List<Node> { canSeePlayerNode, spinNode });
-
-            //Selector root = new Selector(new List<Node> { spinSelfSequence, followSequence });
-
-            //SetAIDestination root = new SetAIDestination("Player", SetNavAgentTarget);
-
-            Sequence root = new Sequence(new List<Node> { new SetAIDestination("Player", this), new MoveToAIDestination(this, 2.0f) });
-            behaviourTree.SetBehaviourTree(root);
+            Sequence root = new Sequence(new List<Node> { new CanSeePlayerNode(transform, 90.0f, 2.0f, playerLayerMask), new SetAIDestination("Player", this), new MoveToAIDestination(this, 1.5f) });
+            Selector test = new Selector(new List<Node> { root, new SpinNode(transform) });
+            behaviourTree.SetBehaviourTree(test);
         }
 
         private void Update()
@@ -72,6 +75,9 @@ namespace DD.AI.Controllers
 
             // Anims
             ani.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
+
+            // Reset after setting Anim variables so we stop moving
+            velocity = Vector3.zero + Vector3.up * yVelocity;
         }
 
         private void ApplyPhysics()
@@ -88,18 +94,12 @@ namespace DD.AI.Controllers
             velocity.y = yVelocity;
             
             controller.Move(velocity * Time.deltaTime);
-            //velocity = Vector3.zero + Vector3.up * yVelocity;
-
         }
 
+        // TODO: Decide whether we should pass the Target position instead of just a direction
+        //          - would allow for movement smoothing to be handled directly by the actual Move function.
         private void Move(Vector3 dir)
         {
-            //dir = dir.normalized;
-            //Vector3 vel = dir * 1.0f;
-            //transform.position += vel * Time.deltaTime * moveSpeed;
-
-            //transform.position += transform.forward * Time.deltaTime * moveSpeed;
-
             velocity = transform.forward * moveSpeed;
 
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
@@ -109,6 +109,21 @@ namespace DD.AI.Controllers
         private void SetNavAgentTarget(Transform target)
         {
             MoveTarget = target;
+        }
+
+        public Transform GetTransform()
+        {
+            return transform;
+        }
+
+        public Transform GetMoveTarget()
+        {
+            return MoveTarget;
+        }
+
+        public Blackboard GetAIBlackboard()
+        {
+            return behaviourTree.Blackboard;
         }
     }
 }

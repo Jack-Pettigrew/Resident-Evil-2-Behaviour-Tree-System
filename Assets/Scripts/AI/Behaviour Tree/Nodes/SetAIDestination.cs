@@ -8,10 +8,10 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class SetAIDestination : Node
     {
-        private AIBeahviourTreeController ai = null;
+        private IAIBehaviour ai = null;
         private string targetBBName = string.Empty;
 
-        public SetAIDestination(string bbVariable, AIBeahviourTreeController ai)
+        public SetAIDestination(string bbVariable, IAIBehaviour ai)
         {
             this.targetBBName = bbVariable;
             this.ai = ai;
@@ -23,7 +23,7 @@ namespace DD.AI.BehaviourTreeSystem
             
             if(Blackboard.GetFromSharedBlackboardNonAlloc(targetBBName, out player))
             {
-                ai.SetMoveTarget(((Transform)player));
+                ai.SetMoveTarget((Transform)player);
                 return NodeState.SUCCESSFUL;
             }
             else
