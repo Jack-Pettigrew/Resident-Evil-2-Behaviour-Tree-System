@@ -23,7 +23,7 @@ namespace DD.AI.BehaviourTreeSystem
             
             if(Blackboard.GetFromSharedBlackboardNonAlloc(targetBBName, out player))
             {
-                ai.SetNavAgentTarget(((Transform)player));
+                ai.SetMoveTarget(((Transform)player));
                 return NodeState.SUCCESSFUL;
             }
             else

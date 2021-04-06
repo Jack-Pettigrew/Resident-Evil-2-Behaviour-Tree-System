@@ -25,7 +25,7 @@ namespace DD.AI.BehaviourTreeSystem
 
             if(targetDir.sqrMagnitude >= 0.5f)
             {
-                ai.Move(targetDir);
+                ai.MoveEvent(targetDir);
                 return NodeState.RUNNING;
             }
             else

@@ -11,13 +11,16 @@ namespace DD.AI.BehaviourTreeSystem
     {
         private const float NAV_UPDATE_TIMER = 0.25f;
         private float timer = NAV_UPDATE_TIMER;
+
+        private float arrivedDistance = 1.0f;
         private int pathCornerIndex = 0;
         private NavMeshPath path;
         private AIBeahviourTreeController ai;
 
-        public MoveToAIDestination(AIBeahviourTreeController ai)
+        public MoveToAIDestination(AIBeahviourTreeController ai, float arrivedDistance)
         {
             this.ai = ai;
+            this.arrivedDistance = arrivedDistance;
             path = new NavMeshPath();
         }
 
@@ -33,9 +36,9 @@ namespace DD.AI.BehaviourTreeSystem
             Vector3 targetDir = path.corners[pathCornerIndex] - ai.transform.position;
             float targetDist = targetDir.magnitude;
 
-            if(targetDist > 1.0f)
+            if(targetDist > arrivedDistance)
             {
-                ai.Move(targetDir);
+                ai.MoveEvent(targetDir);
                 return NodeState.RUNNING;
             }
             else

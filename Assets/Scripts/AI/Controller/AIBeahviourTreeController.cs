@@ -7,8 +7,13 @@ using DD.AI.BehaviourTreeSystem;
 
 namespace DD.AI.Controllers
 {
-    public class AIBeahviourTreeController : MonoBehaviour
+    public class AIBeahviourTreeController : MonoBehaviour, IAIBehaviour
     {
+        #region AI Events
+        public Action<Transform> SetMoveTarget { get; set; }
+        public Action<Vector3> MoveEvent { get; set; }
+        #endregion
+
         private BehaviourTree behaviourTree = null;
 
         // AI MOVEMENT
@@ -29,7 +34,13 @@ namespace DD.AI.Controllers
         private Animator ani = null;
         private CharacterController controller = null;
 
-        void Awake()
+        private void InitAIEvents()
+        {
+            SetMoveTarget += SetMoveTarget;
+            MoveEvent += Move;
+        }
+
+        private void Awake()
         {
             controller = GetComponent<CharacterController>();
             ani = GetComponent<Animator>();
@@ -49,11 +60,11 @@ namespace DD.AI.Controllers
 
             //SetAIDestination root = new SetAIDestination("Player", SetNavAgentTarget);
 
-            Sequence root = new Sequence(new List<Node> { new SetAIDestination("Player", this), new MoveToAIDestination(this) });
+            Sequence root = new Sequence(new List<Node> { new SetAIDestination("Player", this), new MoveToAIDestination(this, 2.0f) });
             behaviourTree.SetBehaviourTree(root);
         }
 
-        void Update()
+        private void Update()
         {
             behaviourTree.EvaluateTree();
 
@@ -81,7 +92,7 @@ namespace DD.AI.Controllers
 
         }
 
-        public void Move(Vector3 dir)
+        private void Move(Vector3 dir)
         {
             //dir = dir.normalized;
             //Vector3 vel = dir * 1.0f;
@@ -95,7 +106,7 @@ namespace DD.AI.Controllers
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
         }
 
-        public void SetNavAgentTarget(Transform target)
+        private void SetNavAgentTarget(Transform target)
         {
             MoveTarget = target;
         }
