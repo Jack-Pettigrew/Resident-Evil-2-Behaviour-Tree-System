@@ -62,9 +62,11 @@ namespace DD.AI.Controllers
             // BB: Player Reference
             Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
 
-            Sequence root = new Sequence(new List<Node> { new CanSeePlayerNode(transform, 90.0f, 2.0f, playerLayerMask), new SetAIDestination("Player", this), new MoveToAIDestination(this, 1.5f) });
-            Selector test = new Selector(new List<Node> { root, new SpinNode(transform) });
-            behaviourTree.SetBehaviourTree(test);
+            Sequence followPlayerSequence = new Sequence(new List<Node> { new SetAIDestination("Player", this), new MoveToAIDestination(this, 1.5f) });
+            IdleNode idle = new IdleNode();
+
+            CanSeePlayerNode root = new CanSeePlayerNode(followPlayerSequence, idle, transform, 90, 10.0f, playerLayerMask);
+            behaviourTree.SetBehaviourTree(root);
         }
 
         private void Update()

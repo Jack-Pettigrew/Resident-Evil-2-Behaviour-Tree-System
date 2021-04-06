@@ -7,13 +7,6 @@ namespace DD.AI.BehaviourTreeSystem
     [System.Serializable]
     public abstract class Node
     {
-        //protected BehaviourTree behaviourTree;
-
-        //public Node(BehaviourTree tree)
-        //{
-        //    behaviourTree = tree;
-        //}
-
         public abstract NodeState Evaluate();
     }
 

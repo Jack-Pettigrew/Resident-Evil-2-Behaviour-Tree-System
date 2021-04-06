@@ -4,30 +4,36 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class CanSeePlayerNode : Node
+    public class CanSeePlayerNode : Conditional
     {
         private Transform transform = null;
         private float fovAngle = 45.0f;
         private float fovRange = 2.0f;
         private LayerMask layerMask = new LayerMask();
 
-        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange)
+        public CanSeePlayerNode(Node trueNode, Node falseNode, Transform transform, float fovAngle, float fovRange)
         {
+            this.trueNode = trueNode;
+            this.falseNode = falseNode;
+
             this.transform = transform;
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
-            this.layerMask = LayerMask.NameToLayer("Player");
+            layerMask = LayerMask.NameToLayer("Player");
         }
 
-        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange, LayerMask layerMask)
+        public CanSeePlayerNode(Node trueNode, Node falseNode, Transform transform, float fovAngle, float fovRange, LayerMask layerMask)
         {
+            this.trueNode = trueNode;
+            this.falseNode = falseNode;
+
             this.transform = transform;
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
             this.layerMask = layerMask;
         }
 
-        public override NodeState Evaluate()
+        protected override Node EvaluateConditional()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, fovRange, layerMask, QueryTriggerInteraction.Ignore);
 
@@ -37,13 +43,11 @@ namespace DD.AI.BehaviourTreeSystem
 
                 if (Mathf.Abs(Vector3.Angle(transform.forward, targetDir)) <= fovAngle) // Can See Player
                 {
-                    //Debug.Log("Can See");
-                    return NodeState.SUCCESSFUL;
+                    return trueNode;
                 }
             }
 
-            //Debug.Log("Can't See");
-            return NodeState.FAILED;
+            return falseNode;
         }
     }
 }

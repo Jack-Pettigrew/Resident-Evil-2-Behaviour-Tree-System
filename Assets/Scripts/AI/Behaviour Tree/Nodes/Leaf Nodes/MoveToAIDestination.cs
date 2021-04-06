@@ -67,7 +67,7 @@ namespace DD.AI.BehaviourTreeSystem
                 NavMesh.CalculatePath(ai.GetAITransform().position, moveTarget, NavMesh.AllAreas, path);
                 pathCornerIndex = 0;
 
-                Debug.Log(path.status);
+                //Debug.Log(path.status);
 
                 timer = NAV_UPDATE_TIMER;
             }
