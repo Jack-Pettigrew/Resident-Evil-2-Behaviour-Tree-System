@@ -4,20 +4,48 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
+    /// <summary>
+    /// Conditional Node - can be pure conidtional (no nodes, only returning Success or Fail states) or can be Node conditional (has nodes, acts branching Composite Node).
+    /// </summary>
     public abstract class Conditional : Node
     {
+        protected bool pureConditional = false;
         protected Node trueNode = null, falseNode = null;
 
-        protected abstract Node EvaluateConditional();
+        /// <summary>
+        /// Pure Conditional Constructor.
+        /// </summary>
+        protected Conditional()
+        {
+            pureConditional = true;
+        }
+
+        /// <summary>
+        /// Node Conditional Constructor.
+        /// </summary>
+        protected Conditional(Node trueNode, Node falseNode)
+        {
+            this.trueNode = trueNode;
+            this.falseNode = falseNode;
+        }
+
+        protected abstract NodeState EvaluateConditional();
 
         public override NodeState Evaluate()
         {
-            Node resultNode = EvaluateConditional();
+            return pureConditional ? EvaluateConditional() : EvaluateNodeConditional();
+        }
 
-            if(resultNode == null)
+        private NodeState EvaluateNodeConditional()
+        {
+            if (trueNode == null || falseNode == null)
             {
-                return NodeState.FAILED;
+                throw new System.Exception($"Conditional Node: {this} has null truth and/or false Nodes");
             }
+
+            EvaluateConditional();
+
+            Node resultNode = EvaluateConditional() == NodeState.SUCCESSFUL ? trueNode : falseNode;
 
             switch (resultNode.Evaluate())
             {
