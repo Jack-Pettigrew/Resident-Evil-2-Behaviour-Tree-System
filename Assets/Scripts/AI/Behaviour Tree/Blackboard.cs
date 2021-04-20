@@ -40,7 +40,7 @@ namespace DD.AI.BehaviourTreeSystem
                 return true;
             }
 
-            return false;
+            return AddToBlackboard(key, value);
         }
 
         /// <summary>
