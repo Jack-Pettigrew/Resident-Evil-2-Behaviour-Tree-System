@@ -7,10 +7,11 @@ namespace DD.Systems.Room
     public class Room : MonoBehaviour
     {
         [SerializeField] private Door[] doors;
+        [SerializeField] public Door[] Doors { private set { doors = value; } get { return doors; } }
 
         private void OnDrawGizmosSelected()
         {
-            foreach (var door in doors)
+            foreach (var door in Doors)
             {
                 if (door)
                 {
