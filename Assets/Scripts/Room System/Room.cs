@@ -7,7 +7,25 @@ namespace DD.Systems.Room
     public class Room : MonoBehaviour
     {
         [SerializeField] private Door[] doors;
-        [SerializeField] public Door[] Doors { private set { doors = value; } get { return doors; } }
+        public Door[] Doors { private set { doors = value; } get { return doors; } }
+
+        [SerializeField] private RoomFloor[] roomFloors;
+
+
+        private void Awake()
+        {
+            if (roomFloors.Length <= 0)
+            {
+                Debug.LogError(this + " has no child RoomFloor(s). Please assign floors to allow the Room System to know which floors link to which Rooms.");
+            }
+            else
+            {
+                foreach (var floor in roomFloors)
+                {
+                    floor.SetOwnerRoom(this);
+                }
+            }
+        }
 
         private void OnDrawGizmosSelected()
         {
