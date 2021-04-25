@@ -27,6 +27,17 @@ namespace DD.Systems.Room
             }
         }
 
+#if UNITY_EDITOR
+        /// <summary>
+        /// An Editor tool method for setting the this Room's Floor to those selected.
+        /// </summary>
+        /// <param name="floors"></param>
+        public void SetRoomFloors(RoomFloor[] floors)
+        {
+            roomFloors = floors;
+        }
+#endif
+
         private void OnDrawGizmosSelected()
         {
             foreach (var door in Doors)
