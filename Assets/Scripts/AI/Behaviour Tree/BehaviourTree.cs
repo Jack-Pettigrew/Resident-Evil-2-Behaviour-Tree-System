@@ -25,7 +25,16 @@ namespace DD.AI.BehaviourTreeSystem
         public void EvaluateTree()
         {
             // Currently evaluating entire tree each tick
-            rootNode?.Evaluate();
+            NodeState result = rootNode.Evaluate();
+
+            switch (result)
+            {
+                case NodeState.FAILED:
+                    Debug.LogWarning("Behaviour Tree Failure reported.");
+                    break;
+                default:
+                    break;
+            }
 
             // TO DO:
             // Bubbled up returned NodeState handling (mainly if failed or running).

@@ -11,6 +11,12 @@ namespace DD.AI.BehaviourTreeSystem
         private float fovRange = 2.0f;
         private LayerMask layerMask = new LayerMask();
 
+        /// <summary>
+        /// Pure Conditional
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="fovAngle"></param>
+        /// <param name="fovRange"></param>
         public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange) : base()
         {
             this.transform = transform;
@@ -18,6 +24,13 @@ namespace DD.AI.BehaviourTreeSystem
             this.fovRange = fovRange;
             layerMask = LayerMask.NameToLayer("Player");
         }
+
+        /// <summary>
+        /// Pure Conditional
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="fovAngle"></param>
+        /// <param name="fovRange"></param>
 
         public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange, LayerMask layerMask) : base()
         {
@@ -27,6 +40,13 @@ namespace DD.AI.BehaviourTreeSystem
             this.layerMask = layerMask;
         }
 
+        /// <summary>
+        /// Branching Conditional
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="fovAngle"></param>
+        /// <param name="fovRange"></param>
+
         public CanSeePlayerNode(Node trueNode, Node falseNode, Transform transform, float fovAngle, float fovRange) : base(trueNode, falseNode)
         {
             this.transform = transform;
@@ -35,6 +55,12 @@ namespace DD.AI.BehaviourTreeSystem
             layerMask = LayerMask.NameToLayer("Player");
         }
 
+        /// <summary>
+        /// Branching Conditional
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="fovAngle"></param>
+        /// <param name="fovRange"></param>
         public CanSeePlayerNode(Node trueNode, Node falseNode, Transform transform, float fovAngle, float fovRange, LayerMask layerMask) : base(trueNode, falseNode)
         {
             this.transform = transform;
