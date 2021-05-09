@@ -59,12 +59,17 @@ namespace DD.AI.Controllers
             ani = GetComponent<Animator>();
             behaviourTree = new BehaviourTree();
 
-            // BB: Player Reference
+            // Add inital variables to BB
             Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
 
+            // Create BT structure
+            // Idle
+            // Search
+            // Chase
             Sequence followPlayerSequence = new Sequence(new List<Node> { new SetAIDestination("Player", this), new MoveToAIDestination(this, 1.5f) });
             IdleNode idle = new IdleNode();
 
+            // Set Root
             CanSeePlayerNode root = new CanSeePlayerNode(followPlayerSequence, idle, transform, 90, 10.0f, playerLayerMask);
             behaviourTree.SetBehaviourTree(root);
         }
