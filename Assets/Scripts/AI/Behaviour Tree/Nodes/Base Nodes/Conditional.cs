@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DD.AI.BehaviourTreeSystem
 {
     /// <summary>
-    /// Conditional Node - can be pure conidtional (no nodes, only returning Success or Fail states) or can be Node conditional (has nodes, acts branching Composite Node).
+    /// Conditional Node - can be pure conidtional (no nodes, only returning Success or Fail states) or can be branching conditional (has nodes, acts branching Composite Node).
     /// </summary>
     public abstract class Conditional : Node
     {
@@ -21,7 +21,7 @@ namespace DD.AI.BehaviourTreeSystem
         }
 
         /// <summary>
-        /// Node Conditional Constructor.
+        /// Branching Conditional Constructor.
         /// </summary>
         protected Conditional(Node trueNode, Node falseNode)
         {
@@ -33,10 +33,10 @@ namespace DD.AI.BehaviourTreeSystem
 
         public override NodeState Evaluate()
         {
-            return pureConditional ? EvaluateConditional() : EvaluateNodeConditional();
+            return pureConditional ? EvaluateConditional() : EvaluateBranchingConditional();
         }
 
-        private NodeState EvaluateNodeConditional()
+        private NodeState EvaluateBranchingConditional()
         {
             if (trueNode == null || falseNode == null)
             {
