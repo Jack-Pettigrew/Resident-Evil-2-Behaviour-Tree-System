@@ -43,8 +43,6 @@ namespace DD.AI.BehaviourTreeSystem
                 throw new System.Exception($"Conditional Node: {this} has null truth and/or false Nodes");
             }
 
-            EvaluateConditional();
-
             Node resultNode = EvaluateConditional() == NodeState.SUCCESSFUL ? trueNode : falseNode;
 
             switch (resultNode.Evaluate())

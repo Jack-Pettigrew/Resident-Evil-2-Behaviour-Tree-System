@@ -30,7 +30,14 @@ namespace DD.AI.BehaviourTreeSystem
             return true;
         }
 
-        public bool UpdateBlackboardVariable(string keyName, object value)
+        /// <summary>
+        /// Updates the BB variable with the matching Key with the given value.
+        /// </summary>
+        /// <param name="keyName">BB variable Key.</param>
+        /// <param name="value">BB variable value.</param>
+        /// <param name="addIfNotFound">If not found, add to BB?</param>
+        /// <returns></returns>
+        public bool UpdateBlackboardVariable(string keyName, object value, bool addIfNotFound = false)
         {
             string key = keyName.ToLower();
 
@@ -39,8 +46,14 @@ namespace DD.AI.BehaviourTreeSystem
                 blackboard[key] = value;
                 return true;
             }
-
-            return AddToBlackboard(key, value);
+            else if (addIfNotFound)
+            {
+                return AddToBlackboard(key, value);
+            }
+            else
+            { 
+                return false;
+            }
         }
 
         /// <summary>
