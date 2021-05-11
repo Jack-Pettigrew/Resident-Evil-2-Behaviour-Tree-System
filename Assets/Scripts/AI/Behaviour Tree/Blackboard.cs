@@ -61,13 +61,13 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         /// <param name="keyName"></param>
         /// <returns>'object' typed variable. NULL on not found.</returns>
-        public object GetFromBlackboard(string keyName)
+        public T GetFromBlackboard<T>(string keyName)
         {
             object temp;
 
             blackboard.TryGetValue(keyName.ToLower(), out temp);
 
-            return temp;
+            return (T)temp;
         }
 
         /// <summary>
