@@ -11,13 +11,14 @@ namespace DD.AI.Controllers
     public interface IAIBehaviour
     {
         // EVENTS
-        public Action<Transform> SetMoveTarget { get; set; }
         public Action<Vector3> MoveEvent { get; set; }
 
         // EVENT METHODS
+        public Action<Transform> SetMoveTarget { get; set; }
         public Func<Transform> GetAITransform { get; set; }
         public Func<Transform> GetAIMoveTarget { get; set; }
 
         public Blackboard GetAIBlackboard();
+        public Animator GetAnimator();
     } 
 }

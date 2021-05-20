@@ -61,6 +61,7 @@ namespace DD.AI.Controllers
 
             // Add inital variables to BB
             Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
+            GetAIBlackboard().AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
 
             // Create BT structure
             // Idle
@@ -71,7 +72,9 @@ namespace DD.AI.Controllers
 
             // Set Root
             CanSeePlayerNode root = new CanSeePlayerNode(followPlayerSequence, idle, transform, 90, 10.0f, playerLayerMask);
-            behaviourTree.SetBehaviourTree(root);
+
+            CheckBlackboardVariableNode<Transform> node = new CheckBlackboardVariableNode<Transform>("Player", FindObjectOfType<Core.Control.PlayerController>().transform, ConditionType.Equals, this);
+            behaviourTree.SetBehaviourTree(node);
         }
 
         private void Update()
@@ -131,6 +134,11 @@ namespace DD.AI.Controllers
         public Blackboard GetAIBlackboard()
         {
             return behaviourTree.Blackboard;
+        }
+
+        public Animator GetAnimator()
+        {
+            return ani;
         }
     }
 }
