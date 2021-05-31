@@ -22522,6 +22522,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 919132147697854058, guid: 5d20528c66ba436489fcaf1ba83441cd,
+        type: 3}
+      propertyPath: testDot
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3927217079098825053, guid: 5d20528c66ba436489fcaf1ba83441cd,
         type: 3}
       propertyPath: m_Name

@@ -9,20 +9,20 @@ namespace DD.AI.BehaviourTreeSystem
     {
         private readonly IAIBehaviour ai;
         private readonly string blackboardKeyA, blackboardKeyB;
-        private readonly DistanceConditionType distanceConditionType;
+        private readonly ConditionEvaluationType distanceConditionType;
         private readonly float distanceThreshold;
         private readonly bool areVariablesGameObjects;
 
         /// <summary>
-        /// Distanace Node. Checks the distance between two GameObjects A to B using the condition type against distance.
+        /// Distanace Node. Checks the distance between two GameObjects A to B using the condition type against distance. (Pure Conditional)
         /// </summary>
         /// <param name="ai">The AI Behaviour.</param>
         /// <param name="blackboardKeyA">The key of the first blackboard variable.</param>
         /// <param name="blackboardKeyB">The key of the second blackboard variable.</param>
         /// <param name="distanceConditionType">The conditional type for this calculation.</param>
         /// <param name="distanceThreshold">The value to check against.</param>
-        /// <param name="areGameObjects">Whether the check is comparing GameObjects or Vector3s directly.</param>
-        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, DistanceConditionType distanceConditionType, float distanceThreshold, bool areVariablesGameObjects = false) : base()
+        /// <param name="areVariablesGameObjects">Whether the check is comparing GameObjects or Vector3s directly.</param>
+        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionEvaluationType distanceConditionType, float distanceThreshold, bool areVariablesGameObjects = false) : base()
         {
             this.ai = ai;
             this.blackboardKeyA = blackboardKeyA;
@@ -31,7 +31,19 @@ namespace DD.AI.BehaviourTreeSystem
             this.distanceThreshold = distanceThreshold;
             this.areVariablesGameObjects = areVariablesGameObjects;
         }
-        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, DistanceConditionType distanceConditionType, float distanceThreshold, Node trueNode, Node failNode, bool areVariablesGameObjects = false) : base(trueNode, failNode)
+
+        /// <summary>
+        /// Distanace Node. Checks the distance between two GameObjects A to B using the condition type against distance. (Branching Conditional)
+        /// </summary>
+        /// <param name="ai">The AI Behaviour.</param>
+        /// <param name="blackboardKeyA">The key of the first blackboard variable.</param>
+        /// <param name="blackboardKeyB">The key of the second blackboard variable.</param>
+        /// <param name="distanceConditionType">The conditional type for this calculation.</param>
+        /// <param name="distanceThreshold">The value to check against.</param>
+        /// <param name="trueNode">The Node to branch to when True.</param>
+        /// <param name="failNode">The Node to branch to when False.</param>
+        /// <param name="areVariablesGameObjects">Whether the check is comparing GameObjects or Vector3s directly.</param>
+        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionEvaluationType distanceConditionType, float distanceThreshold, Node trueNode, Node failNode, bool areVariablesGameObjects = false) : base(trueNode, failNode)
         {
             this.ai = ai;
             this.blackboardKeyA = blackboardKeyA;
@@ -56,10 +68,10 @@ namespace DD.AI.BehaviourTreeSystem
 
             switch (distanceConditionType)
             {
-                case DistanceConditionType.GreaterThan:
+                case ConditionEvaluationType.GreaterThan:
                     return dist > distanceThreshold ? NodeState.SUCCESSFUL : NodeState.FAILED;
 
-                case DistanceConditionType.LessThan:
+                case ConditionEvaluationType.LessThan:
                     return dist < distanceThreshold ? NodeState.SUCCESSFUL : NodeState.FAILED;
                 default:
                     return NodeState.FAILED;
@@ -67,5 +79,5 @@ namespace DD.AI.BehaviourTreeSystem
         }
     }
 
-    public enum DistanceConditionType { GreaterThan, LessThan}
+    public enum ConditionEvaluationType { GreaterThan, LessThan}
 }
