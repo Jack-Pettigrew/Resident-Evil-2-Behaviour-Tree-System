@@ -5,13 +5,12 @@ using DD.AI.Controllers;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class DistanceToNode : Conditional
+    public class DistanceToNode<T> : Conditional
     {
         private readonly IAIBehaviour ai;
         private readonly string blackboardKeyA, blackboardKeyB;
-        private readonly ConditionEvaluationType distanceConditionType;
+        private readonly ConditionType distanceConditionType;
         private readonly float distanceThreshold;
-        private readonly bool areVariablesGameObjects;
 
         /// <summary>
         /// Distanace Node. Checks the distance between two GameObjects A to B using the condition type against distance. (Pure Conditional)
@@ -22,14 +21,13 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="distanceConditionType">The conditional type for this calculation.</param>
         /// <param name="distanceThreshold">The value to check against.</param>
         /// <param name="areVariablesGameObjects">Whether the check is comparing GameObjects or Vector3s directly.</param>
-        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionEvaluationType distanceConditionType, float distanceThreshold, bool areVariablesGameObjects = false) : base()
+        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionType distanceConditionType, float distanceThreshold, bool areVariablesGameObjects = false) : base()
         {
             this.ai = ai;
             this.blackboardKeyA = blackboardKeyA;
             this.blackboardKeyB = blackboardKeyB;
             this.distanceConditionType = distanceConditionType;
             this.distanceThreshold = distanceThreshold;
-            this.areVariablesGameObjects = areVariablesGameObjects;
         }
 
         /// <summary>
@@ -43,41 +41,56 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="trueNode">The Node to branch to when True.</param>
         /// <param name="failNode">The Node to branch to when False.</param>
         /// <param name="areVariablesGameObjects">Whether the check is comparing GameObjects or Vector3s directly.</param>
-        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionEvaluationType distanceConditionType, float distanceThreshold, Node trueNode, Node failNode, bool areVariablesGameObjects = false) : base(trueNode, failNode)
+        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionType distanceConditionType, float distanceThreshold, Node trueNode, Node failNode, bool areVariablesGameObjects = false) : base(trueNode, failNode)
         {
             this.ai = ai;
             this.blackboardKeyA = blackboardKeyA;
             this.blackboardKeyB = blackboardKeyB;
             this.distanceConditionType = distanceConditionType;
             this.distanceThreshold = distanceThreshold;
-            this.areVariablesGameObjects = areVariablesGameObjects;
         }
 
         protected override NodeState EvaluateConditional()
         {
-            float dist;
+            Vector3 posA, posB;
+            GetTargetVector3(ai.GetAIBlackboard().GetFromBlackboard<T>(blackboardKeyA), out posA);
+            GetTargetVector3(ai.GetAIBlackboard().GetFromBlackboard<T>(blackboardKeyB), out posB);
 
-            if (!areVariablesGameObjects)
-            {
-                dist = (ai.GetAIBlackboard().GetFromBlackboard<Vector3>(blackboardKeyB) - ai.GetAIBlackboard().GetFromBlackboard<Vector3>(blackboardKeyA)).magnitude;
-            }
-            else
-            {
-                dist = (ai.GetAIBlackboard().GetFromBlackboard<GameObject>(blackboardKeyB).transform.position - ai.GetAIBlackboard().GetFromBlackboard<GameObject>(blackboardKeyA).transform.position).magnitude;
-            }
+            float dist = (posB - posA).magnitude;
 
             switch (distanceConditionType)
             {
-                case ConditionEvaluationType.GreaterThan:
+                case ConditionType.GreaterThan:
                     return dist > distanceThreshold ? NodeState.SUCCESSFUL : NodeState.FAILED;
 
-                case ConditionEvaluationType.LessThan:
+                case ConditionType.LessThan:
                     return dist < distanceThreshold ? NodeState.SUCCESSFUL : NodeState.FAILED;
                 default:
                     return NodeState.FAILED;
             }
         }
-    }
 
-    public enum ConditionEvaluationType { GreaterThan, LessThan}
+        // Trying to allow various Blackboard types to be used (GameObject, Transform or Vector3) as to not limit which types this class can be used for.
+        // Generic specialisation overloading suggested by: https://stackoverflow.com/questions/982952/c-sharp-generics-and-type-checking
+        // ...altough not on the other hand by: https://stackoverflow.com/questions/600978/how-to-do-template-specialization-in-c-sharp?noredirect=1&lq=1
+        private void GetTargetVector3(T value, out Vector3 targetPos)
+        {
+            throw new System.Exception($"Unable to get Vector3 from Blackboard key.");
+        }
+
+        private void GetTargetVector3(Vector3 vector3, out Vector3 targetPos)
+        {
+            targetPos = vector3;
+        }
+
+        private void GetTargetVector3(Transform transform, out Vector3 targetPos)
+        {
+            targetPos = transform.position;
+        }
+
+        private void GetTargetVector3(GameObject gameObject, out Vector3 targetPos)
+        {
+            targetPos = gameObject.transform.position;
+        }
+    }
 }
