@@ -17,8 +17,5 @@ namespace DD.AI.Controllers
         public Blackboard GetAIBlackboard();
         public Func<Transform> GetAITransform { get; set; }
         public Animator GetAnimator();
-        public Action<Transform> SetMoveTarget { get; set; }
-        public Func<Transform> GetAIMoveTarget { get; set; }
-
     } 
 }

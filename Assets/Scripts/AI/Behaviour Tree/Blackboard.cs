@@ -84,14 +84,7 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns>Success?</returns>
         public bool GetFromBlackboardNonAlloc(string keyName, out object blackboardObject)
         {
-            if (blackboard.TryGetValue(keyName.ToLower(), out blackboardObject))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return blackboard.TryGetValue(keyName.ToLower(), out blackboardObject);
         }
 
         public bool RemoveFromBlackboard(string keyName)

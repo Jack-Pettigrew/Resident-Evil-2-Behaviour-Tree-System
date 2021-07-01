@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.AI.Controllers;
 
 namespace DD.AI.BehaviourTreeSystem
 {
     public class CanSeePlayerNode : Conditional
     {
-        private Transform transform = null;
+        private IAIBehaviour ai = null;
         private float fovAngle = 45.0f;
         private float fovRange = 2.0f;
         private LayerMask layerMask = new LayerMask();
@@ -17,9 +18,9 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="transform"></param>
         /// <param name="fovAngle"></param>
         /// <param name="fovRange"></param>
-        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange) : base()
+        public CanSeePlayerNode(IAIBehaviour ai, float fovAngle, float fovRange) : base()
         {
-            this.transform = transform;
+            this.ai = ai;
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
             layerMask = LayerMask.NameToLayer("Player");
@@ -32,9 +33,9 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="fovAngle"></param>
         /// <param name="fovRange"></param>
 
-        public CanSeePlayerNode(Transform transform, float fovAngle, float fovRange, LayerMask layerMask) : base()
+        public CanSeePlayerNode(IAIBehaviour ai, float fovAngle, float fovRange, LayerMask layerMask) : base()
         {
-            this.transform = transform;
+            this.ai = ai;
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
             this.layerMask = layerMask;
@@ -47,9 +48,9 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="fovAngle"></param>
         /// <param name="fovRange"></param>
 
-        public CanSeePlayerNode(Node trueNode, Node falseNode, Transform transform, float fovAngle, float fovRange) : base(trueNode, falseNode)
+        public CanSeePlayerNode(Node trueNode, Node falseNode, IAIBehaviour ai, float fovAngle, float fovRange) : base(trueNode, falseNode)
         {
-            this.transform = transform;
+            this.ai = ai;
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
             layerMask = LayerMask.NameToLayer("Player");
@@ -61,9 +62,9 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="transform"></param>
         /// <param name="fovAngle"></param>
         /// <param name="fovRange"></param>
-        public CanSeePlayerNode(Node trueNode, Node falseNode, Transform transform, float fovAngle, float fovRange, LayerMask layerMask) : base(trueNode, falseNode)
+        public CanSeePlayerNode(Node trueNode, Node falseNode, IAIBehaviour ai, float fovAngle, float fovRange, LayerMask layerMask) : base(trueNode, falseNode)
         {
-            this.transform = transform;
+            this.ai = ai;
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
             this.layerMask = layerMask;
@@ -71,13 +72,13 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override NodeState EvaluateConditional()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, fovRange, layerMask, QueryTriggerInteraction.Ignore);
+            Collider[] colliders = Physics.OverlapSphere(ai.GetAITransform().position, fovRange, layerMask, QueryTriggerInteraction.Ignore);
 
             foreach (var collider in colliders)
             {
-                Vector3 targetDir = collider.transform.position - transform.position;
+                Vector3 targetDir = collider.transform.position - ai.GetAITransform().position;
 
-                if (Mathf.Abs(Vector3.Angle(transform.forward, targetDir)) <= fovAngle) // Can See Player
+                if (Mathf.Abs(Vector3.Angle(ai.GetAITransform().forward, targetDir)) <= fovAngle) // Can See Player
                 {
                     return NodeState.SUCCESSFUL;
                 }
