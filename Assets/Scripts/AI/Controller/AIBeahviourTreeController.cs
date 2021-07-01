@@ -39,7 +39,6 @@ namespace DD.AI.Controllers
 
         private void OnEnable()
         {
-            SetMoveTarget += SetNavAgentTarget;
             MoveEvent += Move;
             GetAITransform += GetTransform;
             GetAIMoveTarget += GetMoveTarget;
@@ -47,7 +46,6 @@ namespace DD.AI.Controllers
 
         private void OnDisable()
         {
-            SetMoveTarget -= SetNavAgentTarget;
             MoveEvent -= Move;
             GetAITransform -= GetTransform;
             GetAIMoveTarget -= GetMoveTarget;
@@ -59,22 +57,22 @@ namespace DD.AI.Controllers
             ani = GetComponent<Animator>();
             behaviourTree = new BehaviourTree();
 
-            // Add inital variables to BB
-            Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
+            // Create and add inital variables to BB (usually defined in an editor - but forced here because they're a pain to create)
+            //Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
             GetAIBlackboard().AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
 
             // Create BT structure
             // Idle
             // Search
             // Chase
-            Sequence followPlayerSequence = new Sequence(new List<Node> { new SetAIDestination("Player", this), new MoveToAIDestination(this, 1.5f) });
+            MoveToNode moveToPlayer = new MoveToNode(this, "Player", 1.5f);
             IdleNode idle = new IdleNode();
 
             // Set Root
-            CanSeePlayerNode root = new CanSeePlayerNode(followPlayerSequence, idle, transform, 90, 10.0f, playerLayerMask);
+            CanSeePlayerNode root = new CanSeePlayerNode(moveToPlayer, idle, this, 90, 10.0f, playerLayerMask);
 
-            CheckBlackboardVariableNode<Transform> node = new CheckBlackboardVariableNode<Transform>("Player", FindObjectOfType<Core.Control.PlayerController>().transform, ConditionType.Equals, this);
-            behaviourTree.SetBehaviourTree(node);
+            //CheckBlackboardVariableNode<Transform> root = new CheckBlackboardVariableNode<Transform>("Player", FindObjectOfType<Core.Control.PlayerController>().transform, ConditionType.Equals, this);
+            behaviourTree.SetBehaviourTree(root);
         }
 
         private void Update()
@@ -121,11 +119,6 @@ namespace DD.AI.Controllers
         public Animator GetAnimator()
         {
             return ani;
-        }
-
-        private void SetNavAgentTarget(Transform target)
-        {
-            MoveTarget = target;
         }
 
         private void Move(Vector3 dir)
