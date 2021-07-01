@@ -108,27 +108,9 @@ namespace DD.AI.Controllers
 
         // TODO: Decide whether we should pass the Target position instead of just a direction
         //          - would allow for movement smoothing to be handled directly by the actual Move function.
-        private void Move(Vector3 dir)
-        {
-            velocity = transform.forward * moveSpeed;
-
-            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
-        }
-
-        private void SetNavAgentTarget(Transform target)
-        {
-            MoveTarget = target;
-        }
-
         public Transform GetTransform()
         {
             return transform;
-        }
-
-        public Transform GetMoveTarget()
-        {
-            return MoveTarget;
         }
 
         public Blackboard GetAIBlackboard()
@@ -139,6 +121,24 @@ namespace DD.AI.Controllers
         public Animator GetAnimator()
         {
             return ani;
+        }
+
+        private void SetNavAgentTarget(Transform target)
+        {
+            MoveTarget = target;
+        }
+
+        private void Move(Vector3 dir)
+        {
+            velocity = transform.forward * moveSpeed;
+
+            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
+        }
+
+        public Transform GetMoveTarget()
+        {
+            return MoveTarget;
         }
     }
 }

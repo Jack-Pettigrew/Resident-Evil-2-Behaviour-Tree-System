@@ -13,12 +13,12 @@ namespace DD.AI.Controllers
         // EVENTS
         public Action<Vector3> MoveEvent { get; set; }
 
-        // EVENT METHODS
-        public Action<Transform> SetMoveTarget { get; set; }
+        // Retrival Events
+        public Blackboard GetAIBlackboard();
         public Func<Transform> GetAITransform { get; set; }
+        public Animator GetAnimator();
+        public Action<Transform> SetMoveTarget { get; set; }
         public Func<Transform> GetAIMoveTarget { get; set; }
 
-        public Blackboard GetAIBlackboard();
-        public Animator GetAnimator();
     } 
 }
