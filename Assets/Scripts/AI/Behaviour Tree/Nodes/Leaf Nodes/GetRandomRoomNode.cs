@@ -11,34 +11,35 @@ namespace DD.AI.BehaviourTreeSystem
         private readonly int retryLimit;
         private readonly bool unsearchedRoomsOnly;
         private readonly IAIBehaviour ai;
-        private readonly string blackboardKey;
+        private readonly string roomBlackboardKey;
 
-        public GetRandomRoomNode(bool unsearchedRoomsOnly, int retryLimit, IAIBehaviour ai, string blackboardKey)
+        public GetRandomRoomNode(IAIBehaviour ai, string roomBlackboardKey, bool unsearchedRoomsOnly = false, int retryLimit = 0)
         {
-            this.unsearchedRoomsOnly = unsearchedRoomsOnly;
             this.ai = ai;
-            this.blackboardKey = blackboardKey;
-
-            ai.GetAIBlackboard().AddToBlackboard(blackboardKey, new List<int>());
+            this.roomBlackboardKey = roomBlackboardKey;
+            this.unsearchedRoomsOnly = unsearchedRoomsOnly;
+            this.retryLimit = retryLimit;
         }
 
         public override NodeState Evaluate()
         {
             int tries = 0;
             Room result;
-            Room currentRoom = ai.GetAIBlackboard().GetFromBlackboard<Room>(blackboardKey);
+            Room currentRoom = ai.GetAIBlackboard().GetFromBlackboard<Room>(roomBlackboardKey);
 
             do
             {
                 result = RoomManager.GetRandomRoom();
                 ++tries;
 
-                if(tries < retryLimit)
+                if(tries <= retryLimit)
                 {
                     break;
                 }
 
             } while (result == currentRoom);
+
+            ai.GetAIBlackboard().UpdateBlackboardVariable(roomBlackboardKey, result, true);
 
             return NodeState.SUCCESSFUL;
         }

@@ -19,6 +19,12 @@ namespace DD.AI.BehaviourTreeSystem
         }
 
         #region Instance Blackboard Methods
+        /// <summary>
+        /// Adds a new variable to the Blackboard associated with the given keyName. Won't add if pre-existing keyName used (use update instead).
+        /// </summary>
+        /// <param name="keyName">BB variable Key.</param>
+        /// <param name="value">BB variable value.</param>
+        /// <returns>Success?</returns>
         public bool AddToBlackboard(string keyName, object value)
         {
             string key = keyName.ToLower();
@@ -35,8 +41,8 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         /// <param name="keyName">BB variable Key.</param>
         /// <param name="value">BB variable value.</param>
-        /// <param name="addIfNotFound">If not found, add to BB?</param>
-        /// <returns></returns>
+        /// <param name="addIfNotFound">If not found, should it be added to the BlackBoard?</param>
+        /// <returns>Success?</returns>
         public bool UpdateBlackboardVariable(string keyName, object value, bool addIfNotFound = false)
         {
             string key = keyName.ToLower();
