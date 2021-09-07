@@ -10,12 +10,12 @@ namespace DD.AI.Controllers
     /// </summary>
     public interface IAIBehaviour
     {
-        // EVENTS
+        // EVENTS - allow for decoupled code
         public Action<Vector3> MoveEvent { get; set; }
 
-        // Retrival Events
-        public Blackboard GetAIBlackboard();
-        public Func<Transform> GetAITransform { get; set; }
+        // METHODS
+        public Transform GetAITransform();
         public Animator GetAnimator();
+        public Blackboard GetAIBlackboard();
     } 
 }

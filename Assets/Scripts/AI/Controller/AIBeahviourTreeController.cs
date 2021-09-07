@@ -10,11 +10,7 @@ namespace DD.AI.Controllers
     public class AIBeahviourTreeController : MonoBehaviour, IAIBehaviour
     {
         #region AI Events
-        public Action<Transform> SetMoveTarget { get; set; }
         public Action<Vector3> MoveEvent { get; set; }
-
-        public Func<Transform> GetAITransform { get; set; }
-        public Func<Transform> GetAIMoveTarget { get; set; }
         #endregion
 
         private BehaviourTree behaviourTree = null;
@@ -28,9 +24,10 @@ namespace DD.AI.Controllers
 
         [SerializeField] private float rotSpeedScalar = 0.5f;
         private float currentRotVel = 0;
-        public Transform MoveTarget { private set; get; }
 
-        // FOV (seperate component that updates tree via event)
+        // FOV
+        [SerializeField] private int fovAngle = 90.0f;
+        [SerializeField] private int fovRange = 10.0f;
         [SerializeField] private LayerMask playerLayerMask;
 
         // COMPONENTS
@@ -40,15 +37,11 @@ namespace DD.AI.Controllers
         private void OnEnable()
         {
             MoveEvent += Move;
-            GetAITransform += GetTransform;
-            GetAIMoveTarget += GetMoveTarget;
         }
 
         private void OnDisable()
         {
             MoveEvent -= Move;
-            GetAITransform -= GetTransform;
-            GetAIMoveTarget -= GetMoveTarget;
         }
 
         private void Awake()
@@ -57,38 +50,46 @@ namespace DD.AI.Controllers
             ani = GetComponent<Animator>();
             behaviourTree = new BehaviourTree();
 
-            // Create and add inital variables to BB (usually defined in an editor - but forced here because they're a pain to create)
+            // init Behaviour Tree
+            behaviourTree.SetBehaviourTree(CreateBehaviourTree());
+        }
+
+        private Node CreateBehaviourTree()
+        {
+            // Create and add inital variables to BB (to be defined in editor... but made here because custom tools are hard to make lol)
             //Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
             GetAIBlackboard().AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
 
-            // Create BT structure
-            // Idle
-            // Search
-            // Chase
+            /* Create Example BT structure
+             Idle
+             Search
+             Chase
+            */
             MoveToNode moveToPlayer = new MoveToNode(this, "Player", 1.5f);
             IdleNode idle = new IdleNode();
 
             // Set Root
-            CanSeePlayerNode root = new CanSeePlayerNode(moveToPlayer, idle, this, 90, 10.0f, playerLayerMask);
+            CanSeePlayerNode root = new CanSeePlayerNode(moveToPlayer, idle, this, fovAngle, fovRange, playerLayerMask);
 
             //CheckBlackboardVariableNode<Transform> root = new CheckBlackboardVariableNode<Transform>("Player", FindObjectOfType<Core.Control.PlayerController>().transform, ConditionType.Equals, this);
-            behaviourTree.SetBehaviourTree(root);
+
+            return root;
         }
 
         private void Update()
         {
             behaviourTree.EvaluateTree();
 
-            ApplyPhysics();
+            UpdatePhysics();
 
             // Anims
             ani.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
 
-            // Reset after setting Anim variables so we stop moving
+            // Reset after setting Anim variables so we stop moving (workaround)
             velocity = Vector3.zero + Vector3.up * yVelocity;
         }
 
-        private void ApplyPhysics()
+        private void UpdatePhysics()
         {
             if (controller.isGrounded)
             {
@@ -106,19 +107,19 @@ namespace DD.AI.Controllers
 
         // TODO: Decide whether we should pass the Target position instead of just a direction
         //          - would allow for movement smoothing to be handled directly by the actual Move function.
-        public Transform GetTransform()
+        public Transform GetAITransform()
         {
             return transform;
-        }
-
-        public Blackboard GetAIBlackboard()
-        {
-            return behaviourTree.Blackboard;
         }
 
         public Animator GetAnimator()
         {
             return ani;
+        }
+
+        public Blackboard GetAIBlackboard()
+        {
+            return behaviourTree.Blackboard;
         }
 
         private void Move(Vector3 dir)
@@ -127,11 +128,6 @@ namespace DD.AI.Controllers
 
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
-        }
-
-        public Transform GetMoveTarget()
-        {
-            return MoveTarget;
         }
     }
 }
