@@ -130,13 +130,13 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         /// <param name="keyName"></param>
         /// <returns>'object' typed variable. NULL on not found.</returns>
-        public static object GetFromSharedBlackboard(string keyName)
+        public static T GetFromSharedBlackboard<T>(string keyName)
         {
             object temp;
 
             sharedBlackboard.TryGetValue(keyName.ToLower(), out temp);
 
-            return temp;
+            return (T)temp;
         }
 
         /// <summary>

@@ -26,8 +26,8 @@ namespace DD.AI.Controllers
         private float currentRotVel = 0;
 
         // FOV
-        [SerializeField] private int fovAngle = 90.0f;
-        [SerializeField] private int fovRange = 10.0f;
+        [SerializeField] private float fovAngle = 90.0f;
+        [SerializeField] private float fovRange = 10.0f;
         [SerializeField] private LayerMask playerLayerMask;
 
         // COMPONENTS

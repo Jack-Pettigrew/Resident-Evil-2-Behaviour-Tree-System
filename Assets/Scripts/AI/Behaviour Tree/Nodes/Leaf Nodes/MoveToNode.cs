@@ -16,7 +16,7 @@ namespace DD.AI.BehaviourTreeSystem
         private Transform moveTarget = null;
 
         // PATH CALCULATION
-        private readonly float arrivedDistance = 1.0f;
+        private readonly float arrivedDistance;
         private NavMeshPath path;
         private int pathCornerIndex = 0;
         private const float NAV_WAYPOINT_THRESHOLD = 0.5f;
@@ -35,9 +35,9 @@ namespace DD.AI.BehaviourTreeSystem
         public override NodeState Evaluate()
         {
             // Pathing
-            RecalculatePath();
             if(path.status == NavMeshPathStatus.PathInvalid)
             {
+                RecalculatePath();
                 return NodeState.RUNNING;
             }
 
@@ -60,11 +60,14 @@ namespace DD.AI.BehaviourTreeSystem
             }
         }
 
-        private void RecalculatePath()
+        private bool RecalculatePath()
         {
+            pathCornerIndex = 0;
+
             if(!moveTarget)
             {
                 moveTarget = ai.GetAIBlackboard().GetFromBlackboard<Transform>(targetBlackboardKey);
+                return false;
             }
 
             timer -= Time.deltaTime;
@@ -74,10 +77,10 @@ namespace DD.AI.BehaviourTreeSystem
                 NavMesh.CalculatePath(ai.GetAITransform().position, moveTarget.position, NavMesh.AllAreas, path);
                 pathCornerIndex = 0;
 
-                //Debug.Log(path.status);
-
                 timer = NAV_UPDATE_TIMER;
             }
+
+            return true;
         }
     }
 }
