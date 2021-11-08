@@ -24,20 +24,6 @@ namespace DD.Systems.Room
             return FindLowestCostPath(startingRoom, goalRoom, ref doorCostDictionary);
         }
 
-        public static Room GetRoomOfObject(Vector3 objectPosition)
-        {
-            RaycastHit hit;
-            Physics.Raycast(objectPosition, Vector3.down, out hit, 10.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore);
-            Debug.DrawRay(objectPosition, Vector3.down * 10.0f, Color.red, 20.0f, false);
-
-            RoomFloor floor = hit.collider.GetComponent<RoomFloor>();
-
-            if (floor)
-                return floor.OwnerRoom;
-            else
-                return null;
-        }
-
         private static bool BFSCalculateDoorCosts(Room startingRoom, Room goalRoom, ref Dictionary<Door, int> doorCostDictionary)
         {
             HashSet<Room> roomsToCheck = new HashSet<Room>(); // to check next iteration

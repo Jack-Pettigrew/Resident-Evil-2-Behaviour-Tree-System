@@ -22,7 +22,7 @@ namespace DD.AI.BehaviourTreeSystem
         public override NodeState Evaluate()
         {
             Room result;
-            Room currentRoom = ai.GetAIBlackboard().GetFromBlackboard<Room>(roomBlackboardKey);
+            Room currentRoom = RoomManager.GetRoomOfObject(ai.GetAITransform().position);
 
             do
             {
