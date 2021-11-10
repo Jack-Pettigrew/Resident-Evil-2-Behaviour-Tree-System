@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
@@ -30,7 +31,7 @@ namespace DD.AI.BehaviourTreeSystem
                     }
                     else // More nodes to process
                     {
-                        return NodeState.RUNNING;
+                        return Evaluate();
                     }
 
                 case NodeState.FAILED:
