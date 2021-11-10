@@ -11,13 +11,11 @@ namespace DD.AI.BehaviourTreeSystem
         private readonly string blackboardKey;
         private readonly T compareValue;
         private readonly ConditionType conditionType;
-        private readonly IAIBehaviour ai;
 
-        public CheckBlackboardVariableNode(string blackboardKey, T compareValue, ConditionType conditionType, IAIBehaviour ai) : base()
+        public CheckBlackboardVariableNode(string blackboardKey, T compareValue, ConditionType conditionType, IAIBehaviour ai) : base(ai)
         {
             this.blackboardKey = blackboardKey;
             this.conditionType = conditionType;
-            this.ai = ai;
             this.compareValue = compareValue;
         }
 

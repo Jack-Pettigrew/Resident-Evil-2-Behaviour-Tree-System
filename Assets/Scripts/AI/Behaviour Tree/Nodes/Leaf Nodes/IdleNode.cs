@@ -20,6 +20,7 @@ public class IdleNode : Node
 
     public override NodeState Evaluate()
     {
+        Debug.Log("Idle");
         timer -= Time.deltaTime;
 
         if (timer <= 0.0f)

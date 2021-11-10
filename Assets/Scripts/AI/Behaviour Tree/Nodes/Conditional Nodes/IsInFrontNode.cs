@@ -7,7 +7,6 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class IsInFrontNode<T> : Conditional
     {
-        private readonly IAIBehaviour ai;
         private readonly string blackboardKey;
 
         /// <summary>
@@ -15,9 +14,8 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         /// <param name="ai">The AI.</param>
         /// <param name="blackboardKey">The key of the BlackBoard variables.</param>
-        public IsInFrontNode(IAIBehaviour ai, string blackboardKey) : base()
+        public IsInFrontNode(IAIBehaviour ai, string blackboardKey) : base(ai)
         {
-            this.ai = ai;
             this.blackboardKey = blackboardKey;
         }
 

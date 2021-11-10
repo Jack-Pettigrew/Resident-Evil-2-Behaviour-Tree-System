@@ -30,54 +30,66 @@ namespace DD.AI.BehaviourTreeSystem
             this.targetBlackboardKey = targetBlackboardKey;
             this.arrivedDistance = arrivedDistance;
             path = new NavMeshPath();
+            moveTarget = ai.GetAIBlackboard().GetFromBlackboard<Transform>(targetBlackboardKey);
         }
 
         public override NodeState Evaluate()
         {
-            // Pathing
-            if(path.status == NavMeshPathStatus.PathInvalid)
+            Debug.Log("MoveToNode");
+            ai.MoveEvent(ai.GetAITransform().forward);
+            return NodeState.SUCCESSFUL;
+
+            if (!UpdatePath())
             {
-                RecalculatePath();
-                return NodeState.RUNNING;
+                return NodeState.FAILED;
             }
 
             Vector3 navTargetDir = path.corners[pathCornerIndex] - ai.GetAITransform().position;
             float targetDist = (moveTarget.position - ai.GetAITransform().position).magnitude;
 
-            if(targetDist > arrivedDistance)
-            {
+            //if(targetDist > arrivedDistance)
+            //{
                 if(navTargetDir.magnitude <= NAV_WAYPOINT_THRESHOLD)
                 {
                     pathCornerIndex++;
                 }
 
                 ai.MoveEvent(navTargetDir);
-                return NodeState.RUNNING;
-            }
-            else
-            {
                 return NodeState.SUCCESSFUL;
-            }
+                //return NodeState.RUNNING;
+            //}
+            //else
+            //{
+            //    return NodeState.SUCCESSFUL;
+            //}
         }
 
-        private bool RecalculatePath()
+        private bool UpdatePath()
         {
-            pathCornerIndex = 0;
-
-            if(!moveTarget)
-            {
-                moveTarget = ai.GetAIBlackboard().GetFromBlackboard<Transform>(targetBlackboardKey);
-                return false;
-            }
-
             timer -= Time.deltaTime;
 
             if(timer <= 0 || path.status == NavMeshPathStatus.PathInvalid)
             {
+                // Check for current moveTarget
+                if (!moveTarget)
+                {
+                    moveTarget = ai.GetAIBlackboard().GetFromBlackboard<Transform>(targetBlackboardKey);
+
+                    // Fail if no move target in BlackBoard
+                    if(!moveTarget)
+                    {
+                        return false;
+                    }
+                }
+
                 NavMesh.CalculatePath(ai.GetAITransform().position, moveTarget.position, NavMesh.AllAreas, path);
                 pathCornerIndex = 0;
-
                 timer = NAV_UPDATE_TIMER;
+
+                if(path.corners.Length == 0)
+                {
+                    return false;
+                }
             }
 
             return true;

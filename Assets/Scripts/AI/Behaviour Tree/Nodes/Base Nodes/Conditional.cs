@@ -12,12 +12,15 @@ namespace DD.AI.BehaviourTreeSystem
         protected bool pureConditional = false;
         protected Node trueNode = null, falseNode = null;
 
+        protected Controllers.IAIBehaviour ai;
+
         /// <summary>
         /// Pure Conditional Constructor.
         /// </summary>
-        protected Conditional()
+        protected Conditional(Controllers.IAIBehaviour ai)
         {
             pureConditional = true;
+            this.ai = ai;
         }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace DD.AI.Controllers
 
         // FOV
         [SerializeField] private float fovAngle = 90.0f;
-        [SerializeField] private float fovRange = 10.0f;
+        [SerializeField] private float fovRange = 5.0f;
         [SerializeField] private LayerMask playerLayerMask;
 
         // COMPONENTS
@@ -65,11 +65,16 @@ namespace DD.AI.Controllers
              Search
              Chase
             */
-            MoveToNode moveToPlayer = new MoveToNode(this, "Player", 1.5f);
+
             IdleNode idle = new IdleNode();
+            CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(this, fovAngle, fovRange, playerLayerMask);
+            MoveToNode moveToPlayer = new MoveToNode(this, "Player", 1.5f);
+            
+            Sequence idleSequence = new Sequence(new List<Node> { new IsAtTargetNode(this), idle });
+            Sequence followSequence = new Sequence(new List<Node> { canSeePlayer, moveToPlayer });
 
             // Set Root
-            CanSeePlayerNode root = new CanSeePlayerNode(moveToPlayer, idle, this, fovAngle, fovRange, playerLayerMask);
+            Selector root = new Selector(new List<Node> {idleSequence, followSequence, idle});
 
             //CheckBlackboardVariableNode<Transform> root = new CheckBlackboardVariableNode<Transform>("Player", FindObjectOfType<Core.Control.PlayerController>().transform, ConditionType.Equals, this);
 

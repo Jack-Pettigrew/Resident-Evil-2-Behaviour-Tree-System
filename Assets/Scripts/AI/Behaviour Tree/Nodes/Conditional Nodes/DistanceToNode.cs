@@ -7,7 +7,6 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class DistanceToNode<T> : Conditional
     {
-        private readonly IAIBehaviour ai;
         private readonly string blackboardKeyA, blackboardKeyB;
         private readonly ConditionType distanceConditionType;
         private readonly float distanceThreshold;
@@ -21,9 +20,8 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="distanceConditionType">The conditional type for this calculation.</param>
         /// <param name="distanceThreshold">The value to check against.</param>
         /// <param name="areVariablesGameObjects">Whether the check is comparing GameObjects or Vector3s directly.</param>
-        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionType distanceConditionType, float distanceThreshold, bool areVariablesGameObjects = false) : base()
+        public DistanceToNode(IAIBehaviour ai, string blackboardKeyA, string blackboardKeyB, ConditionType distanceConditionType, float distanceThreshold, bool areVariablesGameObjects = false) : base(ai)
         {
-            this.ai = ai;
             this.blackboardKeyA = blackboardKeyA;
             this.blackboardKeyB = blackboardKeyB;
             this.distanceConditionType = distanceConditionType;
