@@ -6,11 +6,11 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class Selector : Node
     {
-        protected List<Node> nodes = new List<Node>();
+        protected List<Node> nodes;
 
-        public Selector(List<Node> nodes)
+        public Selector(BehaviourTree behaviourTree, List<Node> nodes) : base(behaviourTree)
         {
-            this.nodes = nodes;
+            this.nodes = new List<Node>(nodes);
         }
 
         public override NodeState Evaluate()

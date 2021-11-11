@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using DD.AI.BehaviourTreeSystem;
-using DD.Systems.Room;
 
 namespace DD.AI.Controllers
 {
@@ -16,6 +14,5 @@ namespace DD.AI.Controllers
         // METHODS
         public Transform GetAITransform();
         public Animator GetAnimator();
-        public Blackboard GetAIBlackboard();
     } 
 }

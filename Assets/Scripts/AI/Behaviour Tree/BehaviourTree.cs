@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.AI.Controllers;
 
 namespace DD.AI.BehaviourTreeSystem
 {
     public class BehaviourTree
     {
-        // Change this to a custom BehaviourTreeAsset later (it'll have all the nodes in it - or will at least be able to generate one from the asset)
+        public IAIBehaviour ai { private set; get; }
         private Node rootNode = null;
-
-        // Behaviour Tree's Blackboard
         public Blackboard Blackboard { private set; get; }
 
-        public BehaviourTree()
+        public BehaviourTree(IAIBehaviour ai)
         {
+            this.ai = ai;
             Blackboard = new Blackboard();
         }
 

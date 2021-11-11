@@ -9,7 +9,6 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class MoveToNode : Node
     {
-        private readonly IAIBehaviour ai;
         private readonly string targetBlackboardKey;
 
         // MOVEMENT
@@ -21,31 +20,26 @@ namespace DD.AI.BehaviourTreeSystem
         private int pathCornerIndex = 0;
         private const float NAV_WAYPOINT_THRESHOLD = 0.5f;
 
-        private const float NAV_UPDATE_TIMER = 0.1f;
+        private const float NAV_UPDATE_TIMER = 0.02f;
         private float timer = NAV_UPDATE_TIMER;
 
-        public MoveToNode(IAIBehaviour ai, string targetBlackboardKey, float arrivedDistance)
+        public MoveToNode(BehaviourTree behaviourTree, string targetBlackboardKey, float arrivedDistance) : base(behaviourTree)
         {
-            this.ai = ai;
             this.targetBlackboardKey = targetBlackboardKey;
             this.arrivedDistance = arrivedDistance;
             path = new NavMeshPath();
-            moveTarget = ai.GetAIBlackboard().GetFromBlackboard<Transform>(targetBlackboardKey);
+            moveTarget = behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey);
         }
 
         public override NodeState Evaluate()
         {
-            Debug.Log("MoveToNode");
-            ai.MoveEvent(ai.GetAITransform().forward);
-            return NodeState.SUCCESSFUL;
-
             if (!UpdatePath())
             {
                 return NodeState.FAILED;
             }
 
-            Vector3 navTargetDir = path.corners[pathCornerIndex] - ai.GetAITransform().position;
-            float targetDist = (moveTarget.position - ai.GetAITransform().position).magnitude;
+            Vector3 navTargetDir = path.corners[pathCornerIndex] - behaviourTree.ai.GetAITransform().position;
+            float targetDist = (moveTarget.position - behaviourTree.ai.GetAITransform().position).magnitude;
 
             //if(targetDist > arrivedDistance)
             //{
@@ -54,7 +48,7 @@ namespace DD.AI.BehaviourTreeSystem
                     pathCornerIndex++;
                 }
 
-                ai.MoveEvent(navTargetDir);
+                behaviourTree.ai.MoveEvent(navTargetDir);
                 return NodeState.SUCCESSFUL;
                 //return NodeState.RUNNING;
             //}
@@ -73,7 +67,7 @@ namespace DD.AI.BehaviourTreeSystem
                 // Check for current moveTarget
                 if (!moveTarget)
                 {
-                    moveTarget = ai.GetAIBlackboard().GetFromBlackboard<Transform>(targetBlackboardKey);
+                    moveTarget = behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey);
 
                     // Fail if no move target in BlackBoard
                     if(!moveTarget)
@@ -82,7 +76,7 @@ namespace DD.AI.BehaviourTreeSystem
                     }
                 }
 
-                NavMesh.CalculatePath(ai.GetAITransform().position, moveTarget.position, NavMesh.AllAreas, path);
+                NavMesh.CalculatePath(behaviourTree.ai.GetAITransform().position, moveTarget.position, NavMesh.AllAreas, path);
                 pathCornerIndex = 0;
                 timer = NAV_UPDATE_TIMER;
 

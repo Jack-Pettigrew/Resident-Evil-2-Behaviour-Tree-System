@@ -11,7 +11,7 @@ namespace DD.AI.BehaviourTreeSystem
         private float fovRange = 2.0f;
         private LayerMask layerMask = new LayerMask();
 
-        public CanSeePlayerNode(IAIBehaviour ai, float fovAngle, float fovRange, LayerMask layerMask) : base(ai)
+        public CanSeePlayerNode(BehaviourTree behaviourTree, float fovAngle, float fovRange, LayerMask layerMask) : base(behaviourTree)
         {
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
@@ -21,13 +21,13 @@ namespace DD.AI.BehaviourTreeSystem
         protected override NodeState EvaluateConditional()
         {
             Debug.Log("CanSeePlayer");
-            Collider[] colliders = Physics.OverlapSphere(ai.GetAITransform().position, fovRange, layerMask, QueryTriggerInteraction.Ignore);
+            Collider[] colliders = Physics.OverlapSphere(behaviourTree.ai.GetAITransform().position, fovRange, layerMask, QueryTriggerInteraction.Ignore);
 
             foreach (var collider in colliders)
             {
-                Vector3 targetDir = collider.transform.position - ai.GetAITransform().position;
+                Vector3 targetDir = collider.transform.position - behaviourTree.ai.GetAITransform().position;
 
-                if (Mathf.Abs(Vector3.Angle(ai.GetAITransform().forward, targetDir)) <= fovAngle) // Can See Player
+                if (Mathf.Abs(Vector3.Angle(behaviourTree.ai.GetAITransform().forward, targetDir)) <= fovAngle) // Can See Player
                 {
                     return NodeState.SUCCESSFUL;
                 }

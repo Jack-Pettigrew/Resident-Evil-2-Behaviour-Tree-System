@@ -9,11 +9,8 @@ namespace DD.AI.BehaviourTreeSystem
     /// </summary>
     public abstract class Conditional : Node
     {
-        protected Controllers.IAIBehaviour ai;
-
-        protected Conditional(Controllers.IAIBehaviour ai)
+        protected Conditional(BehaviourTree behaviourTree) : base(behaviourTree)
         {
-            this.ai = ai;
         }
 
         /// <summary>

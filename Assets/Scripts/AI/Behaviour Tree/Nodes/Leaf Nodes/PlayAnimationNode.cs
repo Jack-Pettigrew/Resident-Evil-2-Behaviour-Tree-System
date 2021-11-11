@@ -7,18 +7,16 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class PlayAnimationNode : Node
     {
-        private readonly IAIBehaviour ai;
         private readonly string stateName;
 
-        public PlayAnimationNode(string stateName, IAIBehaviour ai)
+        public PlayAnimationNode(BehaviourTree behaviourTree, string stateName) : base(behaviourTree)
         {
-            this.ai = ai;
             this.stateName = stateName;
         }
 
         public override NodeState Evaluate()
         {
-            ai.GetAnimator().Play(stateName);
+            behaviourTree.ai.GetAnimator().Play(stateName);
             return NodeState.SUCCESSFUL;
         }
     }

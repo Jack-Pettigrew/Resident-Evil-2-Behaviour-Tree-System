@@ -48,7 +48,7 @@ namespace DD.AI.Controllers
         {
             controller = GetComponent<CharacterController>();
             ani = GetComponent<Animator>();
-            behaviourTree = new BehaviourTree();
+            behaviourTree = new BehaviourTree(this);
 
             // init Behaviour Tree
             behaviourTree.SetBehaviourTree(CreateBehaviourTree());
@@ -57,8 +57,7 @@ namespace DD.AI.Controllers
         private Node CreateBehaviourTree()
         {
             // Create and add inital variables to BB (to be defined in editor... but made here because custom tools are hard to make lol)
-            //Blackboard.AddToSharedBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
-            GetAIBlackboard().AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
+            behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
 
             /* Create Example BT structure
              Idle
@@ -66,17 +65,14 @@ namespace DD.AI.Controllers
              Chase
             */
 
-            IdleNode idle = new IdleNode();
-            CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(this, fovAngle, fovRange, playerLayerMask);
-            MoveToNode moveToPlayer = new MoveToNode(this, "Player", 1.5f);
+            IdleNode idle = new IdleNode(behaviourTree, 0.0f);
+            CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(behaviourTree, fovAngle, fovRange, playerLayerMask);
+            MoveToNode moveToPlayer = new MoveToNode(behaviourTree, "Player", 1.5f);
             
-            Sequence idleSequence = new Sequence(new List<Node> { new IsAtTargetNode(this), idle });
-            Sequence followSequence = new Sequence(new List<Node> { canSeePlayer, moveToPlayer });
+            Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode(behaviourTree), idle });
+            Sequence followSequence = new Sequence(behaviourTree, new List<Node> { canSeePlayer, moveToPlayer });
 
-            // Set Root
-            Selector root = new Selector(new List<Node> {idleSequence, followSequence, idle});
-
-            //CheckBlackboardVariableNode<Transform> root = new CheckBlackboardVariableNode<Transform>("Player", FindObjectOfType<Core.Control.PlayerController>().transform, ConditionType.Equals, this);
+            Selector root = new Selector(behaviourTree, new List<Node> {idleSequence, followSequence, idle});
 
             return root;
         }
@@ -120,11 +116,6 @@ namespace DD.AI.Controllers
         public Animator GetAnimator()
         {
             return ani;
-        }
-
-        public Blackboard GetAIBlackboard()
-        {
-            return behaviourTree.Blackboard;
         }
 
         private void Move(Vector3 dir)

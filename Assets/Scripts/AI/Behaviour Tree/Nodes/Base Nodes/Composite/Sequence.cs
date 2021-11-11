@@ -5,12 +5,12 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class Sequence : Node
     {
-        protected List<Node> nodes = new List<Node>();
         private int currentNodeIndex = 0;
+        protected List<Node> nodes;
 
-        public Sequence(List<Node> nodes)
+        public Sequence(BehaviourTree behaviourTree, List<Node> nodes) : base(behaviourTree)
         {
-            this.nodes = nodes;
+            this.nodes = new List<Node>(nodes);
         }
 
         public override NodeState Evaluate()
