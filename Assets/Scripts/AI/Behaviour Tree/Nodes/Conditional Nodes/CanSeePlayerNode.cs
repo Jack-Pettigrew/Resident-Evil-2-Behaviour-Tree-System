@@ -11,57 +11,8 @@ namespace DD.AI.BehaviourTreeSystem
         private float fovRange = 2.0f;
         private LayerMask layerMask = new LayerMask();
 
-        /// <summary>
-        /// Pure Conditional
-        /// </summary>
-        /// <param name="transform"></param>
-        /// <param name="fovAngle"></param>
-        /// <param name="fovRange"></param>
-        public CanSeePlayerNode(IAIBehaviour ai, float fovAngle, float fovRange) : base(ai)
-        {
-            this.fovAngle = fovAngle;
-            this.fovRange = fovRange;
-            layerMask = LayerMask.NameToLayer("Player");
-        }
-
-        /// <summary>
-        /// Pure Conditional
-        /// </summary>
-        /// <param name="transform"></param>
-        /// <param name="fovAngle"></param>
-        /// <param name="fovRange"></param>
-
         public CanSeePlayerNode(IAIBehaviour ai, float fovAngle, float fovRange, LayerMask layerMask) : base(ai)
         {
-            this.fovAngle = fovAngle;
-            this.fovRange = fovRange;
-            this.layerMask = layerMask;
-        }
-
-        /// <summary>
-        /// Branching Conditional
-        /// </summary>
-        /// <param name="transform"></param>
-        /// <param name="fovAngle"></param>
-        /// <param name="fovRange"></param>
-
-        public CanSeePlayerNode(Node trueNode, Node falseNode, IAIBehaviour ai, float fovAngle, float fovRange) : base(trueNode, falseNode)
-        {
-            this.ai = ai;
-            this.fovAngle = fovAngle;
-            this.fovRange = fovRange;
-            layerMask = LayerMask.NameToLayer("Player");
-        }
-
-        /// <summary>
-        /// Branching Conditional
-        /// </summary>
-        /// <param name="transform"></param>
-        /// <param name="fovAngle"></param>
-        /// <param name="fovRange"></param>
-        public CanSeePlayerNode(Node trueNode, Node falseNode, IAIBehaviour ai, float fovAngle, float fovRange, LayerMask layerMask) : base(trueNode, falseNode)
-        {
-            this.ai = ai;
             this.fovAngle = fovAngle;
             this.fovRange = fovRange;
             this.layerMask = layerMask;
