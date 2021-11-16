@@ -3,32 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using DD.AI.Controllers;
 
 namespace DD.AI.BehaviourTreeSystem
 {
     public class MoveToNode : Node
     {
         private readonly string targetBlackboardKey;
-
-        // MOVEMENT
-        private Transform moveTarget = null;
-
-        // PATH CALCULATION
-        private readonly float arrivedDistance;
         private NavMeshPath path;
-        private int pathCornerIndex = 0;
-        private const float NAV_WAYPOINT_THRESHOLD = 0.5f;
 
-        private const float NAV_UPDATE_TIMER = 0.02f;
-        private float timer = NAV_UPDATE_TIMER;
-
-        public MoveToNode(BehaviourTree behaviourTree, string targetBlackboardKey, float arrivedDistance) : base(behaviourTree)
+        public MoveToNode(BehaviourTree behaviourTree, string targetBlackboardKey) : base(behaviourTree)
         {
             this.targetBlackboardKey = targetBlackboardKey;
-            this.arrivedDistance = arrivedDistance;
             path = new NavMeshPath();
-            moveTarget = behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey);
         }
 
         public override NodeState Evaluate()
@@ -38,53 +24,38 @@ namespace DD.AI.BehaviourTreeSystem
                 return NodeState.FAILED;
             }
 
-            Vector3 navTargetDir = path.corners[pathCornerIndex] - behaviourTree.ai.GetAITransform().position;
-            float targetDist = (moveTarget.position - behaviourTree.ai.GetAITransform().position).magnitude;
+            Vector3 navTargetDir = path.corners[1] - behaviourTree.ai.GetAITransform().position;
+            float targetDist = (behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey).position - behaviourTree.ai.GetAITransform().position).magnitude;
 
-            //if(targetDist > arrivedDistance)
-            //{
-                if(navTargetDir.magnitude <= NAV_WAYPOINT_THRESHOLD)
-                {
-                    pathCornerIndex++;
-                }
-
-                behaviourTree.ai.MoveEvent(navTargetDir);
-                return NodeState.SUCCESSFUL;
-                //return NodeState.RUNNING;
-            //}
-            //else
-            //{
-            //    return NodeState.SUCCESSFUL;
-            //}
+            behaviourTree.ai.MoveEvent(navTargetDir);
+            return NodeState.SUCCESSFUL;
         }
 
         private bool UpdatePath()
         {
-            timer -= Time.deltaTime;
-
-            if(timer <= 0 || path.status == NavMeshPathStatus.PathInvalid)
+            // Fail if no target in BlackBoard
+            if (!behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey))
             {
-                // Check for current moveTarget
-                if (!moveTarget)
-                {
-                    moveTarget = behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey);
-
-                    // Fail if no move target in BlackBoard
-                    if(!moveTarget)
-                    {
-                        return false;
-                    }
-                }
-
-                NavMesh.CalculatePath(behaviourTree.ai.GetAITransform().position, moveTarget.position, NavMesh.AllAreas, path);
-                pathCornerIndex = 0;
-                timer = NAV_UPDATE_TIMER;
-
-                if(path.corners.Length == 0)
-                {
-                    return false;
-                }
+                return false;
             }
+
+            // Update Path
+            NavMesh.CalculatePath(behaviourTree.ai.GetAITransform().position, behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey).position, NavMesh.AllAreas, path);
+
+            // Fail if path is invalid
+            if(path.corners.Length <= 0)
+            {
+                return false;
+            }
+
+            #if UNITY_EDITOR
+            for (int i = 0; i < path.corners.Length; i++)
+            {
+                if (i + 1 == path.corners.Length) break;
+
+                Debug.DrawLine(path.corners[i], path.corners[i + 1]);
+            }
+            #endif
 
             return true;
         }
