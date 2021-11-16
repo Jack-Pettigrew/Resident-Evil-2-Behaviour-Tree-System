@@ -8,15 +8,14 @@ public class IdleNode : Node
     private readonly float IDLE_LENGTH;
     private float timer = 0.0f;
 
-    public IdleNode(BehaviourTree behaviourTree, float time) : base (behaviourTree)
+    public IdleNode(BehaviourTree behaviourTree, string idleTimerBlackboardKey) : base (behaviourTree)
     {
-        IDLE_LENGTH = time;
+        IDLE_LENGTH = behaviourTree.Blackboard.GetFromBlackboard<float>(idleTimerBlackboardKey);
         timer = IDLE_LENGTH;
     }
 
     public override NodeState Evaluate()
     {
-        Debug.Log("Idle");
         timer -= Time.deltaTime;
 
         if (timer <= 0.0f)

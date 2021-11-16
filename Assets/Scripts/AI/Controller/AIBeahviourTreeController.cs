@@ -16,19 +16,21 @@ namespace DD.AI.Controllers
         private BehaviourTree behaviourTree = null;
 
         // AI MOVEMENT
-        [SerializeField] private float moveSpeed = 2.0f;
         private Vector3 velocity = Vector3.zero;
         private float yVelocity = 0;
-        [SerializeField] private float groundedGravity = -0.2f;
-        [SerializeField] private float gravity = Physics.gravity.y;
 
+        [SerializeField] private float moveSpeed = 2.0f;
         [SerializeField] private float rotSpeedScalar = 0.5f;
         private float currentRotVel = 0;
+
+        [SerializeField] private float groundedGravity = -0.2f;
+        [SerializeField] private float gravity = Physics.gravity.y;
 
         // FOV
         [SerializeField] private float fovAngle = 90.0f;
         [SerializeField] private float fovRange = 5.0f;
         [SerializeField] private LayerMask playerLayerMask;
+        [SerializeField] private LayerMask environmentLayerMask;
 
         // COMPONENTS
         private Animator ani = null;
@@ -50,14 +52,18 @@ namespace DD.AI.Controllers
             ani = GetComponent<Animator>();
             behaviourTree = new BehaviourTree(this);
 
-            // init Behaviour Tree
             behaviourTree.SetBehaviourTree(CreateBehaviourTree());
         }
 
         private Node CreateBehaviourTree()
         {
-            // Create and add inital variables to BB (to be defined in editor... but made here because custom tools are hard to make lol)
+            // Create and add BB variables (to be defined in editor... but made here because custom Node tools are hard to make lol)
             behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
+            behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 0.0f);
+            behaviourTree.Blackboard.AddToBlackboard("fovAngle", fovAngle);
+            behaviourTree.Blackboard.AddToBlackboard("fovRange", fovRange);
+            behaviourTree.Blackboard.AddToBlackboard("PlayerLayerMask", playerLayerMask);
+            behaviourTree.Blackboard.AddToBlackboard("EnvironmentLayerMask", environmentLayerMask);
 
             /* Create Example BT structure
              Idle
@@ -65,11 +71,11 @@ namespace DD.AI.Controllers
              Chase
             */
 
-            IdleNode idle = new IdleNode(behaviourTree, 0.0f);
-            CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(behaviourTree, fovAngle, fovRange, playerLayerMask);
-            MoveToNode moveToPlayer = new MoveToNode(behaviourTree, "Player", 1.5f);
+            IdleNode idle = new IdleNode(behaviourTree, "IdleTimerLength");
+            CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(behaviourTree, "fovAngle", "fovRange", "PlayerLayerMask", "EnvironmentLayerMask");
+            MoveToNode moveToPlayer = new MoveToNode(behaviourTree, "Player");
             
-            Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode(behaviourTree), idle });
+            Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode(behaviourTree, "Player"), idle });
             Sequence followSequence = new Sequence(behaviourTree, new List<Node> { canSeePlayer, moveToPlayer });
 
             Selector root = new Selector(behaviourTree, new List<Node> {idleSequence, followSequence, idle});
@@ -82,9 +88,7 @@ namespace DD.AI.Controllers
             behaviourTree.EvaluateTree();
 
             UpdatePhysics();
-
-            // Anims
-            ani.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
+            UpdateAnimations();
 
             // Reset after setting Anim variables so we stop moving (workaround)
             velocity = Vector3.zero + Vector3.up * yVelocity;
@@ -106,8 +110,11 @@ namespace DD.AI.Controllers
             controller.Move(velocity * Time.deltaTime);
         }
 
-        // TODO: Decide whether we should pass the Target position instead of just a direction
-        //          - would allow for movement smoothing to be handled directly by the actual Move function.
+        private void UpdateAnimations()
+        {
+            ani.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
+        }
+
         public Transform GetAITransform()
         {
             return transform;
@@ -118,11 +125,11 @@ namespace DD.AI.Controllers
             return ani;
         }
 
-        private void Move(Vector3 dir)
+        private void Move(Vector3 direction)
         {
             velocity = transform.forward * moveSpeed;
 
-            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
         }
     }

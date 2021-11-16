@@ -36,8 +36,12 @@ namespace DD.AI.BehaviourTreeSystem
                     break;
             }
 
-            // TO DO:
-            // Bubbled up returned NodeState handling (mainly if failed or running).
+            /* TO DO:
+            * Handle different Node States diferently
+            * - Failed
+            * - Interupted (needs accounting for within each node too)
+            */
+
         }
     }
 }

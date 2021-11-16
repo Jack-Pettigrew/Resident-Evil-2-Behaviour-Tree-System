@@ -4,11 +4,11 @@ using UnityEngine;
 namespace DD.AI.Controllers
 {
     /// <summary>
-    /// An Interface allowing the Behaviour Tree to interface with external components/methods without the hassle of references.
+    /// The AI Interface for AI variables and logic decoupled from the Behaviour Tree.
     /// </summary>
     public interface IAIBehaviour
     {
-        // EVENTS - allow for decoupled code
+        // EVENTS - allow for decoupled logic
         public Action<Vector3> MoveEvent { get; set; }
 
         // METHODS

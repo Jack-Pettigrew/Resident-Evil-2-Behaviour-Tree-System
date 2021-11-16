@@ -1237,10 +1237,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  roSpeedScalar: 0.1
+  rotSpeedScalar: 0.2
+  groundedGravity: -0.2
+  gravity: -9.81
+  fovAngle: 90
+  fovRange: 5
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  environmentLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!143 &6105741498264193400
 CharacterController:
   m_ObjectHideFlags: 0

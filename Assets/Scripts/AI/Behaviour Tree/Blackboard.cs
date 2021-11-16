@@ -27,12 +27,10 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns>Success?</returns>
         public bool AddToBlackboard(string keyName, object value)
         {
-            string key = keyName.ToLower();
-
-            if (blackboard.ContainsKey(key))
+            if (blackboard.ContainsKey(keyName))
                 return false;
 
-            blackboard.Add(key, value);
+            blackboard.Add(keyName, value);
             return true;
         }
 
@@ -45,16 +43,14 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns>Success?</returns>
         public bool UpdateBlackboardVariable(string keyName, object value, bool addIfNotFound = false)
         {
-            string key = keyName.ToLower();
-
-            if (blackboard.ContainsKey(key))
+            if (blackboard.ContainsKey(keyName))
             {
-                blackboard[key] = value;
+                blackboard[keyName] = value;
                 return true;
             }
             else if (addIfNotFound)
             {
-                return AddToBlackboard(key, value);
+                return AddToBlackboard(keyName, value);
             }
             else
             { 
@@ -71,7 +67,7 @@ namespace DD.AI.BehaviourTreeSystem
         {
             object temp;
 
-            blackboard.TryGetValue(keyName.ToLower(), out temp);
+            blackboard.TryGetValue(keyName, out temp);
 
             return (T)temp;
         }
@@ -84,12 +80,12 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns>Success?</returns>
         public bool GetFromBlackboardNonAlloc(string keyName, out object blackboardObject)
         {
-            return blackboard.TryGetValue(keyName.ToLower(), out blackboardObject);
+            return blackboard.TryGetValue(keyName, out blackboardObject);
         }
 
         public bool RemoveFromBlackboard(string keyName)
         {
-            if (blackboard.Remove(keyName.ToLower()))
+            if (blackboard.Remove(keyName))
             {
                 return true;
             }
@@ -103,7 +99,7 @@ namespace DD.AI.BehaviourTreeSystem
         #region Shared Blackboard Methods
         public static bool AddToSharedBlackboard(string keyName, object value)
         {
-            string key = keyName.ToLower();
+            string key = keyName;
 
             if (sharedBlackboard.ContainsKey(key))
                 return false;
@@ -114,7 +110,7 @@ namespace DD.AI.BehaviourTreeSystem
 
         public static bool UpdateSharedBlackboardVariable(string keyName, object value)
         {
-            string key = keyName.ToLower();
+            string key = keyName;
 
             if (sharedBlackboard.ContainsKey(key))
             {
@@ -134,7 +130,7 @@ namespace DD.AI.BehaviourTreeSystem
         {
             object temp;
 
-            sharedBlackboard.TryGetValue(keyName.ToLower(), out temp);
+            sharedBlackboard.TryGetValue(keyName, out temp);
 
             return (T)temp;
         }
@@ -147,7 +143,7 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns>Success?</returns>
         public static bool GetFromSharedBlackboardNonAlloc(string keyName, out object blackboardObject)
         {
-            if (sharedBlackboard.TryGetValue(keyName.ToLower(), out blackboardObject))
+            if (sharedBlackboard.TryGetValue(keyName, out blackboardObject))
             {
                 return true;
             }
@@ -159,7 +155,7 @@ namespace DD.AI.BehaviourTreeSystem
 
         public static bool RemoveFromSharedBlackboard(string keyName)
         {
-            if (sharedBlackboard.Remove(keyName.ToLower()))
+            if (sharedBlackboard.Remove(keyName))
             {
                 return true;
             }
