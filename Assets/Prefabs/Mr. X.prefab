@@ -1180,8 +1180,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4452819287647192039}
   - component: {fileID: 7722471974102227357}
-  - component: {fileID: 919132147697854058}
   - component: {fileID: 6105741498264193400}
+  - component: {fileID: 919132147697854058}
   m_Layer: 0
   m_Name: Mr. X
   m_TagString: Untagged
@@ -1224,6 +1224,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!143 &6105741498264193400
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3927217079098825053}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2.33
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!114 &919132147697854058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,24 +1266,6 @@ MonoBehaviour:
   environmentLayerMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!143 &6105741498264193400
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3927217079098825053}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2.33
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &4061697701033289290
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using DD.AI.BehaviourTreeSystem;
 
 namespace DD.AI.Controllers
@@ -13,18 +12,11 @@ namespace DD.AI.Controllers
         public Action<Vector3> MoveEvent { get; set; }
         #endregion
 
-        private BehaviourTree behaviourTree = null;
+        // BEHAVIOUR TREE
+        private BehaviourTree behaviourTree;
 
-        // AI MOVEMENT
-        private Vector3 velocity = Vector3.zero;
-        private float yVelocity = 0;
-
-        [SerializeField] private float moveSpeed = 2.0f;
-        [SerializeField] private float rotSpeedScalar = 0.5f;
-        private float currentRotVel = 0;
-
-        [SerializeField] private float groundedGravity = -0.2f;
-        [SerializeField] private float gravity = Physics.gravity.y;
+        // COMPONENTS - the AI's 'controller'
+        private AILocomotion locomotion;
 
         // FOV
         [SerializeField] private float fovAngle = 90.0f;
@@ -32,26 +24,21 @@ namespace DD.AI.Controllers
         [SerializeField] private LayerMask playerLayerMask;
         [SerializeField] private LayerMask environmentLayerMask;
 
-        // COMPONENTS
-        private Animator ani = null;
-        private CharacterController controller = null;
-
         private void OnEnable()
         {
-            MoveEvent += Move;
+            MoveEvent += locomotion.Move;
         }
 
         private void OnDisable()
         {
-            MoveEvent -= Move;
+            MoveEvent -= locomotion.Move;
         }
 
         private void Awake()
         {
-            controller = GetComponent<CharacterController>();
-            ani = GetComponent<Animator>();
-            behaviourTree = new BehaviourTree(this);
+            locomotion = GetComponent<AILocomotion>();
 
+            behaviourTree = new BehaviourTree(this);
             behaviourTree.SetBehaviourTree(CreateBehaviourTree());
         }
 
@@ -87,33 +74,9 @@ namespace DD.AI.Controllers
         {
             behaviourTree.EvaluateTree();
 
-            UpdatePhysics();
-            UpdateAnimations();
-
-            // Reset after setting Anim variables so we stop moving (workaround)
-            velocity = Vector3.zero + Vector3.up * yVelocity;
+            locomotion.UpdateLocomotion();
         }
 
-        private void UpdatePhysics()
-        {
-            if (controller.isGrounded)
-            {
-                yVelocity = groundedGravity;
-            }
-            else
-            {
-                yVelocity += gravity * Time.deltaTime;
-            }
-
-            velocity.y = yVelocity;
-            
-            controller.Move(velocity * Time.deltaTime);
-        }
-
-        private void UpdateAnimations()
-        {
-            ani.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
-        }
 
         public Transform GetAITransform()
         {
@@ -122,15 +85,7 @@ namespace DD.AI.Controllers
 
         public Animator GetAnimator()
         {
-            return ani;
-        }
-
-        private void Move(Vector3 direction)
-        {
-            velocity = transform.forward * moveSpeed;
-
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
+            return GetComponent<Animator>();
         }
     }
 }
