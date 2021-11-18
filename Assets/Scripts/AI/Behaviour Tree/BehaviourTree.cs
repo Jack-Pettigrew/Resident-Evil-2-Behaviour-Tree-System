@@ -40,6 +40,8 @@ namespace DD.AI.BehaviourTreeSystem
             * Handle different Node States diferently
             * - Failed
             * - Interupted (needs accounting for within each node too)
+            * 
+            * Optimisation of Tree traversal and node execution
             */
 
         }

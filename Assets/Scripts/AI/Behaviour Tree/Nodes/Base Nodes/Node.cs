@@ -35,6 +35,10 @@ namespace DD.AI.BehaviourTreeSystem
             return result;
         }
 
+        /* 
+         * OnStart and OnExit functions may or may not be needed based on the current BT implementation
+         * (heavily relying on the Blackboard for Node variables means nodes don't need to update local variables to match any changes)
+        */
         protected virtual bool OnStart()
         {
             return true;
