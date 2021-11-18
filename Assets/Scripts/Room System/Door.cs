@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DD.Systems.Room
 {
-    public class Door : MonoBehaviour, IAIInteractable
+    public class Door : MonoBehaviour
     {
         // STATE
         public bool IsOpen { private set; get; }
@@ -16,12 +16,18 @@ namespace DD.Systems.Room
         public Room RoomA { get { return roomA; } }
         public Room RoomB { get { return roomB; } }
 
-        public void Interact(IAIBehaviour ai)
+        public bool OpenDoor()
         {
-            // Get which side AI is on from colliders
-            // Set AI's Room in AI.BB
+            // Set door to open
+            // Set IsOpen true
+            return true;
+        }
 
-            // Begin Door animation
+        public bool CloseDoor()
+        {
+            // Set door to close
+            // Set IsOpen false
+            return true;
         }
 
         private void OnDrawGizmosSelected()
