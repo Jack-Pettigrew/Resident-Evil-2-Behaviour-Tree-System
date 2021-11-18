@@ -8,6 +8,10 @@ namespace DD.Systems.Room
 {
     public class Door : MonoBehaviour, IAIInteractable
     {
+        // STATE
+        public bool IsOpen { private set; get; }
+
+        // CONNECTING ROOMS
         [SerializeField] private Room roomA, roomB;
         public Room RoomA { get { return roomA; } }
         public Room RoomB { get { return roomB; } }
