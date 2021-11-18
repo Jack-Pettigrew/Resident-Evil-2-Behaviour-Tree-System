@@ -45,5 +45,17 @@ namespace DD.Systems.Room
 
             return floor ? floor.OwnerRoom : null;
         }
+
+        /// <summary>
+        /// Returns whether the given GameObject is inside the given Room.
+        /// </summary>
+        /// <param name="gameObject">GameObject in question.</param>
+        /// <param name="targetRoom">The target Room.</param>
+        /// <returns>Is inside the Room?</returns>
+        public static bool IsObjectInRoom(GameObject gameObject, Room targetRoom)
+        {
+            return GetRoomOfObject(gameObject.transform.position) == targetRoom ? true : false;
+        }
+
     }
 }
