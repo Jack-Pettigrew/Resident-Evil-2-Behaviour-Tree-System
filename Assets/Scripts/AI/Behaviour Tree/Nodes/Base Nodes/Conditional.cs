@@ -19,7 +19,7 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns>Node State</returns>
         protected abstract NodeState EvaluateConditional();
 
-        public override NodeState Evaluate()
+        protected override NodeState Evaluate()
         {
             return EvaluateConditional();
         }

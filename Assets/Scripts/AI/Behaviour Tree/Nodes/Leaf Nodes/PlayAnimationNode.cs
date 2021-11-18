@@ -14,7 +14,7 @@ namespace DD.AI.BehaviourTreeSystem
             this.stateName = stateName;
         }
 
-        public override NodeState Evaluate()
+        protected override NodeState Evaluate()
         {
             behaviourTree.ai.GetAnimator().Play(stateName);
             return NodeState.SUCCESSFUL;

@@ -15,7 +15,7 @@ namespace DD.AI.BehaviourTreeSystem
             this.roomBlackboardKey = roomBlackboardKey;
         }
 
-        public override NodeState Evaluate()
+        protected override NodeState Evaluate()
         {
             Room result;
             Room currentRoom = RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().position);

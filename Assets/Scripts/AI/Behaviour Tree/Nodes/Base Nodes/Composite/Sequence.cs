@@ -13,10 +13,10 @@ namespace DD.AI.BehaviourTreeSystem
             this.nodes = new List<Node>(nodes);
         }
 
-        public override NodeState Evaluate()
+        protected override NodeState Evaluate()
         {
             // Evaluate one node at a time, haulting at running or stopping at failure
-            switch (nodes[currentNodeIndex].Evaluate())
+            switch (nodes[currentNodeIndex].UpdateNode())
             {
                 case NodeState.RUNNING:
                     return NodeState.RUNNING;

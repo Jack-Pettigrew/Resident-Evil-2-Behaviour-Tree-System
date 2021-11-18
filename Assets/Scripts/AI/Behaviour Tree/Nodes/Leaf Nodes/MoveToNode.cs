@@ -17,7 +17,7 @@ namespace DD.AI.BehaviourTreeSystem
             path = new NavMeshPath();
         }
 
-        public override NodeState Evaluate()
+        protected override NodeState Evaluate()
         {
             if (!UpdatePath())
             {

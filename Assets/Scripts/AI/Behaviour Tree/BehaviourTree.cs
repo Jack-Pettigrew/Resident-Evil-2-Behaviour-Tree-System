@@ -25,7 +25,7 @@ namespace DD.AI.BehaviourTreeSystem
         public void EvaluateTree()
         {
             // Currently evaluating entire tree each tick
-            NodeState result = rootNode.Evaluate();
+            NodeState result = rootNode.UpdateNode();
 
             switch (result)
             {

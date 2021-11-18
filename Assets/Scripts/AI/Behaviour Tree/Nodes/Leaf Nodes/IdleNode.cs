@@ -14,7 +14,7 @@ public class IdleNode : Node
         timer = IDLE_LENGTH;
     }
 
-    public override NodeState Evaluate()
+    protected override NodeState Evaluate()
     {
         timer -= Time.deltaTime;
 
