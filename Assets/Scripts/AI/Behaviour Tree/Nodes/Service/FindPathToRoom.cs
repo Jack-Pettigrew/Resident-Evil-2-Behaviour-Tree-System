@@ -9,14 +9,14 @@ namespace DD.AI.BehaviourTreeSystem
     {
         private readonly string targetRoomBlackboardKey;
 
-        public FindPathToRoom(BehaviourTree behaviourTree, string roomPathArrayBlackboardKey, string targetRoomBlackboardKey) : base(behaviourTree, roomPathArrayBlackboardKey)
+        public FindPathToRoom(BehaviourTree behaviourTree, string roomPathArrayBlackboardKey, string targetBlackboardKey) : base(behaviourTree, roomPathArrayBlackboardKey)
         {
-            this.targetRoomBlackboardKey = targetRoomBlackboardKey;
+            this.targetRoomBlackboardKey = targetBlackboardKey;
         }
 
         protected override NodeState Evaluate()
-        {
-            return UpdateBlackboard(RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().position), 
+        { 
+            return UpdateBlackboard(RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), 
                 behaviourTree.Blackboard.GetFromBlackboard<Room>(targetRoomBlackboardKey))) ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }
