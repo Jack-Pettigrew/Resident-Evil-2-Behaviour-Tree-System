@@ -2,11 +2,11 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class UpdateTargetDoor : UpdateBlackboardService
+    public class UpdateRoomPathTargetDoor : UpdateBlackboardService
     {
         private readonly string doorPathArrayBlackboardKey;
 
-        public UpdateTargetDoor(BehaviourTree behaviourTree, string doorIndexBlackboardKey, string doorPathArrayBlackboardKey) : base(behaviourTree, doorIndexBlackboardKey)
+        public UpdateRoomPathTargetDoor(BehaviourTree behaviourTree, string doorIndexBlackboardKey, string doorPathArrayBlackboardKey) : base(behaviourTree, doorIndexBlackboardKey)
         {
             this.doorPathArrayBlackboardKey = doorPathArrayBlackboardKey;
         }
