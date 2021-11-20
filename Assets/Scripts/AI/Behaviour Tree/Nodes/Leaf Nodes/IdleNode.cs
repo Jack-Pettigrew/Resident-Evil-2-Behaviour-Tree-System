@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.AI.BehaviourTreeSystem;
 
-public class IdleNode : Node
+namespace DD.AI.BehaviourTreeSystem
 {
-    private readonly float IDLE_LENGTH;
-    private float timer = 0.0f;
-
-    public IdleNode(BehaviourTree behaviourTree, string idleTimerBlackboardKey) : base (behaviourTree)
+    public class IdleNode : Node
     {
-        IDLE_LENGTH = behaviourTree.Blackboard.GetFromBlackboard<float>(idleTimerBlackboardKey);
-        timer = IDLE_LENGTH;
-    }
+        private readonly float IDLE_LENGTH;
+        private float timer = 0.0f;
 
-    protected override NodeState Evaluate()
-    {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0.0f)
+        public IdleNode(BehaviourTree behaviourTree, string idleTimerBlackboardKey) : base(behaviourTree)
         {
+            IDLE_LENGTH = behaviourTree.Blackboard.GetFromBlackboard<float>(idleTimerBlackboardKey);
             timer = IDLE_LENGTH;
-            return NodeState.SUCCESSFUL;
         }
-        else
+
+        protected override NodeState Evaluate()
         {
-            return NodeState.RUNNING;
+            timer -= Time.deltaTime;
+
+            if (timer <= 0.0f)
+            {
+                timer = IDLE_LENGTH;
+                return NodeState.SUCCESSFUL;
+            }
+            else
+            {
+                return NodeState.RUNNING;
+            }
         }
+
     }
 }
