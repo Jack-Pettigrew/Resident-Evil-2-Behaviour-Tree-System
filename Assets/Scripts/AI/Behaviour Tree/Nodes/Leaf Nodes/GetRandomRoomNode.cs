@@ -6,13 +6,10 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GetRandomRoomNode : Node
+    public class GetRandomRoomNode : UpdateBlackboardService
     {
-        private readonly string roomBlackboardKey;
-
-        public GetRandomRoomNode(BehaviourTree behaviourTree, string roomBlackboardKey) : base(behaviourTree)
+        public GetRandomRoomNode(BehaviourTree behaviourTree, string blackboardKey) : base(behaviourTree, blackboardKey)
         {
-            this.roomBlackboardKey = roomBlackboardKey;
         }
 
         protected override NodeState Evaluate()
@@ -26,9 +23,7 @@ namespace DD.AI.BehaviourTreeSystem
                 result = RoomManager.GetRandomRoom();
             } while (result == currentRoom);
 
-            behaviourTree.Blackboard.UpdateBlackboardVariable(roomBlackboardKey, result, true);
-
-            return NodeState.SUCCESSFUL;
+            return UpdateBlackboard(result) ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }
 }

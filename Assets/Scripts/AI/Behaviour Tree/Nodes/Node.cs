@@ -18,6 +18,10 @@ namespace DD.AI.BehaviourTreeSystem
             this.behaviourTree = behaviourTree;
         }
 
+        /// <summary>
+        /// The Update function for all Nodes. This is called by the Behaviour Tree each traversal.
+        /// </summary>
+        /// <returns></returns>
         public NodeState UpdateNode()
         {
             if(!OnStart())
