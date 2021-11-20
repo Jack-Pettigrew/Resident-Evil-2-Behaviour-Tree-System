@@ -33,13 +33,13 @@ namespace DD.Systems.Room
         /// <summary>
         /// Returns the Room the given position is on.
         /// </summary>
-        /// <param name="objectPosition">The position of the gameobject.</param>
+        /// <param name="gameObject">The gameobject.</param>
         /// <returns>The current Room of the object or null if no room is found.</returns>
-        public static Room GetRoomOfObject(Vector3 objectPosition)
+        public static Room GetRoomOfObject(GameObject gameObject)
         {
             RaycastHit hit;
-            Physics.Raycast(objectPosition, Vector3.down, out hit, 10.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore);
-            Debug.DrawRay(objectPosition, Vector3.down * 10.0f, Color.red, 20.0f, false);
+            Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 10.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore);
+            Debug.DrawRay(gameObject.transform.position, Vector3.down * 10.0f, Color.red, 20.0f, false);
 
             RoomFloor floor = hit.collider.GetComponent<RoomFloor>();
 
@@ -54,7 +54,7 @@ namespace DD.Systems.Room
         /// <returns>Is inside the Room?</returns>
         public static bool IsObjectInRoom(GameObject gameObject, Room targetRoom)
         {
-            return GetRoomOfObject(gameObject.transform.position) == targetRoom ? true : false;
+            return GetRoomOfObject(gameObject) == targetRoom ? true : false;
         }
 
     }

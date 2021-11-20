@@ -15,7 +15,7 @@ namespace DD.AI.BehaviourTreeSystem
         protected override NodeState Evaluate()
         {
             Room result;
-            Room currentRoom = RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().position);
+            Room currentRoom = RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject);
 
             // Randomise until Room isn't current one
             do
