@@ -45,7 +45,7 @@ namespace DD.AI.Controllers
         private Node CreateBehaviourTree()
         {
             // Create and add BB variables (to be defined in editor... but made here because custom Node tools are hard to make lol)
-            behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().transform);
+            behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().gameObject);
             behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 0.0f);
             behaviourTree.Blackboard.AddToBlackboard("fovAngle", fovAngle);
             behaviourTree.Blackboard.AddToBlackboard("fovRange", fovRange);

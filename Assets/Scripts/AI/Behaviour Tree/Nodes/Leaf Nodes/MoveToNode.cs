@@ -25,7 +25,7 @@ namespace DD.AI.BehaviourTreeSystem
             }
 
             Vector3 navTargetDir = path.corners[1] - behaviourTree.ai.GetAITransform().position;
-            float targetDist = (behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey).position - behaviourTree.ai.GetAITransform().position).magnitude;
+            float targetDist = (behaviourTree.Blackboard.GetFromBlackboard<GameObject>(targetBlackboardKey).transform.position - behaviourTree.ai.GetAITransform().position).magnitude;
 
             behaviourTree.ai.MoveEvent(navTargetDir);
             return NodeState.SUCCESSFUL;
@@ -34,13 +34,13 @@ namespace DD.AI.BehaviourTreeSystem
         private bool UpdatePath()
         {
             // Fail if no target in BlackBoard
-            if (!behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey))
+            if (!behaviourTree.Blackboard.GetFromBlackboard<GameObject>(targetBlackboardKey))
             {
                 return false;
             }
 
             // Update Path
-            NavMesh.CalculatePath(behaviourTree.ai.GetAITransform().position, behaviourTree.Blackboard.GetFromBlackboard<Transform>(targetBlackboardKey).position, NavMesh.AllAreas, path);
+            NavMesh.CalculatePath(behaviourTree.ai.GetAITransform().position, behaviourTree.Blackboard.GetFromBlackboard<GameObject>(targetBlackboardKey).transform.position, NavMesh.AllAreas, path);
 
             // Fail if path is invalid
             if(path.corners.Length <= 0)
