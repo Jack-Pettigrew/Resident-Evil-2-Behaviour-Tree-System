@@ -38,8 +38,13 @@ namespace DD.Systems.Room
         public static Room GetRoomOfObject(GameObject gameObject)
         {
             RaycastHit hit;
-            Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 10.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore);
-            Debug.DrawRay(gameObject.transform.position, Vector3.down * 10.0f, Color.red, 20.0f, false);
+
+            // Raycast accounting for GameObject center point margin of error (e.g. when the center point is directly against a floor plane)
+            Physics.Raycast(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down, out hit, 5.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore);
+
+#if UNITY_EDITOR
+            Debug.DrawRay(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down * 5.0f, Color.red, 10.0f, false);
+#endif
 
             RoomFloor floor = hit.collider.GetComponent<RoomFloor>();
 

@@ -6,10 +6,10 @@ using UnityEngine.AI;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class MoveToNode : Node
+    public class MoveToNode<T> : Node where T : MonoBehaviour
     {
-        private readonly string targetBlackboardKey;
-        private NavMeshPath path;
+        protected readonly string targetBlackboardKey;
+        protected NavMeshPath path;
 
         public MoveToNode(BehaviourTree behaviourTree, string targetBlackboardKey) : base(behaviourTree)
         {
@@ -24,23 +24,25 @@ namespace DD.AI.BehaviourTreeSystem
                 return NodeState.FAILED;
             }
 
-            Vector3 navTargetDir = path.corners[1] - behaviourTree.ai.GetAITransform().position;
-            float targetDist = (behaviourTree.Blackboard.GetFromBlackboard<GameObject>(targetBlackboardKey).transform.position - behaviourTree.ai.GetAITransform().position).magnitude;
-
-            behaviourTree.ai.MoveEvent(navTargetDir);
+            behaviourTree.ai.MoveEvent(path.corners[1] - behaviourTree.ai.GetAITransform().position);
             return NodeState.SUCCESSFUL;
         }
 
-        private bool UpdatePath()
+        protected virtual Vector3 GetTargetPosition()
+        {
+            return behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).transform.position;
+        }
+
+        protected bool UpdatePath()
         {
             // Fail if no target in BlackBoard
-            if (!behaviourTree.Blackboard.GetFromBlackboard<GameObject>(targetBlackboardKey))
+            if (behaviourTree.Blackboard.IsBlackboardVariableNull(targetBlackboardKey))
             {
                 return false;
             }
 
             // Update Path
-            NavMesh.CalculatePath(behaviourTree.ai.GetAITransform().position, behaviourTree.Blackboard.GetFromBlackboard<GameObject>(targetBlackboardKey).transform.position, NavMesh.AllAreas, path);
+            NavMesh.CalculatePath(behaviourTree.ai.GetAITransform().position, GetTargetPosition(), NavMesh.AllAreas, path);
 
             // Fail if path is invalid
             if(path.corners.Length <= 0)

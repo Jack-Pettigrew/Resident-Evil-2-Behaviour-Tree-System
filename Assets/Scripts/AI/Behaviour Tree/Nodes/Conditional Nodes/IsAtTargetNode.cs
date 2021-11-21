@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class IsAtTargetNode : Conditional
+    public class IsAtTargetNode<T> : Conditional where T : MonoBehaviour
     {
         private readonly string targetBlackboardKey;
 
@@ -15,7 +15,7 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override NodeState EvaluateConditional()
         {
-            return (behaviourTree.Blackboard.GetFromBlackboard<GameObject>(targetBlackboardKey).transform.position - behaviourTree.ai.GetAITransform().position).magnitude <= 1.5f ? NodeState.SUCCESSFUL : NodeState.FAILED;
+            return (behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).transform.position - behaviourTree.ai.GetAITransform().position).magnitude <= 1.5f ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }
 

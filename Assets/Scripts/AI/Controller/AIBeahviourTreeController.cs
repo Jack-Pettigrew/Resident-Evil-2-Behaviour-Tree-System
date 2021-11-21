@@ -24,6 +24,8 @@ namespace DD.AI.Controllers
         [SerializeField] private LayerMask playerLayerMask;
         [SerializeField] private LayerMask environmentLayerMask;
 
+        public DD.Systems.Room.Door testDoorTarget;
+
         private void OnEnable()
         {
             MoveEvent += locomotion.Move;
@@ -45,7 +47,12 @@ namespace DD.AI.Controllers
         private Node CreateBehaviourTree()
         {
             // Create and add BB variables (to be defined in editor... but made here because custom Node tools are hard to make lol)
-            behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>().gameObject);
+            behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>());
+
+            behaviourTree.Blackboard.AddToBlackboard("TargetDoor", testDoorTarget);
+            behaviourTree.Blackboard.AddToBlackboard("TargetDoorIndex", 0);
+            behaviourTree.Blackboard.AddToBlackboard("DoorPathArray", new List<DD.Systems.Room.Door>());
+
             behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 0.0f);
             behaviourTree.Blackboard.AddToBlackboard("fovAngle", fovAngle);
             behaviourTree.Blackboard.AddToBlackboard("fovRange", fovRange);
@@ -59,15 +66,17 @@ namespace DD.AI.Controllers
             */
 
             IdleNode idle = new IdleNode(behaviourTree, "IdleTimerLength");
-            CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(behaviourTree, "fovAngle", "fovRange", "PlayerLayerMask", "EnvironmentLayerMask");
-            MoveToNode moveToPlayer = new MoveToNode(behaviourTree, "Player");
-            
-            Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode(behaviourTree, "Player"), idle });
-            Sequence followSequence = new Sequence(behaviourTree, new List<Node> { canSeePlayer, moveToPlayer });
+            //CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(behaviourTree, "fovAngle", "fovRange", "PlayerLayerMask", "EnvironmentLayerMask");
+            //MoveToNode moveToPlayer = new MoveToNode(behaviourTree, "Player");
 
-            Selector root = new Selector(behaviourTree, new List<Node> {idleSequence, followSequence, idle});
+            Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode<Systems.Room.Door>(behaviourTree, "TargetDoor"), idle });
+            //Sequence followSequence = new Sequence(behaviourTree, new List<Node> { canSeePlayer, moveToPlayer });
 
-            return root;
+            //Selector root = new Selector(behaviourTree, new List<Node> { idleSequence, followSequence, idle });
+
+            GoToDoorNode goToDoor = new GoToDoorNode(behaviourTree, "TargetDoor");
+            Selector root = new Selector(behaviourTree, new List<Node> { idleSequence, goToDoor });
+            return goToDoor;
         }
 
         private void Update()
