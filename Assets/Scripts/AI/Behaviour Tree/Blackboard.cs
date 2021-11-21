@@ -22,8 +22,8 @@ namespace DD.AI.BehaviourTreeSystem
         /// <summary>
         /// Adds a new variable to the Blackboard associated with the given keyName. Won't add if pre-existing keyName used (use update instead).
         /// </summary>
-        /// <param name="keyName">BB variable Key.</param>
-        /// <param name="value">BB variable value.</param>
+        /// <param name="keyName">Blackboard variable Key.</param>
+        /// <param name="value">Blackboard variable value.</param>
         /// <returns>Success?</returns>
         public bool AddToBlackboard(string keyName, object value)
         {
@@ -35,10 +35,22 @@ namespace DD.AI.BehaviourTreeSystem
         }
 
         /// <summary>
-        /// Updates the BB variable with the matching Key with the given value.
+        /// Returns whether the Blackboard variable is set.
         /// </summary>
-        /// <param name="keyName">BB variable Key.</param>
-        /// <param name="value">BB variable value.</param>
+        /// <param name="keyName">Key of the variable in Blackboard.</param>
+        /// <returns></returns>
+        public bool IsBlackboardVariableNull(string keyName)
+        {
+            object variable = null;
+            blackboard.TryGetValue(keyName, out variable);
+            return variable == null ? true : false;
+        }
+
+        /// <summary>
+        /// Updates the Blackboard variable with the matching Key with the given value.
+        /// </summary>
+        /// <param name="keyName">Blackboard variable Key.</param>
+        /// <param name="value">Blackboard variable value.</param>
         /// <param name="addIfNotFound">If not found, should it be added to the BlackBoard?</param>
         /// <returns>Success?</returns>
         public bool UpdateBlackboardVariable(string keyName, object value, bool addIfNotFound = false)
