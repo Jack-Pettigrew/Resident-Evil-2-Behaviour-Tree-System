@@ -11,7 +11,6 @@ namespace DD.Systems.Room
 
         [SerializeField] private RoomFloor[] roomFloors;
 
-
         private void Awake()
         {
             if (roomFloors.Length <= 0)
