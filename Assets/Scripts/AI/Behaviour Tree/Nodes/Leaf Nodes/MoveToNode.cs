@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class MoveToNode<T> : Node where T : MonoBehaviour
+    public class MoveToNode<T> : Node where T : Component
     {
         protected readonly string targetBlackboardKey;
         protected NavMeshPath path;
