@@ -50,10 +50,21 @@ namespace DD.Systems.Room
         /// </summary>
         /// <param name="objectsWorldPosition">The position of the object in world space.</param>
         /// <returns>The closest entry point transform.</returns>
-        public Vector3 GetClosestEntryPointRelativeToObject(Vector3 objectsWorldPosition)
+        public Transform GetEntryPointRelativeToObject(Vector3 objectsWorldPosition)
         {
             return (objectsWorldPosition - roomAEntryPoint.position).sqrMagnitude < (objectsWorldPosition - roomBEntryPoint.position).sqrMagnitude 
-                ? roomAEntryPoint.position : roomBEntryPoint.position;
+                ? roomAEntryPoint : roomBEntryPoint;
+        }
+
+        /// <summary>
+        /// Returns this Door's entry point to be used as an exit point that is closest to the given position.
+        /// </summary>
+        /// <param name="objectsWorldPosition">The position of the object in world space.</param>
+        /// <returns>The closest entry point transform.</returns>
+        public Transform GetExitPointRelativeToObject(Vector3 objectsWorldPosition)
+        {
+            return (objectsWorldPosition - roomAEntryPoint.position).sqrMagnitude < (objectsWorldPosition - roomBEntryPoint.position).sqrMagnitude
+                ? roomBEntryPoint : roomAEntryPoint;
         }
 
         /// <summary>
