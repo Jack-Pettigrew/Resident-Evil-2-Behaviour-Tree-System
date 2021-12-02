@@ -3,20 +3,18 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class Sequence : Node
+    public class Sequence : Composite
     {
         private int currentNodeIndex = 0;
-        protected List<Node> nodes;
 
-        public Sequence(BehaviourTree behaviourTree, List<Node> nodes) : base(behaviourTree)
+        public Sequence(BehaviourTree behaviourTree, List<Node> childNodes) : base(behaviourTree, childNodes)
         {
-            this.nodes = new List<Node>(nodes);
         }
 
         protected override NodeState Evaluate()
         {
             // Evaluate one node at a time, haulting at running or stopping at failure
-            switch (nodes[currentNodeIndex].UpdateNode())
+            switch (childNodes[currentNodeIndex].UpdateNode())
             {
                 case NodeState.RUNNING:
                     return NodeState.RUNNING;
@@ -25,7 +23,7 @@ namespace DD.AI.BehaviourTreeSystem
                     currentNodeIndex++;
 
                     // IF finished all child nodes...
-                    if(currentNodeIndex >= nodes.Count)
+                    if(currentNodeIndex >= childNodes.Count)
                     {
                         ResetSequence();
                         return NodeState.SUCCESSFUL;

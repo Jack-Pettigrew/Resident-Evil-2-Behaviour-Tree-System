@@ -4,19 +4,16 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class Selector : Node
+    public class Selector : Composite
     {
-        protected List<Node> nodes;
-
-        public Selector(BehaviourTree behaviourTree, List<Node> nodes) : base(behaviourTree)
+        public Selector(BehaviourTree behaviourTree, List<Node> childNodes) : base(behaviourTree, childNodes)
         {
-            this.nodes = new List<Node>(nodes);
         }
 
         protected override NodeState Evaluate()
         {
             // Process all until Success
-            foreach (Node node in nodes)
+            foreach (Node node in childNodes)
             {
                 switch (node.UpdateNode())
                 {
