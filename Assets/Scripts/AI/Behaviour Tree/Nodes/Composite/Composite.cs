@@ -24,7 +24,7 @@ namespace DD.AI.BehaviourTreeSystem
 
         public Composite(BehaviourTree behaviourTree, List<Node> childNodes, List<Service> serviceNodes) : base(behaviourTree)
         {
-            this.childNodes = new List<Node>(childNodes);
+            this.childNodes = childNodes;
             this.serviceNodes = serviceNodes;
         }
 
