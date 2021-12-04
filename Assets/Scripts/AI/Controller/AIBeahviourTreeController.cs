@@ -67,13 +67,7 @@ namespace DD.AI.Controllers
             */
 
             IdleNode idle = new IdleNode(behaviourTree, "IdleTimerLength");
-            //CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(behaviourTree, "fovAngle", "fovRange", "PlayerLayerMask", "EnvironmentLayerMask");
-            //MoveToNode moveToPlayer = new MoveToNode(behaviourTree, "Player");
-
             Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode<Component>(behaviourTree, "MoveTarget", 0.5f), idle });
-            //Sequence followSequence = new Sequence(behaviourTree, new List<Node> { canSeePlayer, moveToPlayer });
-
-            //Selector root = new Selector(behaviourTree, new List<Node> { idleSequence, followSequence, idle });
 
             IsBlackboardVariableNull isNull = new IsBlackboardVariableNull(behaviourTree, "MoveTarget");
             GetDoorEntryExitPointNode doorEntryExitPoint = new GetDoorEntryExitPointNode(behaviourTree, true, "TargetDoor", "MoveTarget");
@@ -84,7 +78,13 @@ namespace DD.AI.Controllers
             Sequence goToDoorSequence = new Sequence(behaviourTree, new List<Node> { doorEntryExitPoint, goToDoor });
 
             Selector root = new Selector(behaviourTree, new List<Node> { isMoveTargetNullSequence, idleSequence, goToDoorSequence });
-            return root;
+
+            Sequence test = new Sequence(behaviourTree, new List<Node> {
+                new Repeater(behaviourTree, new MoveToNode<Component>(behaviourTree, "TargetDoor"), new IsAtTargetNode<Component>(behaviourTree, "TargetDoor", 3.0f), NodeState.SUCCESSFUL),
+                new Repeater(behaviourTree, new MoveToNode<Component>(behaviourTree, "Player"), new IsAtTargetNode<Component>(behaviourTree, "Player", 1.5f), NodeState.SUCCESSFUL )
+            });
+
+            return test;
         }
 
         private void Update()
