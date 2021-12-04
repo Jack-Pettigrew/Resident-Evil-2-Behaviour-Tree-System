@@ -69,7 +69,7 @@ namespace DD.AI.Controllers
             //CanSeePlayerNode canSeePlayer = new CanSeePlayerNode(behaviourTree, "fovAngle", "fovRange", "PlayerLayerMask", "EnvironmentLayerMask");
             //MoveToNode moveToPlayer = new MoveToNode(behaviourTree, "Player");
 
-            Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode<Systems.Room.Door>(behaviourTree, "TargetDoor"), idle });
+            Sequence idleSequence = new Sequence(behaviourTree, new List<Node> { new IsAtTargetNode<Component>(behaviourTree, "MoveTarget", 0.5f), idle });
             //Sequence followSequence = new Sequence(behaviourTree, new List<Node> { canSeePlayer, moveToPlayer });
 
             //Selector root = new Selector(behaviourTree, new List<Node> { idleSequence, followSequence, idle });
