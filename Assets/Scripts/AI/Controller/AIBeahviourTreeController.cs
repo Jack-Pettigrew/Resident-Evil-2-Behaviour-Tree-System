@@ -48,9 +48,10 @@ namespace DD.AI.Controllers
         {
             // Create and add BB variables (to be defined in editor... but made here because custom Node tools are hard to make lol)
             behaviourTree.Blackboard.AddToBlackboard("Player", FindObjectOfType<Core.Control.PlayerController>());
+            behaviourTree.Blackboard.AddToBlackboard("MoveTarget", null);
 
             behaviourTree.Blackboard.AddToBlackboard("TargetDoor", testDoorTarget);
-            behaviourTree.Blackboard.AddToBlackboard("TargetDoorIndex", 0);
+            behaviourTree.Blackboard.AddToBlackboard("TargetDoorPathIndex", 0);
             behaviourTree.Blackboard.AddToBlackboard("DoorPathArray", new List<DD.Systems.Room.Door>());
 
             behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 0.0f);
@@ -74,9 +75,16 @@ namespace DD.AI.Controllers
 
             //Selector root = new Selector(behaviourTree, new List<Node> { idleSequence, followSequence, idle });
 
-            GoToDoorNode goToDoor = new GoToDoorNode(behaviourTree, "TargetDoor");
-            Selector root = new Selector(behaviourTree, new List<Node> { idleSequence, goToDoor });
-            return goToDoor;
+            IsBlackboardVariableNull isNull = new IsBlackboardVariableNull(behaviourTree, "MoveTarget");
+            GetDoorEntryExitPointNode doorEntryExitPoint = new GetDoorEntryExitPointNode(behaviourTree, true, "TargetDoor", "MoveTarget");
+
+            Sequence isMoveTargetNullSequence = new Sequence(behaviourTree, new List<Node> { isNull, doorEntryExitPoint });
+
+            MoveToNode<Transform> goToDoor = new MoveToNode<Transform>(behaviourTree, "MoveTarget");
+            Sequence goToDoorSequence = new Sequence(behaviourTree, new List<Node> { doorEntryExitPoint, goToDoor });
+
+            Selector root = new Selector(behaviourTree, new List<Node> { isMoveTargetNullSequence, idleSequence, goToDoorSequence });
+            return root;
         }
 
         private void Update()
