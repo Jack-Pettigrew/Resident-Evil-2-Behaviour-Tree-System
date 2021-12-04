@@ -14982,7 +14982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
   moveSpeed: 2
-  rotSpeedScalar: 0.5
+  rotSpeedScalar: 0.1
   groundedGravity: -0.2
   gravity: -9.81
 --- !u!850595691 &1234983283
