@@ -6735,6 +6735,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1925850852}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &239836315
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6847,6 +6853,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1925294820}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &278986337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12774,6 +12786,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1583859685}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &740527775
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15614,6 +15632,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1925294820}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1266721838
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16136,6 +16160,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1717698402}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1528159843
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18048,6 +18078,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1925294820}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1578753601
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18209,6 +18245,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1001781577}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1608166469
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20861,6 +20903,24 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 197706632}
   roomB: {fileID: 1959364694}
   roomBEntryPoint: {fileID: 1542708173}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2038353845}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &2038353847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20975,6 +21035,12 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 1001781577}
   roomBEntryPoint: {fileID: 0}
+  openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closeDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &2073158882
 BoxCollider:
   m_ObjectHideFlags: 0

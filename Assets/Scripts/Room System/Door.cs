@@ -3,6 +3,7 @@ using DD.AI.Controllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DD.Systems.Room
 {
@@ -22,6 +23,8 @@ namespace DD.Systems.Room
         public Room RoomA { get { return roomA; } }
         public Room RoomB { get { return roomB; } }
 
+        [SerializeField] private UnityEvent openDoorEvent;
+        [SerializeField] private UnityEvent closeDoorEvent;
 
         private void Awake()
         {
@@ -35,6 +38,7 @@ namespace DD.Systems.Room
         {
             // Set door to open
             // Set IsOpen true
+            openDoorEvent?.Invoke();
             return true;
         }
 
@@ -42,6 +46,7 @@ namespace DD.Systems.Room
         {
             // Set door to close
             // Set IsOpen false
+            closeDoorEvent.Invoke();
             return true;
         }
 
