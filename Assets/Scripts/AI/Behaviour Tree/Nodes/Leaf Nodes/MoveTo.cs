@@ -6,12 +6,12 @@ using UnityEngine.AI;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class MoveToNode<T> : Node where T : Component
+    public class MoveTo<T> : Node where T : Component
     {
         protected readonly string targetBlackboardKey;
         protected NavMeshPath path;
 
-        public MoveToNode(BehaviourTree behaviourTree, string targetBlackboardKey) : base(behaviourTree)
+        public MoveTo(BehaviourTree behaviourTree, string targetBlackboardKey) : base(behaviourTree)
         {
             this.targetBlackboardKey = targetBlackboardKey;
             path = new NavMeshPath();

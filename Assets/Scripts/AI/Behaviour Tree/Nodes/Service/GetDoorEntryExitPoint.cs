@@ -5,7 +5,7 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GetDoorEntryExitPointNode : UpdateBlackboardService
+    public class GetDoorEntryExitPoint : UpdateBlackboardService
     {
         private readonly string targetDoorBlackboardKey;
         private readonly bool entryPoint;
@@ -17,7 +17,7 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="entryPoint">True: Get Door entry point. False: Get Door exit point.</param>
         /// <param name="targetDoorBlackboardKey">Key associated with the Target Door Blackboard variable.</param>
         /// <param name="moveTargetrBlackboardKey">Key associated with the Move Target Blackboard variable.</param>
-        public GetDoorEntryExitPointNode(BehaviourTree behaviourTree, bool entryPoint, string targetDoorBlackboardKey, string moveTargetrBlackboardKey) : base(behaviourTree, moveTargetrBlackboardKey)
+        public GetDoorEntryExitPoint(BehaviourTree behaviourTree, bool entryPoint, string targetDoorBlackboardKey, string moveTargetrBlackboardKey) : base(behaviourTree, moveTargetrBlackboardKey)
         {
             this.targetDoorBlackboardKey = targetDoorBlackboardKey;
             this.entryPoint = entryPoint;

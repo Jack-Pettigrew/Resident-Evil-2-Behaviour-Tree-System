@@ -5,11 +5,11 @@ using DD.AI.Controllers;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class PlayAnimationNode : Node
+    public class PlayAnimation : Node
     {
         private readonly string stateName;
 
-        public PlayAnimationNode(BehaviourTree behaviourTree, string stateName) : base(behaviourTree)
+        public PlayAnimation(BehaviourTree behaviourTree, string stateName) : base(behaviourTree)
         {
             this.stateName = stateName;
         }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class IsAtTargetNode<T> : Conditional where T : Component
+    public class IsAtTarget<T> : Conditional where T : Component
     {
         private readonly string targetBlackboardKey;
         private float distanceThreshold = 0.5f;
 
-        public IsAtTargetNode(BehaviourTree behaviourTree, string targetBlackboardKey, float distanceThreshold) : base(behaviourTree)
+        public IsAtTarget(BehaviourTree behaviourTree, string targetBlackboardKey, float distanceThreshold) : base(behaviourTree)
         {
             this.targetBlackboardKey = targetBlackboardKey;
             this.distanceThreshold = distanceThreshold;

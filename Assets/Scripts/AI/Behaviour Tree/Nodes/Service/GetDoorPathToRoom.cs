@@ -5,11 +5,11 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class FindPathToRoom : UpdateBlackboardService
+    public class GetDoorPathToRoom : UpdateBlackboardService
     {
         private readonly string targetRoomBlackboardKey;
 
-        public FindPathToRoom(BehaviourTree behaviourTree, string roomPathArrayBlackboardKey, string targetBlackboardKey) : base(behaviourTree, roomPathArrayBlackboardKey)
+        public GetDoorPathToRoom(BehaviourTree behaviourTree, string roomPathArrayBlackboardKey, string targetBlackboardKey) : base(behaviourTree, roomPathArrayBlackboardKey)
         {
             this.targetRoomBlackboardKey = targetBlackboardKey;
         }

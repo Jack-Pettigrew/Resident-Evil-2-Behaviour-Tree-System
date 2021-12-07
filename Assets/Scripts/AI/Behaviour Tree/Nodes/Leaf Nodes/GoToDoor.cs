@@ -5,9 +5,9 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GoToDoorNode : MoveToNode<Door>
+    public class GoToDoor : MoveTo<Door>
     {
-        public GoToDoorNode(BehaviourTree behaviourTree, string targetBlackboardKey) : base(behaviourTree, targetBlackboardKey)
+        public GoToDoor(BehaviourTree behaviourTree, string targetBlackboardKey) : base(behaviourTree, targetBlackboardKey)
         {
         }
 

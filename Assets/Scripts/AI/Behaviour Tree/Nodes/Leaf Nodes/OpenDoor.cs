@@ -5,18 +5,18 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class CloseDoorNode : Node
+    public class OpenDoor : Node
     {
         private readonly string targetDoorBlackboardKey;
 
-        public CloseDoorNode(BehaviourTree behaviourTree, string targetDoorBlackboardKey) : base(behaviourTree)
+        public OpenDoor(BehaviourTree behaviourTree, string targetDoorBlackboardKey) : base(behaviourTree)
         {
             this.targetDoorBlackboardKey = targetDoorBlackboardKey;
         }
 
         protected override NodeState Evaluate()
         {
-            return behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).CloseDoor() ? NodeState.SUCCESSFUL : NodeState.FAILED;
+            return behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).OpenDoor() ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }
 }

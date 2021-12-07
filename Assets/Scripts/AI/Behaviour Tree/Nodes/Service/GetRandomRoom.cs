@@ -6,9 +6,9 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GetRandomRoomNode : UpdateBlackboardService
+    public class GetRandomRoom : UpdateBlackboardService
     {
-        public GetRandomRoomNode(BehaviourTree behaviourTree, string blackboardKey) : base(behaviourTree, blackboardKey)
+        public GetRandomRoom(BehaviourTree behaviourTree, string targetDoorBlackboardVariable) : base(behaviourTree, targetDoorBlackboardVariable)
         {
         }
 
