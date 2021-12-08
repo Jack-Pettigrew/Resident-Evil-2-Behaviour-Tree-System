@@ -8,10 +8,18 @@ namespace DD.AI.BehaviourTreeSystem
     public class GetDoorPathToRoom : UpdateBlackboardService
     {
         private readonly string targetRoomBlackboardKey;
+        private readonly string doorPathIndexBlackboardKey;
 
-        public GetDoorPathToRoom(BehaviourTree behaviourTree, string roomPathArrayBlackboardKey, string targetBlackboardKey) : base(behaviourTree, roomPathArrayBlackboardKey)
+        public GetDoorPathToRoom(BehaviourTree behaviourTree, string roomPathArrayBlackboardKey, string targetBlackboardKey, string doorPathIndexBlackboardKey) : base(behaviourTree, roomPathArrayBlackboardKey)
         {
             this.targetRoomBlackboardKey = targetBlackboardKey;
+            this.doorPathIndexBlackboardKey = doorPathIndexBlackboardKey;
+        }
+
+        protected override bool UpdateBlackboard(object updatedBlackboardVariable)
+        {
+            behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathIndexBlackboardKey, 0);
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(variableBlackboardKey, updatedBlackboardVariable);
         }
 
         protected override NodeState Evaluate()
