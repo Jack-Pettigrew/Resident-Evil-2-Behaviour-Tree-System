@@ -6,6 +6,11 @@ namespace DD.Systems.Room
 {
     public static class RoomPathFinder
     {
+        private static Dictionary<Door, int> doorCostDictionary = new Dictionary<Door, int>();
+
+        private static HashSet<Room> roomsToCheck = new HashSet<Room>(); // to check next iteration
+        private static HashSet<Room> roomsCurrentlyChecking = new HashSet<Room>(); // currently checking this iteration
+
         /// <summary>
         /// Returns the calculated route from the Starting Room to the Goal Room using Doors as waypoints (A variation of BFS Search).
         /// </summary>
@@ -14,21 +19,16 @@ namespace DD.Systems.Room
         /// <returns>Array of Doors as waypoints to the Goal Room.</returns>
         public static Door[] FindPathToRoom(Room startingRoom, Room goalRoom)
         {
-            Dictionary<Door, int> doorCostDictionary = new Dictionary<Door, int>();
-
-            if(!BFSCalculateDoorCosts(startingRoom, goalRoom, ref doorCostDictionary))
+            if(!BFSCalculateDoorCosts(startingRoom, goalRoom))
             {
                 return null;
             }
 
-            return FindLowestCostPath(startingRoom, goalRoom, ref doorCostDictionary);
+            return FindLowestCostPath(startingRoom, goalRoom);
         }
 
-        private static bool BFSCalculateDoorCosts(Room startingRoom, Room goalRoom, ref Dictionary<Door, int> doorCostDictionary)
+        private static bool BFSCalculateDoorCosts(Room startingRoom, Room goalRoom)
         {
-            HashSet<Room> roomsToCheck = new HashSet<Room>(); // to check next iteration
-            HashSet<Room> roomsCurrentlyChecking = new HashSet<Room>(); // currently checking this iteration
-
             int currentDistCost = 0;
             roomsToCheck.Add(goalRoom);
             while (roomsToCheck.Count > 0)
@@ -67,7 +67,7 @@ namespace DD.Systems.Room
             return false;
         }
 
-        private static Door[] FindLowestCostPath(Room startingRoom, Room goalRoom, ref Dictionary<Door, int> doorCostDictionary)
+        private static Door[] FindLowestCostPath(Room startingRoom, Room goalRoom)
         {
             List<Door> doorPath = new List<Door>();
             Room currentRoom = startingRoom;
@@ -80,7 +80,7 @@ namespace DD.Systems.Room
 
                 foreach (var door in currentRoom.Doors)
                 {
-                    if (doorCostDictionary[door] < cost)
+                    if (doorCostDictionary.ContainsKey(door) && doorCostDictionary[door] < cost)
                     {
                         cost = doorCostDictionary[door];
                         cheapestDoor = door;

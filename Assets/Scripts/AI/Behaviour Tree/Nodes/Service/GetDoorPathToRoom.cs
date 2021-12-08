@@ -15,7 +15,7 @@ namespace DD.AI.BehaviourTreeSystem
         }
 
         protected override NodeState Evaluate()
-        { 
+        {
             return UpdateBlackboard(RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), 
                 behaviourTree.Blackboard.GetFromBlackboard<Room>(targetRoomBlackboardKey))) ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }

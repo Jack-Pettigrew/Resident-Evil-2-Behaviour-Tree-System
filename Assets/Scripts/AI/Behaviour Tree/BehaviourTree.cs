@@ -28,7 +28,7 @@ namespace DD.AI.BehaviourTreeSystem
             switch (rootNode.UpdateNode())
             {
                 case NodeState.FAILED:
-                    Debug.LogWarning("Behaviour Tree Failure reported.");
+                    Debug.LogWarning("Behaviour Tree Failure reported - define something to do on complete branch failure.");
                     break;
                 default:
                     break;
