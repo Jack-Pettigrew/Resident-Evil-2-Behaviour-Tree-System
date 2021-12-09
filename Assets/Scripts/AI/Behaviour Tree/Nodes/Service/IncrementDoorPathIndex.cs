@@ -4,24 +4,27 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class IncrementDoorPathIndex : UpdateBlackboardService
     {
+        private readonly string doorIndexBlackboardKey;
         private readonly string doorPathArrayBlackboardKey;
 
-        public IncrementDoorPathIndex(BehaviourTree behaviourTree, string doorIndexBlackboardKey, string doorPathArrayBlackboardKey) : base(behaviourTree, doorIndexBlackboardKey)
+        public IncrementDoorPathIndex(BehaviourTree behaviourTree, string doorIndexBlackboardKey, string doorPathArrayBlackboardKey) : base(behaviourTree)
         {
+            this.doorIndexBlackboardKey = doorIndexBlackboardKey;
             this.doorPathArrayBlackboardKey = doorPathArrayBlackboardKey;
         }
 
-        protected override NodeState Evaluate()
+        protected override bool UpdateBlackboard()
         {
+            int index = behaviourTree.Blackboard.GetFromBlackboard<int>(doorIndexBlackboardKey);
+
             // If updating current door index by 1 excedes door array length, fail
-            if ((behaviourTree.Blackboard.GetFromBlackboard<int>(variableBlackboardKey) + 1) % behaviourTree.Blackboard.GetFromBlackboard<Door[]>(doorPathArrayBlackboardKey).Length == 0)
+            if ((index + 1) % behaviourTree.Blackboard.GetFromBlackboard<Door[]>(doorPathArrayBlackboardKey).Length == 0)
             {
-                return NodeState.FAILED;
+                return false;
             }
             else
             {
-                UpdateBlackboard(behaviourTree.Blackboard.GetFromBlackboard<int>(variableBlackboardKey) + 1);
-                return NodeState.SUCCESSFUL;
+                return behaviourTree.Blackboard.UpdateBlackboardVariable(doorIndexBlackboardKey, (index + 1));
             }
         }
     } 

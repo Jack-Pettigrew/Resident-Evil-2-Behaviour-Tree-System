@@ -8,11 +8,14 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class GetRandomRoom : UpdateBlackboardService
     {
-        public GetRandomRoom(BehaviourTree behaviourTree, string targetDoorBlackboardVariable) : base(behaviourTree, targetDoorBlackboardVariable)
+        public readonly string targetDoorBlackboardVariable;
+
+        public GetRandomRoom(BehaviourTree behaviourTree, string targetDoorBlackboardVariable) : base(behaviourTree)
         {
+            this.targetDoorBlackboardVariable = targetDoorBlackboardVariable;
         }
 
-        protected override NodeState Evaluate()
+        protected override bool UpdateBlackboard()
         {
             Room result;
             Room currentRoom = RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject);
@@ -23,7 +26,7 @@ namespace DD.AI.BehaviourTreeSystem
                 result = RoomManager.GetRandomRoom();
             } while (result == currentRoom);
 
-            return UpdateBlackboard(result) ? NodeState.SUCCESSFUL : NodeState.FAILED;
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(targetDoorBlackboardVariable, result);
         }
     }
 }

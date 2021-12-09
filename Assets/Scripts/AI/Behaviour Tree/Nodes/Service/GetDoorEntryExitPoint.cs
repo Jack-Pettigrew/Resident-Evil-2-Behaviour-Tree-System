@@ -7,6 +7,7 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class GetDoorEntryExitPoint : UpdateBlackboardService
     {
+        private readonly string moveTargetrBlackboardKey;
         private readonly string targetDoorBlackboardKey;
         private readonly bool entryPoint;
 
@@ -17,24 +18,26 @@ namespace DD.AI.BehaviourTreeSystem
         /// <param name="entryPoint">True: Get Door entry point. False: Get Door exit point.</param>
         /// <param name="targetDoorBlackboardKey">Key associated with the Target Door Blackboard variable.</param>
         /// <param name="moveTargetrBlackboardKey">Key associated with the Move Target Blackboard variable.</param>
-        public GetDoorEntryExitPoint(BehaviourTree behaviourTree, bool entryPoint, string targetDoorBlackboardKey, string moveTargetrBlackboardKey) : base(behaviourTree, moveTargetrBlackboardKey)
+        public GetDoorEntryExitPoint(BehaviourTree behaviourTree, bool entryPoint, string targetDoorBlackboardKey, string moveTargetrBlackboardKey) : base(behaviourTree)
         {
+            this.moveTargetrBlackboardKey = moveTargetrBlackboardKey;
             this.targetDoorBlackboardKey = targetDoorBlackboardKey;
             this.entryPoint = entryPoint;
         }
 
-        protected override NodeState Evaluate()
+        protected override bool UpdateBlackboard()
         {
-            if(entryPoint)
+            if (entryPoint)
             {
-                return UpdateBlackboard(behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).GetEntryPointRelativeToObject(behaviourTree.ai.GetAITransform().position)) 
-                    ? NodeState.SUCCESSFUL : NodeState.FAILED;
+                return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
+                    behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).GetEntryPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
             }
             else
             {
-                return UpdateBlackboard(behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).GetExitPointRelativeToObject(behaviourTree.ai.GetAITransform().position))
-                    ? NodeState.SUCCESSFUL : NodeState.FAILED;
+                return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
+                    behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).GetExitPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
             }
+
         }
     }
 }

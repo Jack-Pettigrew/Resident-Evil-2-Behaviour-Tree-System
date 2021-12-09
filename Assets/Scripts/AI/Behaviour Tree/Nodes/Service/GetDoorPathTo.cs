@@ -7,17 +7,20 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class GetDoorPathTo<T> : UpdateBlackboardService where T : Component
     {
+        private readonly string doorPathBlackboardKey;
         private readonly string targetObjectBlackBoardKey;
 
-        public GetDoorPathTo(BehaviourTree behaviourTree, string doorPathBlackboardKey, string targetObjectBlackBoardKey) : base(behaviourTree, doorPathBlackboardKey)
+        public GetDoorPathTo(BehaviourTree behaviourTree, string doorPathBlackboardKey, string targetObjectBlackBoardKey) : base(behaviourTree)
         {
+            this.doorPathBlackboardKey = doorPathBlackboardKey;
             this.targetObjectBlackBoardKey = targetObjectBlackBoardKey;
         }
 
-        protected override NodeState Evaluate()
+        protected override bool UpdateBlackboard()
         {
-            return UpdateBlackboard(RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject),
-                RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetObjectBlackBoardKey).gameObject))) ? NodeState.SUCCESSFUL : NodeState.FAILED;
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject),
+                RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetObjectBlackBoardKey).gameObject)));
+
         }
     }
 }

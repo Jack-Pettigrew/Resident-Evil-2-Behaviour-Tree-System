@@ -6,16 +6,15 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public abstract class UpdateBlackboardService : Service
     {
-        protected readonly string variableBlackboardKey;
-
-        public UpdateBlackboardService(BehaviourTree behaviourTree, string variableBlackboardKey) : base(behaviourTree)
+        public UpdateBlackboardService(BehaviourTree behaviourTree) : base(behaviourTree)
         {
-            this.variableBlackboardKey = variableBlackboardKey;
         }
 
-        protected virtual bool UpdateBlackboard(object updatedBlackboardVariable)
+        protected override NodeState Evaluate()
         {
-            return behaviourTree.Blackboard.UpdateBlackboardVariable(variableBlackboardKey, updatedBlackboardVariable, true);
+            return UpdateBlackboard() ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
+
+        protected abstract bool UpdateBlackboard();
     }
 }
