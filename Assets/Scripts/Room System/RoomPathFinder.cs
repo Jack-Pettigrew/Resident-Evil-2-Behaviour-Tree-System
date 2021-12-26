@@ -87,6 +87,12 @@ namespace DD.Systems.Room
                     }
                 }
 
+                // Throw exception on duplicate door
+                if(doorPath.Contains(cheapestDoor))
+                {
+                    throw new System.Exception("Duplicate door while calculating door path!");
+                }
+
                 doorPath.Add(cheapestDoor);
 
                 currentRoom = cheapestDoor.RoomA != currentRoom ? cheapestDoor.RoomA : cheapestDoor.RoomB;
