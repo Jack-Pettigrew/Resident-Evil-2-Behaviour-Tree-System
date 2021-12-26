@@ -46,7 +46,7 @@ namespace DD.Systems.Room
         {
             // Set door to close
             // Set IsOpen false
-            closeDoorEvent.Invoke();
+            closeDoorEvent?.Invoke();
             return true;
         }
 

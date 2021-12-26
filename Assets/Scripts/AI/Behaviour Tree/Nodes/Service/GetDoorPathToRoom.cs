@@ -5,31 +5,19 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GetDoorPathToRoom : UpdateBlackboardService
+    public class GetDoorPathToRoom : GetDoorPathTo<Room>
     {
-        private readonly string roomPathArrayBlackboardKey;
-        private readonly string targetRoomBlackboardKey;
-        private readonly string doorPathIndexBlackboardKey;
-
-        public GetDoorPathToRoom(BehaviourTree behaviourTree, string roomPathArrayBlackboardKey, string targetBlackboardKey, string doorPathIndexBlackboardKey) : base(behaviourTree)
+        public GetDoorPathToRoom(BehaviourTree behaviourTree, string doorPathBlackboardKey, string doorPathIndexBlackboardKey, string roomTargetBlackboardKey) : base(behaviourTree, doorPathBlackboardKey, doorPathIndexBlackboardKey, roomTargetBlackboardKey)
         {
-            this.roomPathArrayBlackboardKey = roomPathArrayBlackboardKey;
-            this.targetRoomBlackboardKey = targetBlackboardKey;
-            this.doorPathIndexBlackboardKey = doorPathIndexBlackboardKey;
         }
 
         protected override bool UpdateBlackboard()
         {
-            behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathIndexBlackboardKey, 0);
+            ResetDoorPathIndex();
 
-            return behaviourTree.Blackboard.UpdateBlackboardVariable(roomPathArrayBlackboardKey, 
-                RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), behaviourTree.Blackboard.GetFromBlackboard<Room>(targetRoomBlackboardKey))
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, 
+                RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), behaviourTree.Blackboard.GetFromBlackboard<Room>(targetObjectBlackBoardKey))
             );
-        }
-
-        protected override NodeState Evaluate()
-        {
-            return UpdateBlackboard() ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }
 }
