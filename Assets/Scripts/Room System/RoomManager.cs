@@ -40,15 +40,17 @@ namespace DD.Systems.Room
             RaycastHit hit;
 
             // Raycast accounting for GameObject center point margin of error (e.g. when the center point is directly against a floor plane)
-            Physics.Raycast(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down, out hit, 5.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore);
-
+            if (Physics.Raycast(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down, out hit, 5.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore))
+            {
 #if UNITY_EDITOR
-            Debug.DrawRay(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down * 5.0f, Color.red, 10.0f, false);
+                Debug.DrawRay(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down * 5.0f, Color.red, 10.0f, false);
 #endif
 
-            RoomFloor floor = hit.collider.GetComponent<RoomFloor>();
+                RoomFloor floor = hit.collider.GetComponent<RoomFloor>();
+                return floor ? floor.OwnerRoom : null;
+            }
 
-            return floor ? floor.OwnerRoom : null;
+            return null;
         }
 
         /// <summary>
@@ -59,6 +61,11 @@ namespace DD.Systems.Room
         /// <returns>Is inside the Room?</returns>
         public static bool IsObjectInRoom(GameObject gameObject, Room targetRoom)
         {
+            if(!gameObject || !targetRoom)
+            {
+                return false;
+            }
+
             return GetRoomOfObject(gameObject) == targetRoom ? true : false;
         }
 

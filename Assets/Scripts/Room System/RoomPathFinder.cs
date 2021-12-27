@@ -19,8 +19,11 @@ namespace DD.Systems.Room
         /// <returns>Array of Doors as waypoints to the Goal Room.</returns>
         public static Door[] FindPathToRoom(Room startingRoom, Room goalRoom)
         {
+            Reset();
+
             if(!BFSCalculateDoorCosts(startingRoom, goalRoom))
             {
+                //throw new System.Exception("RoomPathFinder: BFS Path unable to calculate.");
                 return null;
             }
 
@@ -100,6 +103,12 @@ namespace DD.Systems.Room
             }
 
             return doorPath.ToArray();
+        }
+        private static void Reset()
+        {
+            doorCostDictionary.Clear();
+            roomsToCheck.Clear();
+            roomsCurrentlyChecking.Clear();
         }
     }
 }

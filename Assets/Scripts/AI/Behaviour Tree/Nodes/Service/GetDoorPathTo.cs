@@ -22,9 +22,15 @@ namespace DD.AI.BehaviourTreeSystem
         {
             ResetDoorPathIndex();
 
-            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, 
-                RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetObjectBlackBoardKey).gameObject))
-            );
+            Room startRoom = RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject);
+            Room goalRoom = RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetObjectBlackBoardKey).gameObject);
+
+            if(!startRoom || !goalRoom)
+            {
+                return false;
+            }
+
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, RoomPathFinder.FindPathToRoom(startRoom, goalRoom));
 
         }
 
