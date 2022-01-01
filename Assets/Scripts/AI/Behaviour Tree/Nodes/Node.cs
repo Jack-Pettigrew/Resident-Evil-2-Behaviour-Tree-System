@@ -29,14 +29,14 @@ namespace DD.AI.BehaviourTreeSystem
                 return NodeState.FAILED;
             }
 
-            NodeState result = Evaluate();
+            NodeState nodeState = Evaluate();
 
-            if(!OnExit())
+            if(!OnExit(nodeState))
             {
                 return NodeState.FAILED;
             }
 
-            return result;
+            return nodeState;
         }
 
         /* 
@@ -47,7 +47,7 @@ namespace DD.AI.BehaviourTreeSystem
         {
             return true;
         }
-        protected virtual bool OnExit()
+        protected virtual bool OnExit(NodeState nodeState)
         {
             return true;
         }
