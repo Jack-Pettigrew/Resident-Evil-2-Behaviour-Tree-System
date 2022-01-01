@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public abstract class Composite : Node
+    public abstract class Composite : Node, IInteruptable
     {
         /// <summary>
         /// All the connected child nodes this Composite branches down to.
@@ -30,11 +30,12 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override bool OnStart()
         {
-            if(serviceNodes?.Count > 0)
+            // Service Nodes
+            if (serviceNodes?.Count > 0)
             {
                 foreach (var node in serviceNodes)
                 {
-                    if(node.UpdateNode() == NodeState.FAILED)
+                    if (node.UpdateNode() == NodeState.FAILED)
                     {
                         return false;
                     }
@@ -42,6 +43,26 @@ namespace DD.AI.BehaviourTreeSystem
             }
 
             return true;
+        }
+
+        protected override bool OnExit(NodeState nodeState)
+        {
+            switch (nodeState)
+            {
+                case NodeState.FAILED:
+                    break;
+
+                default:
+                    behaviourTree.LogBranchNode(this);
+                    break;
+            }
+
+            return true;
+        }
+
+        public virtual void Interupt()
+        {
+            // is this bad OOP?
         }
     }
 }

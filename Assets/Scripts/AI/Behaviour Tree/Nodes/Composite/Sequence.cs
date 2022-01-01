@@ -45,5 +45,10 @@ namespace DD.AI.BehaviourTreeSystem
         {
             currentNodeIndex = 0;
         }
+
+        public override void Interupt()
+        {
+            ResetSequence();
+        }
     }
 }
