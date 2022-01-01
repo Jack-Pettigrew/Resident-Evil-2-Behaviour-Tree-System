@@ -111,7 +111,7 @@ namespace DD.AI.Controllers
 
             /*
              * Final repeater to Player doesn't reset Sequence due to IsAtTarget node in Selector is true before MoveTo<Player> repeater can return success
-             * Fix? Make a full "Go to Room > Go to Player" test tree
+             * Sequence index needs resetting when the execution branch has changed - need a way to do this (Interuptable? etc)
             */
 
             return baseTest;
