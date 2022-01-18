@@ -50,6 +50,9 @@ namespace DD.AI.BehaviourTreeSystem
             */
         }
 
+        /// <summary>
+        /// Handles difference between current execution branch and the previous one.
+        /// </summary>
         private void HandleLoggedNodes()
         {
             if (previousBranch.Count > 0)
@@ -70,6 +73,10 @@ namespace DD.AI.BehaviourTreeSystem
             currentBranch.Clear();
         }
 
+        /// <summary>
+        /// Logs the Node as having been executed this execution branch.
+        /// </summary>
+        /// <param name="node"></param>
         public void LogBranchNode(Composite node)
         {
             currentBranch.Add(node);

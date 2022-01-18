@@ -27,17 +27,23 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override bool UpdateBlackboard()
         {
-            if (entryPoint)
+            Door door = behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey);
+
+            if(door)
             {
-                return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
-                    behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).GetEntryPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
-            }
-            else
-            {
-                return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
-                    behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).GetExitPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
+                if (entryPoint)
+                {
+                    return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
+                        door.GetEntryPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
+                }
+                else
+                {
+                    return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
+                        door.GetExitPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
+                }
             }
 
+            return false;
         }
     }
 }
