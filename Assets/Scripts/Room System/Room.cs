@@ -7,7 +7,7 @@ namespace DD.Systems.Room
     public class Room : MonoBehaviour
     {
         [SerializeField] private Door[] doors;
-        public Door[] Doors { private set { doors = value; } get { return doors; } }
+        public Door[] Doors { set { doors = value; } get { return doors; } }
 
         [SerializeField] private RoomFloor[] roomFloors;
 
@@ -19,9 +19,12 @@ namespace DD.Systems.Room
             }
             else
             {
-                foreach (var floor in roomFloors)
+                foreach (var door in Doors)
                 {
-                    floor.SetOwnerRoom(this);
+                    if(door == null)
+                    {
+                        Debug.LogError($"{this} has a NULL Door in it's array - Doors array was reassigned to empty array.");
+                    }
                 }
             }
         }
@@ -33,6 +36,11 @@ namespace DD.Systems.Room
         /// <param name="floors"></param>
         public void SetRoomFloors(RoomFloor[] floors)
         {
+            foreach (var floor in floors)
+            {
+                floor.SetOwnerRoom(this);
+            }
+
             roomFloors = floors;
         }
 #endif

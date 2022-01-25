@@ -18,7 +18,7 @@ namespace DD.Editor.Rooms
                 EditorGUILayout.HelpBox("Select RoomFloors to add to this Room.", MessageType.Info, true);
             }
 
-            if (GUILayout.Button("Add Selected Floors"))
+            if (GUILayout.Button("Set Selected Floors"))
                 SetRoomFloors();
         }
 

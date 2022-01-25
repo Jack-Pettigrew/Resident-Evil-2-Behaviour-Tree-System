@@ -12,40 +12,29 @@ namespace DD.Systems.Room
         // STATE
         public bool IsOpen { private set; get; }
 
+        // ROOMS
         [Header("Connecting Room")]
         [SerializeField] private Room roomA;
+        public Room RoomA { get { return roomA; } }
         public Transform roomAEntryPoint;
 
         [Header("Connecting Room")]
         [SerializeField] private Room roomB;
+        public Room RoomB { get { return roomB; } }
         public Transform roomBEntryPoint;
 
-        public Room RoomA { get { return roomA; } }
-        public Room RoomB { get { return roomB; } }
-
+        // EVENTS
         [SerializeField] private UnityEvent openDoorEvent;
         [SerializeField] private UnityEvent closeDoorEvent;
 
-        private void Awake()
-        {
-            if(RoomA == null || RoomB == null)
-            {
-                //Debug.LogError($"{gameObject} needs entry point Transforms assigning!");
-            }
-        }
-
         public bool OpenDoor()
         {
-            // Set door to open
-            // Set IsOpen true
             openDoorEvent?.Invoke();
             return true;
         }
 
         public bool CloseDoor()
         {
-            // Set door to close
-            // Set IsOpen false
             closeDoorEvent?.Invoke();
             return true;
         }
@@ -73,7 +62,7 @@ namespace DD.Systems.Room
         }
 
         /// <summary>
-        /// Returns the entry point transform relative to the Room provided. If setup correctly, the entry point will be in the same room as the one provided.
+        /// Returns the entry point transform relative to the Room provided.
         /// </summary>
         /// <param name="room">Relative Room.</param>
         /// <returns>The entry point transform. NULL if invalid Room.</returns>
@@ -93,7 +82,7 @@ namespace DD.Systems.Room
             }
         }
 
-            private void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
 
