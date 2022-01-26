@@ -31,7 +31,7 @@ namespace DD.Editor.Rooms
         /// <summary>
         /// Automatically links the Door's connecting Rooms based on Raycasts from entry points to nearby RoomFloors.
         /// </summary>
-        private void AutoLinkConnectingRooms()
+        public void AutoLinkConnectingRooms()
         {
             Door door = target as Door;
 
@@ -69,6 +69,55 @@ namespace DD.Editor.Rooms
                     roomBDoors.Add(door);
                     roomB.Doors = roomADoors.ToArray();
                 }
+            }
+        }
+
+        [MenuItem("Room System/Auto-link all Doors")]
+        private static void autoLinkAllDoors()
+        {
+            Door[] doors = FindObjectsOfType<Door>();
+
+            foreach (var door in doors)
+            {
+                Room roomA = RoomManager.GetRoomOfObject(door.roomAEntryPoint.gameObject);
+                Room roomB = RoomManager.GetRoomOfObject(door.roomBEntryPoint.gameObject);
+
+                if (roomA == null)
+                {
+                    Debug.LogError("Entry Point A was unable to assign Room. Please make sure the Room's floors are below the appropriate Door entry point.");
+                    return;
+                }
+                if (roomB == null)
+                {
+                    Debug.LogError("Entry Point B was unable to assign Room. Please make sure the Room's floors are below the appropriate Door entry point.");
+                    return;
+                }
+
+                // Link this door to found Rooms
+                SerializedObject serializedObject = new SerializedObject(door);
+                serializedObject.Update();
+
+                SerializedProperty roomAProperty = serializedObject.FindProperty("roomA");
+                roomAProperty.objectReferenceValue = roomA;
+
+                SerializedProperty roomBProperty = serializedObject.FindProperty("roomB");
+                roomBProperty.objectReferenceValue = roomB;
+
+                List<Door> roomADoors = new List<Door>(roomA.Doors);
+                if (!roomADoors.Contains(door))
+                {
+                    roomADoors.Add(door);
+                    roomA.Doors = roomADoors.ToArray();
+                }
+
+                List<Door> roomBDoors = new List<Door>(roomB.Doors);
+                if (!roomBDoors.Contains(door))
+                {
+                    roomBDoors.Add(door);
+                    roomB.Doors = roomADoors.ToArray();
+                }
+
+                serializedObject.ApplyModifiedProperties();
             }
         }
     }
