@@ -95,14 +95,14 @@ namespace DD.Editor.Rooms
                 }
 
                 // Link this door to found Rooms
-                //SerializedObject doorObject = new SerializedObject(door);
-                //doorObject.Update();
+                SerializedObject doorObject = new SerializedObject(door);
+                doorObject.Update();
 
-                //SerializedProperty roomAProperty = doorObject.FindProperty("roomA");
-                //roomAProperty.objectReferenceValue = roomA;
+                SerializedProperty roomAProperty = doorObject.FindProperty("roomA");
+                roomAProperty.objectReferenceValue = roomA;
 
-                //SerializedProperty roomBProperty = doorObject.FindProperty("roomB");
-                //roomBProperty.objectReferenceValue = roomB;
+                SerializedProperty roomBProperty = doorObject.FindProperty("roomB");
+                roomBProperty.objectReferenceValue = roomB;
 
                 // Add Door to Room
                 List<Door> roomADoors = new List<Door>(roomA.Doors);
@@ -119,7 +119,7 @@ namespace DD.Editor.Rooms
                     roomB.Doors = roomBDoors.ToArray();
                 }
 
-                //doorObject.ApplyModifiedProperties();
+                doorObject.ApplyModifiedProperties();
             }
         }
 
