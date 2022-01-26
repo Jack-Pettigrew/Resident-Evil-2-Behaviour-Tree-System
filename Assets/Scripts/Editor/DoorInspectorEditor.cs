@@ -16,8 +16,6 @@ namespace DD.Editor.Rooms
 
             serializedObject.Update();
 
-            Door door = target as Door;
-
             EditorGUILayout.HelpBox("When Auto Linking, ensure the appropriate entry points can reach the desired RoomFloors.", MessageType.Info, true);
 
             if(GUILayout.Button("Auto-link Connecting Rooms"))
@@ -56,6 +54,7 @@ namespace DD.Editor.Rooms
                 SerializedProperty roomBProperty = serializedObject.FindProperty("roomB");
                 roomBProperty.objectReferenceValue = roomB;
 
+                // Assign door
                 List<Door> roomADoors = new List<Door>(roomA.Doors);
                 if(!roomADoors.Contains(door))
                 {
@@ -73,8 +72,10 @@ namespace DD.Editor.Rooms
         }
 
         [MenuItem("Room System/Auto-link all Doors")]
-        private static void autoLinkAllDoors()
+        private static void AutoLinkAllDoors()
         {
+            ClearAllRoomDoorLinks();
+
             Door[] doors = FindObjectsOfType<Door>();
 
             foreach (var door in doors)
@@ -94,15 +95,16 @@ namespace DD.Editor.Rooms
                 }
 
                 // Link this door to found Rooms
-                SerializedObject serializedObject = new SerializedObject(door);
-                serializedObject.Update();
+                //SerializedObject doorObject = new SerializedObject(door);
+                //doorObject.Update();
 
-                SerializedProperty roomAProperty = serializedObject.FindProperty("roomA");
-                roomAProperty.objectReferenceValue = roomA;
+                //SerializedProperty roomAProperty = doorObject.FindProperty("roomA");
+                //roomAProperty.objectReferenceValue = roomA;
 
-                SerializedProperty roomBProperty = serializedObject.FindProperty("roomB");
-                roomBProperty.objectReferenceValue = roomB;
+                //SerializedProperty roomBProperty = doorObject.FindProperty("roomB");
+                //roomBProperty.objectReferenceValue = roomB;
 
+                // Add Door to Room
                 List<Door> roomADoors = new List<Door>(roomA.Doors);
                 if (!roomADoors.Contains(door))
                 {
@@ -114,10 +116,19 @@ namespace DD.Editor.Rooms
                 if (!roomBDoors.Contains(door))
                 {
                     roomBDoors.Add(door);
-                    roomB.Doors = roomADoors.ToArray();
+                    roomB.Doors = roomBDoors.ToArray();
                 }
 
-                serializedObject.ApplyModifiedProperties();
+                //doorObject.ApplyModifiedProperties();
+            }
+        }
+
+        [MenuItem("Room System/Clear all Room Door links")]
+        private static void ClearAllRoomDoorLinks()
+        {
+            foreach (var room in FindObjectsOfType<Room>())
+            {
+                room.Doors = new Door[0];
             }
         }
     }
