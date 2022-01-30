@@ -1056,7 +1056,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985932257419579960}
   - component: {fileID: 6072475716043620257}
-  - component: {fileID: 7924833434173998173}
   m_Layer: 0
   m_Name: Attack Collider
   m_TagString: Untagged
@@ -1091,20 +1090,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.15
   m_Center: {x: 0, y: 0.12, z: 0.01}
---- !u!114 &7924833434173998173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3125495129558702920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e17a651455fcf584e9f6c205c83f5ed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCollider: {fileID: 6072475716043620257}
-  damageAmount: 0
 --- !u!1 &3278992278538720391
 GameObject:
   m_ObjectHideFlags: 0
