@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] private Collider attackCollider;
+    [Header("Damage")]
+    [Tooltip("The amount of damage an object will recieve.")]
+    [SerializeField] private int damageAmount;
     
     private void Awake() {
         attackCollider.enabled = false;
@@ -25,4 +29,7 @@ public class AttackCollider : MonoBehaviour
         attackCollider.enabled = false;
     }
 
+    private void OnCollisionEnter(Collision other) {
+        other.gameObject.GetComponent<IDamagable>().TakeDamage(damageAmount);
+    }
 }

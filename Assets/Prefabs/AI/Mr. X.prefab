@@ -1104,6 +1104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 6072475716043620257}
+  damageAmount: 0
 --- !u!1 &3278992278538720391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,6 +1354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 6072475716043620257}
+  damageAmount: 4
 --- !u!1 &4061697701033289290
 GameObject:
   m_ObjectHideFlags: 0

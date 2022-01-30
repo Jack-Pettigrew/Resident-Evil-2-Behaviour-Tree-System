@@ -11,9 +11,11 @@ namespace DD.AI.BehaviourTreeSystem
         private Node rootNode = null;
         public Blackboard Blackboard { private set; get; }
 
+        // BRANCH TRACKING
         private List<Composite> previousBranch = new List<Composite>(5);
         private List<Composite> currentBranch = new List<Composite>(5);
 
+        // COMPONENTS
         public IAIBehaviour ai { private set; get; }
 
         public BehaviourTree(IAIBehaviour ai)
