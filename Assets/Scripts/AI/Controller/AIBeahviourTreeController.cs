@@ -18,7 +18,8 @@ namespace DD.AI.Controllers
         // COMPONENTS - the AI's 'controller'
         private AILocomotion locomotion;
 
-        // FOV
+        // Temp FOV variables (move to blackboard visual editor)
+        [Header("Field of View")]
         [SerializeField] private float fovAngle = 90.0f;
         [SerializeField] private float fovRange = 5.0f;
         [SerializeField] private LayerMask playerLayerMask;
