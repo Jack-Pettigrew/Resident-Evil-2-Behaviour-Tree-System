@@ -16,7 +16,8 @@ namespace DD.AI.Controllers
         private BehaviourTree behaviourTree;
 
         // COMPONENTS - the AI's 'controller'
-        private AILocomotion locomotion;
+        private AILocomotion aiLocomotion;
+        private AIAnimator aiAnimator;
 
         // Temp FOV variables (move to blackboard visual editor)
         [Header("Field of View")]
@@ -27,17 +28,18 @@ namespace DD.AI.Controllers
 
         private void OnEnable()
         {
-            MoveEvent += locomotion.Move;
+            MoveEvent += aiLocomotion.Move;
         }
 
         private void OnDisable()
         {
-            MoveEvent -= locomotion.Move;
+            MoveEvent -= aiLocomotion.Move;
         }
 
         private void Awake()
         {
-            locomotion = GetComponent<AILocomotion>();
+            aiLocomotion = GetComponent<AILocomotion>();
+            aiAnimator = GetComponent<AIAnimator>();
 
             behaviourTree = new BehaviourTree(this);
             behaviourTree.SetBehaviourTree(CreateBehaviourTree());
@@ -71,7 +73,8 @@ namespace DD.AI.Controllers
                 new Sequence(behaviourTree, new List<Node>{
                     // Idle
                     new IsAtTarget<Component>(behaviourTree, "Player", 1.5f),
-                    new IdleNode(behaviourTree, "IdleTimerLength")
+                    // new IdleNode(behaviourTree, "IdleTimerLength")
+                    new PlayAnimation(behaviourTree, "Melee", true)
                 }),
                 new Sequence(behaviourTree, new List<Node>{
                     // Same room Move to
@@ -116,14 +119,13 @@ namespace DD.AI.Controllers
             */
 
             return baseTest;
-            //return test;
         }
 
         private void Update()
         {
             behaviourTree.EvaluateTree();
 
-            locomotion.UpdateLocomotion();
+            aiLocomotion.UpdateLocomotion();
         }
 
 
@@ -132,9 +134,9 @@ namespace DD.AI.Controllers
             return transform;
         }
 
-        public Animator GetAnimator()
+        public AIAnimator GetAnimator()
         {
-            return GetComponent<Animator>();
+            return aiAnimator;
         }
     }
 }

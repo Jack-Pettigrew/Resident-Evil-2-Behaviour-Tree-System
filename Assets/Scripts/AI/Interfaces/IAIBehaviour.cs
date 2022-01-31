@@ -15,6 +15,6 @@ namespace DD.AI.Controllers
 
         // METHODS
         public Transform GetAITransform();
-        public Animator GetAnimator();
+        public AIAnimator GetAnimator();
     } 
 }
