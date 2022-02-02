@@ -4,7 +4,7 @@ namespace DD.Core
 {
     public interface IDamagable
     {
-        bool IsDamagable { get; }
+        bool IsDamagable { get; set; }
         
         void TakeDamage(float damageAmount);
         IEnumerator DamageCooldown();

@@ -6,9 +6,9 @@ namespace DD.Core
 {
     public class Health : MonoBehaviour, IDamagable, IKillable
     {
-        [Header("Health")]
-        [SerializeField] private bool isDamagable = true;
-        public bool IsDamagable { get; }
+        [field: Header("Health")]
+        [field: SerializeField] public bool IsDamagable { get; set; }
+
         [SerializeField] private float maxHealth = 100.0f;
         public float CurrentHealth { get; private set; }
 
@@ -21,26 +21,27 @@ namespace DD.Core
 
         public virtual void TakeDamage(float damageAmount)
         {
-            if(!IsDamagable || IsDead) return;
-            
+            if (!IsDamagable || IsDead) return;
+
             CurrentHealth -= damageAmount;
 
-            if(CurrentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }
-            else if (hasDamageCooldown) {
+            else if (hasDamageCooldown)
+            {
                 StartCoroutine(DamageCooldown());
             }
         }
 
         public virtual IEnumerator DamageCooldown()
         {
-            isDamagable = false;
+            IsDamagable = false;
 
             yield return new WaitForSeconds(damageCooldown);
 
-            isDamagable = true;
+            IsDamagable = true;
         }
 
         public virtual void Die()
