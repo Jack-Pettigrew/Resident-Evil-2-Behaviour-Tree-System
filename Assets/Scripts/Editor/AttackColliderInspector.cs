@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using DD.Core.Combat;
 
 [CustomEditor(typeof(AttackCollider))]
 public class AttackColliderInspector : Editor {
