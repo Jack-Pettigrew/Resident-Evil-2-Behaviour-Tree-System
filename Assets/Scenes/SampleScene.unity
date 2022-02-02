@@ -9462,6 +9462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 504257293}
   - component: {fileID: 504257294}
+  - component: {fileID: 504257291}
   - component: {fileID: 504257290}
   m_Layer: 6
   m_Name: Temp Player
@@ -9490,6 +9491,31 @@ MonoBehaviour:
   gravity: -9.81
   cameraTransform: {fileID: 963194228}
   turnSpeedScalar: 0.1
+--- !u!114 &504257291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504257289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db7d4649c9b5574aab0493affebb90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsDamagable>k__BackingField: 1
+  maxHealth: 100
+  hasDamageCooldown: 1
+  damageCooldown: 1
+  OnHealthHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &504257293
 Transform:
   m_ObjectHideFlags: 0
