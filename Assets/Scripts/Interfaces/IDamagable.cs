@@ -1,8 +1,12 @@
 using System.Collections;
 
-public interface IDamagable
+namespace DD.Core
 {
-    bool IsDamagable{get;}
-    bool TakeDamage(float damageAmount);
-    IEnumerator DamageCooldown(float cooldownTime);
+    public interface IDamagable
+    {
+        bool IsDamagable { get; }
+        
+        void TakeDamage(float damageAmount);
+        IEnumerator DamageCooldown();
+    }
 }
