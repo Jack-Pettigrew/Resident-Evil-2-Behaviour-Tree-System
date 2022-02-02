@@ -15,6 +15,9 @@ namespace DD.Core.Control
         [Header("Locomotion")]
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float runSpeed = 2.0f;
+        [SerializeField] private float turnSpeedScalar = 0.5f;
+        private float turnSmoothingVar = 0.0f;
+
 
         private bool isSprinting = false;
         private Vector3 inputDir = Vector3.zero;
@@ -24,9 +27,8 @@ namespace DD.Core.Control
         [SerializeField] private float groundedGravity = -0.2f;
         [SerializeField] private float gravity = Physics.gravity.y;
 
+        [Header("Camera")]
         [SerializeField] private Transform cameraTransform = null;
-        [SerializeField] private float turnSpeedScalar = 0.5f;
-        private float turnSmoothingVar = 0.0f;
 
         private void Awake()
         {
