@@ -10,14 +10,13 @@ namespace DD.Core.Control
         [SerializeField] private bool ignoreInput = false;
 
         private CharacterController controller = null;
-        [SerializeField] private Animator ani = null;
+        [SerializeField] private Animator animator = null;
 
         [Header("Locomotion")]
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float runSpeed = 2.0f;
         [SerializeField] private float turnSpeedScalar = 0.5f;
         private float turnSmoothingVar = 0.0f;
-
 
         private bool isSprinting = false;
         private Vector3 inputDir = Vector3.zero;
@@ -34,16 +33,18 @@ namespace DD.Core.Control
         {
             controller = GetComponent<CharacterController>();
 
-            if(ani == null)
+            if(animator == null)
             {
-                ani = GetComponentInChildren<Animator>();
+                animator = GetComponentInChildren<Animator>();
 
-                if(ani == null)
+                if(animator == null)
                 {
                     Debug.LogError($"No Animator found for {name}");
                 }
             }
         }
+
+        public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;
 
         void Update()
         {
@@ -118,9 +119,9 @@ namespace DD.Core.Control
 
         private void UpdateAnimations()
         {
-            ani.SetFloat("VelX", inputDir.x);
-            ani.SetFloat("VelY", inputDir.z);
-            ani.SetBool("isSprinting", isSprinting);
+            animator.SetFloat("VelX", inputDir.x);
+            animator.SetFloat("VelY", inputDir.z);
+            animator.SetBool("isSprinting", isSprinting);
         }
     }
 
