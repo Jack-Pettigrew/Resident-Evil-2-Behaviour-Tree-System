@@ -4,10 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DD.Core;
 
 namespace DD.Systems.Room
 {
-    public class Door : MonoBehaviour
+    public class Door : MonoBehaviour, IInteractable
     {
         // STATE
         public bool IsOpen { private set; get; }
@@ -27,15 +28,29 @@ namespace DD.Systems.Room
         [SerializeField] private UnityEvent openDoorEvent;
         [SerializeField] private UnityEvent closeDoorEvent;
 
+        public void Interact()
+        {
+            if(!IsOpen)
+            {
+                OpenDoor();
+            }
+            else
+            {
+                CloseDoor();
+            }
+        }
+
         public bool OpenDoor()
         {
             openDoorEvent?.Invoke();
+            IsOpen = true;
             return true;
         }
 
         public bool CloseDoor()
         {
             closeDoorEvent?.Invoke();
+            IsOpen = false;
             return true;
         }
 
