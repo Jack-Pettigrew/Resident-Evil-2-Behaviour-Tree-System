@@ -42,10 +42,6 @@ namespace DD.Systems.Room
             // Raycast accounting for GameObject center point margin of error (e.g. when the center point is directly against a floor plane)
             if (Physics.Raycast(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down, out hit, 5.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore))
             {
-#if UNITY_EDITOR
-                Debug.DrawRay(gameObject.transform.position + Vector3.up * 0.05f, Vector3.down * 5.0f, Color.red, 10.0f, false);
-#endif
-
                 RoomFloor floor = hit.collider.GetComponent<RoomFloor>();
                 return floor ? floor.OwnerRoom : null;
             }
