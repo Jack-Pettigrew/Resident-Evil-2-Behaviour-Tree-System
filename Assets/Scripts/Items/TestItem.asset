@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc0e9da02424b74b84c1ea8ea5c4351, type: 3}
   m_Name: TestItem
   m_EditorClassIdentifier: 
+  itemName: Test Item
+  itemDescription: This is literally a test item - it doesn't do anything. Please
+    stop picking this up.
+  itemPrefab: {fileID: 0}
+  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  isStackable: 1
+  maxStackSize: 10
