@@ -37,7 +37,10 @@ namespace DD.Core.InventorySystem
             }
             else if(inventory.Count < MaxInventorySize)
             {
-                inventory.Add(new ItemSlot(itemData));
+                slot = new ItemSlot(itemData);
+                slot.OnItemDepleted += RemoveItem;
+
+                inventory.Add(slot);
                 added = true;
             }
 
@@ -47,7 +50,7 @@ namespace DD.Core.InventorySystem
             }
             else
             {
-                slot.OnItemDepleted += RemoveItem;
+                OnItemAdded.Invoke(itemData);
             }
 
             return added;
