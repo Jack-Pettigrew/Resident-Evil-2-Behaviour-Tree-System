@@ -4,10 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Items;
 
-namespace DD.Core.Inventory
+namespace DD.Core.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
+        #region Singleton
+            public static Inventory Instance {get; private set;}
+
+            private void Awake() {
+                Instance = this;
+            }
+        #endregion
+        
         // INVENTORY
         private List<ItemSlot> inventory = new List<ItemSlot>();
 

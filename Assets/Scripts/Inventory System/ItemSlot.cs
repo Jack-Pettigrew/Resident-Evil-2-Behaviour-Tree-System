@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DD.Core.Items;
 
-namespace DD.Core.Inventory
+namespace DD.Core.InventorySystem
 {
     public class ItemSlot
     {
