@@ -85,8 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a675bb9684f8e47b450ee478bde700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableTag: Interactable
-  range: 1
+  range: 1.75
   maxAngle: 75
 --- !u!114 &7082594427839628680
 MonoBehaviour:
