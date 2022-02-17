@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Items;
+using DD.Core.Control;
 
 namespace DD.Core.InventorySystem
 {
@@ -13,8 +14,13 @@ namespace DD.Core.InventorySystem
 
             private void Awake() {
                 Instance = this;
+
+                player = FindObjectOfType<PlayerController>();
             }
         #endregion
+        
+        // PLAYER
+        private PlayerController player;
         
         // INVENTORY
         private List<ItemSlot> inventory = new List<ItemSlot>();
@@ -26,10 +32,9 @@ namespace DD.Core.InventorySystem
         public Action<ItemData> OnCantAddItem;
 
         private void Update() {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.E) && inventory.Count > 0)
             {
                 DropItem(inventory[0].ItemData);
-                Debug.Log("Inventory Dropped Item");
             }
         }
 
@@ -58,7 +63,7 @@ namespace DD.Core.InventorySystem
             }
             else
             {
-                OnItemAdded.Invoke(itemData);
+                OnItemAdded?.Invoke(itemData);
             }
 
             return added;
@@ -90,8 +95,7 @@ namespace DD.Core.InventorySystem
             if(slot != null)
             {
                 slot.ReduceItem(amount);
-                DD.Core.Control.PlayerController player = FindObjectOfType<DD.Core.Control.PlayerController>();
-                Instantiate(itemData.itemPrefab, player.transform.position + player.transform.forward * 1, Quaternion.identity);
+                Instantiate(itemData.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
             }
         }
 
