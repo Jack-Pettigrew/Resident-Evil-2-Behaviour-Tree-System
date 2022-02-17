@@ -25,6 +25,14 @@ namespace DD.Core.InventorySystem
         public Action<ItemData> OnItemAdded;
         public Action<ItemData> OnCantAddItem;
 
+        private void Update() {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                DropItem(inventory[0].ItemData);
+                Debug.Log("Inventory Dropped Item");
+            }
+        }
+
         public bool AddItem(ItemData itemData)
         {
             ItemSlot slot = FindItem(itemData);
@@ -73,6 +81,17 @@ namespace DD.Core.InventorySystem
             if(inventory.Contains(itemSlot))
             {
                 inventory.Remove(itemSlot);
+            }
+        }
+
+        public void DropItem(ItemData itemData, int amount = 1)
+        {
+            ItemSlot slot = FindItem(itemData);
+            if(slot != null)
+            {
+                slot.ReduceItem(amount);
+                DD.Core.Control.PlayerController player = FindObjectOfType<DD.Core.Control.PlayerController>();
+                Instantiate(itemData.itemPrefab, player.transform.position + player.transform.forward * 1, Quaternion.identity);
             }
         }
 

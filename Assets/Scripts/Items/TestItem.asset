@@ -15,7 +15,8 @@ MonoBehaviour:
   itemName: Test Item
   itemDescription: This is literally a test item - it doesn't do anything. Please
     stop picking this up.
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 8552970763175748361, guid: 249ecfb6d4f32d1488ee615db694b6ff,
+    type: 3}
   itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   isStackable: 1
   maxStackSize: 10
