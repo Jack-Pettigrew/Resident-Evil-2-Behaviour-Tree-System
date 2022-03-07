@@ -10,14 +10,35 @@ namespace DD.Core.InventorySystem
         public ItemData ItemData { private set; get; }
         public int Amount { private set; get; }
 
+        public Action OnItemUpdated;
         public Action<ItemSlot> OnItemDepleted;
 
-        public ItemSlot(ItemData itemData, int amount = 1)
+        public ItemSlot()
         {
-            this.ItemData = itemData;
-            Amount = amount;
+            ItemData = null;
+            Amount = 0;
         }
 
+        /// <summary>
+        /// Sets the item this ItemSlot will hold.
+        /// </summary>
+        /// <param name="itemData">The ItemData of the new item.</param>
+        /// <param name="amount">The amount of this item to hold.</param>
+        /// <returns>Successful?</returns>
+        public bool SetItem(ItemData itemData, int amount = 1)
+        {
+            if(itemData == null) return false;
+
+            this.ItemData = itemData;
+            Amount = amount;
+            return true;
+        }
+
+        /// <summary>
+        /// Adds to the amount this ItemSlot holds.
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns>Successful?</returns>
         public bool AddItem(int amount)
         {
             if(Amount + amount > ItemData.maxStackSize)
@@ -26,6 +47,7 @@ namespace DD.Core.InventorySystem
             }
 
             Amount += amount;
+            OnItemUpdated?.Invoke();
             return true;
         }
 
@@ -39,6 +61,7 @@ namespace DD.Core.InventorySystem
 
             if(Amount <= 0)
             {
+                ItemData = null;
                 OnItemDepleted?.Invoke(this);
             }
         }

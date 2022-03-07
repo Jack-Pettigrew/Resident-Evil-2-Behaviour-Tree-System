@@ -9,27 +9,31 @@ namespace DD.Core.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        #region Singleton
-            public static Inventory Instance {get; private set;}
-
-            private void Awake() {
-                Instance = this;
-
-                player = FindObjectOfType<PlayerController>();
-            }
-        #endregion
+        public static Inventory Instance {get; private set;}
         
         // PLAYER
         private PlayerController player;
         
         // INVENTORY
-        private List<ItemSlot> inventory = new List<ItemSlot>();
+        [SerializeField] private List<ItemSlot> inventory = new List<ItemSlot>();
 
         [field: SerializeField] public int MaxInventorySize { private set; get; }
 
         // EVENTS
-        public Action<ItemData> OnItemAdded;
+        public Action<ItemSlot> OnItemAdded;
         public Action<ItemData> OnCantAddItem;
+
+        private void Awake() {
+            // Singleton
+            Instance = this;
+
+            player = FindObjectOfType<PlayerController>();
+
+            for (int i = 0; i < MaxInventorySize; i++)
+            {
+                inventory.Add(new ItemSlot());
+            }
+        }
 
         private void Update() {
             if(Input.GetKeyDown(KeyCode.E) && inventory.Count > 0)
@@ -48,13 +52,16 @@ namespace DD.Core.InventorySystem
             {
                 added = slot.AddItem(1);
             }
-            else if(inventory.Count < MaxInventorySize)
+            else
             {
-                slot = new ItemSlot(itemData);
-                slot.OnItemDepleted += RemoveItem;
+                // Add to empty slot if able
+                slot = inventory.Find(x => x.Amount == 0);
 
-                inventory.Add(slot);
-                added = true;
+                if(slot != null)
+                {
+                    slot.SetItem(itemData);
+                    added = true;
+                }
             }
 
             if(!added)
@@ -63,9 +70,9 @@ namespace DD.Core.InventorySystem
             }
             else
             {
-                OnItemAdded?.Invoke(itemData);
+                OnItemAdded?.Invoke(slot);
             }
-
+            
             return added;
         }
 
@@ -85,7 +92,7 @@ namespace DD.Core.InventorySystem
             
             if(inventory.Contains(itemSlot))
             {
-                inventory.Remove(itemSlot);
+                // inventory.Remove(itemSlot);
             }
         }
 
