@@ -11,7 +11,7 @@ namespace DD.Core.InventorySystem
         public int Amount { private set; get; }
 
         public Action OnItemUpdated;
-        public Action<ItemSlot> OnItemDepleted;
+        public Action OnItemDepleted;
 
         public ItemSlot()
         {
@@ -62,7 +62,7 @@ namespace DD.Core.InventorySystem
             if(Amount <= 0)
             {
                 ItemData = null;
-                OnItemDepleted?.Invoke(this);
+                OnItemDepleted?.Invoke();
             }
         }
 

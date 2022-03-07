@@ -72,7 +72,7 @@ namespace DD.Core.InventorySystem
             {
                 OnItemAdded?.Invoke(slot);
             }
-            
+
             return added;
         }
 
@@ -86,14 +86,9 @@ namespace DD.Core.InventorySystem
             }
         }
 
-        public void RemoveItem(ItemSlot itemSlot)
+        public void RemoveItem(ItemData itemData, int amount = 1)
         {
-            if(itemSlot == null) return;
-            
-            if(inventory.Contains(itemSlot))
-            {
-                // inventory.Remove(itemSlot);
-            }
+            FindItem(itemData).ReduceItem(amount);
         }
 
         public void DropItem(ItemData itemData, int amount = 1)
@@ -104,11 +99,6 @@ namespace DD.Core.InventorySystem
                 slot.ReduceItem(amount);
                 Instantiate(itemData.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
             }
-        }
-
-        public void RemoveItem(ItemData itemData)
-        {
-            RemoveItem(FindItem(itemData));
         }
 
         public bool HasItem(ItemData itemData)

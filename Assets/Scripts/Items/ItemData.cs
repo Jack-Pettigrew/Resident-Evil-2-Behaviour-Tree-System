@@ -11,7 +11,7 @@ namespace DD.Core.Items
         public string itemName;
         [TextArea] public string itemDescription;
         public GameObject itemPrefab;
-        public Sprite itemIcon;
+        public Texture itemIcon;
 
         [Header("Inventory Settings")]
         public bool isStackable = true;
