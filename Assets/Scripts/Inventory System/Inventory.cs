@@ -61,7 +61,7 @@ namespace DD.Core.InventorySystem
                 if(slot != null)
                 {
                     slot.SetItem(itemData);
-                    OnNewInventoryItem.Invoke(slot);
+                    OnNewInventoryItem?.Invoke(slot);
                     added = true;
                 }
             }
