@@ -58,6 +58,7 @@ namespace DD.Core.InventorySystem
         public void ReduceItem(int amount)
         {
             Amount -= amount;
+            OnItemUpdated?.Invoke();
 
             if(Amount <= 0)
             {
