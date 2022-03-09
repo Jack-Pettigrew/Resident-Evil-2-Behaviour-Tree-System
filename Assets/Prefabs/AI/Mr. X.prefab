@@ -1337,12 +1337,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599cb348ddc65554b99bc18d56702001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackOriginTransform: {fileID: 1985932257419579960}
-  originOffset: {x: 0, y: -0.12, z: 0.05}
+  attackOriginTransform: {fileID: 4452819287647192039}
+  originOffset: {x: 0, y: 1, z: 1}
   attackableLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackRadius: 0.2
+  attackRadius: 0.78
   damageAmount: 25
 --- !u!1 &4061697701033289290
 GameObject:

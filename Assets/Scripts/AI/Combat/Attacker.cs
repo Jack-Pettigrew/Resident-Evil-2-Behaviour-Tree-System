@@ -26,10 +26,12 @@ namespace DD.Core.Combat
 
         public void Attack()
         {
-            Collider[] colliders = Physics.OverlapSphere(attackOriginTransform.transform.position + originOffset, attackRadius, attackableLayer, QueryTriggerInteraction.Ignore);
+            Vector3 attackPosition = attackOriginTransform.position + attackOriginTransform.forward * originOffset.z + attackOriginTransform.right * originOffset.x + attackOriginTransform.up * originOffset.y;
+            Collider[] colliders = Physics.OverlapSphere(attackPosition, attackRadius, attackableLayer, QueryTriggerInteraction.Ignore);
 
             foreach (var collider in colliders)
             {
+                Debug.Log(collider.name);
                 collider.GetComponent<IDamagable>().TakeDamage(damageAmount);
             }
         }
@@ -38,9 +40,11 @@ namespace DD.Core.Combat
         {
             if (attackOriginTransform)
             {
+                Vector3 attackPosition = attackOriginTransform.position + attackOriginTransform.forward * originOffset.z + attackOriginTransform.right * originOffset.x + attackOriginTransform.up * originOffset.y;
                 Gizmos.color = new Color(1, 0, 0, 0.5f);
-                Gizmos.DrawSphere(attackOriginTransform.transform.position + originOffset, attackRadius);
+                Gizmos.DrawSphere(attackPosition, attackRadius);
             }
         }
     }
 }
+ 
