@@ -23,6 +23,10 @@ namespace DD.Core
         public UnityEvent<float> OnDamageTaken;
         public UnityEvent OnDeath;
 
+        private void Awake() {
+            CurrentHealth = maxHealth;
+        }
+
         public void Heal(float healAmount)
         {
             CurrentHealth = Mathf.Min(CurrentHealth += healAmount, maxHealth);
