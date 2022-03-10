@@ -49,7 +49,7 @@ namespace DD.Core.InventorySystem
             bool added = false;
 
             // Check for existing slot
-            if(slot != null)
+            if(slot != null && itemData.isStackable)
             {
                 added = slot.AddItem(1);
             }

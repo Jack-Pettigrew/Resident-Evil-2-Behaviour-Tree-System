@@ -15,6 +15,11 @@ namespace DD.Core.Items
 
         [Header("Inventory Settings")]
         public bool isStackable = true;
-        public int maxStackSize = 10;        
+        public int maxStackSize = 10;
+
+        public virtual void Use()
+        {
+            Debug.Log("PLEASE DON'T HACK!");
+        }
     }
 }
