@@ -27,7 +27,7 @@ namespace DD.AI.Controllers
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
-            animator = GetComponent<Animator>();
+            animator = GetComponent<AIAnimator>().Animator;
         }
 
         /// <summary>

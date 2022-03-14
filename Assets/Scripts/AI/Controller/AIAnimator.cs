@@ -5,14 +5,16 @@ using UnityEngine;
 
 namespace DD.AI.Controllers
 {
-    [RequireComponent(typeof(Animator))]
     public class AIAnimator : MonoBehaviour
     {
-        private Animator animator;
-        public Animator Animator { get; }
+        [SerializeField] private Animator animator;
+        public Animator Animator { get{ return animator; } }
         
         private void Awake() {
-            animator = GetComponent<Animator>();
+            if(!animator)
+            {
+                Debug.LogError($"{name} has no animator!");
+            }
         }
 
         public void PlayAndWait(string stateName, Action callback)
