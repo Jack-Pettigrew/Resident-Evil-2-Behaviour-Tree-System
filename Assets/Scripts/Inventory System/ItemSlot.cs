@@ -10,8 +10,8 @@ namespace DD.Core.InventorySystem
         public ItemData ItemData { private set; get; }
         public int Amount { private set; get; }
 
-        public Action OnItemUpdated;
-        public Action OnItemDepleted;
+        public event Action OnItemUpdated;
+        public event Action OnItemDepleted;
 
         public ItemSlot()
         {

@@ -20,9 +20,9 @@ namespace DD.Core.InventorySystem
         [field: SerializeField] public int MaxInventorySize { private set; get; }
 
         // EVENTS
-        public Action<ItemSlot> OnNewInventoryItem;     // When a new item has been given an item slot
-        public Action<ItemData> OnItemAdded;            // When an item has been added to the inventory
-        public Action<ItemData> OnCantAddItem;          // When an item failed being added to the inventory
+        public event Action<ItemSlot> OnNewInventoryItem;     // When a new item has been given an item slot
+        public event Action<ItemData> OnItemAdded;            // When an item has been added to the inventory
+        public event Action<ItemData> OnCantAddItem;          // When an item failed being added to the inventory
 
         private void Awake() {
             // Singleton
