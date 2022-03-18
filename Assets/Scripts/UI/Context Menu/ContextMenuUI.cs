@@ -1,37 +1,63 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using TMPro;
 
 namespace DD.UI
 {
     public class ContextMenuUI : MonoBehaviour
     {
-        private ContextMenuOption[] contextMenuOptions = null;
-        
-        // SetPosition
-        // CreateContextMenu
+        // UI Components
+        [SerializeField] private GameObject uiButtonPrefab;
 
+        /// <summary>
+        /// Sets the menu options displayed in the context menu.
+        /// </summary>
+        /// <param name="contextMenuOptions">An array of options </param>
         public void SetContextMenu(ContextMenuOption[] contextMenuOptions)
         {
-            this.contextMenuOptions = contextMenuOptions;
+            // Destroy any previous context options
+            foreach (Transform childTransform in GetComponentsInChildren<Transform>())
+            {
+                if(childTransform != transform)
+                {
+                    Destroy(childTransform.gameObject);
+                }
+            }
 
-            // Create the actual UI elements
-            // Assign title + callback on click
-            // (may no longer need local ContextMenuOption[])
+            // Create new context options
+            foreach (ContextMenuOption menuOption in contextMenuOptions)
+            {
+                Button menuButton = Instantiate(uiButtonPrefab).GetComponent<Button>();
+                
+                menuButton.transform.SetParent(transform);
+
+                menuButton.GetComponentInChildren<TextMeshProUGUI>().text = menuOption.menuOptionTitle;
+                menuButton.onClick = menuOption.onClickCallback;
+            }
         }
+
+        /// <summary>
+        /// Sets the position of the context menu.
+        /// </summary>
+        /// <param name="position"></param>
+        public void SetPosition(Vector2 position) => transform.position = position;
     }
 
+    // MOVE TO OWN CLASS
     public class ContextMenuOption
     {
         public string menuOptionTitle;
-        
-        public delegate void MenuOptionCallback();
-        public MenuOptionCallback callback;
+        public Button.ButtonClickedEvent onClickCallback;
 
-        public ContextMenuOption(string menuOptionTitle, MenuOptionCallback menuOptionCallback)
+        public ContextMenuOption(string menuOptionTitle, UnityAction menuOptionCallback)
         {
             this.menuOptionTitle = menuOptionTitle;
-            this.callback = menuOptionCallback;
+            onClickCallback = new Button.ButtonClickedEvent();
+            onClickCallback.AddListener(menuOptionCallback);
         }
     }
 }
