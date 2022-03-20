@@ -13,6 +13,11 @@ namespace DD.UI
         // UI Components
         [SerializeField] private GameObject uiButtonPrefab;
 
+
+        public void ShowContextMenu() => gameObject.SetActive(true);
+
+        public void HideContextMenu() => gameObject.SetActive(false);
+
         /// <summary>
         /// Sets the menu options displayed in the context menu.
         /// </summary>
@@ -22,7 +27,7 @@ namespace DD.UI
             // Destroy any previous context options
             foreach (Transform childTransform in GetComponentsInChildren<Transform>())
             {
-                if(childTransform != transform)
+                if (childTransform != transform)
                 {
                     Destroy(childTransform.gameObject);
                 }
@@ -31,11 +36,14 @@ namespace DD.UI
             // Create new context options
             foreach (ContextMenuOption menuOption in contextMenuOptions)
             {
+                // Create button
                 Button menuButton = Instantiate(uiButtonPrefab).GetComponent<Button>();
-                
                 menuButton.transform.SetParent(transform);
 
                 menuButton.GetComponentInChildren<TextMeshProUGUI>().text = menuOption.menuOptionTitle;
+
+                // Assign required and custom click callbacks
+                menuOption.onClickCallback.AddListener(HideContextMenu);
                 menuButton.onClick = menuOption.onClickCallback;
             }
         }
