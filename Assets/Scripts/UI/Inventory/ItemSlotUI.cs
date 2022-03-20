@@ -7,17 +7,16 @@ using DD.Core.InventorySystem;
 using TMPro;
 
 namespace DD.UI
-{    
+{
     public class ItemSlotUI : MenuItem
     {
         // Item
-        public ItemSlot ItemSlot {private set; get;}
+        public ItemSlot ItemSlot { private set; get; }
 
         // UI COMPONENTS
         [SerializeField] private GameObject itemToggle;
         [SerializeField] private TextMeshProUGUI amountText;
         [SerializeField] private RawImage itemImage;
-                
         /// <summary>
         /// Sets up the link between this UI slot the given ItemSlot. 
         /// </summary>
@@ -45,7 +44,7 @@ namespace DD.UI
             itemToggle.SetActive(false);
             itemImage.texture = null;
         }
-        
+
         public override void Select()
         {
             Debug.LogError($"ItemSlotUI {name} has no Select method logic");

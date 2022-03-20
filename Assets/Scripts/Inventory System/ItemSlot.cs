@@ -66,10 +66,5 @@ namespace DD.Core.InventorySystem
                 OnItemDepleted?.Invoke();
             }
         }
-
-        public bool UseItem()
-        {
-            return false;
-        }
     }
 }
