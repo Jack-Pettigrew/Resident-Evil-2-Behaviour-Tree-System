@@ -1,22 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
+    [Header("Camera Variables")]
     private float pitch, yaw;
     [SerializeField] private float sensitivity = 1.0f;
 
-    [SerializeField] private Transform viewTarget = null;
-    [SerializeField] private Vector3 targetOffset = Vector3.zero;
+    [Header("Cinemachine Cameras")]
+    [SerializeField] private CinemachineVirtualCamera locomotionCamera;
+    [SerializeField] private CinemachineVirtualCamera aimingCamera;
 
     private void LateUpdate()
     {
         yaw += Input.GetAxis("Mouse X") * sensitivity;
         pitch += Input.GetAxis("Mouse Y") * sensitivity;
 
-        transform.eulerAngles = new Vector3(-pitch, yaw);
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            aimingCamera.gameObject.SetActive(true);
+        }
+        else if(Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            aimingCamera.gameObject.SetActive(false);
+        }
 
-        transform.position = viewTarget.position - (transform.forward * targetOffset.z) + (transform.up * targetOffset.y) + (transform.right * targetOffset.x);
+        if(Input.GetKey(KeyCode.Mouse1))
+        {
+            aimingCamera.transform.eulerAngles = new Vector3(-pitch, yaw);
+        }
+        else
+        {
+            locomotionCamera.transform.eulerAngles = new Vector3(-pitch, yaw);
+        }
     }
 }
