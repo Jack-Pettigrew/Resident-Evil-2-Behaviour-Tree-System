@@ -7,22 +7,23 @@ namespace DD.Core.Control
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
     {
+        [Header("Components")]
+        [SerializeField] private Animator animator = null;
+        private CharacterController controller = null;
+
+        [Header("Global")]
         [SerializeField] private bool ignoreInput = false;
 
-        private CharacterController controller = null;
-        [SerializeField] private Animator animator = null;
+        private Vector3 inputDir = Vector3.zero;
+        private Vector3 velocity = Vector3.zero;
+        private float yVelocity = 0.0f;
+        private bool isSprinting = false;
 
         [Header("Locomotion")]
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float runSpeed = 2.0f;
         [SerializeField] private float turnSpeedScalar = 0.5f;
         private float turnSmoothingVar = 0.0f;
-
-        private bool isSprinting = false;
-        private Vector3 inputDir = Vector3.zero;
-        private Vector3 velocity = Vector3.zero;
-        private float yVelocity = 0.0f;
-
         [SerializeField] private float groundedGravity = -0.2f;
         [SerializeField] private float gravity = Physics.gravity.y;
 
