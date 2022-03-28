@@ -7617,7 +7617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380240394}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663198}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 756739221}
@@ -15307,7 +15307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663198}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15320,14 +15320,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 404bf66c1282fc54abdb896fd837d4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 1.5
-  viewTarget: {fileID: 504257293}
-  targetOffset: {x: 0.75, y: 0.5, z: 2}
+  locomotionCamera: {fileID: 380240395}
+  aimingCamera: {fileID: 950797705}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30004,6 +30004,11 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 7082594427839628681, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
+      propertyPath: aimTurnSpeedScalar
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7082594427839628682, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: m_Name

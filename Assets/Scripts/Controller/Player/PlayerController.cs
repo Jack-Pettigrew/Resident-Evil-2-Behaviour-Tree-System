@@ -18,14 +18,15 @@ namespace DD.Core.Control
         private Vector3 velocity = Vector3.zero;
         private float yVelocity = 0.0f;
         private bool isSprinting = false;
+        private bool isAiming = false;
 
         [Header("Locomotion")]
+        [SerializeField] private float gravity = Physics.gravity.y;
+        [SerializeField] private float groundedGravity = -0.2f;
         [SerializeField] private float walkSpeed = 1.0f;
         [SerializeField] private float runSpeed = 2.0f;
-        [SerializeField] private float turnSpeedScalar = 0.5f;
+        [SerializeField] private float locomotionTurnSpeedScalar = 0.5f;
         private float turnSmoothingVar = 0.0f;
-        [SerializeField] private float groundedGravity = -0.2f;
-        [SerializeField] private float gravity = Physics.gravity.y;
 
         [Header("Camera")]
         [SerializeField] private Transform cameraTransform = null;
@@ -49,7 +50,7 @@ namespace DD.Core.Control
 
         void Update()
         {
-            inputDir =  ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+            UpdateInput();
 
             Turn();
 
@@ -58,25 +59,42 @@ namespace DD.Core.Control
             UpdateAnimations();
         }
 
+        private void UpdateInput()
+        {
+            inputDir =  ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+
+            isAiming = Input.GetKey(KeyCode.Mouse1);
+        }
+
         /// <summary>
         /// Turns Player according to movement type (Strafe or Input Direction).
         /// </summary>
         private void Turn()
         {
+            // Aim Turning
+            if(isAiming)
+            {
+                transform.eulerAngles = Vector3.up * cameraTransform.eulerAngles.y;
+                return;
+            }
+            
+            // Locomotion Turning
             if (inputDir.sqrMagnitude > 0)
             {
                 float targetAngle;
 
-                if (!isSprinting) // STRAFE (Camera Forward)
+                // STRAFE (Camera Forward)
+                if (!isSprinting)
                 {
                     targetAngle = cameraTransform.eulerAngles.y;
                 }
-                else    // Input Forward
+                // Input Forward
+                else
                 {
                     targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + cameraTransform.localEulerAngles.y;
                 }
 
-                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothingVar, turnSpeedScalar);
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothingVar, locomotionTurnSpeedScalar);
             }
         }
 
@@ -100,7 +118,7 @@ namespace DD.Core.Control
             {
                 isSprinting = false;
             }
-            else if(!isSprinting)
+            else if(!isAiming && !isSprinting)
             {
                 isSprinting = Input.GetKeyDown(KeyCode.LeftShift);
             }

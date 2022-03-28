@@ -65,13 +65,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9c378453a24e54dacf2d603928b5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreInput: 0
   animator: {fileID: 4179680867669133881}
+  ignoreInput: 0
+  gravity: -9.81
+  groundedGravity: -0.2
   walkSpeed: 3
   runSpeed: 6
-  turnSpeedScalar: 0.1
-  groundedGravity: -0.2
-  gravity: -9.81
+  locomotionTurnSpeedScalar: 0.1
+  aimTurnSpeedScalar: 0.5
   cameraTransform: {fileID: 0}
 --- !u!114 &3639959652520792826
 MonoBehaviour:
