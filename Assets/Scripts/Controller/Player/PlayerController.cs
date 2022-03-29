@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace DD.Core.Control
 {
@@ -8,7 +9,6 @@ namespace DD.Core.Control
     public class PlayerController : MonoBehaviour
     {
         [Header("Components")]
-        [SerializeField] private Animator animator = null;
         private CharacterController controller = null;
 
         [Header("Global")]
@@ -30,6 +30,10 @@ namespace DD.Core.Control
 
         [Header("Camera")]
         [SerializeField] private Transform cameraTransform = null;
+
+        [Header("Animation")]
+        [SerializeField] private Animator animator = null;
+        [SerializeField] private MultiAimConstraint aimRigConstraint;
 
         private void Awake()
         {
@@ -55,7 +59,9 @@ namespace DD.Core.Control
             Turn();
 
             Move();
+        }
 
+        private void LateUpdate() {
             UpdateAnimations();
         }
 
@@ -138,9 +144,14 @@ namespace DD.Core.Control
 
         private void UpdateAnimations()
         {
-            animator.SetFloat("VelX", inputDir.x);
-            animator.SetFloat("VelY", inputDir.z);
+            // Locomotion
+            animator.SetFloat("VelX", Mathf.Lerp(animator.GetFloat("VelX"), inputDir.x, Time.deltaTime * 10.0f));
+            animator.SetFloat("VelY", Mathf.Lerp(animator.GetFloat("VelY"), inputDir.z, Time.deltaTime * 10.0f));
             animator.SetBool("isSprinting", isSprinting);
+
+            // Aiming
+            animator.SetLayerWeight(1, (isAiming ? 1.0f : 0.0f));
+            aimRigConstraint.weight = isAiming ? 1.0f : 0.0f;
         }
     }
 
