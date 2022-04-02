@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using DD.Core.InventorySystem;
+using DD.Systems.InventorySystem;
 using TMPro;
 
 namespace DD.UI

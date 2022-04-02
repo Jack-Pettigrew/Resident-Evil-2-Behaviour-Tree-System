@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DD.Core.Items;
 
-namespace DD.Core.InventorySystem
+namespace DD.Systems.InventorySystem
 {
     public class ItemSlot
     {
@@ -27,7 +27,7 @@ namespace DD.Core.InventorySystem
         /// <returns>Successful?</returns>
         public bool SetItem(ItemData itemData, int amount = 1)
         {
-            if(itemData == null) return false;
+            if (itemData == null) return false;
 
             this.ItemData = itemData;
             Amount = amount;
@@ -41,7 +41,7 @@ namespace DD.Core.InventorySystem
         /// <returns>Successful?</returns>
         public bool AddItem(int amount)
         {
-            if(Amount + amount > ItemData.maxStackSize)
+            if (Amount + amount > ItemData.maxStackSize)
             {
                 return false;
             }
@@ -60,7 +60,7 @@ namespace DD.Core.InventorySystem
             Amount -= amount;
             OnItemUpdated?.Invoke();
 
-            if(Amount <= 0)
+            if (Amount <= 0)
             {
                 ItemData = null;
                 OnItemDepleted?.Invoke();

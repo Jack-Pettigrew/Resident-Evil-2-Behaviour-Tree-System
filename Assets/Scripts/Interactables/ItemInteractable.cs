@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Items;
-using DD.Core.InventorySystem;
+using DD.Systems.InventorySystem;
 
 namespace DD.Core
 {

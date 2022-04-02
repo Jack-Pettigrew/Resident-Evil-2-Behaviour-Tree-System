@@ -5,15 +5,15 @@ using UnityEngine;
 using DD.Core.Items;
 using DD.Core.Control;
 
-namespace DD.Core.InventorySystem
+namespace DD.Systems.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        public static Inventory Instance {get; private set;}
-        
+        public static Inventory Instance { get; private set; }
+
         // PLAYER
         private PlayerController player;
-        
+
         // INVENTORY
         [SerializeField] private List<ItemSlot> inventory = new List<ItemSlot>();
 
@@ -24,7 +24,8 @@ namespace DD.Core.InventorySystem
         public event Action<ItemData> OnItemAdded;            // When an item has been added to the inventory
         public event Action<ItemData> OnCantAddItem;          // When an item failed being added to the inventory
 
-        private void Awake() {
+        private void Awake()
+        {
             // Singleton
             Instance = this;
 
@@ -36,8 +37,9 @@ namespace DD.Core.InventorySystem
             }
         }
 
-        private void Update() {
-            if(Input.GetKeyDown(KeyCode.E) && inventory.Count > 0)
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.E) && inventory.Count > 0)
             {
                 DropItem(inventory[0].ItemData);
             }
@@ -49,7 +51,7 @@ namespace DD.Core.InventorySystem
             bool added = false;
 
             // Check for existing slot
-            if(slot != null && itemData.isStackable)
+            if (slot != null && itemData.isStackable)
             {
                 added = slot.AddItem(1);
             }
@@ -58,7 +60,7 @@ namespace DD.Core.InventorySystem
                 // Add to empty slot if able
                 slot = inventory.Find(x => x.Amount == 0);
 
-                if(slot != null)
+                if (slot != null)
                 {
                     slot.SetItem(itemData);
                     OnNewInventoryItem?.Invoke(slot);
@@ -66,7 +68,7 @@ namespace DD.Core.InventorySystem
                 }
             }
 
-            if(!added)
+            if (!added)
             {
                 OnCantAddItem?.Invoke(itemData);
             }
@@ -82,7 +84,7 @@ namespace DD.Core.InventorySystem
         {
             ItemSlot slot = FindItem(itemData);
 
-            if(slot != null)
+            if (slot != null)
             {
                 slot.ReduceItem(amount);
             }
@@ -96,7 +98,7 @@ namespace DD.Core.InventorySystem
         public void DropItem(ItemData itemData, int amount = 1)
         {
             ItemSlot slot = FindItem(itemData);
-            if(slot != null)
+            if (slot != null)
             {
                 slot.ReduceItem(amount);
                 Instantiate(itemData.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);

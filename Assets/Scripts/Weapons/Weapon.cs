@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DD.Core.InventorySystem;
+using DD.Systems.InventorySystem;
 using DD.Core.Items;
 
 namespace DD.Core.Combat
