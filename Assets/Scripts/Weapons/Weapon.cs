@@ -24,14 +24,16 @@ namespace DD.Core.Combat
 
         public void Interact()
         {
+            if(IsOwned) return;
+
             Inventory.Instance.AddItem(itemData);
         }
     }
 
     public enum WeaponType
     {
-        Primary,
-        Secondary,
-        Ordinance
+        Gun,
+        Melee,
+        Throwable
     }
 }
