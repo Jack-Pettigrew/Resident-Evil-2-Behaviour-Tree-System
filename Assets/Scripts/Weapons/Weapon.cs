@@ -13,8 +13,8 @@ namespace DD.Core.Combat
 
         [field: Header("Weapon")]
         [field: SerializeField] public WeaponType WeaponType { private set; get; }
-        public bool IsOwned { private set; get; }
-        public bool IsEquipped { private set; get; }
+        public bool isOwned = false;
+        public bool isEquipped = false;
         [SerializeField] private int damage = 1;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace DD.Core.Combat
 
         public void Interact()
         {
-            if(IsOwned) return;
+            if(isOwned) return;
 
             Inventory.Instance.AddItem(itemData);
         }
