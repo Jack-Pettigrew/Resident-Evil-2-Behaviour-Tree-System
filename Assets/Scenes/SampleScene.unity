@@ -6610,6 +6610,7 @@ MonoBehaviour:
   rateOfFire: 1
   aimFireAccuracy: 1
   hipFireAccuracy: 0.1
+  gunEffects: {fileID: 11400000, guid: 362be78cfe2384e55937b25ae09afbcd, type: 2}
 --- !u!1 &233452634
 GameObject:
   m_ObjectHideFlags: 0
@@ -15221,63 +15222,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &816673680
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1122964723992546, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_Name
-      value: 45ACP Bullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_RootOrder
-      value: 37
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 30.714848
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.368027
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.77707
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396417133449288, guid: 674adf642abf5614aae2995443c8250f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 674adf642abf5614aae2995443c8250f, type: 3}
 --- !u!1001 &873094772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30207,6 +30151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bullet Hit Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 2496133399248368127, guid: 3867a5e1f985f46a08b2875a0e1db18f,
+        type: 3}
+      propertyPath: looping
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3867a5e1f985f46a08b2875a0e1db18f, type: 3}

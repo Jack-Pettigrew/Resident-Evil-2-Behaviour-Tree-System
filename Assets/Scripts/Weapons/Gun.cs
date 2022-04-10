@@ -23,8 +23,22 @@ namespace DD.Core.Combat
         [SerializeField, Range(0.1f, 1.0f)] private float aimFireAccuracy = 1.0f;
         [SerializeField, Range(0.1f, 1.0f)] private float hipFireAccuracy = 0.0f;
 
+        // Effects
+        [Header("Effects")]
+        [SerializeField] private GunEffects gunEffects;
+        private ParticleSystem bulletHitParticles, muzzleFlashParticles;
+
         // EVENTS
         public event Action<Gun> OnReloaded;
+
+        private void Awake() 
+        {
+            if(gunEffects)
+            {
+                bulletHitParticles = gunEffects.hitEffect ? Instantiate(gunEffects.hitEffect, Vector3.zero, Quaternion.identity, transform) : null;
+                muzzleFlashParticles = gunEffects.muzzleFlashEffect ? Instantiate(gunEffects.muzzleFlashEffect, Vector3.zero, Quaternion.identity, bulletOrigin) : null;
+            }
+        }
 
         private void Update() {
             if(Input.GetKeyDown(KeyCode.Mouse0))
@@ -43,9 +57,19 @@ namespace DD.Core.Combat
                 Debug.Log("BANG!");
                 Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
                 Debug.DrawRay(ray.origin, ray.direction * 10.0f, Color.red, 10.0f);
-                
+
+                RaycastHit hit;
+                Physics.Raycast(ray.origin, ray.direction, out hit, 100.0f);
+
+                if(hit.collider)
+                {
+                    bulletHitParticles.transform.position = hit.point;
+                    bulletHitParticles.transform.forward = hit.normal;
+                    bulletHitParticles.Play();
+                }
+
                 // Instantiate Bullet in direction accounting for aim type accuracy
-                
+
                 CurrentAmmo -= 1;
                 StartCoroutine(AttackCooldown());
             }
