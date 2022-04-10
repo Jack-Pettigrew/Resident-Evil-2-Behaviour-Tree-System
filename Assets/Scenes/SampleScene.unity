@@ -6773,19 +6773,6 @@ MonoBehaviour:
   rateOfFire: 1
   aimFireAccuracy: 1
   hipFireAccuracy: 0.1
---- !u!65 &229358778
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229358775}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &233452634
 GameObject:
   m_ObjectHideFlags: 0
@@ -6948,7 +6935,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17096
+  m_Name: pb_Mesh17094
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7253,7 +7240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380240394}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663307}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 756739221}
@@ -9549,7 +9536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456c0eff0c1154f3b9d935617771a69d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testGun: {fileID: 229358775}
+  playerAnimator: {fileID: 0}
 --- !u!1 &574881392
 GameObject:
   m_ObjectHideFlags: 0
@@ -12952,7 +12939,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17238
+  m_Name: pb_Mesh17236
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15366,7 +15353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663307}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 719462867}
@@ -15720,7 +15707,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17070
+  m_Name: pb_Mesh17068
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16048,7 +16035,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17154
+  m_Name: pb_Mesh17152
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25493,7 +25480,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17122
+  m_Name: pb_Mesh17120
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30224,6 +30211,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4179680867669133881, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:RightShoulder'\n\tTransform 'mixamorig:RightForeArm'\n\tTransform
+        'mixamorig:Spine'\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:RightShoulder'\n\tTransform 'mixamorig:RightForeArm'\n\tTransform
+        'mixamorig:Spine'\n\tand more ..."
+      objectReference: {fileID: 0}
     - target: {fileID: 5238361880764233507, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: m_Icon
@@ -30301,6 +30299,11 @@ PrefabInstance:
       objectReference: {fileID: 719462867}
     - target: {fileID: 8036518003357819806, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
+      propertyPath: m_Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036518003357819806, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
       propertyPath: m_SourceObjectsGUIToggle
       value: 0
       objectReference: {fileID: 0}
@@ -30309,6 +30312,11 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 719462867}
+    - target: {fileID: 9181141634884648216, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22b76eee5844fbb479d36fe9fea76695, type: 3}
 --- !u!1001 &8552970761278776896
