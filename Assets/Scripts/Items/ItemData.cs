@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DD.Core.Items
 {
-    [CreateAssetMenu(fileName = "ItemData", menuName = "Items/ItemData")]
+    [CreateAssetMenu(fileName = "itemData", menuName = "Items/Item Data")]
     public class ItemData : ScriptableObject
     {
         [Header("Base Info")]
