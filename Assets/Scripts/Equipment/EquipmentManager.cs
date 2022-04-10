@@ -26,7 +26,7 @@ namespace DD.Core.Combat
             foreach (var gun in FindObjectsOfType<Gun>())
             {
                 equipmentSlots[i] = gun;
-                gun.SetCanShoot(true);
+                gun.SetCanUse(true);
                 i++;
             }
         }
@@ -96,7 +96,7 @@ namespace DD.Core.Combat
             {
                 // Unequip current weapon
                 ActiveWeapon.isEquipped = false;
-                ActiveWeapon.SetCanShoot(false);
+                ActiveWeapon.SetCanUse(false);
 
                 // Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
 
@@ -112,7 +112,7 @@ namespace DD.Core.Combat
             {
                 // Set weapon equiped
                 ActiveWeapon.isEquipped = true;
-                ActiveWeapon.SetCanShoot(false);
+                ActiveWeapon.SetCanUse(true);
 
                 // Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
                 // Update animator with appropriate weapon hold pose (including idle if no weapon)

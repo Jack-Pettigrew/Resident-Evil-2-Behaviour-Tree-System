@@ -15,12 +15,15 @@ namespace DD.Core.Combat
         [field: SerializeField] public WeaponType WeaponType { private set; get; }
         public bool isOwned = false;
         public bool isEquipped = false;
+        public bool canUse = false;
         [SerializeField] private int damage = 1;
 
         /// <summary>
         /// The attacking logic for the weapon.
         /// </summary>
         public abstract void Attack();
+
+        public void SetCanUse(bool toggle) => canUse = toggle;
 
         public void Interact()
         {
