@@ -16,7 +16,9 @@ namespace DD.Core.Combat
         // Firing
         [Header("Firing")]
         [SerializeField] private Transform bulletOrigin;
-        private bool canShoot = true;
+        [SerializeField] private GameObject bulletPrefab;
+
+        private bool canShoot = false;
         [Tooltip("Cooldown in seconds between each time the gun can be fired")]
         [SerializeField] private float rateOfFire = 1.0f;
         [SerializeField, Range(0.1f, 1.0f)] private float aimFireAccuracy = 1.0f;
@@ -25,12 +27,21 @@ namespace DD.Core.Combat
         // EVENTS
         public event Action<Gun> OnReloaded;
 
+        private void Update() {
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Attack();
+            }
+        }
+
+        public void SetCanShoot(bool toggle) => canShoot = toggle;
+
         /// <summary>
         /// Shoots the gun.
         /// </summary>
         public override void Attack()
         {
-            if (canShoot)
+            if (canShoot && isEquipped)
             {
                 Debug.Log("BANG!");
                 Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
