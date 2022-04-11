@@ -37,6 +37,8 @@ namespace DD.Core.Combat
             {
                 bulletHitParticles = gunEffects.hitEffect ? Instantiate(gunEffects.hitEffect, Vector3.zero, Quaternion.identity, transform) : null;
                 muzzleFlashParticles = gunEffects.muzzleFlashEffect ? Instantiate(gunEffects.muzzleFlashEffect, Vector3.zero, Quaternion.identity, bulletOrigin) : null;
+                // ensure muzzle flash is locally zeroed
+                muzzleFlashParticles.transform.localPosition = Vector3.zero;
             }
         }
 
@@ -55,10 +57,10 @@ namespace DD.Core.Combat
             if (canUse && isEquipped)
             {
                 Debug.Log("BANG!");
-                Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-                Debug.DrawRay(ray.origin, ray.direction * 10.0f, Color.red, 10.0f);
-
+                muzzleFlashParticles.Play();
+                
                 RaycastHit hit;
+                Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
                 Physics.Raycast(ray.origin, ray.direction, out hit, 100.0f);
 
                 if(hit.collider)

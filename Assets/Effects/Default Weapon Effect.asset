@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 2496133399248368127, guid: 3867a5e1f985f46a08b2875a0e1db18f,
     type: 3}
-  muzzleFlashEffect: {fileID: 0}
+  muzzleFlashEffect: {fileID: 7225920959395007357, guid: 61220cfcffdfd4532b1d62461c6e9100,
+    type: 3}
