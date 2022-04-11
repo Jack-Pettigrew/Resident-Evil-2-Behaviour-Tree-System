@@ -9,16 +9,12 @@ namespace DD.Core.Control
     public class PlayerController : MonoBehaviour
     {
         [Header("Components")]
+        [SerializeField] private InputManager inputManager;
         private CharacterController controller = null;
 
         [Header("Global")]
-        [SerializeField] private bool ignoreInput = false;
-
-        private Vector3 inputDir = Vector3.zero;
         private Vector3 velocity = Vector3.zero;
         private float yVelocity = 0.0f;
-        private bool isSprinting = false;
-        private bool isAiming = false;
 
         [Header("Locomotion")]
         [SerializeField] private float gravity = Physics.gravity.y;
@@ -48,14 +44,19 @@ namespace DD.Core.Control
                     Debug.LogError($"No Animator found for {name}");
                 }
             }
-        }
 
-        public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;
+            if(!inputManager)
+            {
+                inputManager = FindObjectOfType<InputManager>();
+                if(!inputManager)
+                {
+                    Debug.LogError("No Input Manager found.");
+                }
+            }
+        }
 
         void Update()
         {
-            UpdateInput();
-
             Turn();
 
             Move();
@@ -65,39 +66,32 @@ namespace DD.Core.Control
             UpdateAnimations();
         }
 
-        private void UpdateInput()
-        {
-            inputDir =  ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-
-            isAiming = Input.GetKey(KeyCode.Mouse1);
-        }
-
         /// <summary>
         /// Turns Player according to movement type (Strafe or Input Direction).
         /// </summary>
         private void Turn()
         {
             // Aim Turning
-            if(isAiming)
+            if(inputManager.Aim)
             {
                 transform.eulerAngles = Vector3.up * cameraTransform.eulerAngles.y;
                 return;
             }
             
             // Locomotion Turning
-            if (inputDir.sqrMagnitude > 0)
+            if (inputManager.InputDirection.sqrMagnitude > 0)
             {
                 float targetAngle;
 
                 // STRAFE (Camera Forward)
-                if (!isSprinting)
+                if (!inputManager.Sprint)
                 {
                     targetAngle = cameraTransform.eulerAngles.y;
                 }
                 // Input Forward
                 else
                 {
-                    targetAngle = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + cameraTransform.localEulerAngles.y;
+                    targetAngle = Mathf.Atan2(inputManager.InputDirection.x, inputManager.InputDirection.z) * Mathf.Rad2Deg + cameraTransform.localEulerAngles.y;
                 }
 
                 transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothingVar, locomotionTurnSpeedScalar);
@@ -119,25 +113,15 @@ namespace DD.Core.Control
                 yVelocity += gravity * Time.deltaTime;
             }
 
-            // Sprint Check
-            if(isSprinting && inputDir.sqrMagnitude <= 0)
-            {
-                isSprinting = false;
-            }
-            else if(!isAiming && !isSprinting)
-            {
-                isSprinting = Input.GetKeyDown(KeyCode.LeftShift);
-            }
-
             // Move
-            if (!isSprinting) // Strafing
+            if (!inputManager.Sprint) // Strafing
             {
-                velocity = ((transform.rotation * inputDir) * inputDir.magnitude * walkSpeed) + (Vector3.up * yVelocity);
+                velocity = ((transform.rotation * inputManager.InputDirection) * inputManager.InputDirection.magnitude * walkSpeed) + (Vector3.up * yVelocity);
                 controller.Move(velocity * Time.deltaTime);
             }
             else // Input Forward Based
             {
-                velocity = (transform.forward * inputDir.magnitude * runSpeed) + (Vector3.up * yVelocity);
+                velocity = (transform.forward * inputManager.InputDirection.magnitude * runSpeed) + (Vector3.up * yVelocity);
                 controller.Move(velocity * Time.deltaTime);
             }
         }
@@ -145,14 +129,13 @@ namespace DD.Core.Control
         private void UpdateAnimations()
         {
             // Locomotion
-            animator.SetFloat("VelX", Mathf.Lerp(animator.GetFloat("VelX"), inputDir.x, Time.deltaTime * 10.0f));
-            animator.SetFloat("VelY", Mathf.Lerp(animator.GetFloat("VelY"), inputDir.z, Time.deltaTime * 10.0f));
-            animator.SetBool("isSprinting", isSprinting);
+            animator.SetFloat("VelX", Mathf.Lerp(animator.GetFloat("VelX"), inputManager.InputDirection.x, Time.deltaTime * 10.0f));
+            animator.SetFloat("VelY", Mathf.Lerp(animator.GetFloat("VelY"), inputManager.InputDirection.z, Time.deltaTime * 10.0f));
+            animator.SetBool("isSprinting", inputManager.Sprint);
 
             // Aiming
-            animator.SetLayerWeight(1, (isAiming ? 1.0f : 0.0f));
-            aimRigConstraint.weight = isAiming ? 1.0f : 0.0f;
+            animator.SetLayerWeight(1, (inputManager.Aim ? 1.0f : 0.0f));
+            aimRigConstraint.weight = inputManager.Aim ? 1.0f : 0.0f;
         }
     }
-
 }
