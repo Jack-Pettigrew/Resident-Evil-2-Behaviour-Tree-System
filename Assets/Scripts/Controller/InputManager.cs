@@ -7,6 +7,9 @@ namespace DD.Core.Control
 {
     public class InputManager : MonoBehaviour
     {
+        // Singleton
+        public static InputManager Instance;
+
         [Header("Management")]
         [SerializeField] private bool ignoreInput = false;
         public Vector3 InputDirection { private set; get; }
@@ -20,6 +23,14 @@ namespace DD.Core.Control
 
         public KeyCode shootKeyCode;
         public event Action OnShoot;
+
+        public KeyCode quickSlotOneKey, quickSlotTwoKey, quickSlotThreeKey, quickSlotFourKey;
+        public event Action<int> OnQuickSlotChange;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Update()
         {
@@ -40,6 +51,10 @@ namespace DD.Core.Control
             // Combat
             Aim = Input.GetKey(aimKeyCode);
             if(Input.GetKeyDown(shootKeyCode)) OnShoot?.Invoke();
+            if(Input.GetKeyDown(quickSlotOneKey)) OnQuickSlotChange?.Invoke(0);
+            if(Input.GetKeyDown(quickSlotTwoKey)) OnQuickSlotChange?.Invoke(1);
+            if(Input.GetKeyDown(quickSlotThreeKey)) OnQuickSlotChange?.Invoke(2);
+            if(Input.GetKeyDown(quickSlotFourKey)) OnQuickSlotChange?.Invoke(3);
         }
 
         public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;

@@ -21130,6 +21130,10 @@ MonoBehaviour:
   sprintKeyCode: 304
   aimKeyCode: 324
   shootKeyCode: 323
+  quickSlotOneKey: 49
+  quickSlotTwoKey: 50
+  quickSlotThreeKey: 51
+  quickSlotFourKey: 52
 --- !u!4 &1531301804
 Transform:
   m_ObjectHideFlags: 0

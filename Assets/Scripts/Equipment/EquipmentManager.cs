@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.Core.Control;
 
 namespace DD.Core.Combat
 {
     public class EquipmentManager : MonoBehaviour
-    {
+    {        
         // Equipment Slots
         private Weapon[] equipmentSlots = new Weapon[4];
 
@@ -29,15 +30,11 @@ namespace DD.Core.Combat
                 gun.SetCanUse(true);
                 i++;
             }
-        }
 
-        private void Update() {
-            if(Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                SwapWeapon(activeWeaponSlotID == 0 ? 1 : 0);
-            }
+            // Input Swap
+            InputManager.Instance.OnQuickSlotChange += SwapWeapon;
         }
-
+        
         /// <summary>
         /// Equips the given weapon in the associated equipment slot.
         /// </summary>
