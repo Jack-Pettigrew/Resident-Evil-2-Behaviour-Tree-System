@@ -33,6 +33,12 @@ namespace DD.Core.Combat
 
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
+            InputManager.Instance.OnShoot += UseWeapon;
+        }
+
+        public void UseWeapon()
+        {
+            ActiveWeapon.Attack();
         }
         
         /// <summary>

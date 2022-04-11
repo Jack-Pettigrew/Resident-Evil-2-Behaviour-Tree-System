@@ -51,6 +51,8 @@ namespace DD.Core.Control
             // Combat
             Aim = Input.GetKey(aimKeyCode);
             if(Input.GetKeyDown(shootKeyCode)) OnShoot?.Invoke();
+
+            // Quick Slots
             if(Input.GetKeyDown(quickSlotOneKey)) OnQuickSlotChange?.Invoke(0);
             if(Input.GetKeyDown(quickSlotTwoKey)) OnQuickSlotChange?.Invoke(1);
             if(Input.GetKeyDown(quickSlotThreeKey)) OnQuickSlotChange?.Invoke(2);

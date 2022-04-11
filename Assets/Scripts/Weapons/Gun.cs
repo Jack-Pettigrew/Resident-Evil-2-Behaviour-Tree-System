@@ -42,13 +42,6 @@ namespace DD.Core.Combat
             }
         }
 
-        private void Update() {
-            if(Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Attack();
-            }
-        }
-
         /// <summary>
         /// Shoots the gun.
         /// </summary>
