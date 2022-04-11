@@ -15379,7 +15379,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1806
+  m_Name: pb_Mesh-1792
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15702,6 +15702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404bf66c1282fc54abdb896fd837d4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputManager: {fileID: 1531301803}
   sensitivity: 1.5
   locomotionCamera: {fileID: 380240395}
   aimingCamera: {fileID: 950797705}
@@ -21107,7 +21108,7 @@ GameObject:
   - component: {fileID: 1531301804}
   - component: {fileID: 1531301803}
   m_Layer: 0
-  m_Name: nager Manager
+  m_Name: Input Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30270,6 +30271,11 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7082594427839628681, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 1531301803}
     - target: {fileID: 7082594427839628681, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: cameraTransform

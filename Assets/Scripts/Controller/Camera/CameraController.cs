@@ -3,37 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraController : MonoBehaviour
+namespace DD.Core.Control
 {
-    [Header("Camera Variables")]
-    private float pitch, yaw;
-    [SerializeField] private float sensitivity = 1.0f;
-
-    [Header("Cinemachine Cameras")]
-    [SerializeField] private CinemachineVirtualCamera locomotionCamera;
-    [SerializeField] private CinemachineVirtualCamera aimingCamera;
-
-    private void LateUpdate()
+    public class CameraController : MonoBehaviour
     {
-        yaw += Input.GetAxis("Mouse X") * sensitivity;
-        pitch += Input.GetAxis("Mouse Y") * sensitivity;
+        // Components
+        [SerializeField] private InputManager inputManager;
 
-        if(Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            aimingCamera.gameObject.SetActive(true);
-        }
-        else if(Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            aimingCamera.gameObject.SetActive(false);
+        [Header("Camera Variables")]
+        private float pitch, yaw;
+        [SerializeField] private float sensitivity = 1.0f;
+
+        [Header("Cinemachine Cameras")]
+        [SerializeField] private CinemachineVirtualCamera locomotionCamera;
+        [SerializeField] private CinemachineVirtualCamera aimingCamera;
+
+        private void Awake() {
+            if(!inputManager)
+            {
+                inputManager = FindObjectOfType<InputManager>();
+                if(!inputManager)
+                {
+                    Debug.LogError("No Input Manager found.");
+                }
+            }
         }
 
-        if(Input.GetKey(KeyCode.Mouse1))
+        private void LateUpdate()
         {
-            aimingCamera.transform.eulerAngles = new Vector3(-pitch, yaw);
-        }
-        else
-        {
-            locomotionCamera.transform.eulerAngles = new Vector3(-pitch, yaw);
+            // Camera input
+            yaw += Input.GetAxis("Mouse X") * sensitivity;
+            pitch += Input.GetAxis("Mouse Y") * sensitivity;
+
+            // Virtual camera swapping
+            if (inputManager.Aim && !aimingCamera.gameObject.activeInHierarchy)
+            {
+                aimingCamera.gameObject.SetActive(true);
+            }
+            else if (!inputManager.Aim && aimingCamera.gameObject.activeInHierarchy)
+            {
+                aimingCamera.gameObject.SetActive(false);
+            }
+
+            // Virtual camera orbiting
+            if (inputManager.Aim)
+            {
+                aimingCamera.transform.eulerAngles = new Vector3(-pitch, yaw);
+            }
+            else
+            {
+                locomotionCamera.transform.eulerAngles = new Vector3(-pitch, yaw);
+            }
         }
     }
 }
