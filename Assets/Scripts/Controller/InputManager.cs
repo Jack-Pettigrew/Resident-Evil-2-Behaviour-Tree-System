@@ -24,6 +24,9 @@ namespace DD.Core.Control
         public KeyCode shootKeyCode;
         public event Action OnShoot;
 
+        public KeyCode reloadKeyCode;
+        public event Action OnReload;
+
         public KeyCode quickSlotOneKey, quickSlotTwoKey, quickSlotThreeKey, quickSlotFourKey;
         public event Action<int> OnQuickSlotChange;
 
@@ -34,11 +37,11 @@ namespace DD.Core.Control
 
         private void Update()
         {
+            // Global
             if(ignoreInput) return;
 
             // Locomotion
             InputDirection =  ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-
             if(Sprint && InputDirection.sqrMagnitude <= 0)
             {
                 Sprint = false;
@@ -51,6 +54,7 @@ namespace DD.Core.Control
             // Combat
             Aim = Input.GetKey(aimKeyCode);
             if(Input.GetKeyDown(shootKeyCode)) OnShoot?.Invoke();
+            if(Input.GetKeyDown(reloadKeyCode)) OnReload?.Invoke();
 
             // Quick Slots
             if(Input.GetKeyDown(quickSlotOneKey)) OnQuickSlotChange?.Invoke(0);
