@@ -25,8 +25,6 @@ namespace DD.Core.Combat
 
         [Tooltip("Cooldown in seconds between each time the gun can be fired")]
         [SerializeField] private float rateOfFire = 1.0f;
-        [SerializeField, Range(0.1f, 1.0f)] private float aimFireAccuracy = 1.0f;
-        [SerializeField, Range(0.1f, 1.0f)] private float hipFireAccuracy = 0.0f;
 
         // Effects
         [Header("Effects")]
