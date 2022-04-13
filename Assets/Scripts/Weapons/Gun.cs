@@ -28,6 +28,10 @@ namespace DD.Core.Combat
         [SerializeField] private GunEffects gunEffects;
         private ParticleSystem bulletHitParticles, muzzleFlashParticles;
 
+        // Coroutines
+        private Coroutine attackCooldownCoroutine;
+        private Coroutine reloadCoroutine;
+
         // EVENTS
         public event Action<Gun> OnReloaded;
 
@@ -47,15 +51,15 @@ namespace DD.Core.Combat
         /// </summary>
         public override void Attack()
         {
-            if (canUse && isEquipped)
-            {
-                Debug.Log("BANG!");
-                muzzleFlashParticles.Play();
-                
+            if (canUse && isEquipped && CurrentAmmo > 0)
+            {                
+                // Fire Ray
                 RaycastHit hit;
                 Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
                 Physics.Raycast(ray.origin, ray.direction, out hit, 100.0f);
 
+                // Weapon Effects
+                muzzleFlashParticles.Play();
                 if(hit.collider)
                 {
                     bulletHitParticles.transform.position = hit.point;
@@ -66,7 +70,7 @@ namespace DD.Core.Combat
                 // Instantiate Bullet in direction accounting for aim type accuracy
 
                 CurrentAmmo -= 1;
-                StartCoroutine(AttackCooldown());
+                attackCooldownCoroutine = StartCoroutine(AttackCooldown());
             }
         }
 
@@ -84,14 +88,16 @@ namespace DD.Core.Combat
         /// </summary>
         public void Reload(int ammo)
         {
-            if (!IsReloading)
+            if (canUse && !IsReloading && CurrentAmmo < MaxAmmoCapacity)
             {
-                StartCoroutine(ReloadCoroutine(ammo));
+                reloadCoroutine = StartCoroutine(ReloadCoroutine(ammo));
             }
         }
 
         protected IEnumerator ReloadCoroutine(int ammo)
         {
+            if(attackCooldownCoroutine != null) StopCoroutine(attackCooldownCoroutine);
+
             canUse = false;
             IsReloading = true;
 
@@ -101,7 +107,7 @@ namespace DD.Core.Combat
 
             IsReloading = false;
             canUse = true;
-            OnReloaded.Invoke(this);
+            OnReloaded?.Invoke(this);
         }
     }
 }
