@@ -16,7 +16,7 @@ namespace DD.Core.Combat
         public bool isOwned = false;
         public bool isEquipped = false;
         public bool canUse = false;
-        [SerializeField] private int damage = 1;
+        [SerializeField] protected int weaponDamage = 1;
 
         /// <summary>
         /// The attacking logic for the weapon.

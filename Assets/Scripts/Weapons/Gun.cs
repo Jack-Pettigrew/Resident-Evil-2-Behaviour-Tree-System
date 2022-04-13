@@ -16,7 +16,12 @@ namespace DD.Core.Combat
         // Firing
         [Header("Firing")]
         [SerializeField] private Transform bulletOrigin;
-        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private Bullet bulletPrefab;
+        [SerializeField, Min(0.0f)] private float bulletSpeed = 10.0f;
+
+        // Bullet Pool
+        private List<Bullet> bulletPool;
+        private int bulletPoolIndex = 0;
 
         [Tooltip("Cooldown in seconds between each time the gun can be fired")]
         [SerializeField] private float rateOfFire = 1.0f;
@@ -37,6 +42,23 @@ namespace DD.Core.Combat
 
         private void Awake() 
         {
+            CurrentAmmo = MaxAmmoCapacity;
+
+            if(bulletPrefab)
+            {
+                bulletPool = new List<Bullet>();
+
+                for (int i = 0; i < MaxAmmoCapacity; i++)
+                {
+                    bulletPool.Add(Instantiate<Bullet>(bulletPrefab, Vector3.zero, Quaternion.identity));
+                    bulletPool[i].gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                Debug.LogError("No Bullet Prefab selected.");
+            }
+            
             if(gunEffects)
             {
                 bulletHitParticles = gunEffects.hitEffect ? Instantiate(gunEffects.hitEffect, Vector3.zero, Quaternion.identity, transform) : null;
@@ -67,7 +89,9 @@ namespace DD.Core.Combat
                     bulletHitParticles.Play();
                 }
 
-                // Instantiate Bullet in direction accounting for aim type accuracy
+                // Fire bullet from pool
+                bulletPool[bulletPoolIndex].Fire(weaponDamage, bulletOrigin.position, bulletOrigin.forward, bulletSpeed);
+                bulletPoolIndex = (bulletPoolIndex + 1) % bulletPool.Count;
 
                 CurrentAmmo -= 1;
                 attackCooldownCoroutine = StartCoroutine(AttackCooldown());
