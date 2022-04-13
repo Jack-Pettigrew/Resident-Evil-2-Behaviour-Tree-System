@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Control;
+using UnityEngine.Animations.Rigging;
 
 namespace DD.Core.Combat
 {
@@ -15,8 +16,9 @@ namespace DD.Core.Combat
         private int activeWeaponSlotID = 0;
         public Weapon ActiveWeapon { get { return equipmentSlots[activeWeaponSlotID]; } }
 
-        // Animation
+        [Header("Animation")]
         [SerializeField] private Animator playerAnimator;
+        [SerializeField] private MultiAimConstraint aimTargetConstraint;
 
         // Events
         public event Action<int> OnWeaponSwap;
@@ -35,6 +37,10 @@ namespace DD.Core.Combat
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
             InputManager.Instance.OnShoot += UseWeapon;
             InputManager.Instance.OnReload += ReloadWeapon;
+        }
+
+        private void LateUpdate() {
+            UpdateAnimations();
         }
 
         public void UseWeapon()
@@ -104,14 +110,14 @@ namespace DD.Core.Combat
                 return;
             }
 
-            // d-pad/1-4 switches the currently active equipment to the selected one
+            // If we currently have an active weapon...
             if(ActiveWeapon != null)
             {
                 // Unequip current weapon
                 ActiveWeapon.isEquipped = false;
                 ActiveWeapon.SetCanUse(false);
 
-                // Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
+                // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
 
                 // **** TEST SWAP ****
                 ActiveWeapon.gameObject.SetActive(false);
@@ -127,8 +133,8 @@ namespace DD.Core.Combat
                 ActiveWeapon.isEquipped = true;
                 ActiveWeapon.SetCanUse(true);
 
-                // Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
-                // Update animator with appropriate weapon hold pose (including idle if no weapon)
+                // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
+                // TODO: Update animator with appropriate weapon hold pose (including idle if no weapon)
                 
                 // **** TEST SWAP ****
                 ActiveWeapon.gameObject.SetActive(true);
@@ -139,15 +145,23 @@ namespace DD.Core.Combat
                 // ensure default
             }
 
-            // (torso animations may need it's own state flow to ensure correct animations are selected e.g. gun idle, to aiming, to swap, to new gun pose, to disabled torso layer, to enabled torso layer)
+            // TODO: torso animations may need it's own state flow to ensure correct animations are selected e.g. gun idle, to aiming, to swap, to new gun pose, to disabled torso layer, to enabled torso layer
 
             // ui temporarily appears when swapping - via event
             OnWeaponSwap?.Invoke(activeWeaponSlotID);
         }
 
+        public void UpdateAnimations()
+        {
+            // Aiming Animation            
+            if(aimTargetConstraint)
+            {
+                playerAnimator.SetLayerWeight(1, (InputManager.Instance.Aim ? 1.0f : 0.0f));
+                aimTargetConstraint.weight = InputManager.Instance.Aim ? 1.0f : 0.0f;
+            }
+        }
+
         // TODO:
         // change loadout from inventory
-        // input - swap active equipment
-        // input - shoot?? (maybe shoot should be it's own class)
     }
 }

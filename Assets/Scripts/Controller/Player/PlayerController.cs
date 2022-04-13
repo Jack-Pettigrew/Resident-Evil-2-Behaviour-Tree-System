@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 
 namespace DD.Core.Control
 {
@@ -29,7 +28,6 @@ namespace DD.Core.Control
 
         [Header("Animation")]
         [SerializeField] private Animator animator = null;
-        [SerializeField] private MultiAimConstraint aimRigConstraint;
 
         private void Awake()
         {
@@ -132,10 +130,6 @@ namespace DD.Core.Control
             animator.SetFloat("VelX", Mathf.Lerp(animator.GetFloat("VelX"), inputManager.InputDirection.x, Time.deltaTime * 10.0f));
             animator.SetFloat("VelY", Mathf.Lerp(animator.GetFloat("VelY"), inputManager.InputDirection.z, Time.deltaTime * 10.0f));
             animator.SetBool("isSprinting", inputManager.Sprint);
-
-            // Aiming
-            animator.SetLayerWeight(1, (inputManager.Aim ? 1.0f : 0.0f));
-            aimRigConstraint.weight = inputManager.Aim ? 1.0f : 0.0f;
         }
     }
 }

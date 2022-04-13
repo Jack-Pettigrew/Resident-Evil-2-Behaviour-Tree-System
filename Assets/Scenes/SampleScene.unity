@@ -6656,6 +6656,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323799811}
   m_CullTransparentMesh: 1
+--- !u!4 &327847078 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7962164388063258567, guid: 22b76eee5844fbb479d36fe9fea76695,
+    type: 3}
+  m_PrefabInstance: {fileID: 7082594427335908995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &332698871
 Mesh:
   m_ObjectHideFlags: 0
@@ -6967,7 +6973,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380240394}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663149}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663091}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 756739221}
@@ -9591,7 +9597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456c0eff0c1154f3b9d935617771a69d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 2095398876}
+  aimTargetConstraint: {fileID: 1604262727}
 --- !u!1 &574881392
 GameObject:
   m_ObjectHideFlags: 0
@@ -12998,6 +13005,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719462867}
   - component: {fileID: 719462868}
+  - component: {fileID: 719462869}
   m_Layer: 0
   m_Name: Player Aim Target
   m_TagString: Untagged
@@ -13012,13 +13020,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719462866}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.66361195, y: 0, z: 3.500008}
+  m_LocalRotation: {x: 0.44518855, y: -0.44518855, z: -0.5493698, w: 0.5493698}
+  m_LocalPosition: {x: 0.000021398067, y: 0.000036305282, z: 14.155051}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 963194228}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -78.04, z: -90}
 --- !u!114 &719462868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13031,8 +13039,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089f0fbbe21dd4fd9a0472fd1425bffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDistance: 5
-  cameraTransform: {fileID: 963194228}
+  playerCamera: {fileID: 963194227}
+  aimRigLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &719462869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719462866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &756600458
 Mesh:
   m_ObjectHideFlags: 0
@@ -15572,7 +15594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663149}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663091}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 719462867}
@@ -21018,7 +21040,7 @@ MonoBehaviour:
   ignoreInput: 0
   sprintKeyCode: 304
   aimKeyCode: 324
-  shootKeyCode: 102
+  shootKeyCode: 323
   reloadKeyCode: 114
   quickSlotOneKey: 49
   quickSlotTwoKey: 50
@@ -22809,6 +22831,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerRoom: {fileID: 1323002382}
+--- !u!114 &1604262727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8036518003357819806, guid: 22b76eee5844fbb479d36fe9fea76695,
+    type: 3}
+  m_PrefabInstance: {fileID: 7082594427335908995}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1622383947
 Mesh:
   m_ObjectHideFlags: 0
@@ -28284,6 +28318,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048189209}
   m_CullTransparentMesh: 1
+--- !u!95 &2095398876 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4179680867669133881, guid: 22b76eee5844fbb479d36fe9fea76695,
+    type: 3}
+  m_PrefabInstance: {fileID: 7082594427335908995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2113665091
 GameObject:
   m_ObjectHideFlags: 0
@@ -30253,6 +30293,11 @@ PrefabInstance:
       propertyPath: m_Effectors.Array.data[0].m_Style.color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3096321611372567896, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
+      propertyPath: m_Name
+      value: Player Animation Rig
+      objectReference: {fileID: 0}
     - target: {fileID: 4179680867669133881, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: m_WarningMessage
@@ -30348,6 +30393,11 @@ PrefabInstance:
       propertyPath: m_SourceObjectsGUIToggle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8036518003357819806, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
+      propertyPath: m_Data.m_ConstrainedObject
+      value: 
+      objectReference: {fileID: 327847078}
     - target: {fileID: 8036518003357819806, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
