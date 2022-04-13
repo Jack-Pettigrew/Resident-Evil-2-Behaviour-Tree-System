@@ -34,6 +34,7 @@ namespace DD.Core.Combat
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
             InputManager.Instance.OnShoot += UseWeapon;
+            InputManager.Instance.OnReload += ReloadWeapon;
         }
 
         public void UseWeapon()
@@ -59,6 +60,15 @@ namespace DD.Core.Combat
             if(equipmentSlotID == activeWeaponSlotID)
             {
                 SwapWeapon(equipmentSlotID);
+            }
+        }
+
+        public void ReloadWeapon()
+        {
+            if(ActiveWeapon.WeaponType == WeaponType.Gun)
+            {
+                Gun gun = ActiveWeapon as Gun;
+                gun.Reload(gun.MaxAmmoCapacity);
             }
         }
 
