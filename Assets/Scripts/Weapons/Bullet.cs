@@ -10,9 +10,15 @@ namespace DD.Core.Combat
         private int bulletDamage;
         private bool activeBullet = false;
         private Rigidbody rb;
+        private ParticleSystem bulletHitParticleSystem;
 
         private void Awake() {
             rb = GetComponent<Rigidbody>();
+        }
+
+        public void SetBulletHitParticleSystem(ParticleSystem bulletHitParticleSystem)
+        {
+            this.bulletHitParticleSystem = bulletHitParticleSystem;
         }
 
         public void Fire(int bulletDamage, Vector3 firePosition, Vector3 direction, float bulletSpeed)
@@ -21,18 +27,33 @@ namespace DD.Core.Combat
 
             activeBullet = true;
             this.bulletDamage = bulletDamage;
+
+            // Reset rigidbody velocity
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             transform.position = firePosition;
             transform.forward = direction;
 
-            rb.AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
+            rb.AddForce(direction * bulletSpeed, ForceMode.Impulse);
         }
 
         private void OnCollisionEnter(Collision other) {
             if(activeBullet)
             {
-                activeBullet = false;
-
                 Debug.Log($"Hit: {other.gameObject.name}");
+                
+                activeBullet = false;
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+
+                // Play bullet hit particle system
+                if(bulletHitParticleSystem)
+                {
+                    bulletHitParticleSystem.transform.position = other.GetContact(0).point;
+                    bulletHitParticleSystem.transform.forward = other.GetContact(0).normal;
+                    bulletHitParticleSystem.Play();
+                    Debug.Log("bullet particles play");
+                }
 
                 IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
                 if(damagable != null)

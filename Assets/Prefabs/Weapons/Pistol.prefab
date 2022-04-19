@@ -325,10 +325,8 @@ MonoBehaviour:
   bulletOrigin: {fileID: 4749683149073268147}
   bulletPrefab: {fileID: 6865335181609130190, guid: b8f340fe57e69439dadc8562ebbab3f8,
     type: 3}
-  bulletSpeed: 50
+  bulletSpeed: 100
   rateOfFire: 1
-  aimFireAccuracy: 1
-  hipFireAccuracy: 0.1
   gunEffects: {fileID: 11400000, guid: 362be78cfe2384e55937b25ae09afbcd, type: 2}
 --- !u!1 &4749683148733646334
 GameObject:

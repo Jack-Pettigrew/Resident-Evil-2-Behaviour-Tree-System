@@ -42,6 +42,16 @@ namespace DD.Core.Combat
         {
             CurrentAmmo = MaxAmmoCapacity;
 
+            // Particles
+            if(gunEffects)
+            {
+                bulletHitParticles = gunEffects.hitEffect ? Instantiate(gunEffects.hitEffect, Vector3.zero, Quaternion.identity, transform) : null;
+                muzzleFlashParticles = gunEffects.muzzleFlashEffect ? Instantiate(gunEffects.muzzleFlashEffect, Vector3.zero, Quaternion.identity, bulletOrigin) : null;
+                // ensure muzzle flash is locally zeroed
+                muzzleFlashParticles.transform.localPosition = Vector3.zero;
+            }
+
+            // Bullet Instantiation
             if(bulletPrefab)
             {
                 bulletPool = new List<Bullet>();
@@ -50,19 +60,12 @@ namespace DD.Core.Combat
                 {
                     bulletPool.Add(Instantiate<Bullet>(bulletPrefab, Vector3.zero, Quaternion.identity));
                     bulletPool[i].gameObject.SetActive(false);
+                    bulletPool[i].SetBulletHitParticleSystem(bulletHitParticles);
                 }
             }
             else
             {
                 Debug.LogError("No Bullet Prefab selected.");
-            }
-            
-            if(gunEffects)
-            {
-                bulletHitParticles = gunEffects.hitEffect ? Instantiate(gunEffects.hitEffect, Vector3.zero, Quaternion.identity, transform) : null;
-                muzzleFlashParticles = gunEffects.muzzleFlashEffect ? Instantiate(gunEffects.muzzleFlashEffect, Vector3.zero, Quaternion.identity, bulletOrigin) : null;
-                // ensure muzzle flash is locally zeroed
-                muzzleFlashParticles.transform.localPosition = Vector3.zero;
             }
         }
 
@@ -80,15 +83,10 @@ namespace DD.Core.Combat
 
                 // Weapon Effects
                 muzzleFlashParticles.Play();
-                if(hit.collider)
-                {
-                    bulletHitParticles.transform.position = hit.point;
-                    bulletHitParticles.transform.forward = hit.normal;
-                    bulletHitParticles.Play();
-                }
 
                 // Fire bullet from pool
-                bulletPool[bulletPoolIndex].Fire(weaponDamage, bulletOrigin.position, bulletOrigin.forward, bulletSpeed);
+                Vector3 bulletDirection = hit.collider ? hit.point - bulletOrigin.position : bulletOrigin.forward;
+                bulletPool[bulletPoolIndex].Fire(weaponDamage, bulletOrigin.position, bulletDirection, bulletSpeed);
                 bulletPoolIndex = (bulletPoolIndex + 1) % bulletPool.Count;
 
                 CurrentAmmo -= 1;
