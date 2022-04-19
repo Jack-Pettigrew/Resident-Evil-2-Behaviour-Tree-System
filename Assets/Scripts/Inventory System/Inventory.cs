@@ -37,14 +37,6 @@ namespace DD.Systems.InventorySystem
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.E) && inventory.Count > 0)
-            {
-                DropItem(inventory[0].ItemData);
-            }
-        }
-
         public bool AddItem(ItemData itemData)
         {
             ItemSlot slot = FindItem(itemData);
