@@ -52,7 +52,6 @@ namespace DD.Core.Combat
                     bulletHitParticleSystem.transform.position = other.GetContact(0).point;
                     bulletHitParticleSystem.transform.forward = other.GetContact(0).normal;
                     bulletHitParticleSystem.Play();
-                    Debug.Log("bullet particles play");
                 }
 
                 IDamagable damagable = other.gameObject.GetComponent<IDamagable>();
