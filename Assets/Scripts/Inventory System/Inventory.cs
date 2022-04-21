@@ -89,6 +89,8 @@ namespace DD.Systems.InventorySystem
 
         public void DropItem(ItemData itemData, int amount = 1)
         {
+            if(!itemData.isDroppable) return;
+
             ItemSlot slot = FindItem(itemData);
             if (slot != null)
             {
