@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace DD.Core.Items
 {
-    [CreateAssetMenu(fileName = "itemData", menuName = "Items/Item Data")]
-    public class ItemData : ScriptableObject
+    public abstract class ItemData : ScriptableObject
     {
         [Header("Base Info")]
         public string itemName;
@@ -16,10 +15,6 @@ namespace DD.Core.Items
         [Header("Inventory Settings")]
         public bool isStackable = true;
         public int maxStackSize = 10;
-
-        public virtual void Use()
-        {
-            Debug.Log("PLEASE DON'T HACK!");
-        }
+        public bool isDroppable = true;
     }
 }
