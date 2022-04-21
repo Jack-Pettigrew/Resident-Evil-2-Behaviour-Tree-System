@@ -6,11 +6,11 @@ using DD.Systems.InventorySystem;
 
 namespace DD.Core
 {
-    public class ItemInteractable : Interactable
+    public class WorldItem : MonoBehaviour, IInteractable
     {
         [SerializeField] private ItemData itemData;
         
-        public override void Interact()
+        public void Interact()
         {
             Inventory.Instance.AddItem(itemData);
             Destroy(gameObject);
