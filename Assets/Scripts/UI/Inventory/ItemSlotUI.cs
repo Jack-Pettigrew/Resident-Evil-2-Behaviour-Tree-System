@@ -60,12 +60,12 @@ namespace DD.UI
             {
                 return;
             }
-            
-            contextMenu.SetContextMenu(new ContextMenuOption[] {
-                new ContextMenuOption("Use", ItemSlot.ItemData.Use),
-                new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(ItemSlot.ItemData);})
-            });
 
+            List<ContextMenuOption> contextMenuOptions = new List<ContextMenuOption>();
+            contextMenuOptions.Add(new ContextMenuOption("Use", () => { ItemUser.Instance.UseItem(ItemSlot.ItemData);}));
+            contextMenuOptions.Add(new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(ItemSlot.ItemData);}));
+
+            contextMenu.SetContextMenu(contextMenuOptions);
             contextMenu.SetPosition(transform.position);
             contextMenu.ShowContextMenu();
         }
