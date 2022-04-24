@@ -15,49 +15,56 @@ namespace DD.Systems.InventorySystem
         private PlayerController player;
 
         // INVENTORY
-        [SerializeField] private List<ItemSlot> inventory = new List<ItemSlot>();
-
+        public List<Item> inventory { private set; get; }
         [field: SerializeField] public int MaxInventorySize { private set; get; }
 
         // EVENTS
-        public event Action<ItemSlot> OnNewInventoryItem;     // When a new item has been given an item slot
-        public event Action<ItemData> OnItemAdded;            // When an item has been added to the inventory
-        public event Action<ItemData> OnCantAddItem;          // When an item failed being added to the inventory
+        /// <summary>
+        /// When the inventory is updated in general
+        /// </summary>
+        public event Action OnInvetoryUpdated;
+
+        /// <summary> 
+        /// When a new item has been given an item slot and the amount added
+        /// </summary>
+        public event Action<Item, int> OnItemAdded;
+
+        /// <summary>
+        /// When an item failed being added to the inventory
+        /// </summary>
+        public event Action<ItemData> OnCantAddItem;
 
         private void Awake()
         {
             // Singleton
             Instance = this;
 
-            player = FindObjectOfType<PlayerController>();
+            inventory = new List<Item>();
 
-            for (int i = 0; i < MaxInventorySize; i++)
-            {
-                inventory.Add(new ItemSlot());
-            }
+            player = FindObjectOfType<PlayerController>();
         }
 
-        public bool AddItem(ItemData itemData)
+        public bool AddItem(ItemData itemData, int amount)
         {
-            ItemSlot slot = FindItem(itemData);
             bool added = false;
+            Item itemToAdd = null;
 
-            // Check for existing slot
-            if (slot != null && itemData.isStackable)
+            // Add to existing Item if stackable
+            if (itemData.isStackable)
             {
-                added = slot.AddItem(1);
-            }
-            else
-            {
-                // Add to empty slot if able
-                slot = inventory.Find(x => x.Amount == 0);
+                itemToAdd = FindItem(itemData);
 
-                if (slot != null)
+                if (itemToAdd != null)
                 {
-                    slot.SetItem(itemData);
-                    OnNewInventoryItem?.Invoke(slot);
-                    added = true;
+                    added = itemToAdd.AddItemAmount(amount) > 0;
                 }
+            }
+            
+            if(!added && inventory.Count < MaxInventorySize)
+            {
+                itemToAdd = new Item(itemData, amount);
+                inventory.Add(itemToAdd);
+                added = true;
             }
 
             if (!added)
@@ -66,36 +73,35 @@ namespace DD.Systems.InventorySystem
             }
             else
             {
-                OnItemAdded?.Invoke(itemData);
+                OnItemAdded?.Invoke(itemToAdd, amount);
             }
 
             return added;
         }
 
-        public void ReduceItem(ItemData itemData, int amount)
-        {
-            ItemSlot slot = FindItem(itemData);
-
-            if (slot != null)
-            {
-                slot.ReduceItem(amount);
-            }
-        }
-
         public void RemoveItem(ItemData itemData, int amount = 1)
         {
-            FindItem(itemData).ReduceItem(amount);
+            Item item = FindItem(itemData);
+            item.RemoveItemAmount(amount);
+            
+            if(item.ItemAmount <= 0)
+            {
+                inventory.Remove(item);
+            }
+            
+            OnInvetoryUpdated?.Invoke();
         }
 
         public void DropItem(ItemData itemData, int amount = 1)
         {
             if(!itemData.isDroppable) return;
 
-            ItemSlot slot = FindItem(itemData);
-            if (slot != null)
+            Item item = FindItem(itemData);
+            if (item != null)
             {
-                slot.ReduceItem(amount);
-                Instantiate(itemData.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
+                WorldItem worldItem = Instantiate<WorldItem>(itemData.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
+                worldItem.SetItemAmount(amount);
+                RemoveItem(itemData, amount);
             }
         }
 
@@ -109,13 +115,13 @@ namespace DD.Systems.InventorySystem
         /// </summary>
         /// <param name="itemData">The item data of the item to find.</param>
         /// <returns>The item slot the item is in OR null if not found.</returns>
-        private ItemSlot FindItem(ItemData itemData)
+        public Item FindItem(ItemData itemData)
         {
-            foreach (ItemSlot slot in inventory)
+            foreach (Item item in inventory)
             {
-                if (slot.ItemData == itemData)
+                if (item.ItemData == itemData)
                 {
-                    return slot;
+                    return item;
                 }
             }
 

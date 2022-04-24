@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using DD.Core.Items;
 using DD.Systems.InventorySystem;
 using TMPro;
 
@@ -11,10 +11,10 @@ namespace DD.UI
     public class ItemSlotUI : MenuItem
     {
         // Item
-        public ItemSlot ItemSlot { private set; get; }
+        public Item Item { private set; get; }
 
         // UI COMPONENTS
-        [SerializeField] private GameObject itemToggle;
+        [SerializeField] private GameObject itemUI;
         [SerializeField] private TextMeshProUGUI amountText;
         [SerializeField] private RawImage itemImage;
 
@@ -25,45 +25,45 @@ namespace DD.UI
             contextMenu = FindObjectOfType<ContextMenuUI>();
         }
 
-        /// <summary>
-        /// Sets up the link between this UI slot the given ItemSlot. 
-        /// </summary>
-        /// <param name="itemSlot">An inventory item slot.</param>
-        public void SetLinkedItemSlot(ItemSlot itemSlot)
+        public void SetLinkedItem(Item item)
         {
-            ItemSlot = itemSlot;
-
-            itemSlot.OnItemUpdated += UpdateUI;
-            itemSlot.OnItemDepleted += RemoveItem;
-
-            UpdateUI();
-            itemImage.texture = itemSlot.ItemData.itemIcon;
-            itemToggle.SetActive(true);
+            Item = item;
+            UpdateSlot();
         }
 
-        public void UpdateUI()
+        public void UpdateSlot()
         {
-            amountText.text = ItemSlot.Amount.ToString();
+            if (Item == null)
+            {
+                itemUI.SetActive(false);
+                return;
+            }
+
+            Debug.Log($"{Item.ItemData.name} : {Item.ItemAmount}");
+            amountText.text = Item.ItemAmount.ToString();
+            itemImage.texture = Item.ItemData.itemIcon;
+            itemUI.SetActive(true);
         }
 
         public void RemoveItem()
         {
-            ItemSlot = null;
-            itemToggle.SetActive(false);
+            itemUI.SetActive(false);
+            Item = null;
+            amountText.text = "";
             itemImage.texture = null;
         }
 
         public override void Select()
         {
             // Cancel if no Item
-            if(ItemSlot == null)
-            {
-                return;
-            }
+            if(Item == null) return;
 
             List<ContextMenuOption> contextMenuOptions = new List<ContextMenuOption>();
-            contextMenuOptions.Add(new ContextMenuOption("Use", () => { ItemUser.Instance.UseItem(ItemSlot.ItemData);}));
-            contextMenuOptions.Add(new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(ItemSlot.ItemData);}));
+
+            // Equipment Items
+            
+            contextMenuOptions.Add(new ContextMenuOption("Use", () => { ItemUser.Instance.UseItem(Item.ItemData);}));
+            contextMenuOptions.Add(new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(Item.ItemData);}));
 
             contextMenu.SetContextMenu(contextMenuOptions);
             contextMenu.SetPosition(transform.position);

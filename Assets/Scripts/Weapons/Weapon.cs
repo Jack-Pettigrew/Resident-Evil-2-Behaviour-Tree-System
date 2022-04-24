@@ -29,14 +29,7 @@ namespace DD.Core.Combat
         {
             if(isOwned) return;
 
-            Inventory.Instance.AddItem(itemData);
+            Inventory.Instance.AddItem(itemData, 1);
         }
-    }
-
-    public enum WeaponType
-    {
-        Gun,
-        Melee,
-        Throwable
     }
 }

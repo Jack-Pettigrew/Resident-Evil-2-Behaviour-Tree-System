@@ -32,7 +32,7 @@ public class ItemUser : MonoBehaviour
         {
             HealingItem healingItem = (HealingItem)item;
             playerHealth.Heal(healingItem.healAmount);
-            Inventory.Instance.ReduceItem(item, 1);
+            Inventory.Instance.RemoveItem(item, 1);
             return;
         }
 

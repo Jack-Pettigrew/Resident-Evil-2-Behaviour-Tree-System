@@ -9,7 +9,7 @@ namespace DD.Core.Items
         [Header("Base Info")]
         public string itemName;
         [TextArea] public string itemDescription;
-        public GameObject itemPrefab;
+        public WorldItem itemPrefab;
         public Texture itemIcon;
 
         [Header("Inventory Settings")]

@@ -4,16 +4,31 @@ using UnityEngine;
 using DD.Core.Items;
 using DD.Systems.InventorySystem;
 
-namespace DD.Core
+namespace DD.Core.Items
 {
     public class WorldItem : MonoBehaviour, IInteractable
     {
         [SerializeField] private ItemData itemData;
-        
+        [field: SerializeField] public int ItemAmount { private set; get; }
+
+        public void SetItemAmount(int itemAmount)
+        {
+            if(itemAmount <= 0)
+            {
+                itemAmount = 1;
+            }
+            
+            ItemAmount = Mathf.Min(itemAmount, itemData.maxStackSize);
+        }
+
         public void Interact()
         {
-            Inventory.Instance.AddItem(itemData);
+            Inventory.Instance.AddItem(itemData, ItemAmount);
             Destroy(gameObject);
+        }
+
+        private void OnValidate() {
+            SetItemAmount(ItemAmount);
         }
     }
 }

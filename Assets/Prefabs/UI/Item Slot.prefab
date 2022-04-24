@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0b60168b1bb824e89a339f5f45b9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToggle: {fileID: 8264109231044232756}
+  itemUI: {fileID: 8264109231044232756}
   amountText: {fileID: 8264109230849372214}
   itemImage: {fileID: 8264109228941823841}
 --- !u!1 &8264109230849372216

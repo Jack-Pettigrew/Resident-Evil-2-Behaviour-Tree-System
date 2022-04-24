@@ -19,4 +19,6 @@ MonoBehaviour:
   isStackable: 1
   maxStackSize: 50
   isDroppable: 1
+  isCombinable: 0
+  combinableItems: []
   ammoType: 0
