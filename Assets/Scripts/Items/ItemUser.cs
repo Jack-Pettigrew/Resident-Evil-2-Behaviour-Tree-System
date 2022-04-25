@@ -28,22 +28,33 @@ public class ItemUser : MonoBehaviour
     /// <param name="item"></param>
     public void UseItem(ItemData item)
     {
-        if(item is HealingItem)
+        // Downcasting Code Smell alert but thanks to the polymorphism and that not all Items being 'usable'.
+        // A Use function in class Item would force empty default implementations where not necessary.
+        
+        // Switch Type Checks: https://stackoverflow.com/questions/298976/is-there-a-better-alternative-than-this-to-switch-on-type
+        switch (item)
         {
-            HealingItem healingItem = (HealingItem)item;
-            playerHealth.Heal(healingItem.healAmount);
-            Inventory.Instance.RemoveItem(item, 1);
-            return;
-        }
+            case HealingItemData healingItem:
+                playerHealth.Heal(healingItem.healAmount);
+                Inventory.Instance.RemoveItem(item, 1);
+                break;
 
-        if(item is AmmoItem)
-        {
-            // Does this handle Context Menu using or Reload using?
-            // Makes sense to make it generic enough to cater to both
-
-            // What does each care about?
-            // Inventory UI cares about combining ammo item with weapon of a similar type
-            // Reloading cares about finding ammo for the currently active weapon and consuming as much as it can
+            default:
+                break;
         }
+        
+        // Can't 'use' ammo
     }
 }
+
+// ItemScriptableObject - abstract Item CreateItemInstance
+/* 
+    WorldItem returns the result of that function to the Inventory.Instance.AddItem method,
+    removing the need for the inventory to create an Item instance.
+    This allows for Item to be purely abstract as Inventory no longer creates instances of Item. The ScriptableObject is
+    responsible for it's own factory.
+*/
+
+// abstract Item - virutal GetContextOptions (Default: Drop)
+// UsableItem : IUsable
+// QuestItem : Item
