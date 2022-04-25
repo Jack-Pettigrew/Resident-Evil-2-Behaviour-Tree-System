@@ -35,8 +35,6 @@ namespace DD.UI
         {
             // Goes through the inventory and populates instantiated itemslotUIs with the relevant information
 
-            Debug.Log("Updating UI");
-
             for (int i = 0; i < uiItemSlots.Count; i++)
             {
                 if(i >= Inventory.Instance.inventory.Count)

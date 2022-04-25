@@ -39,7 +39,6 @@ namespace DD.UI
                 return;
             }
 
-            Debug.Log($"{Item.ItemData.name} : {Item.ItemAmount}");
             amountText.text = Item.ItemAmount.ToString();
             itemImage.texture = Item.ItemData.itemIcon;
             itemUI.SetActive(true);
@@ -60,10 +59,13 @@ namespace DD.UI
 
             List<ContextMenuOption> contextMenuOptions = new List<ContextMenuOption>();
 
+            contextMenuOptions.Add(new ContextMenuOption("Use", () => ItemUser.Instance.UseItem(Item.ItemData)));
+
             // Equipment Items
-            
-            contextMenuOptions.Add(new ContextMenuOption("Use", () => { ItemUser.Instance.UseItem(Item.ItemData);}));
-            contextMenuOptions.Add(new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(Item.ItemData);}));
+            if(Item.ItemData.isDroppable)
+            {
+                contextMenuOptions.Add(new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(Item.ItemData, Item.ItemAmount);}));
+            }
 
             contextMenu.SetContextMenu(contextMenuOptions);
             contextMenu.SetPosition(transform.position);

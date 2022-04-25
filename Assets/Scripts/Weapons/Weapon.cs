@@ -29,7 +29,7 @@ namespace DD.Core.Combat
         {
             if(isOwned) return;
 
-            Inventory.Instance.AddItem(itemData, 1);
+            Inventory.Instance.AddItem(itemData.CreateItemInstance(1));
         }
     }
 }
