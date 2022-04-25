@@ -23,7 +23,8 @@ namespace DD.Core.Items
 
         public void Interact()
         {
-            Inventory.Instance.AddItem(itemData, ItemAmount);
+            Item item = itemData.CreateItemInstance(ItemAmount);
+            Inventory.Instance.AddItem(item);
             Destroy(gameObject);
         }
 

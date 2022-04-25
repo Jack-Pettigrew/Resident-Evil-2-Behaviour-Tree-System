@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.UI;
+using DD.Systems.InventorySystem;
 
 namespace DD.Core.Items
 {
@@ -16,5 +18,8 @@ namespace DD.Core.Items
         public bool isStackable = true;
         public int maxStackSize = 10;
         public bool isDroppable = true;
+        public bool isCombinable = false;
+
+        public abstract Item CreateItemInstance(int amountOfItem);
     }
 }

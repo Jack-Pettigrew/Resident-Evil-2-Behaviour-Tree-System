@@ -5,20 +5,15 @@ using UnityEngine;
 namespace DD.Core.Items
 {   
     [System.Serializable]
-    public class Item
+    public abstract class Item : IUsable
     {
         [field: SerializeField] public ItemData ItemData { private set; get; }
         public int ItemAmount { private set; get; }
 
         public Item(ItemData itemData, int amountOfItem)
         {
-            SetItem(itemData, amountOfItem);
-        }
-
-        public void SetItem(ItemData itemData, int amountOfItem)
-        {
             ItemData = itemData;
-            AddItemAmount(amountOfItem);
+            ItemAmount = amountOfItem;
         }
 
         /// <summary>
@@ -64,5 +59,12 @@ namespace DD.Core.Items
 
             return amountToRemove;
         }
+
+        public abstract void Use();
+    }
+
+    public interface IUsable
+    {
+        void Use();
     }
 }

@@ -32,7 +32,7 @@ namespace DD.Systems.InventorySystem
         /// <summary>
         /// When an item failed being added to the inventory
         /// </summary>
-        public event Action<ItemData> OnCantAddItem;
+        public event Action<Item> OnCantAddItem;
 
         private void Awake()
         {
@@ -44,36 +44,35 @@ namespace DD.Systems.InventorySystem
             player = FindObjectOfType<PlayerController>();
         }
 
-        public bool AddItem(ItemData itemData, int amount)
+        public bool AddItem(Item item)
         {
             bool added = false;
-            Item itemToAdd = null;
 
             // Add to existing Item if stackable
-            if (itemData.isStackable)
+            if (item.ItemData.isStackable)
             {
-                itemToAdd = FindItem(itemData);
+                Item existingItem = FindItem(item.ItemData);
 
-                if (itemToAdd != null)
+                if (existingItem != null)
                 {
-                    added = itemToAdd.AddItemAmount(amount) > 0;
+                    added = existingItem.AddItemAmount(item.ItemAmount) > 0;
                 }
             }
             
+            // Add new item
             if(!added && inventory.Count < MaxInventorySize)
             {
-                itemToAdd = new Item(itemData, amount);
-                inventory.Add(itemToAdd);
+                inventory.Add(item);
                 added = true;
             }
 
             if (!added)
             {
-                OnCantAddItem?.Invoke(itemData);
+                OnCantAddItem?.Invoke(item);
             }
             else
             {
-                OnItemAdded?.Invoke(itemToAdd, amount);
+                OnItemAdded?.Invoke(item, item.ItemAmount);
             }
 
             return added;
