@@ -19,6 +19,19 @@ namespace DD.Core.Items
             return options;
         }
 
+        public override bool Combine(Item combiningItem)
+        {
+            switch (combiningItem)
+            {
+                case AmmoItem combiningAmmo:
+                    AddItemAmount(combiningAmmo.ItemAmount);
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         public override void Use()
         {
 

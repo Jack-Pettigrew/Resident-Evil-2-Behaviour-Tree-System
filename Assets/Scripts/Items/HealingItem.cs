@@ -22,5 +22,14 @@ namespace DD.Core.Items
         {
             ItemUser.Instance.UseItem(ItemData);
         }
+
+        public override bool Combine(Item combiningItem)
+        {
+            if(combiningItem is HealingItem) return false;
+
+            AddItemAmount(combiningItem.ItemAmount);
+            return true;
+        }
+
     }
 }

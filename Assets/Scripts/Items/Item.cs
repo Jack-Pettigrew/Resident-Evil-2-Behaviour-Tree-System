@@ -6,7 +6,7 @@ using DD.UI;
 namespace DD.Core.Items
 {   
     [System.Serializable]
-    public abstract class Item : IUsable
+    public abstract class Item : ICombinable
     {
         [field: SerializeField] public ItemData ItemData { private set; get; }
         public int ItemAmount { private set; get; }
@@ -62,12 +62,13 @@ namespace DD.Core.Items
         }
 
         public abstract void Use();
+        public abstract bool Combine(Item combiningItem);
 
         public abstract List<ContextMenuOption> GetContextOptions();
     }
 
-    public interface IUsable
+    public interface ICombinable
     {
-        void Use();
+        public abstract bool Combine(Item combiningItem);
     }
 }
