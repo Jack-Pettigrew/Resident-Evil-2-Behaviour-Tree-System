@@ -57,11 +57,9 @@ namespace DD.UI
             // Cancel if no Item
             if(Item == null) return;
 
-            List<ContextMenuOption> contextMenuOptions = new List<ContextMenuOption>();
+            // Item Context Menu
+            List<ContextMenuOption> contextMenuOptions = Item.GetContextOptions();
 
-            contextMenuOptions.Add(new ContextMenuOption("Use", () => ItemUser.Instance.UseItem(Item.ItemData)));
-
-            // Equipment Items
             if(Item.ItemData.isDroppable)
             {
                 contextMenuOptions.Add(new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(Item.ItemData, Item.ItemAmount);}));

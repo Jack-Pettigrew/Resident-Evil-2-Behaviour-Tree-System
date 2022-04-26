@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.UI;
 
 namespace DD.Core.Items
 {   
@@ -61,6 +62,8 @@ namespace DD.Core.Items
         }
 
         public abstract void Use();
+
+        public abstract List<ContextMenuOption> GetContextOptions();
     }
 
     public interface IUsable

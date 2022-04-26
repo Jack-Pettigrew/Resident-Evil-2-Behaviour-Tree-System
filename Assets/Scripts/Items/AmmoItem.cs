@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DD.UI;
 using UnityEngine;
 
 namespace DD.Core.Items
@@ -10,9 +11,17 @@ namespace DD.Core.Items
         {
         }
 
+        public override List<ContextMenuOption> GetContextOptions()
+        {
+            List<ContextMenuOption> options = new List<ContextMenuOption>();
+            options.Add(new ContextMenuOption("Combine", () => Use()));
+
+            return options;
+        }
+
         public override void Use()
         {
-            throw new System.NotImplementedException();
+
         }
     }
 }
