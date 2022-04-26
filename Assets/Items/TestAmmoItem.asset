@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45de37f4e99dd4e1da4232d75903ae63, type: 3}
-  m_Name: AmmoItem
+  m_Name: TestAmmoItem
   m_EditorClassIdentifier: 
   itemName: Pistol Ammo
   itemDescription: Literally some Pistol Ammo

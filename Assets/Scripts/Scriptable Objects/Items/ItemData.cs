@@ -8,6 +8,9 @@ namespace DD.Core.Items
 {
     public abstract class ItemData : ScriptableObject
     {
+        [Header("Database Info")]
+        [SerializeField, ReadOnly] private int ItemID;
+
         [Header("Base Info")]
         public string itemName;
         [TextArea] public string itemDescription;
@@ -19,6 +22,8 @@ namespace DD.Core.Items
         public int maxStackSize = 10;
         public bool isDroppable = true;
         public bool isCombinable = false;
+
+        public void SetItemID(int id) => ItemID = id;
 
         public abstract Item CreateItemInstance(int amountOfItem);
     }

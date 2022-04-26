@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DD.Core.Items
 {
-    [CreateAssetMenu(fileName = "AmmoItem", menuName = "Items/Ammo Item")]
+    [CreateAssetMenu(fileName = "AmmoItem", menuName = "Items/Ammo Item", order = 2)]
     public class AmmoItemData : ItemData
     {
         [Header("Ammo Properties")]

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DD.Core.Items
 {
-    [CreateAssetMenu(fileName = "HealingItemData", menuName = "Items/Healing Item")]
+    [CreateAssetMenu(fileName = "HealingItemData", menuName = "Items/Healing Item", order = 1)]
     public class HealingItemData : ItemData
     {
         [Header("Healing Properties")]
