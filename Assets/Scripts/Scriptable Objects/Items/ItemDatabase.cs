@@ -9,6 +9,20 @@ namespace DD.Core.Items
     {
         [SerializeField] private List<ItemData> itemDatabase;
 
+        public T GetItemData<T>(int itemID) where T : ItemData
+        {
+            if(itemID < 0 || itemID >= itemDatabase.Count) return null;
+
+            return (T)itemDatabase[itemID];
+        }
+
+        public Item GetItem(int itemID, int amount)
+        {
+            if(itemID < 0 || itemID > itemDatabase.Count) return null;
+
+            return itemDatabase[itemID].CreateItemInstance(amount);
+        }
+
         private void OnValidate() 
         {
             HashSet<ItemData> set = new HashSet<ItemData>();
