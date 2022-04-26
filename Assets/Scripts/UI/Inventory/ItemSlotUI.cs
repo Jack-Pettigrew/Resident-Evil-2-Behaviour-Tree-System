@@ -11,7 +11,7 @@ namespace DD.UI
     public class ItemSlotUI : MenuItem
     {
         // Item
-        public Item Item { private set; get; }
+        public ItemSlot ItemSlot { private set; get; }
 
         // UI COMPONENTS
         [SerializeField] private GameObject itemUI;
@@ -25,46 +25,42 @@ namespace DD.UI
             contextMenu = FindObjectOfType<ContextMenuUI>();
         }
 
-        public void SetLinkedItem(Item item)
+        public void SetLinkedItem(ItemSlot itemSlot)
         {
-            Item = item;
-            UpdateSlot();
+            ItemSlot = itemSlot;
         }
 
         public void UpdateSlot()
         {
-            if (Item == null)
+            if (ItemSlot == null)
             {
                 itemUI.SetActive(false);
                 return;
             }
 
-            amountText.text = Item.ItemAmount.ToString();
-            itemImage.texture = Item.ItemData.itemIcon;
+            amountText.text = ItemSlot.ItemQuantity.ToString();
+            itemImage.texture = ItemSlot.Item.itemIcon;
             itemUI.SetActive(true);
         }
 
         public void RemoveItem()
         {
             itemUI.SetActive(false);
-            Item = null;
+            ItemSlot = null;
             amountText.text = "";
             itemImage.texture = null;
         }
 
         public override void Select()
         {
-            // Cancel if no Item
-            if(Item == null) return;
+            // Cancel if no ItemSlot
+            if(ItemSlot == null) return;
 
             // Item Context Menu
-            List<ContextMenuOption> contextMenuOptions = Item.GetContextOptions();
+            List<ContextMenuOption> contextMenuOptions = ItemSlot.Item.GetContextMenuOptions();
 
-            if(Item.ItemData.isDroppable)
-            {
-                contextMenuOptions.Add(new ContextMenuOption("Drop", () => {Inventory.Instance.DropItem(Item.ItemData, Item.ItemAmount);}));
-            }
-
+            if(contextMenuOptions.Count == 0) return;
+            
             contextMenu.SetContextMenu(contextMenuOptions);
             contextMenu.SetPosition(transform.position);
             contextMenu.ShowContextMenu();

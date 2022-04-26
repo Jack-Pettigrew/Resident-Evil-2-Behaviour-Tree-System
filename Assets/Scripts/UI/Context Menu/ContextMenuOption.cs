@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 namespace DD.UI
 {
+    [System.Serializable]
     public class ContextMenuOption
     {
         public string menuOptionTitle;

@@ -43,6 +43,7 @@ namespace DD.UI
                 }
                 else {
                     uiItemSlots[i].SetLinkedItem(Inventory.Instance.inventory[i]);
+                    uiItemSlots[i].UpdateSlot();
                 }
             }
         }

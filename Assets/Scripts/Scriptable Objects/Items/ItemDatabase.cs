@@ -7,25 +7,18 @@ namespace DD.Core.Items
     [CreateAssetMenu(menuName = "Items/Item Database", fileName = "ItemDatabase", order = 0)]
     public class ItemDatabase : ScriptableObject
     {
-        [SerializeField] private List<ItemData> itemDatabase;
+        [SerializeField] private List<Item> itemDatabase;
 
-        public T GetItemData<T>(int itemID) where T : ItemData
+        public T GetItem<T>(int itemID) where T : Item
         {
             if(itemID < 0 || itemID >= itemDatabase.Count) return null;
 
             return (T)itemDatabase[itemID];
         }
 
-        public Item GetItem(int itemID, int amount)
-        {
-            if(itemID < 0 || itemID > itemDatabase.Count) return null;
-
-            return itemDatabase[itemID].CreateItemInstance(amount);
-        }
-
         private void OnValidate() 
         {
-            HashSet<ItemData> set = new HashSet<ItemData>();
+            HashSet<Item> set = new HashSet<Item>();
 
             for (int id = 0; id < itemDatabase.Count; id++)
             {

@@ -71,11 +71,11 @@ namespace DD.Core.Combat
 
         public void ReloadWeapon()
         {
-            if(ActiveWeapon.WeaponType == WeaponType.Gun)
-            {
-                Gun gun = ActiveWeapon as Gun;
-                gun.Reload(gun.MaxAmmoCapacity);
-            }
+            // if(ActiveWeapon.WeaponType == WeaponType.Gun)
+            // {
+            //     Gun gun = ActiveWeapon as Gun;
+            //     gun.Reload(gun.MaxAmmoCapacity);
+            // }
         }
 
         /// <summary>

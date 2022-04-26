@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DD.Core.Items;
 using DD.Core.Control;
+using DD.Core.Items;
 
 namespace DD.Systems.InventorySystem
 {
@@ -15,7 +15,7 @@ namespace DD.Systems.InventorySystem
         private PlayerController player;
 
         // INVENTORY
-        public List<Item> inventory { private set; get; }
+        public List<ItemSlot> inventory { private set; get; }
         [field: SerializeField] public int MaxInventorySize { private set; get; }
 
         // EVENTS
@@ -25,12 +25,12 @@ namespace DD.Systems.InventorySystem
         public event Action OnInvetoryUpdated;
 
         /// <summary> 
-        /// When a new item has been given an item slot and the amount added
+        /// When a new ItemSlot has been given an ItemSlot slot and the amount added
         /// </summary>
         public event Action<Item, int> OnItemAdded;
 
         /// <summary>
-        /// When an item failed being added to the inventory
+        /// When an ItemSlot failed being added to the inventory
         /// </summary>
         public event Action<Item> OnCantAddItem;
 
@@ -39,30 +39,33 @@ namespace DD.Systems.InventorySystem
             // Singleton
             Instance = this;
 
-            inventory = new List<Item>();
+            inventory = new List<ItemSlot>();
 
             player = FindObjectOfType<PlayerController>();
         }
 
-        public bool AddItem(Item item)
+        // GET ITEM FUNCTION SIMILAR TO ITEM DATABASE GENERIC WHERE T : ITEM ????????????
+
+        public bool AddItem(Item item, int amountToAdd)
         {
             bool added = false;
 
-            // Add to existing Item if stackable
-            if (item.ItemData.isStackable)
+            // Add to existing ItemSlot if stackable
+            if (item.isStackable)
             {
-                Item existingItem = FindItem(item.ItemData);
+                ItemSlot existingItemSlot = FindItemSlot(item);
 
-                if (existingItem != null)
+                if (existingItemSlot != null)
                 {
-                    added = existingItem.AddItemAmount(item.ItemAmount) > 0;
+                    existingItemSlot.AddItem(amountToAdd);
+                    added = true;
                 }
             }
             
-            // Add new item
+            // Add new ItemSlot
             if(!added && inventory.Count < MaxInventorySize)
             {
-                inventory.Add(item);
+                inventory.Add(new ItemSlot(item, amountToAdd));
                 added = true;
             }
 
@@ -72,55 +75,55 @@ namespace DD.Systems.InventorySystem
             }
             else
             {
-                OnItemAdded?.Invoke(item, item.ItemAmount);
+                OnItemAdded?.Invoke(item, amountToAdd);
             }
 
             return added;
         }
 
-        public void RemoveItem(ItemData itemData, int amount = 1)
+        public void RemoveItem(Item item, int amount = 1)
         {
-            Item item = FindItem(itemData);
-            item.RemoveItemAmount(amount);
+            ItemSlot ItemSlot = FindItemSlot(item);
+            ItemSlot.RemoveItem(amount);
             
-            if(item.ItemAmount <= 0)
+            if(ItemSlot.ItemQuantity <= 0)
             {
-                inventory.Remove(item);
+                inventory.Remove(ItemSlot);
             }
             
             OnInvetoryUpdated?.Invoke();
         }
 
-        public void DropItem(ItemData itemData, int amount = 1)
+        public void DropItem(Item item, int amount = 1)
         {
-            if(!itemData.isDroppable) return;
+            if(!item.isDroppable) return;
 
-            Item item = FindItem(itemData);
-            if (item != null)
+            ItemSlot itemSlot = FindItemSlot(item);
+            if (itemSlot != null)
             {
-                WorldItem worldItem = Instantiate<WorldItem>(itemData.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
-                worldItem.SetItemAmount(amount);
-                RemoveItem(itemData, amount);
+                WorldItem worldItem = Instantiate<WorldItem>(itemSlot.Item.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
+                worldItem.SetItemQuantity(amount);
+                RemoveItem(item, amount);
             }
         }
 
-        public bool HasItem(ItemData itemData)
+        public bool HasItem(Item item)
         {
-            return FindItem(itemData) != null ? true : false;
+            return FindItemSlot(item) != null ? true : false;
         }
 
         /// <summary>
-        /// Finds the Item within the inventory.
+        /// Finds the ItemSlot within the inventory.
         /// </summary>
-        /// <param name="itemData">The item data of the item to find.</param>
-        /// <returns>The item slot the item is in OR null if not found.</returns>
-        public Item FindItem(ItemData itemData)
+        /// <param name="ItemSlotData">The ItemSlot data of the ItemSlot to find.</param>
+        /// <returns>The ItemSlot slot the ItemSlot is in OR null if not found.</returns>
+        public ItemSlot FindItemSlot(Item item)
         {
-            foreach (Item item in inventory)
+            foreach (ItemSlot ItemSlot in inventory)
             {
-                if (item.ItemData == itemData)
+                if (ItemSlot.Item == item)
                 {
-                    return item;
+                    return ItemSlot;
                 }
             }
 
