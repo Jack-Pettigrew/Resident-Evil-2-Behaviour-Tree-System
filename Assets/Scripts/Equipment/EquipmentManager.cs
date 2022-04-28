@@ -164,7 +164,7 @@ namespace DD.Core.Combat
         public void UpdateAnimations()
         {
             // Aiming Animation            
-            if(aimTargetConstraint)
+            if(ActiveWeapon && aimTargetConstraint)
             {
                 playerAnimator.SetLayerWeight(1, (InputManager.Instance.Aim ? 1.0f : 0.0f));
                 aimTargetConstraint.weight = InputManager.Instance.Aim ? 1.0f : 0.0f;
