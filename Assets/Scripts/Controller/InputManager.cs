@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.Core.Combat;
 
 namespace DD.Core.Control
 {
@@ -28,7 +29,7 @@ namespace DD.Core.Control
         public event Action OnReload;
 
         public KeyCode quickSlotOneKey, quickSlotTwoKey, quickSlotThreeKey, quickSlotFourKey;
-        public event Action<int> OnQuickSlotChange;
+        public event Action<WeaponSlot> OnQuickSlotChange;
 
         private void Awake()
         {
@@ -57,10 +58,10 @@ namespace DD.Core.Control
             if(Input.GetKeyDown(reloadKeyCode)) OnReload?.Invoke();
 
             // Quick Slots
-            if(Input.GetKeyDown(quickSlotOneKey)) OnQuickSlotChange?.Invoke(0);
-            if(Input.GetKeyDown(quickSlotTwoKey)) OnQuickSlotChange?.Invoke(1);
-            if(Input.GetKeyDown(quickSlotThreeKey)) OnQuickSlotChange?.Invoke(2);
-            if(Input.GetKeyDown(quickSlotFourKey)) OnQuickSlotChange?.Invoke(3);
+            if(Input.GetKeyDown(quickSlotOneKey)) OnQuickSlotChange?.Invoke(WeaponSlot.One);
+            if(Input.GetKeyDown(quickSlotTwoKey)) OnQuickSlotChange?.Invoke(WeaponSlot.Two);
+            if(Input.GetKeyDown(quickSlotThreeKey)) OnQuickSlotChange?.Invoke(WeaponSlot.Three);
+            if(Input.GetKeyDown(quickSlotFourKey)) OnQuickSlotChange?.Invoke(WeaponSlot.Four);
         }
 
         public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;

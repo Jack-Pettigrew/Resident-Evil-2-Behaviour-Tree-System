@@ -11,9 +11,9 @@ namespace DD.Core.Combat
     public class EquipmentManager : MonoBehaviour
     {        
         // Equipment Slots
-        private Weapon[] equipmentSlots = new Weapon[4];
+        private Weapon[] weaponSlots = new Weapon[4];
         private int activeWeaponSlotID = 0;
-        public Weapon ActiveWeapon { get { return equipmentSlots[activeWeaponSlotID]; } }
+        public Weapon ActiveWeapon { get { return weaponSlots[activeWeaponSlotID]; } }
 
         [Header("Animation")]
         [SerializeField] private Transform weaponHoldTransform;
@@ -27,7 +27,7 @@ namespace DD.Core.Combat
 
         private void Start() {
             // ***** TEST *****
-            EquipWeapon(0, testWeapon);
+            EquipWeapon(WeaponSlot.One, testWeapon);
 
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
@@ -58,16 +58,12 @@ namespace DD.Core.Combat
         /// </summary>
         /// <param name="equipmentSlotID">ID of the equipment slot to set the weapon to.</param>
         /// <param name="weaponToEquip">Weapon to equip.</param>
-        public void EquipWeapon(int equipmentSlotID, EquipmentItem equipmentItem)
+        public void EquipWeapon(WeaponSlot weaponSlot, EquipmentItem equipmentItem)
         {
-            if (equipmentSlotID < 0 || equipmentSlotID >= equipmentSlots.Length)
-            {
-                Debug.LogWarning("Equipment Slot doesn't exist. The weapon wasn't equipped.");
-                return;
-            }
+            int weaponSlotID = (int) weaponSlot;
 
             // Remove previous Weapon
-            GameObject previousWeapon = equipmentSlots[equipmentSlotID]?.GetComponent<GameObject>();
+            GameObject previousWeapon = weaponSlots[weaponSlotID]?.GetComponent<GameObject>();
             if(!previousWeapon)
             {
                 Destroy(previousWeapon);
@@ -79,12 +75,12 @@ namespace DD.Core.Combat
             newWeapon.transform.localRotation = Quaternion.identity;
 
             // Assign spawned weapon to weapon slot
-            equipmentSlots[equipmentSlotID] = newWeapon;
+            weaponSlots[weaponSlotID] = newWeapon;
 
             // Update current active weapon if we've changed it
-            if(equipmentSlotID == activeWeaponSlotID)
+            if(weaponSlotID == activeWeaponSlotID)
             {
-                SwapWeapon(equipmentSlotID);
+                SwapWeapon(weaponSlot);
             }
         }
 
@@ -112,13 +108,9 @@ namespace DD.Core.Combat
         /// Swaps the active equipment slot.
         /// </summary>
         /// <param name="equipmentSlotID">ID of the slot to make active.</param>
-        public void SwapWeapon(int equipmentSlotID)
+        public void SwapWeapon(WeaponSlot weaponSlot)
         {
-            if(equipmentSlotID < 0 || equipmentSlotID >= equipmentSlots.Length)
-            {
-                Debug.LogWarning("Equipment Slot doesn't exist. The weapon swapped equipped.");
-                return;
-            }
+            int weaponSlotID = (int) weaponSlot;
 
             // If we currently have an active weapon...
             if(ActiveWeapon != null)
@@ -134,7 +126,7 @@ namespace DD.Core.Combat
             }
             
             // switch the active equipment slot
-            activeWeaponSlotID = equipmentSlotID;
+            activeWeaponSlotID = weaponSlotID;
 
             // If weapon occupies this slot...
             if(ActiveWeapon != null)
