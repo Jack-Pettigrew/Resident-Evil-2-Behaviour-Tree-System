@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.Core.Items;
+using DD.Systems.InventorySystem;
 
 namespace DD.Core.Combat
 {
     public class Gun : Weapon
     {
-        [field: Header("Ammo")]
+        [Header("Ammo")]
+        [SerializeField] private AmmoItem gunAmmoItem;
         [field: SerializeField] public int MaxAmmoCapacity { private set; get; }
         public int CurrentAmmo { private set; get; }
         public bool IsReloading { private set; get; }
@@ -104,13 +107,18 @@ namespace DD.Core.Combat
         }
 
         /// <summary>
-        /// Reloads the weapon over time.
+        /// Reloads the weapon.
         /// </summary>
-        public void Reload(int ammo)
+        public override void UseWeaponAction()
         {
             if (canUse && !IsReloading && CurrentAmmo < MaxAmmoCapacity)
             {
-                reloadCoroutine = StartCoroutine(ReloadCoroutine(ammo));
+                // Gets the amount of ammo for this gun from the inventory
+                ItemSlot itemSlot = Inventory.Instance.FindItemSlot(gunAmmoItem);
+
+                if(itemSlot == null) return;
+
+                reloadCoroutine = StartCoroutine(ReloadCoroutine(Mathf.Min(CurrentAmmo + itemSlot.ItemQuantity, MaxAmmoCapacity)));
             }
         }
 
@@ -123,8 +131,7 @@ namespace DD.Core.Combat
 
             yield return new WaitForSeconds(reloadTime);
 
-            CurrentAmmo = Mathf.Min(CurrentAmmo + ammo, MaxAmmoCapacity);
-
+            CurrentAmmo = ammo;
             IsReloading = false;
             canUse = true;
             OnReloaded?.Invoke(this);
