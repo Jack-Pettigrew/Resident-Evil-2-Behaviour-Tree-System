@@ -88,20 +88,16 @@ namespace DD.Core.Combat
         /// Unequips the weapon associated with the equipment slot.
         /// </summary>
         /// <param name="equipmentSlotID">ID of the slot to unequip.</param>
-        public void UnequipWeaponFromSlot(int equipmentSlotID)
+        public void UnequipWeaponFromSlot(WeaponSlot weaponSlot)
         {
-            // if(equipmentSlotID < 0 || equipmentSlotID >= equipmentSlots.Length)
-            // {
-            //     Debug.LogWarning("Equipment Slot doesn't exist. The weapon wasn't unequipped.");
-            //     return;
-            // }
-            
-            // equipmentSlots[equipmentSlotID] = null;
+            int weaponSlotID = (int) weaponSlot;
 
-            // if(equipmentSlotID == activeWeaponSlotID)
-            // {
-            //     SwapWeapon(equipmentSlotID);
-            // }
+            weaponSlots[weaponSlotID] = null;
+
+            if(weaponSlotID == activeWeaponSlotID)
+            {
+                SwapWeapon(weaponSlot);
+            }
         }
 
         /// <summary>
