@@ -9,7 +9,10 @@ using UnityEngine.Animations.Rigging;
 namespace DD.Core.Combat
 {
     public class EquipmentManager : MonoBehaviour
-    {        
+    {
+        // Singleton
+        public static EquipmentManager Instance { private set; get; }
+
         // Equipment Slots
         private Weapon[] weaponSlots = new Weapon[4];
         private int activeWeaponSlotID = 0;
@@ -25,6 +28,10 @@ namespace DD.Core.Combat
         // Events
         public event Action<int> OnWeaponSwap;
 
+        private void Awake() {
+            Instance = this;
+        }
+
         private void Start() {
             // ***** TEST *****
             EquipWeapon(WeaponSlot.One, testWeapon);
@@ -32,7 +39,7 @@ namespace DD.Core.Combat
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
             InputManager.Instance.OnShoot += UseWeapon;
-            InputManager.Instance.OnReload += ReloadWeapon;
+            InputManager.Instance.OnReload += UseWeaponAction;
         }
 
         private void LateUpdate() {
@@ -44,13 +51,9 @@ namespace DD.Core.Combat
             ActiveWeapon.Attack();
         }
         
-        public void ReloadWeapon()
+        public void UseWeaponAction()
         {
-            // if(ActiveWeapon.WeaponType == WeaponType.Gun)
-            // {
-            //     Gun gun = ActiveWeapon as Gun;
-            //     gun.Reload(gun.MaxAmmoCapacity);
-            // }
+            ActiveWeapon.UseWeaponAction();
         }
 
         /// <summary>
