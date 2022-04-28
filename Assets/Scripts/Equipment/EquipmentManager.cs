@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Control;
+using DD.Core.Items;
 using UnityEngine.Animations.Rigging;
 
 namespace DD.Core.Combat
@@ -11,27 +12,22 @@ namespace DD.Core.Combat
     {        
         // Equipment Slots
         private Weapon[] equipmentSlots = new Weapon[4];
-
-        // Active Equipment
         private int activeWeaponSlotID = 0;
         public Weapon ActiveWeapon { get { return equipmentSlots[activeWeaponSlotID]; } }
 
         [Header("Animation")]
+        [SerializeField] private Transform weaponHoldTransform;
         [SerializeField] private Animator playerAnimator;
         [SerializeField] private MultiAimConstraint aimTargetConstraint;
+
+        public EquipmentItem testWeapon;
 
         // Events
         public event Action<int> OnWeaponSwap;
 
         private void Start() {
             // ***** TEST *****
-            int i = 0;
-            foreach (var gun in FindObjectsOfType<Gun>())
-            {
-                equipmentSlots[i] = gun;
-                gun.SetCanUse(true);
-                i++;
-            }
+            EquipWeapon(0, testWeapon);
 
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
@@ -41,34 +37,13 @@ namespace DD.Core.Combat
 
         private void LateUpdate() {
             UpdateAnimations();
-        }
+        }     
 
         public void UseWeapon()
         {
             ActiveWeapon.Attack();
         }
         
-        /// <summary>
-        /// Equips the given weapon in the associated equipment slot.
-        /// </summary>
-        /// <param name="equipmentSlotID">ID of the equipment slot to set the weapon to.</param>
-        /// <param name="weaponToEquip">Weapon to equip.</param>
-        public void EquipWeapon(int equipmentSlotID, Weapon weaponToEquip)
-        {
-            if (equipmentSlotID < 0 || equipmentSlotID >= equipmentSlots.Length)
-            {
-                Debug.LogWarning("Equipment Slot doesn't exist. The weapon wasn't equipped.");
-                return;
-            }
-
-            equipmentSlots[equipmentSlotID] = weaponToEquip;
-
-            if(equipmentSlotID == activeWeaponSlotID)
-            {
-                SwapWeapon(equipmentSlotID);
-            }
-        }
-
         public void ReloadWeapon()
         {
             // if(ActiveWeapon.WeaponType == WeaponType.Gun)
@@ -79,23 +54,58 @@ namespace DD.Core.Combat
         }
 
         /// <summary>
+        /// Equips the given weapon in the associated equipment slot.
+        /// </summary>
+        /// <param name="equipmentSlotID">ID of the equipment slot to set the weapon to.</param>
+        /// <param name="weaponToEquip">Weapon to equip.</param>
+        public void EquipWeapon(int equipmentSlotID, EquipmentItem equipmentItem)
+        {
+            if (equipmentSlotID < 0 || equipmentSlotID >= equipmentSlots.Length)
+            {
+                Debug.LogWarning("Equipment Slot doesn't exist. The weapon wasn't equipped.");
+                return;
+            }
+
+            // Remove previous Weapon
+            GameObject previousWeapon = equipmentSlots[equipmentSlotID]?.GetComponent<GameObject>();
+            if(!previousWeapon)
+            {
+                Destroy(previousWeapon);
+            }
+
+            // Spawn weapon to hand position
+            Weapon newWeapon = Instantiate<WorldItem>(equipmentItem.itemPrefab).GetComponent<Weapon>();
+            newWeapon.transform.SetParent(weaponHoldTransform, false);
+            newWeapon.transform.localRotation = Quaternion.identity;
+
+            // Assign spawned weapon to weapon slot
+            equipmentSlots[equipmentSlotID] = newWeapon;
+
+            // Update current active weapon if we've changed it
+            if(equipmentSlotID == activeWeaponSlotID)
+            {
+                SwapWeapon(equipmentSlotID);
+            }
+        }
+
+        /// <summary>
         /// Unequips the weapon associated with the equipment slot.
         /// </summary>
         /// <param name="equipmentSlotID">ID of the slot to unequip.</param>
         public void UnequipWeaponFromSlot(int equipmentSlotID)
         {
-            if(equipmentSlotID < 0 || equipmentSlotID >= equipmentSlots.Length)
-            {
-                Debug.LogWarning("Equipment Slot doesn't exist. The weapon wasn't unequipped.");
-                return;
-            }
+            // if(equipmentSlotID < 0 || equipmentSlotID >= equipmentSlots.Length)
+            // {
+            //     Debug.LogWarning("Equipment Slot doesn't exist. The weapon wasn't unequipped.");
+            //     return;
+            // }
             
-            equipmentSlots[equipmentSlotID] = null;
+            // equipmentSlots[equipmentSlotID] = null;
 
-            if(equipmentSlotID == activeWeaponSlotID)
-            {
-                SwapWeapon(equipmentSlotID);
-            }
+            // if(equipmentSlotID == activeWeaponSlotID)
+            // {
+            //     SwapWeapon(equipmentSlotID);
+            // }
         }
 
         /// <summary>

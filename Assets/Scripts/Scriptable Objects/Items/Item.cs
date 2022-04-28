@@ -23,7 +23,9 @@ namespace DD.Core.Items
 
         public void SetItemID(int id) => itemID = id;
 
-        public abstract void Use();
+        public virtual void Use()
+        {
+        }
 
         public List<ContextMenuOption> GetContextMenuOptions()
         {
@@ -39,5 +41,3 @@ namespace DD.Core.Items
         }
     }
 }
-
-// Next try adding derrived items

@@ -276,6 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4749683148606245485}
+  - component: {fileID: -5199752511376094520}
   - component: {fileID: 4749683148606245484}
   m_Layer: 0
   m_Name: Pistol
@@ -302,6 +303,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5199752511376094520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4749683148606245475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec89df4cafa9411da078b351d54bfbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 5a52b851c756d488bb434b9b35e6ece9, type: 2}
+  itemQuantity: 1
 --- !u!114 &4749683148606245484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,8 +329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8164db8632eef4ae782f7d4b209e1266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  <WeaponType>k__BackingField: 0
   isOwned: 1
   isEquipped: 1
   canUse: 0

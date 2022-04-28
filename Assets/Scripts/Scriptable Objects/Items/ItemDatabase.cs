@@ -26,7 +26,7 @@ namespace DD.Core.Items
 
                 if (set.Contains(itemDatabase[id]))
                 {
-                    Debug.LogError($"Item Database: {name} already contains the ItemData '{itemDatabase[id].name}'");
+                    Debug.LogWarning($"Item Database: {name} already contains the ItemData '{itemDatabase[id].name}'");
                     return;
                 }
 

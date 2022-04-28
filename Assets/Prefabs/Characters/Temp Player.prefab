@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2826646270558624000}
   - component: {fileID: 7351247072470298886}
   m_Layer: 0
-  m_Name: Rig 1
+  m_Name: Player Animation Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5238361880764233507}
   m_LocalRotation: {x: -0.46571743, y: 0.45149466, z: 0.5310588, w: 0.545194}
-  m_LocalPosition: {x: 0.023001563, y: 0.07900092, z: 0.02399979}
+  m_LocalPosition: {x: 0.0141, y: 0.0846, z: 0.021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8277067429230741600}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9c378453a24e54dacf2d603928b5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreInput: 0
+  inputManager: {fileID: 0}
   gravity: -9.81
   groundedGravity: -0.2
   walkSpeed: 3
@@ -157,7 +157,6 @@ MonoBehaviour:
   locomotionTurnSpeedScalar: 0.1
   cameraTransform: {fileID: 0}
   animator: {fileID: 4179680867669133881}
-  aimRigConstraint: {fileID: 8036518003357819806}
 --- !u!114 &3639959652520792826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,8 +196,8 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7082594427839628681}
-        m_TargetAssemblyTypeName: DD.Core.Control.PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DD.Core.Control.InputManager, Assembly-CSharp
         m_MethodName: ToggleIgnoreInput
         m_Mode: 6
         m_Arguments:
@@ -207,7 +206,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &9181141634884648216
 GameObject:
@@ -252,9 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
-    m_ConstrainedObject: {fileID: 8918268719450167212}
+    m_ConstrainedObject: {fileID: 7962164388063258567}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -393,9 +392,9 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 7740456526882207656}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8918268719450167212 stripped
+--- !u!4 &7962164388063258567 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8021001004253913084, guid: 17eff25f47b9a4b4fa66f25ea29f9426,
+  m_CorrespondingSourceObject: {fileID: 366175167995203695, guid: 17eff25f47b9a4b4fa66f25ea29f9426,
     type: 3}
   m_PrefabInstance: {fileID: 7740456526882207656}
   m_PrefabAsset: {fileID: 0}
