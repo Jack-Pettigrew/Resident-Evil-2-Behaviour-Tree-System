@@ -28,8 +28,6 @@ namespace DD.Core.Combat
         [Header("UI")]
         [SerializeField] private WeaponSlotPickerUI weaponSlotPickerUI;
 
-        public EquipmentItem testWeapon;
-
         // Events
         public event Action<int> OnWeaponSwap;
 
@@ -38,10 +36,6 @@ namespace DD.Core.Combat
         }
 
         private void Start() {
-            // ***** TEST *****
-            // EquipWeapon(WeaponSlot.One, testWeapon);
-            // Debug.LogWarning("Equipped Weapon Test");
-
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
             InputManager.Instance.OnShoot += UseWeapon;
