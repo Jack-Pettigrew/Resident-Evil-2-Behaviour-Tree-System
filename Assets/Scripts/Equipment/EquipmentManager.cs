@@ -121,7 +121,7 @@ namespace DD.Core.Combat
             if(ActiveWeapon != null)
             {
                 // Unequip current weapon
-                ActiveWeapon.isEquipped = false;
+                ActiveWeapon.SetEquipped(false);
                 ActiveWeapon.SetCanUse(false);
 
                 // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
@@ -137,7 +137,7 @@ namespace DD.Core.Combat
             if(ActiveWeapon != null)
             {
                 // Set weapon equiped
-                ActiveWeapon.isEquipped = true;
+                ActiveWeapon.SetEquipped(true);
                 ActiveWeapon.SetCanUse(true);
 
                 // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)

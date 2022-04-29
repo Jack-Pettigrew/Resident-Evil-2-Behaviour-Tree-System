@@ -41,8 +41,10 @@ namespace DD.Core.Combat
         // EVENTS
         public event Action<Gun> OnReloaded;
 
-        private void Awake() 
+        protected override void Awake() 
         {
+            base.Awake();
+
             CurrentAmmo = MaxAmmoCapacity;
 
             // Particles
@@ -77,7 +79,7 @@ namespace DD.Core.Combat
         /// </summary>
         public override void Attack()
         {
-            if (canUse && isEquipped && CurrentAmmo > 0)
+            if (CanUse && isEquipped && CurrentAmmo > 0)
             {                
                 // Fire Ray
                 RaycastHit hit;
@@ -99,11 +101,11 @@ namespace DD.Core.Combat
 
         protected IEnumerator AttackCooldown()
         {
-            canUse = false;
+            CanUse = false;
 
             yield return new WaitForSeconds(rateOfFire);
 
-            canUse = true;
+            CanUse = true;
         }
 
         /// <summary>
@@ -111,7 +113,7 @@ namespace DD.Core.Combat
         /// </summary>
         public override void UseWeaponAction()
         {
-            if (canUse && !IsReloading && CurrentAmmo < MaxAmmoCapacity)
+            if (CanUse && !IsReloading && CurrentAmmo < MaxAmmoCapacity)
             {
                 // Gets the amount of ammo for this gun from the inventory
                 ItemSlot itemSlot = Inventory.Instance.FindItemSlot(gunAmmoItem);
@@ -126,14 +128,14 @@ namespace DD.Core.Combat
         {
             if(attackCooldownCoroutine != null) StopCoroutine(attackCooldownCoroutine);
 
-            canUse = false;
+            CanUse = false;
             IsReloading = true;
 
             yield return new WaitForSeconds(reloadTime);
 
             CurrentAmmo = ammo;
             IsReloading = false;
-            canUse = true;
+            CanUse = true;
             OnReloaded?.Invoke(this);
         }
     }

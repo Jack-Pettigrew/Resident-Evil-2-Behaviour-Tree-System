@@ -11,6 +11,7 @@ namespace DD.Systems.Room
     public class Door : MonoBehaviour, IInteractable
     {
         // STATE
+        public bool CanInteract { set; get; }
         public bool IsOpen { private set; get; }
 
         // ROOMS
@@ -22,14 +23,21 @@ namespace DD.Systems.Room
         [Header("Connecting Room")]
         [SerializeField] private Room roomB;
         public Room RoomB { get { return roomB; } }
+
         public Transform roomBEntryPoint;
 
         // EVENTS
         [SerializeField] private UnityEvent openDoorEvent;
         [SerializeField] private UnityEvent closeDoorEvent;
 
+        private void Awake() {
+            CanInteract = true;
+        }
+
         public void Interact()
         {
+            if(!CanInteract) return;
+
             if(!IsOpen)
             {
                 OpenDoor();

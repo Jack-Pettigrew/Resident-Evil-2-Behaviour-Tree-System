@@ -6,13 +6,20 @@ using DD.Core.Items;
 
 namespace DD.Core.Combat
 {
+    [RequireComponent(typeof(WorldItem))]
     public abstract class Weapon : MonoBehaviour
     {
+        private WorldItem worldItem;
+
         [field: Header("Weapon")]
-        public bool isEquipped = false;
-        public bool canUse = false;
+        public bool isEquipped { protected set; get; }
+        public bool CanUse { protected set; get; }
         [SerializeField] protected int weaponDamage = 1;
 
+        protected virtual void Awake() {
+            worldItem = GetComponent<WorldItem>();
+        }
+        
         /// <summary>
         /// The attacking logic for the weapon.
         /// </summary>
@@ -23,6 +30,11 @@ namespace DD.Core.Combat
         /// </summary>
         public abstract void UseWeaponAction();
 
-        public void SetCanUse(bool toggle) => canUse = toggle;
+        public void SetCanUse(bool toggle) => CanUse = toggle;
+        public void SetEquipped(bool equipped)
+        {
+            isEquipped = equipped;
+            worldItem.CanInteract = !equipped;
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace DD.Core
 {
     public interface IInteractable
     {
+        bool CanInteract { set; get; }
         void Interact();
     }
 }
