@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 4749683148265081484}
   - component: {fileID: 4749683148265081475}
   - component: {fileID: 4749683148265081474}
+  - component: {fileID: 1678284609}
   m_Layer: 0
   m_Name: M1911 Handgun_Model
   m_TagString: Untagged
@@ -186,6 +187,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &1678284609
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4749683148265081472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
 --- !u!1 &4749683148407007429
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,8 +307,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4749683148606245475}
-  m_LocalRotation: {x: -0.000000029802315, y: -0.000000029802315, z: 0.000000014901158,
-    w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -315,7 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec89df4cafa9411da078b351d54bfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 5a52b851c756d488bb434b9b35e6ece9, type: 2}
+  <Item>k__BackingField: {fileID: 11400000, guid: 5a52b851c756d488bb434b9b35e6ece9,
+    type: 2}
   itemQuantity: 1
 --- !u!114 &4749683148606245484
 MonoBehaviour:
@@ -329,10 +344,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8164db8632eef4ae782f7d4b209e1266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOwned: 1
-  isEquipped: 1
+  isEquipped: 0
   canUse: 0
   weaponDamage: 1
+  gunAmmoItem: {fileID: 0}
   <MaxAmmoCapacity>k__BackingField: 7
   reloadTime: 3
   bulletOrigin: {fileID: 4749683149073268147}

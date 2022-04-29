@@ -15,10 +15,26 @@ MonoBehaviour:
   itemID: 0
   itemName: Test Pistol
   itemDescription: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 2800000, guid: 9f6e25f212f2cd0468b19701275c9a4c, type: 3}
   itemPrefab: {fileID: -5199752511376094520, guid: 56292433ac90b43a0a66a7a73a1b35db,
     type: 3}
   isStackable: 0
   isDroppable: 1
-  contextMenuOptions: []
+  contextMenuOptions:
+  - menuOptionTitle: Equip
+    onClickCallback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000}
+          m_TargetAssemblyTypeName: DD.Core.Items.EquipmentItem, Assembly-CSharp
+          m_MethodName: Use
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   <EquipmentType>k__BackingField: 1

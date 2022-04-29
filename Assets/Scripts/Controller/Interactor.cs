@@ -32,6 +32,12 @@ namespace DD.Core.Control
             foreach (Collider collider in colliders)
             {
                 IInteractable tempInteractable = collider.GetComponent<IInteractable>();
+
+                // This is a child object, get from parent
+                if(tempInteractable == null)
+                {
+                    tempInteractable = collider.GetComponentInParent<IInteractable>();
+                }
                 
                 if(tempInteractable != null)
                 {                    
