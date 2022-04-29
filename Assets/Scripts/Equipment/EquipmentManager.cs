@@ -5,6 +5,7 @@ using UnityEngine;
 using DD.Core.Control;
 using DD.Core.Items;
 using UnityEngine.Animations.Rigging;
+using DD.UI;
 
 namespace DD.Core.Combat
 {
@@ -15,6 +16,7 @@ namespace DD.Core.Combat
 
         // Equipment Slots
         private Weapon[] weaponSlots = new Weapon[4];
+        public Weapon[] WeaponSlots { get { return weaponSlots; } }
         private int activeWeaponSlotID = 0;
         public Weapon ActiveWeapon { get { return weaponSlots[activeWeaponSlotID]; } }
 
@@ -22,6 +24,9 @@ namespace DD.Core.Combat
         [SerializeField] private Transform weaponHoldTransform;
         [SerializeField] private Animator playerAnimator;
         [SerializeField] private MultiAimConstraint aimTargetConstraint;
+
+        [Header("UI")]
+        [SerializeField] private WeaponSlotPickerUI weaponSlotPickerUI;
 
         public EquipmentItem testWeapon;
 
@@ -34,7 +39,8 @@ namespace DD.Core.Combat
 
         private void Start() {
             // ***** TEST *****
-            EquipWeapon(WeaponSlot.One, testWeapon);
+            // EquipWeapon(WeaponSlot.One, testWeapon);
+            // Debug.LogWarning("Equipped Weapon Test");
 
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
@@ -152,6 +158,11 @@ namespace DD.Core.Combat
             OnWeaponSwap?.Invoke(activeWeaponSlotID);
         }
 
+        public void OpenWeaponSlotPicker(EquipmentItem weaponItem)
+        {
+            weaponSlotPickerUI.SelectWeaponForEquip(weaponItem);
+        }
+
         public void UpdateAnimations()
         {
             // Aiming Animation            
@@ -161,8 +172,5 @@ namespace DD.Core.Combat
                 aimTargetConstraint.weight = InputManager.Instance.Aim ? 1.0f : 0.0f;
             }
         }
-
-        // TODO:
-        // change loadout from inventory
     }
 }

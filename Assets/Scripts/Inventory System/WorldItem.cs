@@ -7,14 +7,14 @@ namespace DD.Core.Items
 {
     public class WorldItem : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Item item;
+        [field: SerializeField] public Item Item { private set; get; }
         [SerializeField] private int itemQuantity;
 
         public void SetItemQuantity(int quantity) => itemQuantity = quantity;
 
         public void Interact()
         {
-            Inventory.Instance.AddItem(item, itemQuantity);
+            Inventory.Instance.AddItem(Item, itemQuantity);
             Destroy(gameObject);
         }
     }

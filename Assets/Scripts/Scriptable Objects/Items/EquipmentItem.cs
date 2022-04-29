@@ -13,6 +13,7 @@ namespace DD.Core.Items
 
         public override void Use()
         {
+            EquipmentManager.Instance.OpenWeaponSlotPicker(this);
         }
     }
 }
