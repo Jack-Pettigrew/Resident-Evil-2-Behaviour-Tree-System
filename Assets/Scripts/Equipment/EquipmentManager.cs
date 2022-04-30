@@ -83,22 +83,24 @@ namespace DD.Core.Combat
             {
                 MoveEquipmentWeaponSlot(equipmentItem, weaponSlot);
             }
-            
-            // Remove previous Weapon
-            GameObject previousWeapon = weaponSlots[weaponSlotID]?.GetComponent<GameObject>();
-            if(!previousWeapon)
+            else
             {
-                Destroy(previousWeapon);
+                // Remove previous Weapon
+                GameObject previousWeapon = weaponSlots[weaponSlotID]?.GetComponent<GameObject>();
+                if(!previousWeapon)
+                {
+                    Destroy(previousWeapon);
+                }
+
+                // Spawn weapon to hand position + disable
+                Weapon newWeapon = Instantiate<WorldItem>(equipmentItem.itemPrefab).GetComponent<Weapon>();
+                newWeapon.transform.SetParent(weaponHoldTransform, false);
+                newWeapon.transform.localRotation = Quaternion.identity;
+                newWeapon.gameObject.SetActive(false);
+
+                // Assign spawned weapon to weapon slot
+                weaponSlots[weaponSlotID] = newWeapon;
             }
-
-            // Spawn weapon to hand position + disable
-            Weapon newWeapon = Instantiate<WorldItem>(equipmentItem.itemPrefab).GetComponent<Weapon>();
-            newWeapon.transform.SetParent(weaponHoldTransform, false);
-            newWeapon.transform.localRotation = Quaternion.identity;
-            newWeapon.gameObject.SetActive(false);
-
-            // Assign spawned weapon to weapon slot
-            weaponSlots[weaponSlotID] = newWeapon;
 
             // Update current active weapon if we've changed it
             if(weaponSlotID == activeWeaponSlotID)
