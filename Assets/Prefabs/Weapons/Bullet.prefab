@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6866036139037018240}
   - component: {fileID: 5878497134804230520}
   - component: {fileID: 6865335181609130190}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,6 +73,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 45ACP Bullet_Casing
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362657251999731927, guid: 4cb20e8abae957146a8b78e670d3fe74,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397418048604020427, guid: 4cb20e8abae957146a8b78e670d3fe74,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8698172140991394757, guid: 4cb20e8abae957146a8b78e670d3fe74,
         type: 3}
@@ -205,10 +215,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2023207857688684297, guid: 65c9f6563c561ee4e8905d1e6a32548b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6804990658058999119, guid: 65c9f6563c561ee4e8905d1e6a32548b,
         type: 3}
       propertyPath: m_Name
       value: UCP45 Bullet Head
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804990658058999119, guid: 65c9f6563c561ee4e8905d1e6a32548b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1773974481383211893, guid: 65c9f6563c561ee4e8905d1e6a32548b, type: 3}
