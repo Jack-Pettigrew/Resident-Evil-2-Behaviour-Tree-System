@@ -24,9 +24,14 @@ namespace DD.UI
         {
             Weapon weapon = EquipmentManager.Instance.WeaponSlots[(int)associatedWeaponSlot];
 
-            if(!weapon) return;
+            if(!weapon) 
+            {
+                iconComponent.texture = null;
+                iconComponent.enabled = false;
+                return;
+            }
             
-            Item item = weapon.GetComponent<WorldItem>().Item;
+            Item item = weapon.WorldItem.Item;
 
             if(item)
             {
