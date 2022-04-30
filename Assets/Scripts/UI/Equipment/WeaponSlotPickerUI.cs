@@ -21,7 +21,7 @@ namespace DD.UI
         {
             if(selectedWeapon == null) return;
 
-            EquipmentManager.Instance.EquipWeapon(weaponSlot, selectedWeapon);
+            EquipmentManager.Instance.EquipWeapon(selectedWeapon, weaponSlot);
             Cancel();
         }
 

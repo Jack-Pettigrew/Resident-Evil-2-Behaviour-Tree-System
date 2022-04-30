@@ -9,7 +9,7 @@ namespace DD.Core.Combat
     [RequireComponent(typeof(WorldItem))]
     public abstract class Weapon : MonoBehaviour
     {
-        private WorldItem worldItem;
+        public WorldItem WorldItem { private set; get; }
 
         [field: Header("Weapon")]
         public bool isEquipped { protected set; get; }
@@ -17,7 +17,7 @@ namespace DD.Core.Combat
         [SerializeField] protected int weaponDamage = 1;
 
         protected virtual void Awake() {
-            worldItem = GetComponent<WorldItem>();
+            WorldItem = GetComponent<WorldItem>();
         }
         
         /// <summary>
@@ -34,7 +34,7 @@ namespace DD.Core.Combat
         public void SetEquipped(bool equipped)
         {
             isEquipped = equipped;
-            worldItem.CanInteract = !equipped;
+            WorldItem.CanInteract = !equipped;
         }
     }
 }

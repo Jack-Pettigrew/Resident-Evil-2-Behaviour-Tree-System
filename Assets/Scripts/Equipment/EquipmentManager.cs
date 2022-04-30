@@ -56,15 +56,34 @@ namespace DD.Core.Combat
             ActiveWeapon.UseWeaponAction();
         }
 
+        public bool HasEquipmentEquipped(EquipmentItem equipmentItem)
+        {
+            foreach (Weapon weapon in weaponSlots)
+            {
+                if(weapon != null && weapon.WorldItem.Item == equipmentItem)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Equips the given weapon in the associated equipment slot.
         /// </summary>
         /// <param name="equipmentSlotID">ID of the equipment slot to set the weapon to.</param>
         /// <param name="weaponToEquip">Weapon to equip.</param>
-        public void EquipWeapon(WeaponSlot weaponSlot, EquipmentItem equipmentItem)
+        public void EquipWeapon(EquipmentItem equipmentItem, WeaponSlot weaponSlot)
         {
             int weaponSlotID = (int) weaponSlot;
 
+            // Handle moving weapon slots
+            if(HasEquipmentEquipped(equipmentItem))
+            {
+                MoveEquipmentWeaponSlot(equipmentItem, weaponSlot);
+            }
+            
             // Remove previous Weapon
             GameObject previousWeapon = weaponSlots[weaponSlotID]?.GetComponent<GameObject>();
             if(!previousWeapon)
@@ -72,10 +91,11 @@ namespace DD.Core.Combat
                 Destroy(previousWeapon);
             }
 
-            // Spawn weapon to hand position
+            // Spawn weapon to hand position + disable
             Weapon newWeapon = Instantiate<WorldItem>(equipmentItem.itemPrefab).GetComponent<Weapon>();
             newWeapon.transform.SetParent(weaponHoldTransform, false);
             newWeapon.transform.localRotation = Quaternion.identity;
+            newWeapon.gameObject.SetActive(false);
 
             // Assign spawned weapon to weapon slot
             weaponSlots[weaponSlotID] = newWeapon;
@@ -150,6 +170,19 @@ namespace DD.Core.Combat
 
             // ui temporarily appears when swapping - via event
             OnWeaponSwap?.Invoke(activeWeaponSlotID);
+        }
+
+        public void MoveEquipmentWeaponSlot(EquipmentItem equipmentItem, WeaponSlot weaponSlot)
+        {
+            for (int i = 0; i < weaponSlots.Length; i++)
+            {
+                if(weaponSlots[i] != null && weaponSlots[i].WorldItem.Item == equipmentItem)
+                {
+                    weaponSlots[(int)weaponSlot] = weaponSlots[i];
+                    weaponSlots[i] = null;
+                    return;
+                }
+            }
         }
 
         public void OpenWeaponSlotPicker(EquipmentItem weaponItem)
