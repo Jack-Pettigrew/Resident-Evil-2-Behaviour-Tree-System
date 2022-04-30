@@ -10,10 +10,10 @@ namespace DD.UI
 {
     public class WeaponSlotUI : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private WeaponSlotPickerUI weaponSlotPickerUI;
         [SerializeField] private WeaponSlot associatedWeaponSlot;
 
-        // UI
+        [Header("UI Components")]
+        [SerializeField] private WeaponSlotPickerUI weaponSlotPickerUI;
         [SerializeField] private RawImage iconComponent;
 
         private void OnEnable() {

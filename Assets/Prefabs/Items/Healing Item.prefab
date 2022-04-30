@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec89df4cafa9411da078b351d54bfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CanInteract>k__BackingField: 1
   <Item>k__BackingField: {fileID: 11400000, guid: 7d53914ae08cb414a9c52f031b41c774,
     type: 2}
   itemQuantity: 1

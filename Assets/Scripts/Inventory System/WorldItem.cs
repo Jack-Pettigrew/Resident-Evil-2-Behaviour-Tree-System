@@ -7,7 +7,7 @@ namespace DD.Core.Items
 {
     public class WorldItem : MonoBehaviour, IInteractable
     {
-        public bool CanInteract { set; get; }
+        [field: SerializeField] public bool CanInteract { set; get; }
 
         [field: SerializeField] public Item Item { private set; get; }
         [SerializeField] private int itemQuantity;
