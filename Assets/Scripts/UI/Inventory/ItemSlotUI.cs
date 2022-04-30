@@ -22,7 +22,7 @@ namespace DD.UI
 
         private void Awake()
         {
-            contextMenu = FindObjectOfType<ContextMenuUI>();
+            contextMenu = FindObjectOfType<ContextMenuUI>(true);
         }
 
         public void SetLinkedItem(ItemSlot itemSlot)
