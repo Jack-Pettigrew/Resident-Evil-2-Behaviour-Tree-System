@@ -17,6 +17,8 @@ namespace DD.UI
         [SerializeField] private RawImage iconComponent;
 
         private void OnEnable() {
+            if(!EquipmentManager.Instance) return;
+            
             DrawWeaponSlot();
         }
 
@@ -47,7 +49,7 @@ namespace DD.UI
         }
 
         public void OnPointerClick(PointerEventData eventData)
-        {
+        {            
             weaponSlotPickerUI.SelectEquipWeapon(associatedWeaponSlot);
         }
     }
