@@ -28,6 +28,9 @@ namespace DD.Core.Control
         public KeyCode reloadKeyCode;
         public event Action OnReload;
 
+        public KeyCode inventoryKeyCode;
+        public event Action OnInventoryToggle;
+
         public KeyCode quickSlotOneKey, quickSlotTwoKey, quickSlotThreeKey, quickSlotFourKey;
         public event Action<WeaponSlot> OnQuickSlotChange;
 
@@ -56,6 +59,9 @@ namespace DD.Core.Control
             Aim = Input.GetKey(aimKeyCode);
             if(Input.GetKeyDown(shootKeyCode)) OnShoot?.Invoke();
             if(Input.GetKeyDown(reloadKeyCode)) OnReload?.Invoke();
+
+            // Inventory
+            if(Input.GetKeyDown(inventoryKeyCode)) OnInventoryToggle?.Invoke();
 
             // Quick Slots
             if(Input.GetKeyDown(quickSlotOneKey)) OnQuickSlotChange?.Invoke(WeaponSlot.One);
