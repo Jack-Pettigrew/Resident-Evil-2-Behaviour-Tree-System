@@ -35,8 +35,7 @@ namespace DD.UI
             foreach (ContextMenuOption menuOption in contextMenuOptions)
             {
                 // Create button
-                Button menuButton = Instantiate(uiButtonPrefab).GetComponent<Button>();
-                menuButton.transform.SetParent(transform);
+                Button menuButton = Instantiate(uiButtonPrefab, transform).GetComponent<Button>();
 
                 menuButton.GetComponentInChildren<TextMeshProUGUI>().text = menuOption.menuOptionTitle;
 
