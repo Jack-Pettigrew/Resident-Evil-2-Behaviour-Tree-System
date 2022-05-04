@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ namespace DD.Systems.InventorySystem
     {
         public Item Item { private set; get; }
         public int ItemQuantity { private set; get; }
+
+        // Events
+        public event Action<ItemSlot> OnItemSlotDepleted;
 
         public ItemSlot(Item item, int amount)
         {
@@ -25,9 +29,12 @@ namespace DD.Systems.InventorySystem
 
         public void RemoveItem(int amountToRemove)
         {
-            if(amountToRemove < 0) return;
-
             ItemQuantity -= amountToRemove;
+
+            if(ItemQuantity <= 0)
+            {
+                OnItemSlotDepleted?.Invoke(this);
+            }
         }
     }
 }

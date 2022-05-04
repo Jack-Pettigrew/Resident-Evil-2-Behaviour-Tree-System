@@ -65,7 +65,10 @@ namespace DD.Systems.InventorySystem
             // Add new ItemSlot
             if(!added && inventory.Count < MaxInventorySize)
             {
-                inventory.Add(new ItemSlot(item, amountToAdd));
+                ItemSlot newItemSlot = new ItemSlot(item, amountToAdd);
+                newItemSlot.OnItemSlotDepleted += RemoveItemSlot;
+                
+                inventory.Add(newItemSlot);
                 added = true;
             }
 
@@ -105,6 +108,11 @@ namespace DD.Systems.InventorySystem
                 worldItem.SetItemQuantity(amount);
                 RemoveItem(item, amount);
             }
+        }
+
+        public void RemoveItemSlot(ItemSlot itemSlot)
+        {
+            inventory.Remove(itemSlot);
         }
 
         public bool HasItem(Item item)
