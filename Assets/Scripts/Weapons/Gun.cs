@@ -7,8 +7,9 @@ using DD.Systems.InventorySystem;
 
 namespace DD.Core.Combat
 {
+    [RequireComponent(typeof(WorldItem))]
     public class Gun : Weapon
-    {
+    {        
         [Header("Ammo")]
         [SerializeField] private AmmoItem gunAmmoItem;
         [field: SerializeField] public int MaxAmmoCapacity { private set; get; }
@@ -120,11 +121,11 @@ namespace DD.Core.Combat
 
                 if(itemSlot == null) return;
 
-                reloadCoroutine = StartCoroutine(ReloadCoroutine(Mathf.Min(CurrentAmmo + itemSlot.ItemQuantity, MaxAmmoCapacity)));
+                reloadCoroutine = StartCoroutine(ReloadCoroutine(itemSlot));
             }
         }
 
-        protected IEnumerator ReloadCoroutine(int ammo)
+        protected IEnumerator ReloadCoroutine(ItemSlot itemSlot)
         {
             if(attackCooldownCoroutine != null) StopCoroutine(attackCooldownCoroutine);
 
@@ -133,7 +134,10 @@ namespace DD.Core.Combat
 
             yield return new WaitForSeconds(reloadTime);
 
-            CurrentAmmo = ammo;
+            int ammoToAdd = Mathf.Min(MaxAmmoCapacity - CurrentAmmo, itemSlot.ItemQuantity);
+            CurrentAmmo += ammoToAdd;
+            itemSlot.RemoveItem(ammoToAdd);
+            
             IsReloading = false;
             CanUse = true;
             OnReloaded?.Invoke(this);
