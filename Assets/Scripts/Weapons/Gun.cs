@@ -10,8 +10,8 @@ namespace DD.Core.Combat
     [RequireComponent(typeof(WorldItem))]
     public class Gun : Weapon
     {        
-        [Header("Ammo")]
-        [SerializeField] private AmmoItem gunAmmoItem;
+        [field: Header("Ammo")]
+        [field: SerializeField] public AmmoItem GunAmmoItem { private set; get; }
         [field: SerializeField] public int MaxAmmoCapacity { private set; get; }
         public int CurrentAmmo { private set; get; }
         public bool IsReloading { private set; get; }
@@ -40,6 +40,7 @@ namespace DD.Core.Combat
         private Coroutine reloadCoroutine;
 
         // EVENTS
+        public event Action OnReloading;
         public event Action<Gun> OnReloaded;
 
         protected override void Awake() 
@@ -117,7 +118,7 @@ namespace DD.Core.Combat
             if (CanUse && !IsReloading && CurrentAmmo < MaxAmmoCapacity)
             {
                 // Gets the amount of ammo for this gun from the inventory
-                ItemSlot itemSlot = Inventory.Instance.FindItemSlot(gunAmmoItem);
+                ItemSlot itemSlot = Inventory.Instance.FindItemSlot(GunAmmoItem);
 
                 if(itemSlot == null) return;
 
@@ -134,6 +135,7 @@ namespace DD.Core.Combat
 
             CanUse = false;
             IsReloading = true;
+            OnReloading?.Invoke();
 
             yield return new WaitForSeconds(reloadTime);
 

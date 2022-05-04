@@ -53,7 +53,7 @@ namespace DD.Core.Combat
         
         public void UseWeaponAction()
         {
-            ActiveWeapon.UseWeaponAction();
+            ActiveWeapon?.UseWeaponAction();
         }
 
         public bool HasEquipmentEquipped(EquipmentItem equipmentItem)
