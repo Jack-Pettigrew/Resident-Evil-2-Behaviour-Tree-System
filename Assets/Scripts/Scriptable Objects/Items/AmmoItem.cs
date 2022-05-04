@@ -5,7 +5,8 @@ using DD.Core.Combat;
 
 namespace DD.Core.Items
 {
-    public class AmmoItem : HealingItem
+    [CreateAssetMenu(menuName = "Items/Ammo Item", fileName = "AmmoItem", order = 3)]
+    public class AmmoItem : EquipmentItem
     {   
         public override void Use()
         {

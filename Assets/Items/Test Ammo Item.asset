@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e876159ff94f4a44ad7afdfdcf9afcb, type: 3}
+  m_Name: Test Ammo Item
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemName: Test Ammo Item
+  itemDescription: 
+  itemIcon: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+  itemPrefab: {fileID: 4539353995082467048, guid: 58cd50910a3ffe742be14ed051ee999a,
+    type: 3}
+  isStackable: 1
+  isDroppable: 1
+  contextMenuOptions:
+  - menuOptionTitle: Combine
+    onClickCallback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000}
+          m_TargetAssemblyTypeName: DD.Core.Items.AmmoItem, Assembly-CSharp
+          m_MethodName: Use
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  <EquipmentType>k__BackingField: 0
