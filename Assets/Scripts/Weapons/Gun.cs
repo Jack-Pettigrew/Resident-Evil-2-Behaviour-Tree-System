@@ -127,7 +127,10 @@ namespace DD.Core.Combat
 
         protected IEnumerator ReloadCoroutine(ItemSlot itemSlot)
         {
-            if(attackCooldownCoroutine != null) StopCoroutine(attackCooldownCoroutine);
+            if(attackCooldownCoroutine != null) 
+            {
+                StopCoroutine(attackCooldownCoroutine);
+            }
 
             CanUse = false;
             IsReloading = true;

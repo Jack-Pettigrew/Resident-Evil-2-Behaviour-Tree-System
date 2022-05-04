@@ -23,10 +23,8 @@ namespace DD.Core.Items
 
         public void SetItemID(int id) => itemID = id;
 
-        public virtual void Use()
-        {
-        }
-
+        public abstract void Use();
+        
         public List<ContextMenuOption> GetContextMenuOptions()
         {
             // Make new list so we don't pile on Drop buttons
