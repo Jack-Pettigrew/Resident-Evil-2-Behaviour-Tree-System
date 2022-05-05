@@ -29,7 +29,7 @@ namespace DD.Core.Combat
         [SerializeField] private WeaponSlotPickerUI weaponSlotPickerUI;
 
         // Events
-        public event Action<int> OnWeaponSwap;
+        public event Action OnWeaponSwap;
 
         private void Awake() {
             Instance = this;
@@ -117,6 +117,7 @@ namespace DD.Core.Combat
         {
             int weaponSlotID = (int) weaponSlot;
 
+            Destroy(weaponSlots[weaponSlotID].gameObject);
             weaponSlots[weaponSlotID] = null;
 
             if(weaponSlotID == activeWeaponSlotID)
@@ -171,7 +172,7 @@ namespace DD.Core.Combat
             // TODO: torso animations may need it's own state flow to ensure correct animations are selected e.g. gun idle, to aiming, to swap, to new gun pose, to disabled torso layer, to enabled torso layer
 
             // ui temporarily appears when swapping - via event
-            OnWeaponSwap?.Invoke(activeWeaponSlotID);
+            OnWeaponSwap?.Invoke();
         }
 
         public void MoveEquipmentWeaponSlot(EquipmentItem equipmentItem, WeaponSlot weaponSlot)

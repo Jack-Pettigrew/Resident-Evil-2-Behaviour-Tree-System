@@ -27289,6 +27289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0c4a440545f264a94550c17f40b3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeTime: 0.5
+  fadingCavasGroup: {fileID: 1743877697}
   currentAmmoCounter: {fileID: 1307211503}
   remainingAmmoCounter: {fileID: 989839430}
 --- !u!43 &1744468774
