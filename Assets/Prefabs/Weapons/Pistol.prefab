@@ -354,7 +354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 1
-  gunAmmoItem: {fileID: 11400000, guid: 80e1476323d52834b9b502257b08e0dc, type: 2}
+  <GunAmmoItem>k__BackingField: {fileID: 11400000, guid: 80e1476323d52834b9b502257b08e0dc,
+    type: 2}
   <MaxAmmoCapacity>k__BackingField: 7
   reloadTime: 3
   bulletOrigin: {fileID: 4749683149073268147}

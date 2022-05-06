@@ -7,6 +7,7 @@ namespace DD.UI
     public abstract class GameplayUI : MonoBehaviour, IFadable
     {
         [Header("Fade Transition")]
+        public bool isTransitioning = false;
         public float fadeTime = 1.0f;
         [SerializeField] protected CanvasGroup fadingCavasGroup;
 
@@ -17,7 +18,7 @@ namespace DD.UI
         
         public bool IsVisible()
         {
-            return fadingCavasGroup.alpha == 0;
+            return fadingCavasGroup.alpha > 0;
         }
         
         public void StartFadeTransition(float startValue, float endValue, float fadeLength)
@@ -27,10 +28,13 @@ namespace DD.UI
 
         protected virtual IEnumerator FadeCorountine(float startValue, float endValue, float fadeLength)
         {
-            if(fadeCoroutine != null) 
+            if(isTransitioning)
             {
                 StopCoroutine(fadeCoroutine);
+                startValue = fadingCavasGroup.alpha;
             }
+
+            isTransitioning = true;
             
             startValue = Mathf.Clamp01(startValue);
             endValue = Mathf.Clamp01(endValue);
@@ -51,6 +55,8 @@ namespace DD.UI
                 
                 yield return null;
             }
+
+            isTransitioning = false;
         }
     }
 }

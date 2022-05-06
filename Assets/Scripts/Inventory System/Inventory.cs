@@ -27,7 +27,7 @@ namespace DD.Systems.InventorySystem
         /// <summary> 
         /// When a new ItemSlot has been given an ItemSlot slot and the amount added
         /// </summary>
-        public event Action<Item, int> OnItemAdded;
+        public event Action<ItemSlot> OnItemAdded;
 
         /// <summary>
         /// When an ItemSlot failed being added to the inventory
@@ -50,14 +50,16 @@ namespace DD.Systems.InventorySystem
         {
             bool added = false;
 
+            ItemSlot itemSlot = null;
+
             // Add to existing ItemSlot if stackable
             if (item.isStackable)
             {
-                ItemSlot existingItemSlot = FindItemSlot(item);
+                itemSlot = FindItemSlot(item);
 
-                if (existingItemSlot != null)
+                if (itemSlot != null)
                 {
-                    existingItemSlot.AddItem(amountToAdd);
+                    itemSlot.AddItem(amountToAdd);
                     added = true;
                 }
             }
@@ -65,10 +67,10 @@ namespace DD.Systems.InventorySystem
             // Add new ItemSlot
             if(!added && inventory.Count < MaxInventorySize)
             {
-                ItemSlot newItemSlot = new ItemSlot(item, amountToAdd);
-                newItemSlot.OnItemSlotDepleted += RemoveItemSlot;
+                itemSlot = new ItemSlot(item, amountToAdd);
+                itemSlot.OnItemSlotDepleted += RemoveItemSlot;
                 
-                inventory.Add(newItemSlot);
+                inventory.Add(itemSlot);
                 added = true;
             }
 
@@ -78,7 +80,7 @@ namespace DD.Systems.InventorySystem
             }
             else
             {
-                OnItemAdded?.Invoke(item, amountToAdd);
+                OnItemAdded?.Invoke(itemSlot);
             }
 
             return added;

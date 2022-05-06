@@ -40,6 +40,7 @@ namespace DD.Core.Combat
         private Coroutine reloadCoroutine;
 
         // EVENTS
+        public event Action OnShot;
         public event Action OnReloading;
         public event Action OnReloaded;
 
@@ -98,6 +99,7 @@ namespace DD.Core.Combat
 
                 CurrentAmmo -= 1;
                 attackCooldownCoroutine = StartCoroutine(AttackCooldown());
+                OnShot?.Invoke();
             }
         }
 
