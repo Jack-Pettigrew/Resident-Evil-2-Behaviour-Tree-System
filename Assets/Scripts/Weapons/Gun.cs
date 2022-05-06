@@ -41,7 +41,7 @@ namespace DD.Core.Combat
 
         // EVENTS
         public event Action OnReloading;
-        public event Action<Gun> OnReloaded;
+        public event Action OnReloaded;
 
         protected override void Awake() 
         {
@@ -145,7 +145,7 @@ namespace DD.Core.Combat
             
             IsReloading = false;
             CanUse = true;
-            OnReloaded?.Invoke(this);
+            OnReloaded?.Invoke();
         }
     }
 }
