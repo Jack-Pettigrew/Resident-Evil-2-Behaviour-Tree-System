@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Combat;
+using DD.Animation;
 
 namespace DD.Core.Control
 {
-    public class InputManager : MonoBehaviour
+    public class InputManager : MonoBehaviour, IAnimatorEvent<PlayerAnimationController>
     {
         // Singleton
         public static InputManager Instance;
@@ -21,6 +22,7 @@ namespace DD.Core.Control
 
         public KeyCode aimKeyCode;
         public bool Aim { private set; get; }
+        public Action OnAim;
 
         public KeyCode shootKeyCode;
         public event Action OnShoot;
@@ -71,5 +73,15 @@ namespace DD.Core.Control
         }
 
         public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;
+
+        public void SubscribeAnimator(PlayerAnimationController animationController)
+        {
+            
+        }
+
+        public void UnsubscribeAnimator(PlayerAnimationController animationController)
+        {
+            
+        }
     }
 }

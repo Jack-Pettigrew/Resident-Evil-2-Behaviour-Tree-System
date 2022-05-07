@@ -15,6 +15,7 @@ namespace DD.Core.Combat
         public bool isEquipped { protected set; get; }
         public bool CanUse { protected set; get; }
         [SerializeField] protected int weaponDamage = 1;
+        [field: SerializeField] public WeaponType WeaponType { private set; get; }
 
         protected virtual void Awake() {
             WorldItem = GetComponent<WorldItem>();
@@ -36,5 +37,11 @@ namespace DD.Core.Combat
             isEquipped = equipped;
             WorldItem.CanInteract = !equipped;
         }
+    }
+
+    public enum WeaponType
+    {
+        Gun,
+        Meele
     }
 }

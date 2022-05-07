@@ -1,11 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD.Animation;
 
 namespace DD.Core.Control
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IAnimatorEvent<PlayerAnimationController>
     {
         [Header("Components")]
         [SerializeField] private InputManager inputManager;
@@ -26,22 +28,12 @@ namespace DD.Core.Control
         [Header("Camera")]
         [SerializeField] private Transform cameraTransform = null;
 
-        [Header("Animation")]
-        [SerializeField] private Animator animator = null;
+        // EVENTS
+        public event Action OnMovementUpdated;
 
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
-
-            if(animator == null)
-            {
-                animator = GetComponentInChildren<Animator>();
-
-                if(animator == null)
-                {
-                    Debug.LogError($"No Animator found for {name}");
-                }
-            }
 
             if(!inputManager)
             {
@@ -61,7 +53,7 @@ namespace DD.Core.Control
         }
 
         private void LateUpdate() {
-            UpdateAnimations();
+            OnMovementUpdated?.Invoke();
         }
 
         /// <summary>
@@ -124,12 +116,14 @@ namespace DD.Core.Control
             }
         }
 
-        private void UpdateAnimations()
+        public void SubscribeAnimator(PlayerAnimationController animationController)
         {
-            // Locomotion
-            animator.SetFloat("VelX", Mathf.Lerp(animator.GetFloat("VelX"), inputManager.InputDirection.x, Time.deltaTime * 10.0f));
-            animator.SetFloat("VelY", Mathf.Lerp(animator.GetFloat("VelY"), inputManager.InputDirection.z, Time.deltaTime * 10.0f));
-            animator.SetBool("isSprinting", inputManager.Sprint);
+            OnMovementUpdated += animationController.UpdateMovement;
+        }
+
+        public void UnsubscribeAnimator(PlayerAnimationController animationController)
+        {
+            OnMovementUpdated -= animationController.UpdateMovement;
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Control;
 using DD.Core.Items;
-using UnityEngine.Animations.Rigging;
 using DD.UI;
+using DD.Animation;
 
 namespace DD.Core.Combat
 {
-    public class EquipmentManager : MonoBehaviour
+    public class EquipmentManager : MonoBehaviour, IAnimatorEvent<PlayerAnimationController>
     {
         // Singleton
         public static EquipmentManager Instance { private set; get; }
@@ -19,11 +19,7 @@ namespace DD.Core.Combat
         public Weapon[] WeaponSlots { get { return weaponSlots; } }
         private int activeWeaponSlotID = 0;
         public Weapon ActiveWeapon { get { return weaponSlots[activeWeaponSlotID]; } }
-
-        [Header("Animation")]
-        [SerializeField] private Transform weaponHoldTransform;
-        [SerializeField] private Animator playerAnimator;
-        [SerializeField] private MultiAimConstraint aimTargetConstraint;
+        [SerializeField] private Transform weaponHoldSocket;
 
         [Header("UI")]
         [SerializeField] private WeaponSlotPickerUI weaponSlotPickerUI;
@@ -42,10 +38,6 @@ namespace DD.Core.Combat
             InputManager.Instance.OnShoot += UseWeapon;
             InputManager.Instance.OnReload += UseWeaponAction;
         }
-
-        private void LateUpdate() {
-            UpdateAnimations();
-        }     
 
         public void UseWeapon()
         {
@@ -95,7 +87,7 @@ namespace DD.Core.Combat
 
                 // Spawn weapon to hand position + disable
                 Weapon newWeapon = Instantiate<WorldItem>(equipmentItem.itemPrefab).GetComponent<Weapon>();
-                newWeapon.transform.SetParent(weaponHoldTransform, false);
+                newWeapon.transform.SetParent(weaponHoldSocket, false);
                 newWeapon.transform.localRotation = Quaternion.identity;
                 newWeapon.gameObject.SetActive(false);
 
@@ -195,14 +187,14 @@ namespace DD.Core.Combat
             weaponSlotPickerUI.SelectWeaponForEquip(weaponItem);
         }
 
-        public void UpdateAnimations()
+        public void SubscribeAnimator(PlayerAnimationController animationController)
         {
-            // Aiming Animation            
-            if(ActiveWeapon && aimTargetConstraint)
-            {
-                playerAnimator.SetLayerWeight(1, (InputManager.Instance.Aim ? 1.0f : 0.0f));
-                aimTargetConstraint.weight = InputManager.Instance.Aim ? 1.0f : 0.0f;
-            }
+            OnWeaponSwapped += animationController.UpdateWeaponType;
+        }
+
+        public void UnsubscribeAnimator(PlayerAnimationController animationController)
+        {
+            OnWeaponSwapped -= animationController.UpdateWeaponType;
         }
     }
 }

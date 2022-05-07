@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Items;
 using DD.Systems.InventorySystem;
+using DD.Animation;
 
 namespace DD.Core.Combat
 {
     [RequireComponent(typeof(WorldItem))]
-    public class Gun : Weapon
+    public class Gun : Weapon, IAnimatorEvent<PlayerAnimationController>
     {        
         [field: Header("Ammo")]
         [field: SerializeField] public AmmoItem GunAmmoItem { private set; get; }
@@ -148,6 +149,18 @@ namespace DD.Core.Combat
             IsReloading = false;
             CanUse = true;
             OnReloaded?.Invoke();
+        }
+
+        public void SubscribeAnimator(PlayerAnimationController animationController)
+        {
+            OnReloading += animationController.TriggerReload;
+            OnShot += animationController.TriggerShoot;
+        }
+
+        public void UnsubscribeAnimator(PlayerAnimationController animationController)
+        {
+            OnReloading -= animationController.TriggerReload;
+            OnShot -= animationController.TriggerShoot;
         }
     }
 }
