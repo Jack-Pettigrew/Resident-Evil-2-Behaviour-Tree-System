@@ -76,6 +76,9 @@ namespace DD.Core.Combat
             {
                 Debug.LogError("No Bullet Prefab selected.");
             }
+
+            // Animation Subbing
+            FindObjectOfType<PlayerAnimationController>()?.InitAnimationEvent(this);
         }
 
         /// <summary>

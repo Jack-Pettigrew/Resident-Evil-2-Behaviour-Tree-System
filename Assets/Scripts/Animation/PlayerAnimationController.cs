@@ -8,7 +8,7 @@ using UnityEngine.Animations.Rigging;
 
 namespace DD.Animation
 {
-    public class PlayerAnimationController : AnimationController
+    public class PlayerAnimationController : AnimationController<PlayerAnimationController>
     {
         // Input Manager
         private InputManager inputManager;
@@ -28,7 +28,7 @@ namespace DD.Animation
             // subscribe to all events you can find relating to the player
             foreach (IAnimatorEvent<PlayerAnimationController> animatorEvent in FindObjectsOfType<MonoBehaviour>().OfType<IAnimatorEvent<PlayerAnimationController>>())
             {
-                animatorEvent.SubscribeAnimator(this);
+                InitAnimationEvent(animatorEvent);
             }
         }
 
@@ -59,14 +59,11 @@ namespace DD.Animation
         public void TriggerShoot()
         {
             animator.SetTrigger("Shoot");
-            animator.ResetTrigger("Shoot");
         }
 
         public void TriggerReload()
         {
             animator.SetTrigger("Reload");
-            animator.ResetTrigger("Reload");
-
         }
 
         public void UpdateWeaponType()
