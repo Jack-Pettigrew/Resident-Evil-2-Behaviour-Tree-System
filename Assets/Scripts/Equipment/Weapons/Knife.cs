@@ -1,18 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DD.Animation;
 using UnityEngine;
 
-public class Knife : MonoBehaviour
+namespace DD.Core.Combat
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Knife : Weapon
     {
+        public event Action OnAttack;
         
-    }
+        protected override void Awake() 
+        {
+            base.Awake();
 
-    // Update is called once per frame
-    void Update()
-    {
+            FindObjectOfType<PlayerAnimationController>()?.InitAnimationEvent(this);
+        }
         
+        public override void Attack()
+        {
+            OnAttack?.Invoke();
+        }
+
+        public override void UseWeaponAction()
+        {
+            // Nothing
+        }
+
+        public override void SubscribeAnimator(PlayerAnimationController animationController)
+        {
+            OnAttack += animationController.TriggerShoot;
+        }
+
+        public override void UnsubscribeAnimator(PlayerAnimationController animationController)
+        {
+            OnAttack -= animationController.TriggerShoot;
+        }
     }
 }

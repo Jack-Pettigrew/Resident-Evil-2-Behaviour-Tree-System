@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.Systems.InventorySystem;
 using DD.Core.Items;
+using DD.Animation;
 
 namespace DD.Core.Combat
 {
     [RequireComponent(typeof(WorldItem))]
-    public abstract class Weapon : MonoBehaviour
+    public abstract class Weapon : MonoBehaviour, IAnimatorEvent<PlayerAnimationController>
     {
         public WorldItem WorldItem { private set; get; }
 
@@ -37,6 +38,10 @@ namespace DD.Core.Combat
             isEquipped = equipped;
             WorldItem.CanInteract = !equipped;
         }
+
+        public abstract void SubscribeAnimator(PlayerAnimationController animationController);
+
+        public abstract void UnsubscribeAnimator(PlayerAnimationController animationController);
     }
 
     public enum WeaponType

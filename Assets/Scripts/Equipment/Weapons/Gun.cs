@@ -9,7 +9,7 @@ using DD.Animation;
 namespace DD.Core.Combat
 {
     [RequireComponent(typeof(WorldItem))]
-    public class Gun : Weapon, IAnimatorEvent<PlayerAnimationController>
+    public class Gun : Weapon
     {        
         [field: Header("Ammo")]
         [field: SerializeField] public AmmoItem GunAmmoItem { private set; get; }
@@ -154,13 +154,13 @@ namespace DD.Core.Combat
             OnReloaded?.Invoke();
         }
 
-        public void SubscribeAnimator(PlayerAnimationController animationController)
+        public override void SubscribeAnimator(PlayerAnimationController animationController)
         {
             OnReloading += animationController.TriggerReload;
             OnShot += animationController.TriggerShoot;
         }
 
-        public void UnsubscribeAnimator(PlayerAnimationController animationController)
+        public override void UnsubscribeAnimator(PlayerAnimationController animationController)
         {
             OnReloading -= animationController.TriggerReload;
             OnShot -= animationController.TriggerShoot;
