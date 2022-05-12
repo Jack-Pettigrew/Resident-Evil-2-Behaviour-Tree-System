@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1959be2297bc248979eb23023e24e98e, type: 3}
+  m_Name: Test Knife Item
+  m_EditorClassIdentifier: 
+  itemID: 0
+  itemName: Knife
+  itemDescription: Very sharp knife
+  itemIcon: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+  itemPrefab: {fileID: -7755348436959745225, guid: 2ad621b78d7db0f4ca65ace34a25b43a,
+    type: 3}
+  isStackable: 0
+  isDroppable: 1
+  contextMenuOptions:
+  - menuOptionTitle: Equip
+    onClickCallback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000}
+          m_TargetAssemblyTypeName: DD.Core.Items.EquipmentItem, Assembly-CSharp
+          m_MethodName: Use
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  <EquipmentType>k__BackingField: 1
