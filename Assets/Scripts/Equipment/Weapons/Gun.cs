@@ -5,6 +5,7 @@ using UnityEngine;
 using DD.Core.Items;
 using DD.Systems.InventorySystem;
 using DD.Animation;
+using DD.Core.Control;
 
 namespace DD.Core.Combat
 {
@@ -86,7 +87,7 @@ namespace DD.Core.Combat
         /// </summary>
         public override void Attack()
         {
-            if (CanUse && isEquipped && CurrentAmmo > 0)
+            if (InputManager.Instance.Aim && CanUse && isEquipped && CurrentAmmo > 0)
             {                
                 // Fire Ray
                 RaycastHit hit;
