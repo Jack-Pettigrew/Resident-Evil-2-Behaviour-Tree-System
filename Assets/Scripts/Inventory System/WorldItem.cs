@@ -16,8 +16,6 @@ namespace DD.Core.Items
 
         public void Interact()
         {
-            if(!CanInteract) return;
-
             Inventory.Instance.AddItem(Item, itemQuantity);
             Destroy(gameObject);
         }

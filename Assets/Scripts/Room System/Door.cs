@@ -36,8 +36,6 @@ namespace DD.Systems.Room
 
         public void Interact()
         {
-            if(!CanInteract) return;
-
             if(!IsOpen)
             {
                 OpenDoor();

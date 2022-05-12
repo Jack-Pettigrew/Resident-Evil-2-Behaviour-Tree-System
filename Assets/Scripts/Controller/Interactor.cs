@@ -39,7 +39,7 @@ namespace DD.Core.Control
                     tempInteractable = collider.GetComponentInParent<IInteractable>();
                 }
                 
-                if(tempInteractable != null)
+                if(tempInteractable != null && tempInteractable.CanInteract)
                 {                    
                     float angle = Vector3.Angle(transform.forward, collider.transform.position - transform.position);
                     float dist = Vector3.Distance(transform.position, collider.transform.position);
