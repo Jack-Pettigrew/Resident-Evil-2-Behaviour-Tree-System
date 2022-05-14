@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cross Punch
+  m_Name: Right Hook
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e265e879348b6c547b35939e18260d27, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7c20d6acfd475b24987087bded4f8587, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
