@@ -5,7 +5,7 @@ using DD.AI.Controllers;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class PlayAnimation : Node
+    public class PlayAnimation : LeafNode
     {
         private readonly string stateName;
         private bool waitForAnimationToComplete;

@@ -5,7 +5,7 @@ using DD.AI.BehaviourTreeSystem;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class IdleNode : Node
+    public class IdleNode : LeafNode
     {
         private readonly float IDLE_LENGTH;
         private float timer = 0.0f;

@@ -5,7 +5,7 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class OpenDoor : Node
+    public class OpenDoor : LeafNode
     {
         private readonly string targetDoorBlackboardKey;
 
