@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public abstract class Composite : Node, IInteruptable
+    public abstract class Composite : Node
     {
         /// <summary>
         /// All the connected child nodes this Composite branches down to.
@@ -58,11 +58,6 @@ namespace DD.AI.BehaviourTreeSystem
             }
 
             return true;
-        }
-
-        public virtual void Interupt()
-        {
-            // is this bad OOP?
         }
     }
 }

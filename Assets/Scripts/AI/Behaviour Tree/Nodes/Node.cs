@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DD.AI.BehaviourTreeSystem
 {
     [System.Serializable]
-    public abstract class Node
+    public abstract class Node : IInteruptable
     {
         // Behaviour Tree references
         protected readonly BehaviourTree behaviourTree;
@@ -57,6 +57,11 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         /// <returns>Node State result from evaluation logic.</returns>
         protected abstract NodeState Evaluate();
+
+        public virtual void Interupt()
+        {
+            // is this bad OOP?
+        }
     }
 
     public enum NodeState
