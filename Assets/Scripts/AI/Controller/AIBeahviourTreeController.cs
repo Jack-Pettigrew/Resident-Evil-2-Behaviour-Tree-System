@@ -89,10 +89,10 @@ namespace DD.AI.Controllers
                     new Sequence(behaviourTree, new List<Node>{
                         // Room Path check?
                         new Invertor(behaviourTree,
-                            new HasPathTo<Component>(behaviourTree, "TargetDoorPath", "Player")
+                            new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player")
                         ),
                         new GetDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
-                        new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
+                        new GetDoorFromDoorPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
                     }),
                     // new Sequence
                         // Repeater: MoveTo TargetDoor until IsAtTarget
@@ -108,7 +108,7 @@ namespace DD.AI.Controllers
                             new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
                             new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 1.0f), NodeState.SUCCESSFUL),
                             new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-                            new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
+                            new GetDoorFromDoorPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
                     })
                 })
             });

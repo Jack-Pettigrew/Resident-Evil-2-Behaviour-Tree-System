@@ -6,6 +6,6 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public interface IInteruptable
     {
-        void Interupt();
+        void OnInterupt();
     }
 }

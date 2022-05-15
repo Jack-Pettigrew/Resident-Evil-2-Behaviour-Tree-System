@@ -5,12 +5,12 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class HasPathTo<T> : Conditional where T : Component
+    public class HasRoomPathTo<T> : Conditional where T : Component
     {
         protected readonly string doorPathBlackboardKey;
         protected readonly string targetBlackboardKey;
 
-        public HasPathTo(BehaviourTree behaviourTree, string doorPathBlackboardKey, string targetBlackboardKey) : base(behaviourTree)
+        public HasRoomPathTo(BehaviourTree behaviourTree, string doorPathBlackboardKey, string targetBlackboardKey) : base(behaviourTree)
         {
             this.doorPathBlackboardKey = doorPathBlackboardKey;
             this.targetBlackboardKey = targetBlackboardKey;

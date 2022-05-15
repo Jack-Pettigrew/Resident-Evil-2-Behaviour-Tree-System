@@ -84,9 +84,14 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns>Node State result from evaluation logic.</returns>
         protected abstract NodeState Evaluate();
 
-        public virtual void Interupt()
+        /// <summary>
+        /// <para>Called when running node is no longer a part the currently executing branch. Contains all necessary for clean up logic.</para>
+        /// When overriding ensure base logic is also called.
+        /// </summary>
+        public virtual void OnInterupt()
         {
-            // is this bad OOP?
+            NodeExit();
+            State = NodeState.NONE;
         }
     }
 
