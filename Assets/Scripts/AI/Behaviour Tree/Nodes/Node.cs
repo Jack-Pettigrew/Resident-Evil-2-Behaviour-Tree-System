@@ -7,15 +7,36 @@ namespace DD.AI.BehaviourTreeSystem
     [System.Serializable]
     public abstract class Node : IInteruptable
     {
-        // Behaviour Tree references
+        // Node References
         protected readonly BehaviourTree behaviourTree;
 
-        // Node Instance Variables
-        public bool NodeRunning { private set; get; }
+        // Node Status
+        public NodeState State { private set; get; }
 
         public Node(BehaviourTree behaviourTree)
         {
             this.behaviourTree = behaviourTree;
+        }
+
+        /// <summary>
+        /// The node start logic.
+        /// </summary>
+        /// <returns>Success?</returns>
+        protected virtual bool NodeStart()
+        {                        
+            // Log Node as reached
+            behaviourTree.LogReachedNode(this);
+            
+            return OnStart();
+        }
+
+        /// <summary>
+        /// The node exit logic.
+        /// </summary>
+        /// <returns>Success?</returns>
+        private bool NodeExit()
+        {
+            return OnExit();
         }
 
         /// <summary>
@@ -24,30 +45,35 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns></returns>
         public NodeState UpdateNode()
         {
-            if(!OnStart())
+            if(!NodeStart())
             {
-                return NodeState.FAILED;
+                return State = NodeState.FAILED;
             }
 
-            NodeState nodeState = Evaluate();
+            State = Evaluate();            
 
-            if(!OnExit(nodeState))
+            if(!NodeExit())
             {
-                return NodeState.FAILED;
+                return State = NodeState.FAILED;
             }
 
-            return nodeState;
+            return State;
         }
 
-        /* 
-         * OnStart and OnExit functions may or may not be needed based on the current BT implementation
-         * (heavily relying on the Blackboard for Node variables means nodes don't need to update local variables to match any changes)
-        */
+        /// <summary>
+        /// Custom node start logic.
+        /// </summary>
+        /// <returns>Success?</returns>
         protected virtual bool OnStart()
         {
             return true;
         }
-        protected virtual bool OnExit(NodeState nodeState)
+
+        /// <summary>
+        /// Custom node exit logic.
+        /// </summary>
+        /// <returns>Success?</returns>
+        protected virtual bool OnExit()
         {
             return true;
         }
@@ -66,6 +92,7 @@ namespace DD.AI.BehaviourTreeSystem
 
     public enum NodeState
     {
+        NONE,
         RUNNING,
         SUCCESSFUL,
         FAILED

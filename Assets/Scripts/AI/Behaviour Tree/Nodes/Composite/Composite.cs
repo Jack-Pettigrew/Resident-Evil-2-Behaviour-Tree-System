@@ -29,8 +29,8 @@ namespace DD.AI.BehaviourTreeSystem
         }
 
         protected override bool OnStart()
-        {
-            // Service Nodes
+        {            
+            // Evaluate Service Nodes before composite updates
             if (serviceNodes?.Count > 0)
             {
                 foreach (var node in serviceNodes)
@@ -40,21 +40,6 @@ namespace DD.AI.BehaviourTreeSystem
                         return false;
                     }
                 }
-            }
-
-            return true;
-        }
-
-        protected override bool OnExit(NodeState nodeState)
-        {
-            switch (nodeState)
-            {
-                case NodeState.FAILED:
-                    break;
-
-                default:
-                    behaviourTree.LogBranchNode(this);
-                    break;
             }
 
             return true;

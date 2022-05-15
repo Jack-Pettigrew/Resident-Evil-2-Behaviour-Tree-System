@@ -41,7 +41,7 @@ namespace DD.AI.BehaviourTreeSystem
                     break;
             }
 
-            HandleLoggedNodes();
+            HandleLoggedBranch();
 
             /* TO DO:
             * Handle different Node States diferently
@@ -55,9 +55,8 @@ namespace DD.AI.BehaviourTreeSystem
         /// <summary>
         /// Handles difference between current execution branch and the previous one.
         /// </summary>
-        private void HandleLoggedNodes()
-        {
-            if (previousBranch.Count > 0)
+        private void HandleLoggedBranch()
+        {          
             {
                 List<Composite> oldBranchNodes = previousBranch.Except(currentBranch).ToList();
 
@@ -78,8 +77,8 @@ namespace DD.AI.BehaviourTreeSystem
         /// <summary>
         /// Logs the Node as having been executed this execution branch.
         /// </summary>
-        /// <param name="node"></param>
-        public void LogBranchNode(Composite node)
+        /// <param name="node">The node reached.</param>
+        public void LogReachedNode(Node node)
         {
             currentBranch.Add(node);
         }
