@@ -7,7 +7,7 @@ using DD.Animation;
 
 namespace DD.Core.Control
 {
-    public class InputManager : MonoBehaviour, IAnimatorEvent<PlayerAnimationController>
+    public class InputManager : MonoBehaviour
     {
         // Singleton
         public static InputManager Instance;
@@ -73,15 +73,5 @@ namespace DD.Core.Control
         }
 
         public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;
-
-        public void SubscribeAnimator(PlayerAnimationController animationController)
-        {
-            
-        }
-
-        public void UnsubscribeAnimator(PlayerAnimationController animationController)
-        {
-            
-        }
     }
 }
