@@ -17,12 +17,12 @@ namespace DD.Animation
         [SerializeField] private int weaponAnimatorLayerID = 1;
 
         [Header("Animation Targets")]
-        [SerializeField] private MultiAimConstraint aimTargetConstraint;
+        [SerializeField] private Rig aimRig;
         
         private void Awake() {
             inputManager = FindObjectOfType<InputManager>();
         }
-        
+                
         private void Start()
         {
             // subscribe to all events you can find relating to the player
@@ -53,7 +53,10 @@ namespace DD.Animation
         public void UpdateAim()
         {
             animator.SetBool("Aiming", inputManager.Aim);
-            aimTargetConstraint.weight = (EquipmentManager.Instance.ActiveWeapon != null && inputManager.Aim) ? 1.0f : 0.0f;
+
+            bool contraintWeight = (EquipmentManager.Instance.ActiveWeapon != null && EquipmentManager.Instance.ActiveWeapon.WeaponType == WeaponType.Gun) && inputManager.Aim;
+
+            aimRig.weight = contraintWeight ? 1.0f : 0.0f;
         }
 
         public void TriggerShoot()

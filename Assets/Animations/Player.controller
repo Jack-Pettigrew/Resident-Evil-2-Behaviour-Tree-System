@@ -33,7 +33,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Stabbing
-  m_Speed: 1.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3753434903468185466}
@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 1452c88d736db1c41a690b23f19ae169,
+  m_Motion: {fileID: 9122943657865514959, guid: 1452c88d736db1c41a690b23f19ae169,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -151,13 +151,13 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: a66e1b03ad8850c4383149fc949907d8,
+  m_Motion: {fileID: 6183211152343637703, guid: a66e1b03ad8850c4383149fc949907d8,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: VelX
 --- !u!1102 &-5709839296084149666
 AnimatorState:
   serializedVersion: 6
@@ -285,7 +285,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 35726e1486d3b164ea96a5d6e8aa05ef,
+  m_Motion: {fileID: -2239144741285499113, guid: 35726e1486d3b164ea96a5d6e8aa05ef,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -326,7 +326,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 488a5277e439df044b6135b7aa2bb17b,
+    m_Motion: {fileID: -3100369314251171874, guid: 488a5277e439df044b6135b7aa2bb17b,
       type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
@@ -412,7 +412,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Weapon
+  m_Name: Upperbody
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5709839296084149666}
@@ -458,7 +458,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.875
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -548,14 +548,14 @@ AnimatorController:
     m_Behaviours: []
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
-    m_DefaultWeight: 0
+    m_DefaultWeight: 1
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Weapon
+    m_Name: Upperbody
     m_StateMachine: {fileID: -2588200227585034574}
-    m_Mask: {fileID: 31900000, guid: efa977925a0544cebb8ff595c62e0227, type: 2}
+    m_Mask: {fileID: 31900000, guid: 08ccff891f628fc44a0e6b3e12fafd50, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
@@ -586,7 +586,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 28e527a90493bb64187e5995f516fdcc,
+  m_Motion: {fileID: 6690620664312781819, guid: 28e527a90493bb64187e5995f516fdcc,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -743,7 +743,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: e31850f093466ae4db3320ce00e90693,
+  m_Motion: {fileID: -4759078611176051166, guid: e31850f093466ae4db3320ce00e90693,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -812,7 +812,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 3996784066874551546}
-    m_Position: {x: 320, y: 110, z: 0}
+    m_Position: {x: 330, y: 120, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
@@ -844,7 +844,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 1de597b853ab9dd4d96ca27dbd5526dc,
+  m_Motion: {fileID: -5075752359623666121, guid: 1de597b853ab9dd4d96ca27dbd5526dc,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
