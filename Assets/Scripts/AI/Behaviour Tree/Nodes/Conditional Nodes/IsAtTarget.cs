@@ -7,7 +7,7 @@ namespace DD.AI.BehaviourTreeSystem
     public class IsAtTarget<T> : Conditional where T : Component
     {
         private readonly string targetBlackboardKey;
-        private float distanceThreshold = 0.5f;
+        private float distanceThreshold;
 
         public IsAtTarget(BehaviourTree behaviourTree, string targetBlackboardKey, float distanceThreshold) : base(behaviourTree)
         {

@@ -28,12 +28,9 @@ namespace DD.UI
 
         public void CheckAddedItem(ItemSlot itemSlot)
         {
-            if(itemSlot.Item is AmmoItem && EquipmentManager.Instance.ActiveWeapon != null)
+            if(itemSlot.Item is AmmoItem)
             {
-                if(itemSlot.Item == ((Gun) EquipmentManager.Instance.ActiveWeapon).GunAmmoItem)
-                {
-                    UpdateUI();
-                }
+                UpdateUI();
             }
         }
 

@@ -5,13 +5,13 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GetDoorPathTo<T> : UpdateBlackboardService where T : Component
+    public class FindDoorPathTo<T> : UpdateBlackboardService where T : Component
     {
         protected readonly string doorPathBlackboardKey;
         protected readonly string doorPathIndexBlackboardKey;
         protected readonly string targetObjectBlackBoardKey;
 
-        public GetDoorPathTo(BehaviourTree behaviourTree, string doorPathBlackboardKey, string doorPathIndexBlackboardKey, string targetObjectBlackBoardKey) : base(behaviourTree)
+        public FindDoorPathTo(BehaviourTree behaviourTree, string doorPathBlackboardKey, string doorPathIndexBlackboardKey, string targetObjectBlackBoardKey) : base(behaviourTree)
         {
             this.doorPathBlackboardKey = doorPathBlackboardKey;
             this.doorPathIndexBlackboardKey = doorPathIndexBlackboardKey;
@@ -30,7 +30,7 @@ namespace DD.AI.BehaviourTreeSystem
                 return false;
             }
 
-            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, RoomPathFinder.FindPathToRoom(startRoom, goalRoom));
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, RoomPathFinder.FindDoorPathToRoom(startRoom, goalRoom));
 
         }
 

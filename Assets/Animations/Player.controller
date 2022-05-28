@@ -32,7 +32,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Stabbing
+  m_Name: Slash
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 9122943657865514959, guid: 1452c88d736db1c41a690b23f19ae169,
+  m_Motion: {fileID: -203655887218126122, guid: 027b1216cbf82e141b0e2b48f0505ae3,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

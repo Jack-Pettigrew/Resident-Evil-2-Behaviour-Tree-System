@@ -17,7 +17,7 @@ namespace DD.Systems.Room
         /// <param name="startingRoom">The starting Room of the path.</param>
         /// <param name="goalRoom">The goal/destination of the path.</param>
         /// <returns>Array of Doors as waypoints to the Goal Room.</returns>
-        public static Door[] FindPathToRoom(Room startingRoom, Room goalRoom)
+        public static Door[] FindDoorPathToRoom(Room startingRoom, Room goalRoom)
         {
             Reset();
 

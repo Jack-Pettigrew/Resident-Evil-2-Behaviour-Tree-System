@@ -22,7 +22,8 @@ namespace DD.Core.Control
 
         public KeyCode aimKeyCode;
         public bool Aim { private set; get; }
-        public Action OnAim;
+        public Action OnAimDown;
+        public Action OnAimUp;
 
         public KeyCode shootKeyCode;
         public event Action OnShoot;
@@ -52,13 +53,15 @@ namespace DD.Core.Control
             {
                 Sprint = false;
             }
-            else if(!Aim && !Sprint)
+            else if(!Aim && InputDirection.sqrMagnitude > 0 && !Sprint)
             {
                 Sprint = Input.GetKeyDown(sprintKeyCode);
             }
 
             // Combat
             Aim = Input.GetKey(aimKeyCode);
+            if(Input.GetKeyDown(aimKeyCode)) OnAimDown?.Invoke();
+            if(Input.GetKeyUp(aimKeyCode)) OnAimUp?.Invoke();
             if(Input.GetKeyDown(shootKeyCode)) OnShoot?.Invoke();
             if(Input.GetKeyDown(reloadKeyCode)) OnReload?.Invoke();
 

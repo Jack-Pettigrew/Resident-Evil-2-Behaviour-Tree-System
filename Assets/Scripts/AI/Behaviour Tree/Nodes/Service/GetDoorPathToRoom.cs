@@ -5,7 +5,7 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GetDoorPathToRoom : GetDoorPathTo<Room>
+    public class GetDoorPathToRoom : FindDoorPathTo<Room>
     {
         public GetDoorPathToRoom(BehaviourTree behaviourTree, string doorPathBlackboardKey, string doorPathIndexBlackboardKey, string roomTargetBlackboardKey) : base(behaviourTree, doorPathBlackboardKey, doorPathIndexBlackboardKey, roomTargetBlackboardKey)
         {
@@ -16,7 +16,7 @@ namespace DD.AI.BehaviourTreeSystem
             ResetDoorPathIndex();
 
             return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, 
-                RoomPathFinder.FindPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), behaviourTree.Blackboard.GetFromBlackboard<Room>(targetObjectBlackBoardKey))
+                RoomPathFinder.FindDoorPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), behaviourTree.Blackboard.GetFromBlackboard<Room>(targetObjectBlackBoardKey))
             );
         }
     }

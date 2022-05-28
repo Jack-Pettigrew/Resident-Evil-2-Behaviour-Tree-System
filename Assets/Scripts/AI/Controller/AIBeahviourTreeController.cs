@@ -74,7 +74,7 @@ namespace DD.AI.Controllers
                     // Idle
                     new IsAtTarget<Component>(behaviourTree, "Player", 1.5f),
                     // new IdleNode(behaviourTree, "IdleTimerLength")
-                    new PlayAnimation(behaviourTree, "Melee", true)
+                    new PlayAnimation(behaviourTree, "Right Hook", true)
                 }),
                 new Sequence(behaviourTree, new List<Node>{
                     // Same room Move to
@@ -91,8 +91,8 @@ namespace DD.AI.Controllers
                         new Invertor(behaviourTree,
                             new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player")
                         ),
-                        new GetDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
-                        new GetDoorFromDoorPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
+                        new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
+                        new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
                     }),
                     // new Sequence
                         // Repeater: MoveTo TargetDoor until IsAtTarget
@@ -108,7 +108,7 @@ namespace DD.AI.Controllers
                             new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
                             new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 1.0f), NodeState.SUCCESSFUL),
                             new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-                            new GetDoorFromDoorPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
+                            new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
                     })
                 })
             });

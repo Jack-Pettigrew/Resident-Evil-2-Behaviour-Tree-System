@@ -19,7 +19,7 @@ namespace DD.AI.Controllers
 
         public void PlayAndWait(string stateName, Action callback)
         {
-            animator.SetTrigger(stateName);
+            animator.CrossFade(stateName, 0.01f);
             StartCoroutine(WaitForAnimation(callback));
         }
 

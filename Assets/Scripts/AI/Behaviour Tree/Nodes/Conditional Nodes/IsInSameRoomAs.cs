@@ -20,7 +20,6 @@ namespace DD.AI.BehaviourTreeSystem
                 behaviourTree.ai.GetAITransform().gameObject,
                 RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).gameObject)
             ) ? NodeState.SUCCESSFUL : NodeState.FAILED;
-
         }
     }
 }

@@ -39,7 +39,7 @@ namespace DD.AI.BehaviourTreeSystem
                 return NodeState.RUNNING;
             }
 
-            behaviourTree.ai.GetAnimator().Animator.SetTrigger(stateName);
+            behaviourTree.ai.GetAnimator().Animator.CrossFade(stateName, 0.1f, 0, 0f);
             return NodeState.SUCCESSFUL;
         }
 

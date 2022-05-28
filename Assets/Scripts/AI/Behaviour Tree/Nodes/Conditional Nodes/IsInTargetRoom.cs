@@ -5,11 +5,11 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class IsInRoom : Conditional
+    public class IsInTargetRoom : Conditional
     {
         private readonly string targetRoomBlackboardKey;
 
-        public IsInRoom(BehaviourTree behaviourTree, string targetRoomBlackboardKey) : base(behaviourTree)
+        public IsInTargetRoom(BehaviourTree behaviourTree, string targetRoomBlackboardKey) : base(behaviourTree)
         {
             this.targetRoomBlackboardKey = targetRoomBlackboardKey;
         }

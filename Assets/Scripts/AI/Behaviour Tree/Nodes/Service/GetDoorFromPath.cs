@@ -5,13 +5,13 @@ using DD.Systems.Room;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public class GetDoorFromDoorPath : UpdateBlackboardService
+    public class GetDoorFromPath : UpdateBlackboardService
     {
         private readonly string doorPathBlackboardKey;
         private readonly string doorPathIndexBlackboardKey;
         private readonly string targetBlackboardKey;
 
-        public GetDoorFromDoorPath(BehaviourTree behaviourTree, string doorPathBlackboardKey, string doorPathIndexBlackboardKey, string targetBlackboardKey) : base(behaviourTree)
+        public GetDoorFromPath(BehaviourTree behaviourTree, string doorPathBlackboardKey, string doorPathIndexBlackboardKey, string targetBlackboardKey) : base(behaviourTree)
         {
             this.doorPathBlackboardKey = doorPathBlackboardKey;
             this.doorPathIndexBlackboardKey = doorPathIndexBlackboardKey;
