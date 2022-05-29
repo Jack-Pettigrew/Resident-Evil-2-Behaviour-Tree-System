@@ -6,7 +6,7 @@ using DD.AI.BehaviourTreeSystem;
 
 namespace DD.AI.Controllers
 {
-    public class AIBeahviourTreeController : MonoBehaviour, IAIBehaviour
+    public class AIBehaviourTreeController : MonoBehaviour, IAIBehaviour
     {
         #region AI Events
         public Action<Vector3> MoveEvent { get; set; }
