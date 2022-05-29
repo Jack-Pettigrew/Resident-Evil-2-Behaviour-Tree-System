@@ -8,33 +8,12 @@ namespace DD.AI.Controllers
 {
     public class AIBehaviourTreeController : MonoBehaviour, IAIBehaviour
     {
-        #region AI Events
-        public Action<Vector3> MoveEvent { get; set; }
-        #endregion
-
         // BEHAVIOUR TREE
         private BehaviourTree behaviourTree;
 
         // COMPONENTS - the AI's 'controller'
         private AILocomotion aiLocomotion;
         private AIAnimator aiAnimator;
-
-        // Temp FOV variables (move to blackboard visual editor)
-        [Header("Field of View")]
-        [SerializeField] private float fovAngle = 90.0f;
-        [SerializeField] private float fovRange = 5.0f;
-        [SerializeField] private LayerMask playerLayerMask;
-        [SerializeField] private LayerMask environmentLayerMask;
-
-        private void OnEnable()
-        {
-            MoveEvent += aiLocomotion.Move;
-        }
-
-        private void OnDisable()
-        {
-            MoveEvent -= aiLocomotion.Move;
-        }
 
         private void Awake()
         {
@@ -57,10 +36,6 @@ namespace DD.AI.Controllers
             behaviourTree.Blackboard.AddToBlackboard("TargetRoom", null);
 
             behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 0.0f);
-            behaviourTree.Blackboard.AddToBlackboard("fovAngle", fovAngle);
-            behaviourTree.Blackboard.AddToBlackboard("fovRange", fovRange);
-            behaviourTree.Blackboard.AddToBlackboard("PlayerLayerMask", playerLayerMask);
-            behaviourTree.Blackboard.AddToBlackboard("EnvironmentLayerMask", environmentLayerMask);
 
             /* Create Example BT structure
              Idle
@@ -124,8 +99,6 @@ namespace DD.AI.Controllers
         private void Update()
         {
             behaviourTree.EvaluateTree();
-
-            aiLocomotion.UpdateLocomotion();
         }
 
 

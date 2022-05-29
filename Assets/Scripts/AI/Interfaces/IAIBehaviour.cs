@@ -10,9 +10,6 @@ namespace DD.AI.Controllers
     /// </summary>
     public interface IAIBehaviour
     {
-        // EVENTS - allow for decoupled logic
-        public Action<Vector3> MoveEvent { get; set; }
-
         // METHODS
         public Transform GetAITransform();
         public AIAnimator GetAnimator();
