@@ -16,5 +16,11 @@ namespace DD.AI.Controllers
         // METHODS
         public Transform GetAITransform();
         public AIAnimator GetAnimator();
+
+        /// <summary>
+        /// Returns the given component from the AI.
+        /// </summary>
+        /// <returns>The component if found; otherwise null if not.</returns>
+        public T GetAIComponent<T>();
     } 
 }

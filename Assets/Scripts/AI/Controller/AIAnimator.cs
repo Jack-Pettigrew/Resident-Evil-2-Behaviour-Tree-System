@@ -23,7 +23,7 @@ namespace DD.AI.Controllers
             StartCoroutine(WaitForAnimation(callback));
         }
 
-        private IEnumerator WaitForAnimation(Action callback = null)
+        private IEnumerator WaitForAnimation(Action callback)
         {            
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             

@@ -138,5 +138,17 @@ namespace DD.AI.Controllers
         {
             return aiAnimator;
         }
+
+        public T GetAIComponent<T>()
+        {
+            T component = GetComponent<T>();
+
+            if(component == null)
+            {
+                component = GetComponentInChildren<T>(true);
+            }
+
+            return component;
+        }
     }
 }
