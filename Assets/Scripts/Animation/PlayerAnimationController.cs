@@ -54,7 +54,7 @@ namespace DD.Animation
         {
             animator.SetBool("Aiming", inputManager.Aim);
 
-            bool contraintWeight = (EquipmentManager.Instance.ActiveWeapon != null && EquipmentManager.Instance.ActiveWeapon.WeaponType == WeaponType.Gun) && inputManager.Aim;
+            bool contraintWeight = (EquipmentManager.Instance.ActiveWeapon != null) && inputManager.Aim;
 
             aimRig.weight = contraintWeight ? 1.0f : 0.0f;
         }
