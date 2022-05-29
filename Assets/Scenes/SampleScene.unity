@@ -7488,7 +7488,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7779126, y: 1}
+    m_SensorSize: {x: 1.7782516, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7505,7 +7505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380240394}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663249}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16546,7 +16546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663249}
+  m_LocalPosition: {x: 36.500008, y: 4.5, z: 9.663376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33282,7 +33282,7 @@ PrefabInstance:
     - target: {fileID: 5378814400148172223, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: m_RigLayers.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5378814400148172223, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}

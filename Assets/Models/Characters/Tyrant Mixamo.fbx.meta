@@ -6,7 +6,52 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 42cf75f352ae0064aa9058a46729cc98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body nocull
+    second: {fileID: 2100000, guid: b435798fac46ea64dbb6f7b81d817b34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body1
+    second: {fileID: 2100000, guid: d01f7cb75418fe44e9d6ef064fcd7396, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye L
+    second: {fileID: 2100000, guid: a9a158103f6c3d94cb7107577260d8e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye R
+    second: {fileID: 2100000, guid: df98c38c702eb7040a1f64d59dcab252, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Face
+    second: {fileID: 2100000, guid: bebb0670cb501be41a3fab349213285c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hat
+    second: {fileID: 2100000, guid: 8427a9e27849eb04aa3c639100dd6e71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants
+    second: {fileID: 2100000, guid: c4c23b6779cd12a46845edceb9dae85d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants 1
+    second: {fileID: 2100000, guid: e5209d82e0efa69499cc5305b0a3326f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
