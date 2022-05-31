@@ -89,14 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61336f5d64349d443be4ac57e5215273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fovAngle: 90
-  fovRange: 5
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  environmentLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &2182218961027780012
 MonoBehaviour:
   m_ObjectHideFlags: 0
