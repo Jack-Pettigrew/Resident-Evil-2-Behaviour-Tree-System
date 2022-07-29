@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using DD.Core;
+using DD.Core.Control;
 
 namespace DD.Systems.Room
 {
@@ -34,7 +34,7 @@ namespace DD.Systems.Room
             CanInteract = true;
         }
 
-        public void Interact()
+        public void Interact(Interactor interactor)
         {
             if(!IsOpen)
             {

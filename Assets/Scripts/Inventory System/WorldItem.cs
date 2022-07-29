@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.Systems.InventorySystem;
+using DD.Core.Control;
 
 namespace DD.Core.Items
 {
@@ -14,7 +15,7 @@ namespace DD.Core.Items
 
         public void SetItemQuantity(int quantity) => itemQuantity = quantity;
 
-        public void Interact()
+        public void Interact(Interactor interactor)
         {
             Inventory.Instance.AddItem(Item, itemQuantity);
             Destroy(gameObject);

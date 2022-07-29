@@ -9,18 +9,29 @@ namespace DD.Core.Control
     {
         [SerializeField] private float range = 1.0f;
         [SerializeField] private float maxAngle = 90.0f;
+
+        // Interactor Info
+        public Transform InteractorTransform { private set; get; }
+        [SerializeField] private InteractorActorType interactorActorType;
+        public InteractorActorType InteractorActorType { get { return interactorActorType; } }
         
-        private void Update() {
+        private void Awake() 
+        {
+            InteractorTransform = transform;
+        }
+        
+        private void Update() 
+        {
             if(Input.GetKeyDown(KeyCode.F))
             {
                 Interact();
             }
         }
         
-        public void Interact()
+        private void Interact()
         {
             IInteractable interactable = FindNearestInteractable();
-            interactable?.Interact();
+            interactable?.Interact(this);
         }
 
         private IInteractable FindNearestInteractable()
@@ -61,5 +72,7 @@ namespace DD.Core.Control
             Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, maxAngle, 0) * (transform.forward * range));
             Gizmos.DrawLine(transform.position, transform.position + Quaternion.Euler(0, -maxAngle, 0) * (transform.forward * range));
         }
-    }    
+    }
+
+    public enum InteractorActorType { Player, AI }
 }
