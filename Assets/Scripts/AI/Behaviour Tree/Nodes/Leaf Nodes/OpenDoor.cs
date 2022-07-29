@@ -16,7 +16,8 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override NodeState Evaluate()
         {
-            return behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).OpenDoor() ? NodeState.SUCCESSFUL : NodeState.FAILED;
+            behaviourTree.Blackboard.GetFromBlackboard<Door>(targetDoorBlackboardKey).OpenDoor(behaviourTree.ai.GetAITransform().position);
+            return NodeState.SUCCESSFUL;
         }
     }
 }
