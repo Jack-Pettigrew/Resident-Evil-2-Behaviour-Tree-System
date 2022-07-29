@@ -47,14 +47,14 @@ namespace DD.Animation
         public void UpdateLayers()
         {            
 
-            animator.SetLayerWeight(weaponAnimatorLayerID, EquipmentManager.Instance.ActiveWeapon != null ? 1.0f : 0.0f);
+            animator.SetLayerWeight(weaponAnimatorLayerID, EquipmentManager.Instance?.ActiveWeapon != null ? 1.0f : 0.0f);
         }
 
         public void UpdateAim()
         {
             animator.SetBool("Aiming", inputManager.Aim);
 
-            bool contraintWeight = (EquipmentManager.Instance.ActiveWeapon != null) && inputManager.Aim;
+            bool contraintWeight = (EquipmentManager.Instance?.ActiveWeapon != null) && inputManager.Aim;
 
             aimRig.weight = contraintWeight ? 1.0f : 0.0f;
         }
@@ -71,13 +71,13 @@ namespace DD.Animation
 
         public void UpdateWeaponType()
         {
-            if(EquipmentManager.Instance.ActiveWeapon == null)
+            if(EquipmentManager.Instance?.ActiveWeapon == null)
             {
                 animator.SetInteger("WeaponType", -1);
                 return;
             }
             
-            animator.SetInteger("WeaponType", (int) EquipmentManager.Instance.ActiveWeapon.WeaponType);
+            animator.SetInteger("WeaponType", (int) EquipmentManager.Instance?.ActiveWeapon.WeaponType);
         }
     }
 }
