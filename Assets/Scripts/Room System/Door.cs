@@ -89,29 +89,32 @@ namespace DD.Systems.Room
         - Dynamic physic move - player only
             - while in collision with player, allow Y axis rotation and physics forces to push door up to limit
             - like above "start close cooldown if door is open and player is no longer touching it"
+        - STOP COROUTINES FROM OVERLAPPING (e.g. closing door multiple times will stack coroutines)
         */
         
 
         /// <summary>
         /// Uses the HingeJoint Motor to drive the door to it's offset.
         /// </summary>
-        /// <param name="rotationOffset">The offset the door should be driven to.</param>
+        /// <param name="targetAngle">The angle the door should be driven to offset from 0 in degrees.</param>
         /// <returns></returns>
-        private IEnumerator SlerpDoorToOffset(float rotationOffset)
+        private IEnumerator SlerpDoorToOffset(float targetAngle)
         {
             // Determine target rotation
-            float targetOffset = closedTargetRotation + rotationOffset;
-            Debug.LogWarning($"Target Rot: {targetOffset}");
-            Debug.LogWarning($"Current Rot: {transform.localRotation.eulerAngles.y}");
-            Debug.LogWarning($"Abs: {Mathf.Abs(transform.eulerAngles.y + targetOffset)}");
+            targetAngle = Mathf.Repeat(targetAngle, 360);
 
-            // Wait until motor has reached target angle
-            while(Mathf.Abs(targetOffset) - 0.05f > transform.localEulerAngles.y)
+            Debug.LogWarning(targetAngle);
+
+            // Wait until door has rotated to target angle
+            while(Mathf.Abs(Mathf.DeltaAngle(transform.localEulerAngles.y, targetAngle)) > 0.5f)
             {
                 yield return new WaitForFixedUpdate();
                 // yield return null;
 
-                rigidbody.MoveRotation(Quaternion.Euler(Vector3.up * Mathf.LerpAngle(transform.eulerAngles.y, targetOffset, doorSpeed * Time.deltaTime)));
+                transform.localEulerAngles = new Vector3(0, targetAngle, 0);
+
+                // FIX THIS STUPID CODE BELOW IT DONT WORK THE ABOVE DOES
+                // rigidbody.MoveRotation(Quaternion.Euler(Vector3.up * Mathf.LerpAngle(transform.eulerAngles.y, targetAngle, doorSpeed * Time.deltaTime)));
             }
         }
 
@@ -136,8 +139,10 @@ namespace DD.Systems.Room
                         
             // TODO: base open offset on interactor position and pass to function
 
+            Debug.LogWarning(Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized));
+
             yield return SlerpDoorToOffset(
-                Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? -90.0f : 90.0f
+                Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? 90.0f : -90.0f
             );
 
             Debug.Log("Door fully open!");
