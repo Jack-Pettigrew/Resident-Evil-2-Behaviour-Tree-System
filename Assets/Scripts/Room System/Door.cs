@@ -75,6 +75,19 @@ namespace DD.Systems.Room
             }
         }
 
+        /*
+        Slerp Door:
+        - Remove all hinge related logic
+        - Add rigidbody that only moves rotation on Y axis (toggle on Y axis lock when door is either fully open or shut and off or player is colliding with it)
+        - define rotational limits
+        - Manual open + close - Slerp rotation to rotation offset
+        - Cancel any manual slerping if player touches door - start close cooldown if door is open and player is no longer touching it
+        - Dynamic physic move - player only
+            - while in collision with player, allow Y axis rotation and physics forces to push door up to limit
+            - like above "start close cooldown if door is open and player is no longer touching it"
+        */
+        
+
         /// <summary>
         /// Uses the HingeJoint Motor to drive the door to it's offset.
         /// </summary>
@@ -82,11 +95,10 @@ namespace DD.Systems.Room
         /// <returns></returns>
         private IEnumerator DriveDoorMotorToOffset(float targetRotationOffset)
         {
-            
             // Setup joint motor
             JointMotor motor = hinge.motor;
 
-            // Determine motor speed direction
+            // Determine motor speed direction based on given rotation offset
             if(targetRotationOffset == 0)
             {
                 motor.targetVelocity = Mathf.DeltaAngle(transform.eulerAngles.y, 0) > 0 ? -hingeSpeed : hingeSpeed;
@@ -105,7 +117,6 @@ namespace DD.Systems.Room
             // Wait until motor has reached target angle
             while(!Mathf.Approximately(transform.localRotation.eulerAngles.y, (closedTargetRotation + targetRotationOffset)))
             {
-
                 yield return null;
             }
 
@@ -125,7 +136,7 @@ namespace DD.Systems.Room
         private IEnumerator ManuallyOpenDoor(Vector3 openerPosition)
         {            
             IsOpen = true;
-            // TODO: Play Door opening noise 
+            // TODO: Play Door opening noise
             
             ignorePlayerCollision = true;
             // TODO: ignore player collisions
@@ -134,8 +145,10 @@ namespace DD.Systems.Room
                         
             // TODO: base open offset on interactor position and pass to function
 
+            yield return null;
+
             yield return DriveDoorMotorToOffset(
-                Vector3.Dot(hinge.connectedBody.transform.right, openerPosition - hinge.connectedBody.transform.position) < 0 ? 90.0f : -90.0f
+                Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? 90.0f : -90.0f
             );
 
             Debug.Log("Door fully open!");
