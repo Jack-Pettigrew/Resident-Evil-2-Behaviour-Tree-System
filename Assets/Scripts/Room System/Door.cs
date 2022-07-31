@@ -8,21 +8,22 @@ using DD.Core.Control;
 
 namespace DD.Systems.Room
 {
-    [RequireComponent(typeof(HingeJoint))]
+    [RequireComponent(typeof(Rigidbody))]
     public class Door : MonoBehaviour, IInteractable
     {
         // STATE
         public bool CanInteract { set; get; }
         public bool IsOpen { private set; get; }
+        public bool IsLocked { private set; get; }
 
         [Header("Interaction")]
         public bool ignorePlayerCollision = false;
-        public float hingeSpeed = 1.0f;
+        public float doorSpeed = 3.0f;
         [SerializeField] private float openDoorCooldown = 5.0f;
         private float closedTargetRotation;
 
         // Components
-        [SerializeField] private HingeJoint hinge;
+        [SerializeField] private new Rigidbody rigidbody;
 
         // ROOMS
         [Header("Connecting Room A")]
@@ -43,14 +44,14 @@ namespace DD.Systems.Room
         private void Awake() {
             CanInteract = true;
 
-            if(!hinge)
+            if(IsLocked)
             {
-                hinge = GetComponent<HingeJoint>();
+                ignorePlayerCollision = true;
+            }
 
-                if(!hinge)
-                {
-                    Debug.LogWarning($"{name} Door: No HingeJoint has been set. Door will not open or close!");
-                }
+            if(!rigidbody)
+            {
+                rigidbody = GetComponent<Rigidbody>();
             }
         }
 
@@ -63,7 +64,10 @@ namespace DD.Systems.Room
         /// </summary>
         public void Interact(Interactor interactor)
         {
-            // Vector3.Dot(hinge.connectedBody.transform.right, transform.forward)
+            if(IsLocked) 
+            {
+                return;
+            }
             
             if(!IsOpen)
             {
@@ -91,37 +95,24 @@ namespace DD.Systems.Room
         /// <summary>
         /// Uses the HingeJoint Motor to drive the door to it's offset.
         /// </summary>
-        /// <param name="targetRotationOffset">The offset the door should be driven to.</param>
+        /// <param name="rotationOffset">The offset the door should be driven to.</param>
         /// <returns></returns>
-        private IEnumerator DriveDoorMotorToOffset(float targetRotationOffset)
+        private IEnumerator SlerpDoorToOffset(float rotationOffset)
         {
-            // Setup joint motor
-            JointMotor motor = hinge.motor;
-
-            // Determine motor speed direction based on given rotation offset
-            if(targetRotationOffset == 0)
-            {
-                motor.targetVelocity = Mathf.DeltaAngle(transform.eulerAngles.y, 0) > 0 ? -hingeSpeed : hingeSpeed;
-            }
-            else
-            {
-                motor.targetVelocity = (transform.localRotation.eulerAngles.y - targetRotationOffset) > 0 ? -hingeSpeed : hingeSpeed;
-            }
-                        
-            // Start motor
-            hinge.motor = motor;
-            hinge.useMotor = true;
-
-            // TODO: Motor isn't stopping when it reaches 0 on closing (Mathf.Approximately might not be detecting when it's near 0)
+            // Determine target rotation
+            float targetOffset = closedTargetRotation + rotationOffset;
+            Debug.LogWarning($"Target Rot: {targetOffset}");
+            Debug.LogWarning($"Current Rot: {transform.localRotation.eulerAngles.y}");
+            Debug.LogWarning($"Abs: {Mathf.Abs(transform.eulerAngles.y + targetOffset)}");
 
             // Wait until motor has reached target angle
-            while(!Mathf.Approximately(transform.localRotation.eulerAngles.y, (closedTargetRotation + targetRotationOffset)))
+            while(Mathf.Abs(targetOffset) - 0.05f > transform.localEulerAngles.y)
             {
-                yield return null;
-            }
+                yield return new WaitForFixedUpdate();
+                // yield return null;
 
-            // Stop hinge motor
-            hinge.useMotor = false;
+                rigidbody.MoveRotation(Quaternion.Euler(Vector3.up * Mathf.LerpAngle(transform.eulerAngles.y, targetOffset, doorSpeed * Time.deltaTime)));
+            }
         }
 
         /// <summary>
@@ -145,10 +136,8 @@ namespace DD.Systems.Room
                         
             // TODO: base open offset on interactor position and pass to function
 
-            yield return null;
-
-            yield return DriveDoorMotorToOffset(
-                Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? 90.0f : -90.0f
+            yield return SlerpDoorToOffset(
+                Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? -90.0f : 90.0f
             );
 
             Debug.Log("Door fully open!");
@@ -179,7 +168,7 @@ namespace DD.Systems.Room
         {
             Debug.Log("Closing Door...");
             
-            yield return DriveDoorMotorToOffset(0.0f);
+            yield return SlerpDoorToOffset(0.0f);
             
             Debug.Log("Door closed!");
 
