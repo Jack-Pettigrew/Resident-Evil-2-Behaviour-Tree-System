@@ -221,6 +221,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door_Single_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 5738874144013827596, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab8342bcfccdc8d4f916d0fd7e47e463, type: 3}
 --- !u!4 &6839912212959301328 stripped
@@ -304,7 +309,12 @@ PrefabInstance:
     - target: {fileID: 5738874144013827596, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
         type: 3}
       propertyPath: m_Name
-      value: Door_Single_Left (1)
+      value: Door_Single_Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738874144013827596, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab8342bcfccdc8d4f916d0fd7e47e463, type: 3}
