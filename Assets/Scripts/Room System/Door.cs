@@ -29,8 +29,8 @@ namespace DD.Systems.Room
         private Coroutine runningCoroutine;
 
         // Components
-        [SerializeField] private Transform hingeParentTransform;
-        [Header("Components"), SerializeField] private new Rigidbody rigidbody;
+        [Header("Components"), SerializeField] private Transform hingeParentTransform;
+        [SerializeField] private new Rigidbody rigidbody;
 
         // ROOMS
         [Header("Connecting Rooms")]

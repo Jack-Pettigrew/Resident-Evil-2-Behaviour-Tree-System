@@ -158,6 +158,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
         type: 3}
+      propertyPath: doorwayChecker
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
+        type: 3}
+      propertyPath: entryCheckerCollider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
+        type: 3}
       propertyPath: hingeParentTransform
       value: 
       objectReference: {fileID: 9163295192627616271}
@@ -241,6 +251,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4050988606568919042}
     m_Modifications:
+    - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
+        type: 3}
+      propertyPath: doorwayChecker
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
+        type: 3}
+      propertyPath: entryCheckerCollider
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
         type: 3}
       propertyPath: hingeParentTransform
