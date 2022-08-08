@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27650de517795343a2def7b6a4831c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignorePlayerCollision: 0
+  ignorePlayerCollision: 1
   doorSpeed: 3
   openDoorCooldown: 3
   doorClosedThreshold: 0.2
