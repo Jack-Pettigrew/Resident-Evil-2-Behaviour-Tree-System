@@ -85,38 +85,41 @@ namespace DD.Editor.Rooms
 
                 if (roomA == null)
                 {
-                    Debug.LogError("Entry Point A was unable to assign Room. Please make sure the Room's floors are below the appropriate Door entry point.");
-                    return;
+                    Debug.LogWarning($"{door.name}: Entry Point A was unable to assign to a Room. This may be intentional, if not, please make sure the Room's floors are below the appropriate Door entry point.");
                 }
                 if (roomB == null)
                 {
-                    Debug.LogError("Entry Point B was unable to assign Room. Please make sure the Room's floors are below the appropriate Door entry point.");
-                    return;
+                    Debug.LogWarning($"{door.name}: Entry Point B was unable to assign to a Room. This may be intentional, if not, please make sure the Room's floors are below the appropriate Door entry point.");
                 }
 
                 // Link this door to found Rooms
                 SerializedObject doorObject = new SerializedObject(door);
                 doorObject.Update();
 
-                SerializedProperty roomAProperty = doorObject.FindProperty("roomA");
-                roomAProperty.objectReferenceValue = roomA;
+                if (roomA != null) {
+                    SerializedProperty roomAProperty = doorObject.FindProperty("roomA");
+                    roomAProperty.objectReferenceValue = roomA;
 
-                SerializedProperty roomBProperty = doorObject.FindProperty("roomB");
-                roomBProperty.objectReferenceValue = roomB;
-
-                // Add Door to Room
-                List<Door> roomADoors = new List<Door>(roomA.Doors);
-                if (!roomADoors.Contains(door))
-                {
-                    roomADoors.Add(door);
-                    roomA.Doors = roomADoors.ToArray();
+                    // Add Door to Room
+                    List<Door> roomADoors = new List<Door>(roomA.Doors);
+                    if (!roomADoors.Contains(door))
+                    {
+                        roomADoors.Add(door);
+                        roomA.Doors = roomADoors.ToArray();
+                    }
                 }
 
-                List<Door> roomBDoors = new List<Door>(roomB.Doors);
-                if (!roomBDoors.Contains(door))
-                {
-                    roomBDoors.Add(door);
-                    roomB.Doors = roomBDoors.ToArray();
+                if (roomB != null) {
+                    SerializedProperty roomBProperty = doorObject.FindProperty("roomB");
+                    roomBProperty.objectReferenceValue = roomB;
+
+                    // Add Door to Room
+                    List<Door> roomBDoors = new List<Door>(roomB.Doors);
+                    if (!roomBDoors.Contains(door))
+                    {
+                        roomBDoors.Add(door);
+                        roomB.Doors = roomBDoors.ToArray();
+                    }
                 }
 
                 doorObject.ApplyModifiedProperties();
