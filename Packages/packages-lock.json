@@ -54,7 +54,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.probuilder": {
-      "version": "5.0.4",
+      "version": "5.0.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -123,7 +123,7 @@
       }
     },
     "com.unity.test-framework": {
-      "version": "1.1.31",
+      "version": "1.1.33",
       "depth": 0,
       "source": "registry",
       "dependencies": {
