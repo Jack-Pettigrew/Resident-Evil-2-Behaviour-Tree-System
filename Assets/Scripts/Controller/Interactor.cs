@@ -42,23 +42,24 @@ namespace DD.Core.Control
 
             foreach (Collider collider in colliders)
             {
-                IInteractable tempInteractable = collider.GetComponent<IInteractable>();
+                IInteractable foundInteractable = collider.GetComponent<IInteractable>();
 
                 // This is a child object, get from parent
-                if(tempInteractable == null)
+                if(foundInteractable == null)
                 {
-                    tempInteractable = collider.GetComponentInParent<IInteractable>();
+                    foundInteractable = collider.GetComponentInParent<IInteractable>();
                 }
                 
-                if(tempInteractable != null && tempInteractable.CanInteract)
+                if(foundInteractable != null && foundInteractable.CanInteract)
                 {                    
-                    float angle = Vector3.Angle(transform.forward, collider.transform.position - transform.position);
-                    float dist = Vector3.Distance(transform.position, collider.transform.position);
+                    Vector3 closestPoint = collider.ClosestPoint(transform.position);
+                    float angle = Vector3.Angle(transform.forward, closestPoint - transform.position);
+                    float dist = Vector3.Distance(transform.position, closestPoint);
 
                     if(angle < maxAngle && dist < closestDist)
                     {
                         closestDist = dist; 
-                        interactable = tempInteractable;
+                        interactable = foundInteractable;
                     }
                 }
             }
