@@ -9,22 +9,13 @@ namespace DD.Systems.Room
         [SerializeField] private Door[] doors;
         public Door[] Doors { set { doors = value; } get { return doors; } }
 
-        [SerializeField] private RoomFloor[] roomFloors;
-
         private void Awake()
         {
-            if (roomFloors.Length <= 0)
+            foreach (var door in Doors)
             {
-                Debug.LogError(this + " has no child RoomFloor(s). Please assign floors to allow the Room System to know which floors link to which Rooms.");
-            }
-            else
-            {
-                foreach (var door in Doors)
+                if(door == null)
                 {
-                    if(door == null)
-                    {
-                        Debug.LogError($"{this} has a NULL Door in it's array - Doors array was reassigned to empty array.");
-                    }
+                    Debug.LogError($"{this} has a NULL Door in it's array - Doors array was reassigned to empty array.");
                 }
             }
         }
@@ -40,8 +31,6 @@ namespace DD.Systems.Room
             {
                 floor.SetOwnerRoom(this);
             }
-
-            roomFloors = floors;
         }
 #endif
 
