@@ -98,12 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27650de517795343a2def7b6a4831c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignorePlayerCollision: 1
+  <CanInteract>k__BackingField: 1
+  <IsLocked>k__BackingField: 0
   doorSpeed: 3
   openDoorCooldown: 3
   doorClosedThreshold: 0.2
-  hingeParentTransform: {fileID: 0}
-  rigidbody: {fileID: 4856563137107919680}
+  ignorePlayerCollision: 1
   roomA: {fileID: 0}
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 0}

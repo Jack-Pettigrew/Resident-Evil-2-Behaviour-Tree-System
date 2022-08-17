@@ -8,61 +8,55 @@ using DD.Core.Control;
 
 namespace DD.Systems.Room
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class Door : MonoBehaviour, IInteractable
     {
         // STATE
-        public bool CanInteract { set; get; }
+        [field: Header("Interaction")]
+        [field: SerializeField] public bool CanInteract { set; get; }
+        [field: SerializeField] public bool IsLocked { private set; get; }
         public bool IsChangingState { private set; get; }
         public bool IsOpen { private set; get; }
-        public bool IsLocked { private set; get; }
 
-        [Header("Interaction")]
-        public bool ignorePlayerCollision = false;
         public float doorSpeed = 3.0f;
         [SerializeField] private float openDoorCooldown = 5.0f;
         private float closedTargetRotation;
         [SerializeField, Range(0, 0.5f), Tooltip("The threshold of which the door is considered closed during it's angular Lerp.")]
         private float doorClosedThreshold = 0.1f;
+        public bool ignorePlayerCollision = false;
 
         // Coroutine
         private Coroutine runningCoroutine;
 
         // Components
-        [Header("Components"), SerializeField] private Transform hingeParentTransform;
-        [SerializeField] private new Rigidbody rigidbody;
+        [Header("Components")]
+        private Transform hingeParentTransform;
 
         // ROOMS
         [Header("Connecting Rooms")]
-        [SerializeField] private Room roomA;
+        [SerializeField] protected Room roomA;
         public Room RoomA { get { return roomA; } }
         [Tooltip("The point where characters can start entering the Door from.")] public Transform roomAEntryPoint;
         [Space(10)]
-        [SerializeField] private Room roomB;
+        [SerializeField] protected Room roomB;
         public Room RoomB { get { return roomB; } }
         [Tooltip("The point where characters can start entering the Door from.")] public Transform roomBEntryPoint;
 
         // EVENTS
         [Header("Events")]
-        [SerializeField] private UnityEvent openDoorEvent;
-        [SerializeField] private UnityEvent closeDoorEvent;
+        [SerializeField] protected UnityEvent openDoorEvent;
+        [SerializeField] protected UnityEvent closeDoorEvent;
 
-        private void Awake() {
-            CanInteract = true;
-            
+        private void Awake() {            
             if(IsLocked)
             {
                 ignorePlayerCollision = true;
             }
 
+            hingeParentTransform = transform.parent;
+
             if(!hingeParentTransform)
             {
-                Debug.LogWarning($"Door '{name}' does not have a hinge parent assigned. Please assign a hinge parent to this Door.");
-            }
-
-            if(!rigidbody)
-            {
-                rigidbody = GetComponent<Rigidbody>();
+                Debug.LogWarning($"Door '{name}' does not have a hinge parent assigned. Please assign a parent to act as a hinge for this Door.");
             }
         }
 
@@ -75,16 +69,18 @@ namespace DD.Systems.Room
         /// </summary>
         public void Interact(Interactor interactor)
         {
-            if(IsLocked || IsChangingState) 
+            if(!CanInteract || IsChangingState)
             {
                 return;
             }
-            
-            if(runningCoroutine != null)
+
+            if (IsLocked)
             {
-                StopCoroutine(runningCoroutine);
-                runningCoroutine = null;
+                // play locked noise
+                return;
             }
+            
+            ResetRunningCoroutines();
             
             if(!IsOpen)
             {
@@ -96,19 +92,14 @@ namespace DD.Systems.Room
             }
         }
 
-        /*
-        Slerp Door:
-        - Remove all hinge related logic
-        - Add rigidbody that only moves rotation on Y axis (toggle on Y axis lock when door is either fully open or shut and off or player is colliding with it)
-        - define rotational limits
-        - Manual open + close - Slerp rotation to rotation offset
-        - Cancel any manual slerping if player touches door - start close cooldown if door is open and player is no longer touching it
-        - Dynamic physic move - player only
-            - while in collision with player, allow Y axis rotation and physics forces to push door up to limit
-            - like above "start close cooldown if door is open and player is no longer touching it"
-        - STOP COROUTINES FROM OVERLAPPING (e.g. closing door multiple times will stack coroutines) **********************
-        */
-        
+        public void ResetRunningCoroutines()
+        {
+            if(runningCoroutine != null)
+            {
+                StopCoroutine(runningCoroutine);
+                runningCoroutine = null;
+            }
+        }        
 
         /// <summary>
         /// Uses the HingeJoint Motor to drive the door to it's offset.
@@ -135,8 +126,8 @@ namespace DD.Systems.Room
         /// Opens the Door.
         /// </summary>
         /// <returns></returns>
-        public void OpenDoor(Vector3 openerPosition)
-        {
+        public virtual void OpenDoor(Vector3 openerPosition)
+        {                        
             runningCoroutine = StartCoroutine(ManuallyOpenDoor(openerPosition));
         }
 
@@ -144,15 +135,12 @@ namespace DD.Systems.Room
         {            
             IsOpen = true;
             IsChangingState = true;
-            // TODO: Play Door opening noise
             
             ignorePlayerCollision = true;
             // TODO: ignore player collisions
             
             // Debug.Log("Openning Door...");
                         
-            // TODO: base open offset on interactor position and pass to function
-
             // Debug.LogWarning(Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized));
 
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
@@ -203,7 +191,7 @@ namespace DD.Systems.Room
         /// Closes the Door.
         /// </summary>
         /// <returns></returns>
-        public void CloseDoor()
+        public virtual void CloseDoor()
         {
             runningCoroutine = StartCoroutine(CloseDoorDynamic());
         }
