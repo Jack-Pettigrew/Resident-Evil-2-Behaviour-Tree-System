@@ -16,9 +16,16 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override NodeState EvaluateConditional()
         {
+            Room targetRoom = RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).gameObject);
+
+            if(!targetRoom)
+            {
+                return NodeState.FAILED;
+            }
+            
             return RoomManager.IsObjectInRoom(
                 behaviourTree.ai.GetAITransform().gameObject,
-                RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).gameObject)
+                targetRoom
             ) ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }

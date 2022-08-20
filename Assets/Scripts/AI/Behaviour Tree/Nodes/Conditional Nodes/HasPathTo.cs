@@ -24,6 +24,11 @@ namespace DD.AI.BehaviourTreeSystem
             {
                 Room targetRoom = RoomManager.GetRoomOfObject(behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).gameObject);
 
+                if(!targetRoom)
+                {
+                    return NodeState.FAILED;
+                }
+
                 if (path[path.Length - 1].RoomA == targetRoom || path[path.Length - 1].RoomB == targetRoom)
                 {
                     return NodeState.SUCCESSFUL;

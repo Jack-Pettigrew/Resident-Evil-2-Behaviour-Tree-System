@@ -20,6 +20,11 @@ namespace DD.AI.BehaviourTreeSystem
             Room result;
             Room currentRoom = RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject);
 
+            if(!currentRoom)
+            {
+                return false;
+            }
+
             // Randomise until Room isn't current one
             do
             {

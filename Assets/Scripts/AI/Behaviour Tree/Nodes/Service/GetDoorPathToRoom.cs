@@ -15,8 +15,15 @@ namespace DD.AI.BehaviourTreeSystem
         {
             ResetDoorPathIndex();
 
+            Room targetRoom = RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject);
+
+            if(!targetRoom)
+            {
+                return false;
+            }
+
             return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, 
-                RoomPathFinder.FindDoorPathToRoom(RoomManager.GetRoomOfObject(behaviourTree.ai.GetAITransform().gameObject), behaviourTree.Blackboard.GetFromBlackboard<Room>(targetObjectBlackBoardKey))
+                RoomPathFinder.FindDoorPathToRoom(targetRoom, behaviourTree.Blackboard.GetFromBlackboard<Room>(targetObjectBlackBoardKey))
             );
         }
     }
