@@ -31,7 +31,7 @@ namespace DD.Systems.Room
         }
 
         private static bool BFSCalculateDoorCosts(Room startingRoom, Room goalRoom)
-        {
+        {            
             int currentDistCost = 0;
             roomsToCheck.Add(goalRoom);
             while (roomsToCheck.Count > 0)
@@ -39,9 +39,11 @@ namespace DD.Systems.Room
                 roomsCurrentlyChecking.UnionWith(roomsToCheck);
                 roomsToCheck.Clear();
 
-                foreach (var room in roomsCurrentlyChecking)
+                foreach (Room room in roomsCurrentlyChecking)
                 {
-                    foreach (var door in room.Doors)
+                    if(!room || room.Doors == null || room.Doors.Length == 0) continue;
+                    
+                    foreach (Door door in room.Doors)
                     {
                         if (doorCostDictionary.ContainsKey(door))
                         {
