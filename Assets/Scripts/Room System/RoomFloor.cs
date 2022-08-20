@@ -13,7 +13,7 @@ namespace DD.Systems.Room
         {
             if (ownerRoom == null)
             {
-                Debug.LogWarning(this + " doesn't have an associated Room reference.");
+                Debug.LogWarning(this + " doesn't have an associated Room reference.", this);
             }
         }
 
