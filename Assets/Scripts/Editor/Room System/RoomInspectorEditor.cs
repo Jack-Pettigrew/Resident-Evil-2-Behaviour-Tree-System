@@ -18,8 +18,11 @@ namespace DD.Editor.Rooms
                 EditorGUILayout.HelpBox("Select RoomFloors to add to this Room.", MessageType.Info, true);
             }
 
-            if (GUILayout.Button("Set Selected Floors"))
+            if (GUILayout.Button("Link Selected Floors"))
+            {
                 SetRoomFloors();
+                Debug.Log($"Floors successfully linked to {target.name}");
+            }
         }
 
         private void SetRoomFloors()
