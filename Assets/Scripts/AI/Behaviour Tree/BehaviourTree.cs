@@ -41,7 +41,7 @@ namespace DD.AI.BehaviourTreeSystem
                     break;
             }
 
-            HandleLoggedBranch();
+            HandleBranchChanges();
 
             /* TO DO:
             * Handle different Node States diferently
@@ -55,20 +55,20 @@ namespace DD.AI.BehaviourTreeSystem
         /// <summary>
         /// Handles difference between current execution branch and the previous one.
         /// </summary>
-        private void HandleLoggedBranch()
+        private void HandleBranchChanges()
         {          
             if (currentBranch.Count > 0)
-            {                
+            {
                 int i;
                 for (i = 0; i < previousBranch.Count; i++)
                 {
-                    // 0. Stop if current branch has less nodes
+                    // 0. Break if we reach more nodes than the current branch has
                     if(i > currentBranch.Count - 1) break;
                     
-                    // 1. Check if current branch holds the same nodes as previous within the same or less length
+                    // 1. Check if Node at index i in current branch isn't the same as that in the previous branch
                     if(currentBranch[i] != previousBranch[i])
                     {
-                        // 1.1 If not, check if previous node was running and add to interuptable
+                        // 1.1 If not, check if previous node status is currently running and add to be interupted
                         if(previousBranch[i].State == NodeState.RUNNING)
                         {
                             nodesToInterupt.Add(previousBranch[i]);
