@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openSiblingInUnison: 1
   doorSibling: {fileID: 6213752949800001484}
-  <CanInteract>k__BackingField: 0
+  <CanInteract>k__BackingField: 1
   <IsLocked>k__BackingField: 0
   doorSpeed: 3
   openDoorCooldown: 5
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openSiblingInUnison: 1
   doorSibling: {fileID: 6213752948906468917}
-  <CanInteract>k__BackingField: 0
+  <CanInteract>k__BackingField: 1
   <IsLocked>k__BackingField: 0
   doorSpeed: 3
   openDoorCooldown: 5

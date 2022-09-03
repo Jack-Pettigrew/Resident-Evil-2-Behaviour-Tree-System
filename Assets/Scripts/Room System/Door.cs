@@ -200,8 +200,13 @@ namespace DD.Systems.Room
         /// Closes the Door.
         /// </summary>
         /// <returns></returns>
-        public virtual void CloseDoor()
+        public virtual void CloseDoor(bool siblingInduced = false)
         {
+            if(!siblingInduced && openSiblingInUnison && doorSibling)
+            {
+                doorSibling.CloseDoor(true);
+            }
+            
             runningCoroutine = StartCoroutine(CloseDoorDynamic());
         }
 
