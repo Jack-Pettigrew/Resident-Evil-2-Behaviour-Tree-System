@@ -21,6 +21,7 @@ namespace DD.AI.BehaviourTreeSystem
 
                 if(aiVision == null)
                 {
+                    Debug.LogError("AI does not have an AIVision component!");
                     return false;
                 }
             }
