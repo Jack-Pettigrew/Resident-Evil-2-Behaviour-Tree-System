@@ -10,6 +10,10 @@ namespace DD.Systems.Room
 {
     public class Door : MonoBehaviour, IInteractable
     {
+        [Header("Door Sibling")]
+        [SerializeField] private bool openSiblingInUnison = false;
+        [SerializeField] private Door doorSibling;
+        
         // STATE
         [field: Header("Interaction")]
         [field: SerializeField] public bool CanInteract { set; get; }
@@ -126,8 +130,13 @@ namespace DD.Systems.Room
         /// Opens the Door.
         /// </summary>
         /// <returns></returns>
-        public virtual void OpenDoor(Vector3 openerPosition)
-        {                        
+        public virtual void OpenDoor(Vector3 openerPosition, bool siblingInduced = false)
+        {            
+            if(!siblingInduced && openSiblingInUnison && doorSibling)
+            {
+                doorSibling.OpenDoor(openerPosition, true);
+            }
+            
             runningCoroutine = StartCoroutine(ManuallyOpenDoor(openerPosition));
         }
 
