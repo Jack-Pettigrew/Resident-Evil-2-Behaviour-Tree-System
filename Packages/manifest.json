@@ -2,7 +2,7 @@
   "dependencies": {
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.animation.rigging": "1.1.1",
-    "com.unity.cinemachine": "2.8.6",
+    "com.unity.cinemachine": "2.9.1",
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.probuilder": "5.0.6",
     "com.unity.render-pipelines.high-definition": "12.1.7",
