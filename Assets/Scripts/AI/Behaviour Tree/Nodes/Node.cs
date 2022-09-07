@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DD.AI.BehaviourTreeSystem
 {
     [System.Serializable]
-    public abstract class Node : IInteruptable
+    public abstract class Node : IResetable
     {
         // Node References
         protected readonly BehaviourTree behaviourTree;
@@ -88,7 +88,7 @@ namespace DD.AI.BehaviourTreeSystem
         /// <para>Called when running node is no longer a part the currently executing branch. Contains all necessary for clean up logic.</para>
         /// When overriding ensure base logic is also called.
         /// </summary>
-        public virtual void OnInterupt()
+        public virtual void OnReset()
         {
             NodeExit();
             State = NodeState.NONE;

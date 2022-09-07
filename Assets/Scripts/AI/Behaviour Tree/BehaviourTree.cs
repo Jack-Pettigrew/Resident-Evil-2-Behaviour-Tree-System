@@ -13,7 +13,7 @@ namespace DD.AI.BehaviourTreeSystem
         // BRANCH TRACKING
         private List<Node> previousBranch = new List<Node>();
         private List<Node> currentBranch = new List<Node>();
-        private List<Node> branchNodesToInterupt = new List<Node>();
+        private List<Node> branchNodesToReset = new List<Node>();
         
         
         // COMPONENTS
@@ -64,7 +64,7 @@ namespace DD.AI.BehaviourTreeSystem
             * TODO:
             * Handle different Node States diferently
             * - Failed
-            * - Interupted (needs accounting for within each node too)
+            * - Reseted (needs accounting for within each node too)
             * 
             * Optimisation of Tree traversal and node execution
             */
@@ -87,36 +87,36 @@ namespace DD.AI.BehaviourTreeSystem
                     // 1. Check if Node at index i in current branch isn't the same as that in the previous branch
                     if(currentBranch[i] != previousBranch[i])
                     {
-                        // 1.1 If not, check if previous node status is currently running and add to be interupted
+                        // 1.1 If not, check if previous node status is currently running and add to be reseted
                         if(previousBranch[i].State == NodeState.RUNNING)
                         {
-                            branchNodesToInterupt.Add(previousBranch[i]);
+                            branchNodesToReset.Add(previousBranch[i]);
                         }
                     }
                 }
 
-                // 2. If previousBranch was longer than current, remaining add RUNNING nodes to interupt
+                // 2. If previousBranch was longer than current, remaining add RUNNING nodes to reset
                 if(i < previousBranch.Count - 1)
                 {
                     for (i = i; i < previousBranch.Count; i++)
                     {
-                        // 2.1 Check if node was running and add to interuptable
+                        // 2.1 Check if node was running and add to resetable
                         if(previousBranch[i].State == NodeState.RUNNING)
                         {
-                            branchNodesToInterupt.Add(previousBranch[i]);
+                            branchNodesToReset.Add(previousBranch[i]);
                         }
                     }
                 }
 
-                // 3. If we have nodes to interupt, interupt them
-                if(branchNodesToInterupt.Count > 0)
+                // 3. If we have nodes to reset, reset them
+                if(branchNodesToReset.Count > 0)
                 {
-                    foreach (Node node in branchNodesToInterupt)
+                    foreach (Node node in branchNodesToReset)
                     {
-                        node.OnInterupt();
+                        node.OnReset();
                     }
 
-                    branchNodesToInterupt.Clear();
+                    branchNodesToReset.Clear();
                 }
                                     
                 // 3. Update branch history

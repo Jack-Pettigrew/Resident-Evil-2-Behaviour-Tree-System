@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace DD.AI.BehaviourTreeSystem
 {
-    public interface IInteruptable
+    public interface IResetable
     {
-        void OnInterupt();
+        void OnReset();
     }
 }
