@@ -13,9 +13,13 @@ namespace DD.AI.BehaviourTreeSystem
         // Node Status
         public NodeState State { private set; get; }
 
-        public Node(BehaviourTree behaviourTree)
+        // Node Flags
+        public bool IsUninterruptable { private set; get; }
+
+        public Node(BehaviourTree behaviourTree, bool uninterruptable = false)
         {
             this.behaviourTree = behaviourTree;
+            IsUninterruptable = uninterruptable;
         }
 
         /// <summary>
@@ -23,10 +27,10 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         /// <returns>Success?</returns>
         protected virtual bool NodeStart()
-        {                        
-            // Log Node as reached
+        {
+            // Log Node
             behaviourTree.LogReachedNode(this);
-            
+
             return OnStart();
         }
 
@@ -45,14 +49,14 @@ namespace DD.AI.BehaviourTreeSystem
         /// <returns></returns>
         public NodeState UpdateNode()
         {
-            if(!NodeStart())
+            if (!NodeStart())
             {
                 return State = NodeState.FAILED;
             }
 
-            State = Evaluate();            
+            State = Evaluate();
 
-            if(!NodeExit())
+            if (!NodeExit())
             {
                 return State = NodeState.FAILED;
             }
