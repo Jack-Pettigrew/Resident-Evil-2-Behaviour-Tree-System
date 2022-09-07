@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DD.AI.BehaviourTreeSystem
 {
     /// <summary>
-    /// A Decorator that repeats it's children endlessly or until a condition is met.
+    /// A Decorator that repeats it's children endlessly or until a condition is met. Behaviour Tree is still evaluated each tick.
     /// </summary>
     public class Repeater : Decorator
     {

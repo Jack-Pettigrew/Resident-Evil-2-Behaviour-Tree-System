@@ -9,7 +9,7 @@ namespace DD.AI.BehaviourTreeSystem
     /// </summary>
     public abstract class Decorator : Node
     {
-        // Child Node to repeat
+        // Child Node of the decorator
         protected Node childNode;
 
         public Decorator(BehaviourTree behaviourTree, Node childNode) : base(behaviourTree)

@@ -13,7 +13,8 @@ namespace DD.AI.BehaviourTreeSystem
         // BRANCH TRACKING
         private List<Node> previousBranch = new List<Node>();
         private List<Node> currentBranch = new List<Node>();
-        private List<Node> nodesToInterupt = new List<Node>();
+        private List<Node> branchNodesToInterupt = new List<Node>();
+        
         
         // COMPONENTS
         public IAIBehaviour ai { private set; get; }
@@ -30,7 +31,17 @@ namespace DD.AI.BehaviourTreeSystem
         }
 
         public void EvaluateTree()
-        {            
+        {
+            UpdateTree();
+            
+            HandleBranchChanges();            
+        }
+
+        /// <summary>
+        /// Updates the Behaviour Tree.
+        /// </summary>
+        private void UpdateTree()
+        {
             // Currently evaluating entire tree each tick
             switch (rootNode.UpdateNode())
             {
@@ -49,15 +60,15 @@ namespace DD.AI.BehaviourTreeSystem
                     break;
             }
 
-            HandleBranchChanges();
-
-            /* TO DO:
+            /**
+            * TODO:
             * Handle different Node States diferently
             * - Failed
             * - Interupted (needs accounting for within each node too)
             * 
             * Optimisation of Tree traversal and node execution
             */
+
         }
 
         /// <summary>
@@ -79,7 +90,7 @@ namespace DD.AI.BehaviourTreeSystem
                         // 1.1 If not, check if previous node status is currently running and add to be interupted
                         if(previousBranch[i].State == NodeState.RUNNING)
                         {
-                            nodesToInterupt.Add(previousBranch[i]);
+                            branchNodesToInterupt.Add(previousBranch[i]);
                         }
                     }
                 }
@@ -92,20 +103,20 @@ namespace DD.AI.BehaviourTreeSystem
                         // 2.1 Check if node was running and add to interuptable
                         if(previousBranch[i].State == NodeState.RUNNING)
                         {
-                            nodesToInterupt.Add(previousBranch[i]);
+                            branchNodesToInterupt.Add(previousBranch[i]);
                         }
                     }
                 }
 
                 // 3. If we have nodes to interupt, interupt them
-                if(nodesToInterupt.Count > 0)
+                if(branchNodesToInterupt.Count > 0)
                 {
-                    foreach (Node node in nodesToInterupt)
+                    foreach (Node node in branchNodesToInterupt)
                     {
                         node.OnInterupt();
                     }
 
-                    nodesToInterupt.Clear();
+                    branchNodesToInterupt.Clear();
                 }
                                     
                 // 3. Update branch history
