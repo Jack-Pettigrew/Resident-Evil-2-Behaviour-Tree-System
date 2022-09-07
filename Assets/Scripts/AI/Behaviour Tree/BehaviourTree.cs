@@ -14,8 +14,10 @@ namespace DD.AI.BehaviourTreeSystem
         private List<Node> previousBranch = new List<Node>();
         private List<Node> currentBranch = new List<Node>();
         private List<Node> branchNodesToReset = new List<Node>();
-        
-        
+
+        // Priority Nodes
+        private Queue<Node> priorityNodes = new Queue<Node>();
+
         // COMPONENTS
         public IAIBehaviour ai { private set; get; }
 
@@ -32,9 +34,15 @@ namespace DD.AI.BehaviourTreeSystem
 
         public void EvaluateTree()
         {
+            if (priorityNodes.Count > 0)
+            {
+                UpdatePriorityNodes();
+                return;
+            }
+
             UpdateTree();
-            
-            HandleBranchChanges();            
+
+            HandleBranchChanges();
         }
 
         /// <summary>
@@ -53,7 +61,7 @@ namespace DD.AI.BehaviourTreeSystem
                     {
                         sb.Append(node.GetType().ToString() + '\n');
                     }
-                
+
                     Debug.LogWarning("Behaviour Tree Failure reported:" + sb.ToString());
                     break;
                 default:
@@ -71,24 +79,47 @@ namespace DD.AI.BehaviourTreeSystem
 
         }
 
+        private void UpdatePriorityNodes()
+        {
+            priorityNodes.Peek().UpdateNode();
+
+            switch (priorityNodes.Peek().State)
+            {
+                case NodeState.SUCCESSFUL:
+
+                break;
+
+                default:
+                // Account for whether it failed
+                break;
+            }
+
+            if(priorityNodes.Peek().State == NodeState.SUCCESSFUL)
+            {
+                priorityNodes.Dequeue();
+            }
+
+        }
+
+
         /// <summary>
         /// Handles difference between current execution branch and the previous one.
         /// </summary>
         private void HandleBranchChanges()
-        {          
+        {
             if (currentBranch.Count > 0)
             {
                 int i;
                 for (i = 0; i < previousBranch.Count; i++)
                 {
                     // 0. Break if we reach more nodes than the current branch has
-                    if(i > currentBranch.Count - 1) break;
-                    
+                    if (i > currentBranch.Count - 1) break;
+
                     // 1. Check if Node at index i in current branch isn't the same as that in the previous branch
-                    if(currentBranch[i] != previousBranch[i])
+                    if (currentBranch[i] != previousBranch[i])
                     {
                         // 1.1 If not, check if previous node status is currently running and add to be reseted
-                        if(previousBranch[i].State == NodeState.RUNNING)
+                        if (previousBranch[i].State == NodeState.RUNNING)
                         {
                             branchNodesToReset.Add(previousBranch[i]);
                         }
@@ -96,12 +127,12 @@ namespace DD.AI.BehaviourTreeSystem
                 }
 
                 // 2. If previousBranch was longer than current, remaining add RUNNING nodes to reset
-                if(i < previousBranch.Count - 1)
+                if (i < previousBranch.Count - 1)
                 {
                     for (i = i; i < previousBranch.Count; i++)
                     {
                         // 2.1 Check if node was running and add to resetable
-                        if(previousBranch[i].State == NodeState.RUNNING)
+                        if (previousBranch[i].State == NodeState.RUNNING)
                         {
                             branchNodesToReset.Add(previousBranch[i]);
                         }
@@ -109,7 +140,7 @@ namespace DD.AI.BehaviourTreeSystem
                 }
 
                 // 3. If we have nodes to reset, reset them
-                if(branchNodesToReset.Count > 0)
+                if (branchNodesToReset.Count > 0)
                 {
                     foreach (Node node in branchNodesToReset)
                     {
@@ -118,7 +149,7 @@ namespace DD.AI.BehaviourTreeSystem
 
                     branchNodesToReset.Clear();
                 }
-                                    
+
                 // 3. Update branch history
                 previousBranch = new List<Node>(currentBranch);
                 currentBranch.Clear();
@@ -126,12 +157,20 @@ namespace DD.AI.BehaviourTreeSystem
         }
 
         /// <summary>
-        /// Logs the Node as having been executed this execution branch.
+        /// Logs the Node as being executed this current execution branch.
         /// </summary>
         /// <param name="node">The node reached.</param>
         public void LogReachedNode(Node node)
         {
-            currentBranch.Add(node);
+            if(!currentBranch.Contains(node))
+            {
+                currentBranch.Add(node);
+            }
+
+            if (node.IsUninterruptable && !priorityNodes.Contains(node))
+            {
+                priorityNodes.Enqueue(node);
+            }
         }
     }
 }
