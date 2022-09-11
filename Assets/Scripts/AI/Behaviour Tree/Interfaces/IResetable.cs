@@ -6,6 +6,6 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public interface IResetable
     {
-        void OnReset();
+        void Reset();
     }
 }

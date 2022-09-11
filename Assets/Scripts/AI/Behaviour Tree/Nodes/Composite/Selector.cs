@@ -30,5 +30,10 @@ namespace DD.AI.BehaviourTreeSystem
 
             return NodeState.FAILED;
         }
+
+        protected override void OnReset()
+        {
+            currentNodeIndex = 0;
+        }
     }
 }

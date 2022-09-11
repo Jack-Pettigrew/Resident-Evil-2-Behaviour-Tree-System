@@ -9,7 +9,7 @@ namespace DD.AI.BehaviourTreeSystem
     /// </summary>
     public abstract class Service : Node
     {
-        public Service(BehaviourTree behaviourTree) : base(behaviourTree)
+        public Service(BehaviourTree behaviourTree, bool uninterruptable = false) : base(behaviourTree, uninterruptable)
         { }
     }
 }

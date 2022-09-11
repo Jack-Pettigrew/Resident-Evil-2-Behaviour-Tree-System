@@ -25,7 +25,7 @@ namespace DD.AI.BehaviourTreeSystem
                     // IF finished all child nodes...
                     if(currentNodeIndex >= childNodes.Count)
                     {
-                        ResetSequence();
+                        currentNodeIndex = 0;
                         return NodeState.SUCCESSFUL;
                     }
                     else
@@ -36,21 +36,16 @@ namespace DD.AI.BehaviourTreeSystem
 
                 case NodeState.FAILED:
                 default:
-                    ResetSequence();
+                    currentNodeIndex = 0;
                     return NodeState.FAILED;    // Node failed, we should fail
             }
         }
 
-        private void ResetSequence()
-        {
-            currentNodeIndex = 0;
-        }
-
-        public override void OnReset()
+        protected override void OnReset()
         {
             base.OnReset();
 
-            ResetSequence();
+            currentNodeIndex = 0;
         }
     }
 }
