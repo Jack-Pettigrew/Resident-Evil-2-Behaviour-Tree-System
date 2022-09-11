@@ -26,7 +26,7 @@ namespace DD.AI.BehaviourTreeSystem
         /// The node start logic.
         /// </summary>
         /// <returns>Success?</returns>
-        protected virtual bool NodeStart()
+        private bool NodeStart()
         {
             // Log Node
             behaviourTree.LogReachedNode(this);
@@ -39,7 +39,7 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         /// <returns>Success?</returns>
         private bool NodeExit()
-        {
+        {          
             return OnExit();
         }
 
@@ -90,17 +90,16 @@ namespace DD.AI.BehaviourTreeSystem
 
         public void Reset()
         {
-            NodeExit();
             OnReset();
             State = NodeState.NONE;
         }
 
         /// <summary>
-        /// <para>Called when running node is no longer a part the currently executing branch. Should contain all necessary for Node clean up logic.</para>
+        /// Called when running node is no longer a part the currently executing branch. Should contain all necessary for Node clean up logic.
         /// </summary>
         protected virtual void OnReset()
-        {
-
+        { 
+            // Default Nothing
         }
     }
 
