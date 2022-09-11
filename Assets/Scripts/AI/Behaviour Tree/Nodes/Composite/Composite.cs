@@ -44,5 +44,20 @@ namespace DD.AI.BehaviourTreeSystem
 
             return true;
         }
+
+        /// <summary>
+        /// Handles updating the child Node.
+        /// </summary>
+        /// <returns>The state of the child node.</returns>
+        protected NodeState UpdateChildNode(Node node)
+        {
+            // Uninterruptable
+            if(node.IsUninterruptable && node.State != NodeState.NONE)
+            {
+                return node.State;
+            }
+
+            return node.UpdateNode();
+        }
     }
 }

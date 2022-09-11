@@ -13,19 +13,11 @@ namespace DD.AI.BehaviourTreeSystem
         { }
 
         protected override NodeState Evaluate()
-        {
-            // Uninterruptable Check
-            if(childNodes[currentNodeIndex].IsUninterruptable && childNodes[currentNodeIndex].State != NodeState.NONE)
-            {
-                return childNodes[currentNodeIndex].State;
-            }
-            
+        {            
             // Process all until Success
             for(; currentNodeIndex < childNodes.Count; currentNodeIndex++)
             {
-                childNodes[currentNodeIndex].UpdateNode();
-
-                switch (childNodes[currentNodeIndex].State)
+                switch (UpdateChildNode(childNodes[currentNodeIndex]))
                 {
                     case NodeState.RUNNING:
                         return NodeState.RUNNING;
