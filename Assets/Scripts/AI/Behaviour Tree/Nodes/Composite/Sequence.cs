@@ -5,6 +5,7 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class Sequence : Composite
     {
+        // Used for maintaining position on RUNNING states and continuation from uninterruptable
         private int currentNodeIndex = 0;
 
         public Sequence(BehaviourTree behaviourTree, List<Node> childNodes, bool uninterruptable = false) : base(behaviourTree, childNodes, uninterruptable)

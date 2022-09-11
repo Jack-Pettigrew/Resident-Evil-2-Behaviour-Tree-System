@@ -14,22 +14,33 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override NodeState Evaluate()
         {
-            // Process all until Success
-            foreach (Node node in childNodes)
+            // Uninterruptable Check
+            if(childNodes[currentNodeIndex].IsUninterruptable && childNodes[currentNodeIndex].State != NodeState.NONE)
             {
-                switch (node.UpdateNode())
+                return childNodes[currentNodeIndex].State;
+            }
+            
+            // Process all until Success
+            for(; currentNodeIndex < childNodes.Count; currentNodeIndex++)
+            {
+                childNodes[currentNodeIndex].UpdateNode();
+
+                switch (childNodes[currentNodeIndex].State)
                 {
                     case NodeState.RUNNING:
                         return NodeState.RUNNING;
-                    case NodeState.SUCCESSFUL:
-                        return NodeState.SUCCESSFUL;
                         
+                    case NodeState.SUCCESSFUL:
+                        currentNodeIndex = 0;
+                        return NodeState.SUCCESSFUL;
+
                     case NodeState.FAILED:
                     default:
                         break;
                 }
             }
 
+            currentNodeIndex = 0;
             return NodeState.FAILED;
         }
 
