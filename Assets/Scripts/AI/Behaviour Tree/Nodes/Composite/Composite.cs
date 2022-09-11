@@ -16,13 +16,13 @@ namespace DD.AI.BehaviourTreeSystem
         /// </summary>
         protected List<Service> serviceNodes;
 
-        public Composite(BehaviourTree behaviourTree, List<Node> childNodes) : base(behaviourTree)
+        public Composite(BehaviourTree behaviourTree, List<Node> childNodes, bool uninterruptable = false) : base(behaviourTree, uninterruptable)
         {
             this.childNodes = childNodes;
             this.serviceNodes = null;
         }
 
-        public Composite(BehaviourTree behaviourTree, List<Node> childNodes, List<Service> serviceNodes) : base(behaviourTree)
+        public Composite(BehaviourTree behaviourTree, List<Node> childNodes, List<Service> serviceNodes, bool uninterruptable = false) : base(behaviourTree, uninterruptable)
         {
             this.childNodes = childNodes;
             this.serviceNodes = serviceNodes;

@@ -6,7 +6,7 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public abstract class LeafNode : Node
     {
-        protected LeafNode(BehaviourTree behaviourTree) : base(behaviourTree)
+        protected LeafNode(BehaviourTree behaviourTree, bool uninterruptable = false) : base(behaviourTree, uninterruptable)
         {
         }
     }

@@ -12,7 +12,7 @@ namespace DD.AI.BehaviourTreeSystem
         // Child Node of the decorator
         protected Node childNode;
 
-        public Decorator(BehaviourTree behaviourTree, Node childNode) : base(behaviourTree)
+        public Decorator(BehaviourTree behaviourTree, Node childNode, bool uninterruptable = false) : base(behaviourTree, uninterruptable)
         {
             this.childNode = childNode;
         }

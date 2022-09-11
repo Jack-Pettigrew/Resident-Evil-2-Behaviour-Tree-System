@@ -6,9 +6,11 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class Selector : Composite
     {
-        public Selector(BehaviourTree behaviourTree, List<Node> childNodes) : base(behaviourTree, childNodes)
-        {
-        }
+        // Used for maintaining position on RUNNING states and continuation from uninterruptable
+        private int currentNodeIndex = 0;
+
+        public Selector(BehaviourTree behaviourTree, List<Node> childNodes, bool uninterruptable = false) : base(behaviourTree, childNodes, uninterruptable)
+        { }
 
         protected override NodeState Evaluate()
         {

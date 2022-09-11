@@ -7,12 +7,17 @@ namespace DD.AI.BehaviourTreeSystem
     {
         private int currentNodeIndex = 0;
 
-        public Sequence(BehaviourTree behaviourTree, List<Node> childNodes) : base(behaviourTree, childNodes)
-        {
-        }
+        public Sequence(BehaviourTree behaviourTree, List<Node> childNodes, bool uninterruptable = false) : base(behaviourTree, childNodes, uninterruptable)
+        { }
 
         protected override NodeState Evaluate()
-        {
+        {            
+            // Uninterruptable Check
+            if(childNodes[currentNodeIndex].IsUninterruptable && childNodes[currentNodeIndex].State != NodeState.NONE)
+            {
+                return childNodes[currentNodeIndex].State;
+            }
+            
             // Evaluate one node at a time, haulting at running or stopping at failure
             switch (childNodes[currentNodeIndex].UpdateNode())
             {
