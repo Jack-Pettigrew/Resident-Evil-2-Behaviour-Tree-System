@@ -78,10 +78,10 @@ namespace DD.AI.Controllers
                     new Sequence(behaviourTree, new List<Node>{
                             // Follow path, use door, increment
                             new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
-                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 1.0f), NodeState.SUCCESSFUL),
+                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
                             new OpenDoor(behaviourTree, "TargetDoor"),
                             new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
-                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 1.0f), NodeState.SUCCESSFUL),
+                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
                             new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
                             new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
                     })

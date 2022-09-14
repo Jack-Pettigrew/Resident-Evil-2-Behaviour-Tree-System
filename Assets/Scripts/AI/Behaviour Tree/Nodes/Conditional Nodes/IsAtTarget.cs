@@ -17,7 +17,7 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override NodeState EvaluateConditional()
         {
-            return (behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).transform.position - behaviourTree.ai.GetAITransform().position).magnitude <= distanceThreshold ? NodeState.SUCCESSFUL : NodeState.FAILED;
+            return (Vector3.Distance(behaviourTree.Blackboard.GetFromBlackboard<T>(targetBlackboardKey).transform.position, behaviourTree.ai.GetAITransform().position) <= distanceThreshold) ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }
 
