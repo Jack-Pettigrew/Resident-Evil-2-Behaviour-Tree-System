@@ -16,16 +16,22 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override bool UpdateBlackboard()
         {
-            int index = behaviourTree.Blackboard.GetFromBlackboard<int>(doorIndexBlackboardKey) + 1;
+            int incrementedIndex = behaviourTree.Blackboard.GetFromBlackboard<int>(doorIndexBlackboardKey) + 1;
 
-            // If updating current door index by 1 excedes door array length, fail
-            if (index % behaviourTree.Blackboard.GetFromBlackboard<Door[]>(doorPathArrayBlackboardKey).Length == 0)
+            // If doorPathArray has no elements, fail
+            if(behaviourTree.Blackboard.GetFromBlackboard<Door[]>(doorPathArrayBlackboardKey).Length == 0)
             {
                 return false;
+            } 
+
+            // If updating current door index by 1 excedes door array length, fail
+            if (incrementedIndex - (behaviourTree.Blackboard.GetFromBlackboard<Door[]>(doorPathArrayBlackboardKey).Length - 1) > 0)
+            {
+                return behaviourTree.Blackboard.UpdateBlackboardVariable(doorIndexBlackboardKey, 0);
             }
             else
             {
-                return behaviourTree.Blackboard.UpdateBlackboardVariable(doorIndexBlackboardKey, index);
+                return behaviourTree.Blackboard.UpdateBlackboardVariable(doorIndexBlackboardKey, incrementedIndex);
             }
         }
     } 
