@@ -20,10 +20,11 @@ namespace DD.AI.BehaviourTreeSystem
                 switch (UpdateChildNode(childNodes[currentNodeIndex]))
                 {
                     case NodeState.RUNNING:
+                        OnReset();
                         return NodeState.RUNNING;
                         
                     case NodeState.SUCCESSFUL:
-                        currentNodeIndex = 0;
+                        OnReset();
                         return NodeState.SUCCESSFUL;
 
                     case NodeState.FAILED:
@@ -32,7 +33,7 @@ namespace DD.AI.BehaviourTreeSystem
                 }
             }
 
-            currentNodeIndex = 0;
+            OnReset();
             return NodeState.FAILED;
         }
 
