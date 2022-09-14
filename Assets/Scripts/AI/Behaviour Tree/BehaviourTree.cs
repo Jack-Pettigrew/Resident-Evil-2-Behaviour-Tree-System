@@ -109,12 +109,16 @@ namespace DD.AI.BehaviourTreeSystem
             // Reset nodes no longer in the current branch
             foreach (Node node in previousBranch)
             {
-                // * Commenting out IF statement makes Behaviour Tree reset all branched Nodes regardless of whether they
-                // * were in the current branch or not
-                // // if (!currentBranch.Contains(node))
-                // // {
+                // Reset none running nodes
+                if(node.State != NodeState.RUNNING)
+                {
                     node.Reset();
-                // // }
+                }
+                // Reset running nodes if they're no longer in the current branch
+                else if(!currentBranch.Contains(node))
+                {
+                    node.Reset();
+                }
             }
 
             previousBranch = new HashSet<Node>(currentBranch);
