@@ -12,7 +12,7 @@ namespace DD.AI.BehaviourTreeSystem
         { }
 
         protected override NodeState Evaluate()
-        {                        
+        {            
             // Evaluate one node at a time, haulting at running or stopping at failure
             switch (UpdateChildNode(childNodes[currentNodeIndex]))
             {
@@ -25,7 +25,7 @@ namespace DD.AI.BehaviourTreeSystem
                     // IF finished all child nodes...
                     if(currentNodeIndex >= childNodes.Count)
                     {
-                        currentNodeIndex = 0;
+                        OnReset();
                         return NodeState.SUCCESSFUL;
                     }
                     else
@@ -36,7 +36,7 @@ namespace DD.AI.BehaviourTreeSystem
 
                 case NodeState.FAILED:
                 default:
-                    currentNodeIndex = 0;
+                    OnReset();
                     return NodeState.FAILED;    // Node failed, we should fail
             }
         }
