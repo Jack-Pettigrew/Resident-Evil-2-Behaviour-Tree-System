@@ -85,7 +85,8 @@ namespace DD.AI.Controllers
                             new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
                             new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
                     })
-                })
+                }),
+                new IdleNode(behaviourTree)
             });
 
             /* 

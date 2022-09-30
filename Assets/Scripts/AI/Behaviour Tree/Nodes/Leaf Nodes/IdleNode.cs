@@ -5,10 +5,20 @@ using DD.AI.BehaviourTreeSystem;
 
 namespace DD.AI.BehaviourTreeSystem
 {
+    /// <summary>
+    /// An Idle node - it literally does nothing for a specified amount of time
+    /// </summary>
     public class IdleNode : LeafNode
     {
         private readonly float IDLE_LENGTH;
         private float timer = 0.0f;
+
+        private bool infiniteIdle = false;
+
+        public IdleNode(BehaviourTree behaviourTree) : base(behaviourTree)
+        {
+            infiniteIdle = true;
+        }
 
         public IdleNode(BehaviourTree behaviourTree, string idleTimerBlackboardKey) : base(behaviourTree)
         {
@@ -18,6 +28,10 @@ namespace DD.AI.BehaviourTreeSystem
 
         protected override NodeState Evaluate()
         {
+            if(infiniteIdle) {
+                return NodeState.SUCCESSFUL;
+            }
+            
             timer -= Time.deltaTime;
 
             if (timer <= 0.0f)
