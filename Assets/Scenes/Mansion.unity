@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2888.879, g: 2786.2969, b: 3807.875, a: 1}
+  m_IndirectSpecularColor: {r: 2847.7012, g: 2707.3008, b: 3494.875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1118,7 +1118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34288933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.413339, y: 1.5, z: 9.655}
+  m_LocalPosition: {x: -2.6466608, y: 1.5, z: -15.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6487,7 +6487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_ConstrainedObject: {fileID: 645898193}
     m_SourceObjects:
@@ -13308,7 +13308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361019009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.413339, y: 1.5, z: 9.655}
+  m_LocalPosition: {x: -2.6466608, y: 1.5, z: -15.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20168,7 +20168,7 @@ PrefabInstance:
     - target: {fileID: 7082594427839628686, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: -3.31
       objectReference: {fileID: 0}
     - target: {fileID: 7082594427839628686, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
@@ -20178,7 +20178,7 @@ PrefabInstance:
     - target: {fileID: 7082594427839628686, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.655
+      value: -13.54
       objectReference: {fileID: 0}
     - target: {fileID: 7082594427839628686, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
@@ -22271,7 +22271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0
+  m_Weight: 1
   m_Effectors:
   - m_Transform: {fileID: 1745126930}
     m_Style:
@@ -22293,6 +22293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f07157b24cdc2c49acc780b17f61fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiAimConstraints:
+  - {fileID: 658665613}
+  - {fileID: 162893161}
   lookTargetHelper: {fileID: 1745126930}
   lerpSpeed: 10
 --- !u!1001 &584618855
@@ -24071,7 +24074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Data:
     m_ConstrainedObject: {fileID: 2022294519}
     m_SourceObjects:
@@ -41246,7 +41249,7 @@ GameObject:
   - component: {fileID: 1226494148}
   - component: {fileID: 1226494147}
   m_Layer: 8
-  m_Name: Cube (1)
+  m_Name: testwall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51802,7 +51805,7 @@ GameObject:
   - component: {fileID: 1529401590}
   - component: {fileID: 1529401589}
   m_Layer: 0
-  m_Name: w
+  m_Name: testfloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58988,7 +58991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1745126930}
   m_Layer: 0
-  m_Name: Target
+  m_Name: LookTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,7 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class LookAtObjectAnimationRigging : MonoBehaviour
 {
-    private Rig rig;
+    [SerializeField] private MultiAimConstraint[] multiAimConstraints;
     [SerializeField] private Transform lookTargetHelper;
     private GameObject targetObject;
 
@@ -14,14 +14,21 @@ public class LookAtObjectAnimationRigging : MonoBehaviour
     
     void Awake()
     {
-        rig = GetComponent<Rig>();
+        if(multiAimConstraints == null)
+        {
+            multiAimConstraints = new MultiAimConstraint[0];
+            Debug.LogWarning($"No MultiAimConstrains have been assigned for LookAtObjectAnimationRigging.", this);
+        }
     }
 
     void Update()
-    {
-        if(rig.weight != targetWeight)
+    {        
+        foreach (MultiAimConstraint constraint in multiAimConstraints)
         {
-            rig.weight = Mathf.Lerp(rig.weight, targetWeight, Time.deltaTime * lerpSpeed);
+            if(constraint.weight != targetWeight)
+            {
+                constraint.weight = Mathf.Lerp(constraint.weight, targetWeight, Time.deltaTime * lerpSpeed);
+            }            
         }
     }
 
