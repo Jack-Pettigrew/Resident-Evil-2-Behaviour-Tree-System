@@ -39,20 +39,23 @@ public class LookAtObjectAnimationRigging : MonoBehaviour
         }
     }
 
-    public void EnableLook(GameObject gameObject)
+    public void EnableLook(GameObject gameObject = null)
     {
-        targetObject = gameObject;
+        if(gameObject)
+        {
+            targetObject = gameObject;
+        }
 
         targetWeight = 1f;
     }
 
-    public void DisableLook(GameObject gameObject)
+    public void DisableLook(GameObject gameObject = null)
     {
-        if(gameObject == targetObject)
+        if(gameObject && gameObject == targetObject)
         {
             targetObject = null;
-            
-            targetWeight = 0;
         }
+        
+        targetWeight = 0;
     }
 }
