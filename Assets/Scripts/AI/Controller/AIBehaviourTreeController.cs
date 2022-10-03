@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.AI.BehaviourTreeSystem;
+using DD.Animation.RigEvents;
 
 namespace DD.AI.Controllers
 {
@@ -44,48 +45,43 @@ namespace DD.AI.Controllers
             */
 
             // Go To Door, Open Door, Walk to Exit Point, Go to Player
-            Selector baseTest = new Selector(behaviourTree, new List<Node> {
+            Selector baseTest = new Selector(behaviourTree, new List<Node> {                
+                                
+                // Attack
                 new Sequence(behaviourTree, new List<Node>{
-                    // Idle
                     new IsAtTarget<Component>(behaviourTree, "Player", 1.5f),
-                    // new IdleNode(behaviourTree, "IdleTimerLength")
                     new PlayAnimation(behaviourTree, "Right Hook", true)
                 }),
+
+                // Move to Player
                 new Sequence(behaviourTree, new List<Node>{
                     // Same room Move to
                     new IsInSameRoomAs<Component>(behaviourTree, "Player"),
                     new MoveTo<Component>(behaviourTree, "Player"),
                 }),
-                new Selector(behaviourTree, new List<Node> {
-                    // new Sequence
-                        // IsDoorPathStale (does the door path lead to the same room as Target?)
-                        // Get Door Path to Target (make sure this node reset the index)
-                        // Update current Move Target
-                    new Sequence(behaviourTree, new List<Node>{
-                        // Room Path check?
-                        new Invertor(behaviourTree,
-                            new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player")
-                        ),
-                        new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
-                        new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
-                    }),
-                    // new Sequence
-                        // Repeater: MoveTo TargetDoor until IsAtTarget
-                        // Open Door
-                        // new GetDoorEntryExitPointNode(behaviourTree, false, "TargetDoor", "MoveTarget"),
-                        // new Repeater(behaviourTree, new MoveToNode<Component>(behaviourTree, "MoveTarget"), new IsAtTargetNode<Component>(behaviourTree, "MoveTarget", 1.0f), NodeState.SUCCESSFUL),
-                        // increment door index
-                    new Sequence(behaviourTree, new List<Node>{
-                            // Follow path, use door, increment
-                            new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
-                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                            new OpenDoor(behaviourTree, "TargetDoor"),
-                            new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
-                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                            new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-                            new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor")
-                    })
+                    
+                // Find Path if doesn't have one
+                new Sequence(behaviourTree, new List<Node> {
+                    // Invert to trigger find door path
+                    new Invertor(behaviourTree,
+                        new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player")
+                    ),
+                    new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player")
                 }),
+
+                // Follow path via Doors
+                new Sequence(behaviourTree, new List<Node>{
+                    new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
+                    new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
+                    new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+                    new OpenDoor(behaviourTree, "TargetDoor"),
+                    new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.ENABLE),
+                    new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
+                    new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+                    new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.DISABLE),
+                    new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
+                }, true),
+
                 new IdleNode(behaviourTree)
             });
 
