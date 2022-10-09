@@ -85,19 +85,6 @@ namespace DD.AI.Controllers
                 new IdleNode(behaviourTree)
             });
 
-            /* 
-            TODO:
-            Uninterruptable
-            - bend rig UNTIL conditon has been met
-            - move to other door entry point
-            - bend rig until condition has been met
-            */
-
-            /*
-             * Final repeater to Player doesn't reset Sequence due to IsAtTarget node in Selector is true before MoveTo<Player> repeater can return success
-             * Sequence index needs resetting when the execution branch has changed - need a way to do this (Interuptable? etc)
-            */
-
             return baseTest;
         }
 
