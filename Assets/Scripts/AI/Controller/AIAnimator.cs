@@ -15,7 +15,7 @@ namespace DD.AI.Controllers
         [SerializeField] private AniRigEventSignalReceiver[] rigSignalReceivers;
         private Dictionary<int, AniRigEventSignalReceiver> rigSignalReceiverDictionary = new Dictionary<int, AniRigEventSignalReceiver>();
         
-        private void Awake() {
+        private void Start() {
             if(!animator)
             {
                 Debug.LogError($"{name} has no animator!");
@@ -47,7 +47,7 @@ namespace DD.AI.Controllers
         /// <param name="aniRigEventSignalReceiverLabelHash">The signal's label in hash code form.</param>
         /// <param name="eventType">The type of animation rigging event.</param>
         public void SendAnimRigEventSignal(int aniRigEventSignalReceiverLabelHash, AnimRigEventType eventType)
-        {           
+        {
             if(rigSignalReceiverDictionary.TryGetValue(aniRigEventSignalReceiverLabelHash, out AniRigEventSignalReceiver signalReceiver))
             {
                 signalReceiver.ReceiveSignal(eventType);
