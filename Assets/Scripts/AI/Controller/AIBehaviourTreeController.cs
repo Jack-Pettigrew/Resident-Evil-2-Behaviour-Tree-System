@@ -47,30 +47,22 @@ namespace DD.AI.Controllers
             // Go To Door, Open Door, Walk to Exit Point, Go to Player
             Selector baseTest = new Selector(behaviourTree, new List<Node> {                
                                 
-                // Attack
-                new Sequence(behaviourTree, new List<Node>{
-                    new IsAtTarget<Component>(behaviourTree, "Player", 1.5f),
-                    new PlayAnimation(behaviourTree, "Right Hook", true)
-                }),
-
-                // Move to Player
-                new Sequence(behaviourTree, new List<Node>{
-                    // Same room Move to
-                    new IsInSameRoomAs<Component>(behaviourTree, "Player"),
-                    new MoveTo<Component>(behaviourTree, "Player"),
-                }),
-                    
-                // Find Path if doesn't have one
                 new Sequence(behaviourTree, new List<Node> {
-                    // Invert to trigger find door path
-                    new Invertor(behaviourTree,
-                        new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player")
-                    ),
-                    new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player")
+                    new IsAtTarget<Component>(behaviourTree, "Player", 0.3f),
+                    new IdleNode(behaviourTree)
+                }),
+                                
+                // Follow Player
+                new Sequence(behaviourTree, new List<Node> {
+                    new IsInSameRoomAs<Component>(behaviourTree, "Player"),
+                    new MoveTo<Component>(behaviourTree, "Player")
                 }),
 
-                // Follow path via Doors
-                new Sequence(behaviourTree, new List<Node>{
+                // Follow Door Path
+                new Sequence(behaviourTree, new List<Node> {
+                    new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
+                    // new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player"),
+
                     new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
                     new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
                     new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
@@ -85,6 +77,46 @@ namespace DD.AI.Controllers
                 new IdleNode(behaviourTree)
             });
 
+                // new IdleNode(behaviourTree)
+                                
+                // // Attack
+                // new Sequence(behaviourTree, new List<Node>{
+                //     new IsAtTarget<Component>(behaviourTree, "Player", 1.5f),
+                //     new PlayAnimation(behaviourTree, "Right Hook", true)
+                // }),
+
+                // // Move to Player
+                // new Sequence(behaviourTree, new List<Node>{
+                //     // Same room Move to
+                //     new IsInSameRoomAs<Component>(behaviourTree, "Player"),
+                //     new MoveTo<Component>(behaviourTree, "Player"),
+                // }),
+                    
+                // // Find Path if doesn't have one
+                // new Sequence(behaviourTree, new List<Node> {
+                //     // Invert to trigger find door path
+                //     new Invertor(behaviourTree,
+                //         new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player")
+                //     ),
+                //     new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player")
+                // }),
+
+                // // Follow path via Doors
+                // new Sequence(behaviourTree, new List<Node>{
+                //     new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
+                //     new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
+                //     new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+                //     new OpenDoor(behaviourTree, "TargetDoor"),
+                //     new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.ENABLE),
+                //     new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
+                //     new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+                //     new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.DISABLE),
+                //     new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
+                // }, true),
+
+                // new IdleNode(behaviourTree)
+            // });
+ 
             return baseTest;
         }
 
