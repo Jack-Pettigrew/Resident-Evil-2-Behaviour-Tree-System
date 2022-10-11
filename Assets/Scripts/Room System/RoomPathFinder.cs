@@ -42,23 +42,27 @@ namespace DD.Systems.Room
                 foreach (Room room in roomsCurrentlyChecking)
                 {
                     if(!room || room.Doors == null || room.Doors.Length == 0) continue;
-                    
+                                        
                     foreach (Door door in room.Doors)
-                    {
-                        if (doorCostDictionary.ContainsKey(door))
+                    {                        
+                        // Is Door locked OR already accounting for Door?
+                        if (door.IsLocked || doorCostDictionary.ContainsKey(door))
                         {
                             continue;
                         }
 
                         doorCostDictionary.Add(door, currentDistCost);
 
+                        // Get the next Room to check
                         Room linkingRoom = door.RoomA != room ? door.RoomA : door.RoomB;
 
+                        // Found starting Room? Finish
                         if (linkingRoom == startingRoom)
                         {
                             return true;
                         }
-                        else
+                        // Add room to check list
+                        else if (linkingRoom)
                         {
                             roomsToCheck.Add(linkingRoom);
                         }

@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2848.123, g: 2707.8906, b: 3495.6094, a: 1}
+  m_IndirectSpecularColor: {r: 2847.9277, g: 2707.625, b: 3495.2344, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -66579,6 +66579,11 @@ PrefabInstance:
       propertyPath: doorSibling
       value: 
       objectReference: {fileID: 2019987487}
+    - target: {fileID: 6213752948906468917, guid: 2f3e9aa57b249e448b85897f17f18570,
+        type: 3}
+      propertyPath: <IsLocked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6213752949800001484, guid: 2f3e9aa57b249e448b85897f17f18570,
         type: 3}
       propertyPath: roomA
@@ -66589,6 +66594,11 @@ PrefabInstance:
       propertyPath: roomB
       value: 
       objectReference: {fileID: 1973901657}
+    - target: {fileID: 6213752949800001484, guid: 2f3e9aa57b249e448b85897f17f18570,
+        type: 3}
+      propertyPath: <IsLocked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f3e9aa57b249e448b85897f17f18570, type: 3}
 --- !u!114 &2019987486 stripped
