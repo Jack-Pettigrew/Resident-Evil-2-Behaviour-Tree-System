@@ -50,11 +50,6 @@ namespace DD.Systems.Room
         [SerializeField] protected UnityEvent closeDoorEvent;
 
         private void Awake() {            
-            if(IsLocked)
-            {
-                ignorePlayerCollision = true;
-            }
-
             hingeParentTransform = transform.parent;
 
             if(!hingeParentTransform)
@@ -114,8 +109,6 @@ namespace DD.Systems.Room
             // Determine target rotation
             targetAngle = Mathf.Repeat(targetAngle, 360);
 
-            // Debug.LogWarning(-targetAngle);
-
             // Wait until door has rotated to target angle
             while(Mathf.Abs(Mathf.DeltaAngle(hingeParentTransform.localEulerAngles.y, targetAngle)) > doorClosedThreshold)
             {
@@ -143,20 +136,11 @@ namespace DD.Systems.Room
         {            
             IsOpen = true;
             IsChangingState = true;
-            
-            ignorePlayerCollision = true;
-            // TODO: ignore player collisions
-            
-            // Debug.Log("Openning Door...");
                         
-            // Debug.LogWarning(Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized));
-
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
             yield return SlerpDoorToOffset(
                 Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? 90.0f : -90.0f
             );
-
-            // Debug.Log("Door fully open!");
 
             IsChangingState = false;
             openDoorEvent?.Invoke();
@@ -167,8 +151,6 @@ namespace DD.Systems.Room
         private IEnumerator OpenDoorCooldown()
         {
             float timer = openDoorCooldown;
-
-            // Debug.Log("Door cooldown...");
 
             while (timer > 0)
             {
@@ -182,14 +164,10 @@ namespace DD.Systems.Room
 
         private IEnumerator CloseDoorDynamic()
         {
-            // Debug.Log("Closing Door...");
-
             IsChangingState = true;
             
             yield return SlerpDoorToOffset(0.0f);
             
-            // Debug.Log("Door closed!");
-
             IsOpen = false;
             IsChangingState = false;
             closeDoorEvent?.Invoke();
