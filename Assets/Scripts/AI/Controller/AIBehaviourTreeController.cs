@@ -61,18 +61,21 @@ namespace DD.AI.Controllers
                 // Follow Door Path
                 new Sequence(behaviourTree, new List<Node> {
                     new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
-                    // new HasRoomPathTo<Component>(behaviourTree, "TargetDoorPath", "Player"),
 
                     new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
                     new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
                     new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                    new OpenDoor(behaviourTree, "TargetDoor"),
-                    new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.ENABLE),
-                    new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
-                    new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                    new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.DISABLE),
+
+                    new Sequence(behaviourTree, new List<Node> {
+                        new OpenDoor(behaviourTree, "TargetDoor"),
+                        new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.ENABLE),
+                        new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
+                        new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+                        new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.DISABLE),
+                    }, true),
+
                     new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-                }, true),
+                }),
 
                 new IdleNode(behaviourTree)
             });
