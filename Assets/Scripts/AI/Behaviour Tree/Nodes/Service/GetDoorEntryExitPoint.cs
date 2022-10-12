@@ -34,12 +34,12 @@ namespace DD.AI.BehaviourTreeSystem
                 if (entryPoint)
                 {
                     return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
-                        door.GetEntryPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
+                        door.GetEntryPointRelativeToObject(behaviourTree.ai.GetAITransform().gameObject));
                 }
                 else
                 {
                     return behaviourTree.Blackboard.UpdateBlackboardVariable(moveTargetrBlackboardKey, 
-                        door.GetExitPointRelativeToObject(behaviourTree.ai.GetAITransform().position));
+                        door.GetExitPointRelativeToObject(behaviourTree.ai.GetAITransform().gameObject));
                 }
             }
 

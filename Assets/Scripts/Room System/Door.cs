@@ -26,7 +26,6 @@ namespace DD.Systems.Room
         private float closedTargetRotation;
         [SerializeField, Range(0, 0.5f), Tooltip("The threshold of which the door is considered closed during it's angular Lerp.")]
         private float doorClosedThreshold = 0.1f;
-        public bool ignorePlayerCollision = false;
 
         // Coroutine
         private Coroutine runningCoroutine;
@@ -213,23 +212,33 @@ namespace DD.Systems.Room
         /// <summary>
         /// Returns the Door's entry point relative to the given world position.
         /// </summary>
-        /// <param name="objectsWorldPosition">The position of the object in world space.</param>
+        /// <param name="gameObject">The game object in question.</param>
         /// <returns>The closest entry point transform.</returns>
-        public Transform GetEntryPointRelativeToObject(Vector3 objectsWorldPosition)
+        public Transform GetEntryPointRelativeToObject(GameObject gameObject)
         {
-            return (objectsWorldPosition - roomAEntryPoint.position).sqrMagnitude < (objectsWorldPosition - roomBEntryPoint.position).sqrMagnitude 
-                ? roomAEntryPoint : roomBEntryPoint;
+            Room roomOfObject = RoomManager.GetRoomOfObject(gameObject);
+
+            if (roomOfObject == RoomA) return roomAEntryPoint;
+
+            if(roomOfObject == RoomB) return roomBEntryPoint;
+
+            return null;
         }
 
         /// <summary>
         /// Returns this Door's exit point relative to the given world position.
         /// </summary>
-        /// <param name="objectsWorldPosition">The position of the object in world space.</param>
+        /// <param name="gameObject">The game object in question.</param>
         /// <returns>The closest entry point transform.</returns>
-        public Transform GetExitPointRelativeToObject(Vector3 objectsWorldPosition)
+        public Transform GetExitPointRelativeToObject(GameObject gameObject)
         {
-            return (objectsWorldPosition - roomAEntryPoint.position).sqrMagnitude < (objectsWorldPosition - roomBEntryPoint.position).sqrMagnitude
-                ? roomBEntryPoint : roomAEntryPoint;
+            Room roomOfObject = RoomManager.GetRoomOfObject(gameObject);
+
+            if (roomOfObject == RoomA) return roomBEntryPoint;
+
+            if(roomOfObject == RoomB) return roomAEntryPoint;
+
+            return null;
         }
 
         private void OnDrawGizmosSelected()

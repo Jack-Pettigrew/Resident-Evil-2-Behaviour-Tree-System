@@ -85,11 +85,11 @@ namespace DD.Editor.Rooms
 
                 if (roomA == null)
                 {
-                    Debug.LogWarning($"{door.name}: Entry Point A was unable to assign to a Room. This may be intentional, if not, please make sure the Room's floors are below the appropriate Door entry point.");
+                    Debug.LogWarning($"{door.name}: Entry Point A was unable to assign to a Room. This may be intentional, if not, please make sure the Room's floors are below the appropriate Door entry point.", door);
                 }
                 if (roomB == null)
                 {
-                    Debug.LogWarning($"{door.name}: Entry Point B was unable to assign to a Room. This may be intentional, if not, please make sure the Room's floors are below the appropriate Door entry point.");
+                    Debug.LogWarning($"{door.name}: Entry Point B was unable to assign to a Room. This may be intentional, if not, please make sure the Room's floors are below the appropriate Door entry point.", door);
                 }
 
                 // Link this door to found Rooms
