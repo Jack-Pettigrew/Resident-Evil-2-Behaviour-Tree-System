@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2848.205, g: 2707.9102, b: 3495.6406, a: 1}
+  m_IndirectSpecularColor: {r: 2889.1152, g: 2786.4492, b: 3808.1875, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19324,6 +19324,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.019916425
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639959652520792826, guid: 22b76eee5844fbb479d36fe9fea76695,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3779800629056595683, guid: 22b76eee5844fbb479d36fe9fea76695,
         type: 3}
@@ -42761,6 +42766,11 @@ PrefabInstance:
       propertyPath: rigSignalReceivers.Array.data[0]
       value: 
       objectReference: {fileID: 2023460706}
+    - target: {fileID: 2182218961027780013, guid: 8a1f3dff5ca9947409606afced59c1d1,
+        type: 3}
+      propertyPath: interactor
+      value: 
+      objectReference: {fileID: 1793456775}
     - target: {fileID: 5702218195566529543, guid: 8a1f3dff5ca9947409606afced59c1d1,
         type: 3}
       propertyPath: m_WarningMessage
@@ -42788,6 +42798,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a1f3dff5ca9947409606afced59c1d1, type: 3}
+--- !u!4 &1280532622 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2182218961027780001, guid: 8a1f3dff5ca9947409606afced59c1d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1280532614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1284447813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60476,6 +60492,53 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1787264689}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1793456773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793456774}
+  - component: {fileID: 1793456775}
+  m_Layer: 0
+  m_Name: Interactor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1793456774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793456773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1280532622}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1793456775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793456773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a675bb9684f8e47b450ee478bde700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 2
+  maxAngle: 75
+  interactorType: 1
 --- !u!1001 &1794302290
 PrefabInstance:
   m_ObjectHideFlags: 0

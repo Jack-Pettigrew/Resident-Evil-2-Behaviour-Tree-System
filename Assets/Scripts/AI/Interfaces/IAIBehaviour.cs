@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using DD.Core.Control;
 
 namespace DD.AI.Controllers
 {
@@ -13,6 +14,7 @@ namespace DD.AI.Controllers
         // METHODS
         public Transform GetAITransform();
         public AIAnimator GetAnimator();
+        public Interactor GetInteractor();
 
         /// <summary>
         /// Returns the given component from the AI.

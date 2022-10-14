@@ -12,8 +12,8 @@ namespace DD.Core.Control
 
         // Interactor Info
         public Transform InteractorTransform { private set; get; }
-        [SerializeField] private InteractorActorType interactorActorType;
-        public InteractorActorType InteractorActorType { get { return interactorActorType; } }
+        [SerializeField] private InteractorType interactorType;
+        public InteractorType InteractorType { get { return interactorType; } }
         
         private void Awake() 
         {
@@ -75,5 +75,5 @@ namespace DD.Core.Control
         }
     }
 
-    public enum InteractorActorType { Player, AI }
+    public enum InteractorType { Player, AI }
 }

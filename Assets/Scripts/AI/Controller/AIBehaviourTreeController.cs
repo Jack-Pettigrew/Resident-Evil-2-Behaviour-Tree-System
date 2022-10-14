@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.AI.BehaviourTreeSystem;
 using DD.Animation.RigEvents;
+using DD.Core.Control;
 
 namespace DD.AI.Controllers
 {
@@ -15,6 +16,7 @@ namespace DD.AI.Controllers
         // COMPONENTS - the AI's 'controller'
         private AILocomotion aiLocomotion;
         private AIAnimator aiAnimator;
+        [SerializeField] private Interactor interactor;
 
         private void Awake()
         {
@@ -137,6 +139,11 @@ namespace DD.AI.Controllers
         public AIAnimator GetAnimator()
         {
             return aiAnimator;
+        }
+
+        public Interactor GetInteractor()
+        {
+            return interactor ?? null;
         }
 
         public T GetAIComponent<T>()

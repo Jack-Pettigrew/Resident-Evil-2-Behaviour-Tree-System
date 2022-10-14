@@ -67,6 +67,13 @@ namespace DD.Systems.Room
         /// </summary>
         public void Interact(Interactor interactor)
         {
+            if(interactor.InteractorType == InteractorType.AI)
+            {
+                ResetRunningCoroutines();
+                OpenDoor(interactor.gameObject.transform.position);
+                return;
+            }
+            
             if(!CanInteract || IsChangingState)
             {
                 return;
@@ -79,7 +86,7 @@ namespace DD.Systems.Room
             }
             
             ResetRunningCoroutines();
-            
+
             if(!IsOpen)
             {
                 OpenDoor(interactor.InteractorTransform.position);
@@ -88,6 +95,7 @@ namespace DD.Systems.Room
             {
                 CloseDoor();
             }
+            
         }
 
         public void ResetRunningCoroutines()
@@ -104,7 +112,7 @@ namespace DD.Systems.Room
         /// </summary>
         /// <param name="targetAngle">The angle the door should be driven to offset from 0 in degrees.</param>
         /// <returns></returns>
-        private IEnumerator SlerpDoorToOffset(float targetAngle)
+        private IEnumerator RotateToAngle(float targetAngle)
         {
             // Determine target rotation
             targetAngle = Mathf.Repeat(targetAngle, 360);
@@ -129,16 +137,16 @@ namespace DD.Systems.Room
                 doorSibling.OpenDoor(openerPosition, true);
             }
             
-            runningCoroutine = StartCoroutine(ManuallyOpenDoor(openerPosition));
+            runningCoroutine = StartCoroutine(OpenDoorCoroutine(openerPosition));
         }
 
-        private IEnumerator ManuallyOpenDoor(Vector3 openerPosition)
+        private IEnumerator OpenDoorCoroutine(Vector3 openerPosition)
         {            
             IsOpen = true;
             IsChangingState = true;
                         
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
-            yield return SlerpDoorToOffset(
+            yield return RotateToAngle(
                 Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? 90.0f : -90.0f
             );
 
@@ -158,19 +166,7 @@ namespace DD.Systems.Room
                 yield return null;
             }
 
-            // TODO: start door close dynamic
-            runningCoroutine = StartCoroutine(CloseDoorDynamic());
-        }
-
-        private IEnumerator CloseDoorDynamic()
-        {
-            IsChangingState = true;
-            
-            yield return SlerpDoorToOffset(0.0f);
-            
-            IsOpen = false;
-            IsChangingState = false;
-            closeDoorEvent?.Invoke();
+            runningCoroutine = StartCoroutine(CloseDoorCoroutine());
         }
 
         /// <summary>
@@ -184,7 +180,18 @@ namespace DD.Systems.Room
                 doorSibling.CloseDoor(true);
             }
             
-            runningCoroutine = StartCoroutine(CloseDoorDynamic());
+            runningCoroutine = StartCoroutine(CloseDoorCoroutine());
+        }
+
+        private IEnumerator CloseDoorCoroutine()
+        {
+            IsChangingState = true;
+            
+            yield return RotateToAngle(0.0f);
+            
+            IsOpen = false;
+            IsChangingState = false;
+            closeDoorEvent?.Invoke();
         }
 
         /// <summary>
