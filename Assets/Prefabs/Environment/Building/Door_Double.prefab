@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 6213752948906468919}
   - component: {fileID: 6213752948906468918}
   - component: {fileID: 6213752948906468917}
+  - component: {fileID: 7406864741453870804}
   m_Layer: 11
   m_Name: Door_Single_Left
   m_TagString: Untagged
@@ -274,7 +275,6 @@ MonoBehaviour:
   doorSpeed: 3
   openDoorCooldown: 5
   doorClosedThreshold: 0.1
-  ignorePlayerCollision: 0
   roomA: {fileID: 0}
   roomAEntryPoint: {fileID: 6213752950103872126}
   roomB: {fileID: 0}
@@ -285,6 +285,22 @@ MonoBehaviour:
   closeDoorEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!208 &7406864741453870804
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213752948906468920}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.6, y: 1.0500001, z: 0.109000005}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.0500001, z: 0}
+  m_TimeToStationary: 0.2
 --- !u!1 &6213752949146523345
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +413,7 @@ GameObject:
   - component: {fileID: 6213752949800001486}
   - component: {fileID: 6213752949800001521}
   - component: {fileID: 6213752949800001484}
+  - component: {fileID: 7633227502443437788}
   m_Layer: 11
   m_Name: Door_Single_Right
   m_TagString: Untagged
@@ -501,7 +518,6 @@ MonoBehaviour:
   doorSpeed: 3
   openDoorCooldown: 5
   doorClosedThreshold: 0.1
-  ignorePlayerCollision: 0
   roomA: {fileID: 0}
   roomAEntryPoint: {fileID: 6213752950103872126}
   roomB: {fileID: 0}
@@ -512,6 +528,22 @@ MonoBehaviour:
   closeDoorEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!208 &7633227502443437788
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213752949800001523}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.6, y: 1.0500001, z: 0.109000005}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.0500001, z: 0}
+  m_TimeToStationary: 0.2
 --- !u!1 &6213752950103872097
 GameObject:
   m_ObjectHideFlags: 0
