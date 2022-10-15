@@ -13,7 +13,8 @@ namespace DD.AI.Controllers
         private Animator animator;
 
         // VELOCITY
-        [HideInInspector] public Vector3 velocity = Vector3.zero;
+        private Vector3 velocity = Vector3.zero;
+        public Vector3 Velocity { get { return velocity; } }
         private float yVelocity = 0;
 
         // MOVEMENT
@@ -68,34 +69,34 @@ namespace DD.AI.Controllers
         }
 
         public bool UpdatePath(Vector3 goalPosition)
-        {            
+        {
             // Update Path
             NavMesh.CalculatePath(transform.position, goalPosition, NavMesh.AllAreas, path);
 
             // Fail if path is invalid
-            if(path.corners.Length <= 0)
+            if (path.corners.Length <= 0)
             {
                 return false;
             }
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             for (int i = 0; i < path.corners.Length; i++)
             {
                 if (i + 1 == path.corners.Length) break;
 
                 Debug.DrawLine(path.corners[i], path.corners[i + 1]);
             }
-            #endif
+#endif
 
             return true;
         }
 
         public void Move()
         {
-            if(path.corners.Length > 0)
+            if (path.corners.Length > 0)
             {
                 Vector3 targetDirection = path.corners[1] - transform.position;
-                
+
                 float targetAngle = Mathf.Atan2(targetDirection.x, targetDirection.z) * Mathf.Rad2Deg;
                 transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
 
