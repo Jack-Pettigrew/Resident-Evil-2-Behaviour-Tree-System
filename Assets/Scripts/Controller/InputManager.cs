@@ -49,7 +49,7 @@ namespace DD.Core.Control
 
             // Locomotion
             InputDirection =  ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-            if(Sprint && InputDirection.sqrMagnitude <= 0)
+            if(Sprint && InputDirection.sqrMagnitude <= 0 || Aim)
             {
                 Sprint = false;
             }
