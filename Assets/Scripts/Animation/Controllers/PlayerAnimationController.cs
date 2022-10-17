@@ -61,12 +61,12 @@ namespace DD.Animation
 
         public void TriggerShoot()
         {
-            animator.SetTrigger("Shoot");
+            animator.CrossFade("pistol_shoot", 0.1f, 1);
         }
 
         public void TriggerReload()
         {
-            animator.SetTrigger("Reload");
+            animator.CrossFade("Weapon_Reload", 0.1f, 1);
         }
 
         public void UpdateWeaponType()
