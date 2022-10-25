@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2182218961027780012}
   - component: {fileID: 2182218961027780015}
   - component: {fileID: 416081457991552968}
-  - component: {fileID: 2182218961027780014}
   m_Layer: 0
   m_Name: Mr. X
   m_TagString: Untagged
@@ -68,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61336f5d64349d443be4ac57e5215273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactor: {fileID: 0}
 --- !u!114 &2182218961027780012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5702218195566529543}
+  rigSignalReceivers: []
 --- !u!114 &2182218961027780015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701c334d85d6d5e419d7d5e237877a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   moveSpeed: 2
   rotSpeedScalar: 0.1
   groundedGravity: -0.2
@@ -119,25 +119,12 @@ MonoBehaviour:
   environmentLayerMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &2182218961027780014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2182218961027780000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599cb348ddc65554b99bc18d56702001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackOriginTransform: {fileID: 2182218961027780001}
-  originOffset: {x: 0, y: 1, z: 1}
-  attackableLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  attackRadius: 0.78
-  damageAmount: 25
+  OnObjectSensed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSensedObjectLeft:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4132603547853451573
 GameObject:
   m_ObjectHideFlags: 0
