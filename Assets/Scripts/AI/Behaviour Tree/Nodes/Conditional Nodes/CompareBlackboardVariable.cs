@@ -9,7 +9,7 @@ namespace DD.AI.BehaviourTreeSystem
         private readonly T comparerVariable;
         private readonly string blackboardVariableKey;
 
-        public CompareBlackboardVariable(BehaviourTree behaviourTree, T comparerVariable, string blackboardVariableKey, bool uninterruptable = false) : base(behaviourTree, uninterruptable)
+        public CompareBlackboardVariable(BehaviourTree behaviourTree, T comparerVariable, string blackboardVariableKey) : base(behaviourTree)
         {
             this.comparerVariable = comparerVariable;
             this.blackboardVariableKey = blackboardVariableKey;

@@ -9,7 +9,7 @@ namespace DD.AI.BehaviourTreeSystem
     /// </summary>
     public abstract class Conditional : Node
     {
-        protected Conditional(BehaviourTree behaviourTree, bool uninterruptable = false) : base(behaviourTree, uninterruptable)
+        protected Conditional(BehaviourTree behaviourTree) : base(behaviourTree, false)
         {
         }
 
