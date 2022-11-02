@@ -12,7 +12,7 @@ namespace DD.AI.BehaviourTreeSystem
         protected Node branchingNode;
         protected Conditional conditionalNode;
         
-        public ConditionalBranch(BehaviourTree behaviourTree, Node branchingNode, Conditional conditionalNode, bool uninterruptable) : base(behaviourTree, null, uninterruptable)
+        public ConditionalBranch(BehaviourTree behaviourTree, Conditional conditionalNode, Node branchingNode, bool uninterruptable = false) : base(behaviourTree, null, uninterruptable)
         {
             this.branchingNode = branchingNode;
             this.conditionalNode = conditionalNode;
