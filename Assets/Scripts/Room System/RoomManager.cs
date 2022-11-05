@@ -9,7 +9,7 @@ namespace DD.Systems.Room
     {
         private static Room[] rooms;
 
-        private static Dictionary<Room, Room[]> roomConnections;
+        private static Dictionary<Room, Room[]> roomConnections = new Dictionary<Room, Room[]>();
 
         private void Awake()
         {
@@ -22,8 +22,6 @@ namespace DD.Systems.Room
         public static void GatherAllRooms()
         {
             rooms = FindObjectsOfType<Room>();
-
-            roomConnections = new Dictionary<Room, Room[]>();
 
             foreach (Room room in rooms)
             {
@@ -62,15 +60,28 @@ namespace DD.Systems.Room
 
             if(includeBaseRoom)
             {
-                // Get random index including out of bounds
-                int randomIndex = UnityEngine.Random.Range(0, connectingRooms.Length + 1);
+                // Get random index including out of bounds (make sure it's not NULL)
+                int randomIndex = 0;
+                do
+                {
+                    randomIndex = UnityEngine.Random.Range(0, connectingRooms.Length + 1);
+                }
+                while(randomIndex < connectingRooms.Length && connectingRooms[randomIndex] == null);
 
                 // If out of bounds, return the room random is based on
                 return randomIndex == connectingRooms.Length ? roomToBaseOn : connectingRooms[randomIndex];
             }
             else
             {
-                return connectingRooms[UnityEngine.Random.Range(0, connectingRooms.Length)];
+                // Get random index including out of bounds (make sure it's not NULL)
+                int randomIndex = 0;
+                do
+                {
+                    randomIndex = UnityEngine.Random.Range(0, connectingRooms.Length);
+                }
+                while(connectingRooms[randomIndex] == null);
+
+                return connectingRooms[randomIndex];
             }
         }
 
