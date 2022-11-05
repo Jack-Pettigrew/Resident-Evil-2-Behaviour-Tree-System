@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DD.Systems.Room
@@ -7,6 +8,8 @@ namespace DD.Systems.Room
     public class RoomManager : MonoBehaviour
     {
         private static Room[] rooms;
+
+        private static Dictionary<Room, Room[]> roomConnections;
 
         private void Awake()
         {
@@ -19,6 +22,20 @@ namespace DD.Systems.Room
         public static void GatherAllRooms()
         {
             rooms = FindObjectsOfType<Room>();
+
+            roomConnections = new Dictionary<Room, Room[]>();
+
+            foreach (Room room in rooms)
+            {
+                Room[] connectingRooms = new Room[room.Doors.Length];
+                
+                for (int i = 0; i < room.Doors.Length; i++)
+                {
+                    connectingRooms[i] = room.Doors[i].RoomA != room ? room.Doors[i].RoomA : room.Doors[i].RoomB;
+                }
+
+                roomConnections.Add(room, connectingRooms);
+            }
         }
 
         /// <summary>
@@ -28,6 +45,33 @@ namespace DD.Systems.Room
         public static Room GetRandomRoom()
         {
             return rooms[UnityEngine.Random.Range(0, rooms.Length)];
+        }
+
+        /// <summary>
+        /// Returns a random room adjacent to the given room, or the given room if desired.
+        /// </summary>
+        /// <param name="roomToBaseOn">The Room to randomly select the adjacent rooms of.</param>
+        /// <param name="includeBaseRoom">Should the given room included in the random selection?</param>
+        /// <returns>A randomly selected room.</returns>
+        public static Room GetRandomAdjacentRoom(Room roomToBaseOn, bool includeBaseRoom)
+        {
+            Room[] connectingRooms;
+            roomConnections.TryGetValue(roomToBaseOn, out connectingRooms);
+
+            if(connectingRooms == null) return null;
+
+            if(includeBaseRoom)
+            {
+                // Get random index including out of bounds
+                int randomIndex = UnityEngine.Random.Range(0, connectingRooms.Length + 1);
+
+                // If out of bounds, return the room random is based on
+                return randomIndex == connectingRooms.Length ? roomToBaseOn : connectingRooms[randomIndex];
+            }
+            else
+            {
+                return connectingRooms[UnityEngine.Random.Range(0, connectingRooms.Length)];
+            }
         }
 
         /// <summary>
