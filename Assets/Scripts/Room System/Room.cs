@@ -6,6 +6,9 @@ namespace DD.Systems.Room
 {
     public class Room : MonoBehaviour
     {
+        [SerializeField, Tooltip("Points defining where NPCs should consider 'searching'.")] private Transform[] searchSpots;
+        public Transform[] SearchSpots { set { searchSpots = value; } get { return searchSpots; } }
+
         [SerializeField] private Door[] doors;
         public Door[] Doors { set { doors = value; } get { return doors; } }
 
@@ -13,7 +16,7 @@ namespace DD.Systems.Room
         {
             foreach (var door in Doors)
             {
-                if(door == null)
+                if (door == null)
                 {
                     Debug.LogError($"{this} has a NULL Door in it's array - Doors array was reassigned to empty array.");
                 }
@@ -44,7 +47,7 @@ namespace DD.Systems.Room
                     Gizmos.DrawLine(transform.position, door.transform.position);
 
                     Gizmos.color = Color.green;
-                    if(door.RoomA && door.RoomA != this)
+                    if (door.RoomA && door.RoomA != this)
                         Gizmos.DrawLine(door.transform.position, door.RoomA.transform.position);
                     if (door.RoomB && door.RoomB != this)
                         Gizmos.DrawLine(door.transform.position, door.RoomB.transform.position);
