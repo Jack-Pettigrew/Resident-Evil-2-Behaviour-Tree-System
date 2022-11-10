@@ -47,5 +47,10 @@ namespace DD.AI.BehaviourTreeSystem
         {
             waitComplete = true;
         }
+
+        protected override void OnReset()
+        {
+            StopWaiting();
+        }
     }
 }
