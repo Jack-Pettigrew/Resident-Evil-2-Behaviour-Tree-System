@@ -58,7 +58,6 @@ namespace DD.AI.Sensors
 
             if (sensedCollider != null)
             {
-                Debug.Log("Lost");
                 OnSensedObjectLeft.Invoke(sensedCollider.gameObject);
                 sensedCollider = null;
             }
