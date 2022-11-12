@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2889.3223, g: 2786.6836, b: 3808.4375, a: 1}
+  m_IndirectSpecularColor: {r: 2850.127, g: 2710.2031, b: 3498.8125, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1075,6 +1075,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall_Single_Corner_Basic (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8663bef3a8d2fdc459b35adc667066ed,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8663bef3a8d2fdc459b35adc667066ed,
         type: 3}
@@ -27739,6 +27744,26 @@ MonoBehaviour:
   searchSpots: []
   doors:
   - {fileID: 1760915143}
+--- !u!1 &801362705 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8663bef3a8d2fdc459b35adc667066ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 33648870}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &801362708
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801362705}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 480841673826283371, guid: 8663bef3a8d2fdc459b35adc667066ed, type: 3}
 --- !u!1001 &802474174
 PrefabInstance:
   m_ObjectHideFlags: 0

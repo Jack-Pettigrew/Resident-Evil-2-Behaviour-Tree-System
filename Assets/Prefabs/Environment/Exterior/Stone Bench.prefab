@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1331512271442937450}
   - component: {fileID: 5948500919589992387}
   - component: {fileID: 3922292467234397992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Madera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6315965292342988242}
   - component: {fileID: 6920074865374642807}
   - component: {fileID: 5183075981544601277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stone Bench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
