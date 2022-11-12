@@ -86,7 +86,26 @@ namespace DD.Systems.Room
         }
 
         /// <summary>
-        /// Returns the Room the given position is on.
+        /// Returns the Room the given position is in.
+        /// </summary>
+        /// <param name="point">The point in question</param>
+        /// <returns>The current Room of the point or null if no room is found.</returns>
+        public static Room GetRoomOfPoint(Vector3 point)
+        {
+            RaycastHit hit;
+
+            // Raycast accounting for center point margin of error (e.g. when the center point is directly against a floor plane)
+            if (Physics.Raycast(point + Vector3.up * 0.05f, Vector3.down, out hit, 5.0f, LayerMask.GetMask("Room"), QueryTriggerInteraction.Ignore))
+            {
+                RoomFloor floor = hit.collider.GetComponent<RoomFloor>();
+                return floor ? floor.OwnerRoom : null;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Returns the Room the given GameObject is in.
         /// </summary>
         /// <param name="gameObject">The gameobject.</param>
         /// <returns>The current Room of the object or null if no room is found.</returns>
