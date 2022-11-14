@@ -2441,7 +2441,7 @@ CharacterController:
   m_Radius: 0.15
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: -0.09, z: 0}
 --- !u!114 &7082594427839628681
@@ -2492,7 +2492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1.75
   maxAngle: 75
-  interactorActorType: 0
+  interactorType: 0
 --- !u!114 &7082594427839628680
 MonoBehaviour:
   m_ObjectHideFlags: 0
