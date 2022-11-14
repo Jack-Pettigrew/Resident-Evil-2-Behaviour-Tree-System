@@ -44,17 +44,17 @@ namespace DD.AI.Controllers
             // Creating actual behaviour tree
             Selector root = new Selector(behaviourTree,
                 new List<Node> {
-                    // Attack
+                    // ! Attack
                     new ConditionalBranch(behaviourTree, new CompareBlackboardVariable<MrXState>(behaviourTree, MrXState.ATTACKING, "State"),
                         new Selector(behaviourTree, new List<Node> {
                             
-                            // Attacking Player + Move to Player
+                            // ! Attacking Player + Move to Player
                             new Selector(behaviourTree, new List<Node> {
 
                                 // Atttacking Player
                                 new Sequence(behaviourTree, new List<Node> {
-                                    new IsAtTarget<Component>(behaviourTree, "Player", 0.2f),
-                                    new PlayAnimation(behaviourTree, "Right Hook", true)
+                                    new IsAtTarget<Component>(behaviourTree, "Player", 1.0f),
+                                    new PlayAnimation(behaviourTree, "right_hook", true)
                                 }),
 
                                 // Move To Player
@@ -67,7 +67,7 @@ namespace DD.AI.Controllers
 
                             }),
 
-                            // LKL
+                            // ! LKL
                             new Selector(behaviourTree, new List<Node> {
                                 // End Search
                                 new Sequence(behaviourTree, new List<Node> {
@@ -76,51 +76,49 @@ namespace DD.AI.Controllers
                                     new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.SEARCHING)
                                 }),
 
-                                new Selector(behaviourTree, new List<Node> {
-                                    // Go to LKL via Rooms
+                                // Go to LKL via Rooms
+                                new Sequence(behaviourTree, new List<Node> {
+                                    new Invertor(behaviourTree, new IsInSameRoomAsVector3(behaviourTree, "LastKnownLocation")),
+
+                                    // Room Transition
+                                    new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetSearchRoom"),
+                                    new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
+                                    new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
+                                    new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
                                     new Sequence(behaviourTree, new List<Node> {
-                                        new Invertor(behaviourTree, new IsInSameRoomAsVector3(behaviourTree, "LastKnownLocation")),
-
-                                        // Room Transition
-                                        new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetSearchRoom"),
-                                        new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
-                                        new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
+                                        new OpenDoor(behaviourTree, "TargetDoor"),
+                                        new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.ENABLE),
+                                        new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
                                         new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                                        new Sequence(behaviourTree, new List<Node> {
-                                            new OpenDoor(behaviourTree, "TargetDoor"),
-                                            new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.ENABLE),
-                                            new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
-                                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                                            new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
-                                            new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-                                        }, true)
-                                    }),
+                                        new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
+                                        new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
+                                    }, true)
+                                }),
 
-                                    // Go to LKL directly
-                                    new MoveToVector3(behaviourTree, "LastKnownLocation")
-                                })
+                                // Go to LKL directly
+                                new MoveToVector3(behaviourTree, "LastKnownLocation")
                             })
 
                         })
                     ),
 
-                    // Search
+                    // ! Search
                     new ConditionalBranch(behaviourTree, new CompareBlackboardVariable<MrXState>(behaviourTree, MrXState.SEARCHING, "State"),
                         new Selector(behaviourTree, new List<Node> {
 
-                            // Init Search
+                            // ! Init Search
                             new Sequence(behaviourTree, new List<Node> {
                                 new IsBlackboardVariableNull(behaviourTree, "TargetSearchRoom"),
                                 new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
                             }),
 
-                            // Can See Player?
+                            // ! Can See Player?
                             new Sequence(behaviourTree, new List<Node> {
                                 new CanSeeObject(behaviourTree),
                                 new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.ATTACKING)
                             }),
 
-                            // Search Room + Go to Room
+                            // ! Search Room + Go to Room
                             new Selector(behaviourTree, new List<Node> {
                                 // Search Room
                                 new Sequence(behaviourTree, new List<Node> {
@@ -138,10 +136,8 @@ namespace DD.AI.Controllers
                                     new SetBlackboardVariable<int>(behaviourTree, "SearchRoomCounter", 0),
                                     new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
                                 }),
-
-                                // Go To Room
+                                // Room Transition
                                 new Sequence(behaviourTree, new List<Node> {
-                                    // Room Transition
                                     new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetSearchRoom"),
                                     new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
                                     new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
@@ -159,7 +155,7 @@ namespace DD.AI.Controllers
                         })
                     ),
 
-                    // Idle
+                    // ! Idle
                     new IdleNode(behaviourTree)
                 }
             );
