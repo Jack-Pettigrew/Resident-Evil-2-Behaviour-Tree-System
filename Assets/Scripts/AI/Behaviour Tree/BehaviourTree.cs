@@ -40,7 +40,23 @@ namespace DD.AI.BehaviourTreeSystem
                 return;
             }
 
-            UpdateTree();
+            try
+            {
+                UpdateTree();
+            }
+            catch (System.Exception)
+            {
+                string nodePath = string.Empty;
+
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                foreach (Node node in currentBranch)
+                {
+                    sb.Append(node.GetType().ToString() + '\n');
+                }
+
+                Debug.LogError("Behaviour Tree Breakage reported:\n" + sb.ToString());
+                throw;
+            }
 
             HandleBranchChange();
         }
