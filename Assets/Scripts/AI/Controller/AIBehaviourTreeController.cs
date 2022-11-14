@@ -161,41 +161,6 @@ namespace DD.AI.Controllers
             );
 
             return root;
-
-            // Selector baseTest = new Selector(behaviourTree, new List<Node> {                
-
-            //     new Sequence(behaviourTree, new List<Node> {
-            //         new IsAtTarget<Component>(behaviourTree, "Player", 0.3f),
-            //         new IdleNode(behaviourTree)
-            //     }),
-
-            //     // Follow Player
-            //     new Sequence(behaviourTree, new List<Node> {
-            //         new IsInSameRoomAs<Component>(behaviourTree, "Player"),
-            //         new MoveTo<Component>(behaviourTree, "Player")
-            //     }),
-
-            //     // Follow Door Path
-            //     new Sequence(behaviourTree, new List<Node> {
-            //         new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
-
-            //         new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
-            //         new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
-            //         new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-
-            //         new Sequence(behaviourTree, new List<Node> {
-            //             new OpenDoor(behaviourTree, "TargetDoor"),
-            //             new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.ENABLE),
-            //             new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
-            //             new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-            //             new SendAnimationRigSignal(behaviourTree, "door", AnimRigEventType.DISABLE),
-            //         }, true),
-
-            //         new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-            //     }),
-
-            //     new IdleNode(behaviourTree)
-            // });
         }
 
         private void Update()
