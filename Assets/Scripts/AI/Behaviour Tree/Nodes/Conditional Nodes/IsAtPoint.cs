@@ -12,11 +12,12 @@ namespace DD.AI.BehaviourTreeSystem
         public IsAtPoint(BehaviourTree behaviourTree, string pointBlackboardKey, float disatnceThreshold) : base(behaviourTree)
         { 
             this.pointBlackboardKey = pointBlackboardKey;
+            this.distanceThreshold = disatnceThreshold;
         }
 
         protected override NodeState EvaluateConditional()
         {
-            return Vector3.Distance(behaviourTree.ai.GetAITransform().position, behaviourTree.Blackboard.GetFromBlackboard<Vector3>(pointBlackboardKey)) <= distanceThreshold ? NodeState.SUCCESSFUL : NodeState.FAILED;
+            return Vector3.Distance(behaviourTree.Blackboard.GetFromBlackboard<Vector3>(pointBlackboardKey), behaviourTree.ai.GetAITransform().position) <= distanceThreshold ? NodeState.SUCCESSFUL : NodeState.FAILED;
         }
     }
 }
