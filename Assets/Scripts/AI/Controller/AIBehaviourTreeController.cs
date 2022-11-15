@@ -72,16 +72,20 @@ namespace DD.AI.Controllers
                                 // End Search
                                 new Sequence(behaviourTree, new List<Node> {
                                     new IsAtPoint(behaviourTree, "LastKnownLocation", 1.0f),
-                                    // new PlayAnimation(behaviourTree, "search", true),
+                                    new PlayAnimation(behaviourTree, "looking_around", true),
                                     new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.SEARCHING)
+                                }),
+
+                                // Go to LKL directly
+                                new Sequence(behaviourTree, new List<Node> {
+                                    new IsInSameRoomAsVector3(behaviourTree, "LastKnownLocation"),
+                                    new MoveToVector3(behaviourTree, "LastKnownLocation")
                                 }),
 
                                 // Go to LKL via Rooms
                                 new Sequence(behaviourTree, new List<Node> {
-                                    new Invertor(behaviourTree, new IsInSameRoomAsVector3(behaviourTree, "LastKnownLocation")),
-
                                     // Room Transition
-                                    new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetSearchRoom"),
+                                    new FindDoorPathToVector3(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "LastKnownLocation"),
                                     new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
                                     new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
                                     new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
@@ -93,10 +97,7 @@ namespace DD.AI.Controllers
                                         new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
                                         new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
                                     }, true)
-                                }),
-
-                                // Go to LKL directly
-                                new MoveToVector3(behaviourTree, "LastKnownLocation")
+                                })
                             })
 
                         })
@@ -115,6 +116,7 @@ namespace DD.AI.Controllers
                             // ! Can See Player?
                             new Sequence(behaviourTree, new List<Node> {
                                 new CanSeeObject(behaviourTree),
+                                new SetLastKnownLocation(behaviourTree, "LastKnownLocation", "Player"),
                                 new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.ATTACKING)
                             }),
 
@@ -127,7 +129,7 @@ namespace DD.AI.Controllers
                                         new Sequence(behaviourTree, new List<Node> {
                                             new GetRandomRoomSearchSpot(behaviourTree, "TargetSearchRoom", "MoveTarget"),
                                             new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                                            // new PlayAnimation(behaviourTree, "search", true),
+                                            new PlayAnimation(behaviourTree, "looking_around", true),
                                             new IncrementBlackboardVariable(behaviourTree, "SearchRoomCounter", 1)
                                         }),
                                         new CompareBlackboardVariable<int>(behaviourTree, 2, "SearchRoomCounter"),
@@ -136,6 +138,7 @@ namespace DD.AI.Controllers
                                     new SetBlackboardVariable<int>(behaviourTree, "SearchRoomCounter", 0),
                                     new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
                                 }),
+                                
                                 // Room Transition
                                 new Sequence(behaviourTree, new List<Node> {
                                     new FindDoorPathTo<Component>(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetSearchRoom"),
