@@ -31,11 +31,11 @@ public class PrefabSwapWindow : ExtendedEditorWindow
     private void OnGUI() {
         GUILayout.BeginVertical();
 
-        prefabToSwapTo = (GameObject) EditorGUILayout.ObjectField("Asset to Swap with", prefabToSwapTo, typeof(GameObject), false);
+        prefabToSwapTo = (GameObject) EditorGUILayout.ObjectField("Source Prefab", prefabToSwapTo, typeof(GameObject), false);
 
-        deleteOriginalOnSwap = EditorGUILayout.Toggle("Delete on Swap", deleteOriginalOnSwap);
+        deleteOriginalOnSwap = EditorGUILayout.Toggle("Delete Target on Swap", deleteOriginalOnSwap);
 
-        keepParent = EditorGUILayout.Toggle("Keep Parent", keepParent);
+        keepParent = EditorGUILayout.Toggle("Keep Target's Parent", keepParent);
 
         if(Selection.count == 0 && prefabToSwapTo != null)
         {
