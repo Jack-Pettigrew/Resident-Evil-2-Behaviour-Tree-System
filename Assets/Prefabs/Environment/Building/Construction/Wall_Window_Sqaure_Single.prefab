@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 851691568308222505}
   - component: {fileID: 4358934053416334732}
   - component: {fileID: 1989179419791130950}
-  m_Layer: 0
+  - component: {fileID: 4195923112123050611}
+  - component: {fileID: 6182591523821534253}
+  - component: {fileID: 1575377168820227202}
+  - component: {fileID: 6241929788094184076}
+  m_Layer: 8
   m_Name: Wall_Window_Sqaure_Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,3 +87,55 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4195923112123050611
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43347509632082067}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.8993263, z: 0.16}
+  m_Center: {x: 0, y: 2.5503368, z: 0}
+--- !u!65 &6182591523821534253
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43347509632082067}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.8946934, z: 0.16}
+  m_Center: {x: 0, y: 0.4473467, z: 0}
+--- !u!65 &1575377168820227202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43347509632082067}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20470679, y: 1.20268, z: 0.16}
+  m_Center: {x: -0.8976466, y: 1.4976864, z: 0}
+--- !u!65 &6241929788094184076
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43347509632082067}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20006943, y: 1.2045643, z: 0.16}
+  m_Center: {x: 0.8999653, y: 1.4976863, z: 0}

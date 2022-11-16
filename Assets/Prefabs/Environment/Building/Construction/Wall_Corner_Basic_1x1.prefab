@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 6878297386351789057}
   - component: {fileID: 7555708197775870884}
   - component: {fileID: 5710480606125686638}
-  m_Layer: 0
+  - component: {fileID: 8524544451748036948}
+  - component: {fileID: 5026818409208256263}
+  m_Layer: 8
   m_Name: Wall_Corner_Basic_1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,3 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8524544451748036948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070658419353673403}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.10586506, y: 3, z: 1.05}
+  m_Center: {x: 0.0029325187, y: 1.5, z: 0.47500002}
+--- !u!65 &5026818409208256263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070658419353673403}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0499998, y: 3, z: 0.101409145}
+  m_Center: {x: 0.4749999, y: 1.5, z: 0.0007046126}
