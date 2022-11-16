@@ -55,7 +55,7 @@ public class PrefabSwapWindow : ExtendedEditorWindow
             
             GUILayout.Box(content, GUILayout.MaxWidth(position.width), GUILayout.Height(250));
 
-            if(GUILayout.Button("Swap selected for Prefab"))
+            if(GUILayout.Button("Swap selected for Prefab") && prefabToSwapTo != null)
             {
                 SwapSelectedWithChosen();
             }
@@ -71,10 +71,10 @@ public class PrefabSwapWindow : ExtendedEditorWindow
     }
 
     private void SwapSelectedWithChosen()
-    {
+    {       
         GameObject[] selected = Selection.gameObjects;
 
-        // Undo.RecordObjects(selected, "Undo Prefab Swap");
+        int undoID = Undo.GetCurrentGroup();
 
         foreach (GameObject selectedObject in selected)
         {
@@ -83,18 +83,24 @@ public class PrefabSwapWindow : ExtendedEditorWindow
                 GameObject instantiatedObject = (GameObject) PrefabUtility.InstantiatePrefab(prefabToSwapTo, selectedObject.transform.parent);
                 instantiatedObject.transform.localPosition = selectedObject.transform.localPosition;
                 instantiatedObject.transform.localRotation = selectedObject.transform.localRotation;
+
+                Undo.RegisterCreatedObjectUndo(instantiatedObject, "Prefab swapper instantiation");
             }
             else
             {
                 GameObject instantiatedObject = (GameObject) PrefabUtility.InstantiatePrefab(prefabToSwapTo);
                 instantiatedObject.transform.position = selectedObject.transform.position;
                 instantiatedObject.transform.rotation = selectedObject.transform.rotation;
+
+                Undo.RegisterCreatedObjectUndo(instantiatedObject, "Prefab swapper instantiation");
             }
 
             if(deleteOriginalOnSwap)
             {
                 Undo.DestroyObjectImmediate(selectedObject);
             }
+
+            Undo.CollapseUndoOperations(undoID);
         }
     }
 }
