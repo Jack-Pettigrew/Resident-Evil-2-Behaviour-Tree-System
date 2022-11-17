@@ -33,20 +33,20 @@ namespace DD.AI.Sensors
             // Vicinity
             // Check whether overlap actually updates the array, otherwise it hasn't found anything (array will always be initialised but not necessarily updated)
             int collidersFound = Physics.OverlapSphereNonAlloc(visionTransform.position, fovDistance, colliders, targetLayerMask, QueryTriggerInteraction.Ignore);
-            
+                        
             if (collidersFound > 0)
             {
                 foreach (var collider in colliders)
                 {
                     if (collider == null) continue;
 
-                    Vector3 targetDir = collider.transform.position - visionTransform.position;
+                    Vector3 targetDir = collider.bounds.center - visionTransform.position;
 
                     // Is target within view cone?
                     if (Mathf.Abs(Vector3.Angle(visionTransform.forward, targetDir)) <= fovAngle)
                     {
                         // Is view to target unobsctructed?
-                        if (!Physics.Raycast(visionTransform.position, targetDir, fovDistance, environmentLayerMask, QueryTriggerInteraction.Ignore))
+                        if (!Physics.Raycast(visionTransform.position, targetDir, targetDir.magnitude, environmentLayerMask, QueryTriggerInteraction.Ignore))
                         {
                             sensedCollider = collider;
                             OnObjectSensed.Invoke(sensedCollider.gameObject);
