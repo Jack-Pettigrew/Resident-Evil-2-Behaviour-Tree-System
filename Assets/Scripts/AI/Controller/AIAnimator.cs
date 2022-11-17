@@ -35,7 +35,7 @@ namespace DD.AI.Controllers
 
         private IEnumerator WaitForAnimation(Action callback)
         {            
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(animator.GetNextAnimatorStateInfo(0).length);
             
             callback?.Invoke();
         }
