@@ -10,6 +10,7 @@ namespace DD.AI.Controllers
     {
         [SerializeField] private Animator animator;
         public Animator Animator { get{ return animator; } }
+        private Dictionary<int, AnimationClip> animationClipDictionary = new Dictionary<int, AnimationClip>();
 
         // Animation Rigging Events
         [SerializeField] private AniRigEventSignalReceiver[] rigSignalReceivers;
@@ -21,6 +22,11 @@ namespace DD.AI.Controllers
                 Debug.LogError($"{name} has no animator!");
             }
 
+            foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+            {
+                animationClipDictionary.Add(clip.name.GetHashCode(), clip);
+            }
+
             foreach (AniRigEventSignalReceiver signalReceiver in rigSignalReceivers)
             {
                 rigSignalReceiverDictionary.Add(signalReceiver.ReceiverHash, signalReceiver);
@@ -29,13 +35,18 @@ namespace DD.AI.Controllers
 
         public void PlayAndWait(string stateName, Action callback = null)
         {
+            if(!animationClipDictionary.ContainsKey(stateName.GetHashCode()))
+            {
+                return;
+            }
+            
             animator.CrossFade(stateName, 0.01f);
-            StartCoroutine(WaitForAnimation(callback));
+            StartCoroutine(WaitForAnimation(stateName.GetHashCode(), callback));
         }
 
-        private IEnumerator WaitForAnimation(Action callback)
+        private IEnumerator WaitForAnimation(int animationClipHashCode, Action callback)
         {            
-            yield return new WaitForSeconds(animator.GetNextAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(animationClipDictionary[animationClipHashCode].length);
             
             callback?.Invoke();
         }
