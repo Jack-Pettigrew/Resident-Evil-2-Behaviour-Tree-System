@@ -19,7 +19,7 @@ namespace DD.Core
 
         public void ConsumeHealItem(HealingItem healingItem)
         {
-            playerHealth.Heal(healingItem.HealAmount);
+            playerHealth?.Heal(healingItem.HealAmount);
         }
     }
 }

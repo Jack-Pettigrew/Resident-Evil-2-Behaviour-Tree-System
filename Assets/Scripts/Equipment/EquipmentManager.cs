@@ -41,7 +41,7 @@ namespace DD.Core.Combat
 
         public void UseWeapon()
         {
-            ActiveWeapon.Attack();
+            ActiveWeapon?.Attack();
         }
         
         public void UseWeaponAction()
