@@ -33,7 +33,13 @@ public class DebugCamera : MonoBehaviour
         }
 
         if(active)
-        {            
+        {
+            if(Input.GetKeyDown(KeyCode.I))
+            {
+                Cursor.visible = !Cursor.visible;
+                Cursor.lockState = Cursor.lockState == CursorLockMode.None ? CursorLockMode.Locked : CursorLockMode.None;
+            }
+            
             if(Input.GetKeyDown(KeyCode.O))
             {
                 PauseTime();
