@@ -68441,6 +68441,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stairs
       objectReference: {fileID: 0}
+    - target: {fileID: 4581677603903493735, guid: 74b7046aa0be21647b35e6dca23ca3e6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74b7046aa0be21647b35e6dca23ca3e6, type: 3}
 --- !u!4 &1494502113 stripped
