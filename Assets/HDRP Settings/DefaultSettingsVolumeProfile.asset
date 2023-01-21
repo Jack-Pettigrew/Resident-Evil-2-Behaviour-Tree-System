@@ -186,9 +186,11 @@ MonoBehaviour:
   cloudMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cloudLut:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cloudControl:
     m_OverrideState: 0
     m_Value: 0
@@ -198,24 +200,28 @@ MonoBehaviour:
   cumulusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cumulusMapMultiplier:
     m_OverrideState: 0
     m_Value: 1
   altoStratusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   altoStratusMapMultiplier:
     m_OverrideState: 0
     m_Value: 1
   cumulonimbusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cumulonimbusMapMultiplier:
     m_OverrideState: 0
     m_Value: 1
   rainMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cloudMapResolution:
     m_OverrideState: 0
     m_Value: 64
@@ -428,6 +434,9 @@ MonoBehaviour:
   ghostingReduction:
     m_OverrideState: 0
     m_Value: 0
+  perceptualBlending:
+    m_OverrideState: 0
+    m_Value: 1
   shadows:
     m_OverrideState: 0
     m_Value: 1
@@ -517,6 +526,9 @@ MonoBehaviour:
   lastBounceFallbackHierarchy:
     m_OverrideState: 0
     m_Value: 3
+  ambientProbeDimmer:
+    m_OverrideState: 0
+    m_Value: 1
   layerMask:
     m_OverrideState: 0
     m_Value:
@@ -605,10 +617,10 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   upperHemisphereLuxValue:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.4660715
   upperHemisphereLuxColor:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0.18750614, y: 0.29181972, z: 0.5}
   desiredLuxValue:
     m_OverrideState: 0
