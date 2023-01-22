@@ -8,6 +8,7 @@ public class PrefabSwapWindow : ExtendedEditorWindow
     private static GameObject prefabToSwapTo = null;
     private static bool deleteOriginalOnSwap = true;
     private static bool keepParent = true;
+    private static bool copyScale = false;
 
     private static PrefabSwapWindow window = null;
 
@@ -36,6 +37,8 @@ public class PrefabSwapWindow : ExtendedEditorWindow
         deleteOriginalOnSwap = EditorGUILayout.Toggle("Delete Target on Swap", deleteOriginalOnSwap);
 
         keepParent = EditorGUILayout.Toggle("Keep Target's Parent", keepParent);
+
+        copyScale = EditorGUILayout.Toggle("Copy Target's Scale", copyScale);
 
         if(Selection.count == 0 && prefabToSwapTo != null)
         {
@@ -84,6 +87,11 @@ public class PrefabSwapWindow : ExtendedEditorWindow
                 instantiatedObject.transform.localPosition = selectedObject.transform.localPosition;
                 instantiatedObject.transform.localRotation = selectedObject.transform.localRotation;
 
+                if(copyScale)
+                {
+                    instantiatedObject.transform.localScale = selectedObject.transform.localScale;
+                }
+
                 Undo.RegisterCreatedObjectUndo(instantiatedObject, "Prefab swapper instantiation");
             }
             else
@@ -91,6 +99,11 @@ public class PrefabSwapWindow : ExtendedEditorWindow
                 GameObject instantiatedObject = (GameObject) PrefabUtility.InstantiatePrefab(prefabToSwapTo);
                 instantiatedObject.transform.position = selectedObject.transform.position;
                 instantiatedObject.transform.rotation = selectedObject.transform.rotation;
+
+                if(copyScale)
+                {
+                    instantiatedObject.transform.localScale = selectedObject.transform.localScale;
+                }
 
                 Undo.RegisterCreatedObjectUndo(instantiatedObject, "Prefab swapper instantiation");
             }
