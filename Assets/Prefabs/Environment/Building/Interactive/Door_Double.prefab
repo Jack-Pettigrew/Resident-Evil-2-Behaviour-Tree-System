@@ -129,8 +129,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.81381285, y: 2.9999995, z: 0.13800004}
-  m_Center: {x: -0.40690643, y: 1.4999998, z: -2.7280766e-24}
+  m_Size: {x: 0.8025222, y: 2.9999995, z: 0.13800004}
+  m_Center: {x: 0.40177178, y: 1.4999998, z: -2.7280766e-24}
 --- !u!65 &6213752948811516771
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.81381273, y: 2.9999995, z: 0.13800004}
-  m_Center: {x: -3.5930936, y: 1.4999998, z: -2.7280766e-24}
+  m_Center: {x: 3.59, y: 1.4999998, z: 0}
 --- !u!65 &6213752948811516770
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ BoxCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4, y: 0.9025836, z: 0.13800004}
-  m_Center: {x: -2, y: 2.5487077, z: -2.0256497e-24}
+  m_Center: {x: 2, y: 2.55, z: 0}
 --- !u!1 &6213752948906468920
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 6213752948906468918}
   - component: {fileID: 6213752948906468917}
   - component: {fileID: 7406864741453870804}
+  - component: {fileID: 933569393206556464}
   m_Layer: 11
   m_Name: Door_Single_Left
   m_TagString: Untagged
@@ -301,6 +302,16 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.0500001, z: 0}
   m_TimeToStationary: 0.2
+--- !u!41 &933569393206556464
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213752948906468920}
+  m_Open: 0
+  m_Center: {x: 0.027944088, y: 1.0782241, z: -0.004299164}
+  m_Size: {x: 1.374021, y: 2.2741787, z: 0.26177457}
 --- !u!1 &6213752949146523345
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +425,7 @@ GameObject:
   - component: {fileID: 6213752949800001521}
   - component: {fileID: 6213752949800001484}
   - component: {fileID: 7633227502443437788}
+  - component: {fileID: 1080748628922948421}
   m_Layer: 11
   m_Name: Door_Single_Right
   m_TagString: Untagged
@@ -544,6 +556,16 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.0500001, z: 0}
   m_TimeToStationary: 0.2
+--- !u!41 &1080748628922948421
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213752949800001523}
+  m_Open: 0
+  m_Center: {x: 0.053738594, y: 1.079072, z: 0.0021497607}
+  m_Size: {x: 1.2708426, y: 2.2725315, z: 0.2677998}
 --- !u!1 &6213752950103872097
 GameObject:
   m_ObjectHideFlags: 0

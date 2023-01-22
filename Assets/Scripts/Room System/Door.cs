@@ -33,6 +33,7 @@ namespace DD.Systems.Room
         // Components
         [Header("Components")]
         private Transform hingeParentTransform;
+        private OcclusionPortal occlusionPortal;
 
         // ROOMS
         [Header("Connecting Rooms")]
@@ -51,6 +52,8 @@ namespace DD.Systems.Room
 
         private void Awake() {            
             hingeParentTransform = transform.parent;
+
+            occlusionPortal = GetComponent<OcclusionPortal>();
 
             if(!hingeParentTransform)
             {
@@ -144,6 +147,8 @@ namespace DD.Systems.Room
         {            
             IsOpen = true;
             IsChangingState = true;
+
+            occlusionPortal.open = true;
                         
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
             yield return RotateToAngle(
@@ -191,6 +196,7 @@ namespace DD.Systems.Room
             
             IsOpen = false;
             IsChangingState = false;
+            occlusionPortal.open = false;
             closeDoorEvent?.Invoke();
         }
 
