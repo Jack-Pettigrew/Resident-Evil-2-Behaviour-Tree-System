@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -575235166631893548}
   - component: {fileID: 370930599042962336}
   - component: {fileID: 1458856953439203657}
-  - component: {fileID: 7913556224383738830}
+  - component: {fileID: 8691849379756560569}
   m_Layer: 7
   m_Name: Floor_1x1_Tile
   m_TagString: Untagged
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerRoom: {fileID: 0}
---- !u!65 &7913556224383738830
+--- !u!65 &8691849379756560569
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,5 +109,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.02, z: 1}
-  m_Center: {x: -0.5, y: -0.01, z: -0.5}
+  m_Size: {x: 1, y: 0.09999999, z: 1}
+  m_Center: {x: -0.5, y: -0.049999993, z: -0.5}
