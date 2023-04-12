@@ -10,6 +10,9 @@ scopes = {
 	"last_search.DD5CDD96" = "mesh"
 	"OpenInspectorPreview.DD5CDD96" = "0"
 	"currentGroup.DD5CDD96" = "scene"
+	"last_search.C4949528" = "Ch35_1003_Normal t:Texture2D"
+	"OpenInspectorPreview.C4949528" = "0"
+	"currentGroup.C4949528" = "asset"
 }
 providers = {
 	adb = {
