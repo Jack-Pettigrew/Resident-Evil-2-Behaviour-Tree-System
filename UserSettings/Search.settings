@@ -13,6 +13,9 @@ scopes = {
 	"last_search.C4949528" = "Ch35_1003_Normal t:Texture2D"
 	"OpenInspectorPreview.C4949528" = "0"
 	"currentGroup.C4949528" = "asset"
+	"last_search.DA949528" = "reception"
+	"OpenInspectorPreview.DA949528" = "0"
+	"currentGroup.DA949528" = "all"
 }
 providers = {
 	adb = {
@@ -59,6 +62,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"receptio"
 	"me"
 ]
 searchItemFavorites = [
