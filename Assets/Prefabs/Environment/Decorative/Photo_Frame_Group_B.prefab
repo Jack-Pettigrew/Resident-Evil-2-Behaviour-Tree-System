@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &5000074587086032762
 Transform:
@@ -45,6 +45,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Photo_Frame_Large
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553168832236982331, guid: ff037bdacf5fca642876a5ce5dcb2361,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 2892855955192924801, guid: ff037bdacf5fca642876a5ce5dcb2361,
         type: 3}
@@ -145,6 +150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Photo_Frame_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875069218916690806, guid: 30b74759986e198439ed09cf87eda845,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 5254690367680819660, guid: 30b74759986e198439ed09cf87eda845,
         type: 3}
@@ -325,6 +335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Photo_Frame_Medium
+      objectReference: {fileID: 0}
+    - target: {fileID: 4448777099737970256, guid: f5cffad4e69bb6b43be625e432ec269d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5cffad4e69bb6b43be625e432ec269d, type: 3}

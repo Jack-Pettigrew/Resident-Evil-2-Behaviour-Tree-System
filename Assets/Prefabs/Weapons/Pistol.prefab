@@ -174,7 +174,7 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &4749683148265081474
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -191,7 +191,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!64 &1678284609
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -363,7 +364,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6865335181609130190, guid: b8f340fe57e69439dadc8562ebbab3f8,
     type: 3}
   bulletSpeed: 100
-  rateOfFire: 1
+  rateOfFire: 0.7
   gunEffects: {fileID: 11400000, guid: 362be78cfe2384e55937b25ae09afbcd, type: 2}
 --- !u!1 &4749683148733646334
 GameObject:
