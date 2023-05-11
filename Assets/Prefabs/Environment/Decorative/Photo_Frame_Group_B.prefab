@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 119
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5000074587086032762
 Transform:
@@ -39,6 +39,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5000074587086032762}
     m_Modifications:
     - target: {fileID: 2553168832236982331, guid: ff037bdacf5fca642876a5ce5dcb2361,
@@ -132,6 +133,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: c2046810d2296ab4e89a021452c60852, type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff037bdacf5fca642876a5ce5dcb2361, type: 3}
 --- !u!4 &7874166207124306195 stripped
 Transform:
@@ -144,6 +148,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5000074587086032762}
     m_Modifications:
     - target: {fileID: 4875069218916690806, guid: 30b74759986e198439ed09cf87eda845,
@@ -237,6 +242,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: c2046810d2296ab4e89a021452c60852, type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30b74759986e198439ed09cf87eda845, type: 3}
 --- !u!4 &977206716633009294 stripped
 Transform:
@@ -249,6 +257,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5000074587086032762}
     m_Modifications:
     - target: {fileID: 2791606437508913029, guid: f5cffad4e69bb6b43be625e432ec269d,
@@ -342,6 +351,9 @@ PrefabInstance:
       value: 119
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5cffad4e69bb6b43be625e432ec269d, type: 3}
 --- !u!4 &8328632112260571246 stripped
 Transform:

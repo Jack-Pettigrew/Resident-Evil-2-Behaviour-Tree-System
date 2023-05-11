@@ -1,4 +1,5 @@
 trackSelection = true
+refreshSearchWindowsInPlayMode = false
 fetchPreview = true
 defaultFlags = 0
 keepOpen = false
@@ -13,9 +14,18 @@ scopes = {
 	"last_search.C4949528" = "Ch35_1003_Normal t:Texture2D"
 	"OpenInspectorPreview.C4949528" = "0"
 	"currentGroup.C4949528" = "asset"
-	"last_search.DA949528" = "reception"
+	"last_search.DA949528" = "shelf"
 	"OpenInspectorPreview.DA949528" = "0"
 	"currentGroup.DA949528" = "all"
+	"last_search.2138236A" = ""
+	"OpenInspectorPreview.2138236A" = "0"
+	"currentGroup.2138236A" = "asset"
+	"last_search.3BE40471" = ""
+	"OpenInspectorPreview.3BE40471" = "0"
+	"currentGroup.3BE40471" = "all"
+	"last_search.110DEAF1" = "h: t="
+	"OpenInspectorPreview.110DEAF1" = "0"
+	"currentGroup.110DEAF1" = "scene"
 }
 providers = {
 	adb = {
@@ -58,10 +68,22 @@ providers = {
 		priority = 50
 		defaultAction = null
 	}
+	profilermarkers = {
+		active = false
+		priority = 100
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	"h: t="
+	"h: t=Component>=1024"
+	"h: t=C vertices>=1024"
+	"h: t=MeshFilter vertices>=1024"
+	""
+	"h:"
+	"shelf"
 	"receptio"
 	"me"
 ]
@@ -69,9 +91,12 @@ searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
 showSavedSearchPanel = false
+hideTabs = false
 expandedQueries = [
 ]
 queryBuilder = false
 ignoredProperties = "id;name;classname;imagecontentshash"
-helperWidgetCurrentArea = "all"
+helperWidgetCurrentArea = "h:"
 disabledIndexers = ""
+minIndexVariations = 2
+findProviderIndexHelper = true
