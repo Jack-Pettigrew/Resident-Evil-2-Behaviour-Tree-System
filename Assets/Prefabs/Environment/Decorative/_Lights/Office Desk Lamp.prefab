@@ -45,9 +45,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 21.473156
-  m_Range: 1.8921931
-  m_SpotAngle: 150
+  m_Intensity: 41.96491
+  m_Range: 0.8236192
+  m_SpotAngle: 103.2592
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -168,8 +168,8 @@ MonoBehaviour:
   m_MaxDepthBias: 0.001
   m_ShadowResolution:
     m_Override: 512
-    m_UseOverride: 1
-    m_Level: 0
+    m_UseOverride: 0
+    m_Level: 1
   m_ShadowDimmer: 1
   m_VolumetricShadowDimmer: 1
   m_ShadowFadeDistance: 10000
@@ -242,14 +242,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7530120961332655095}
-  m_LocalRotation: {x: -0, y: 0.8660252, z: -0, w: 0.5000004}
+  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
   m_LocalPosition: {x: 27.200253, y: 3.9495924, z: 51.1513}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7224113343979232447}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 289
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!33 &6081080126308345576
 MeshFilter:
