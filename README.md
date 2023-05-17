@@ -1,4 +1,5 @@
-![RE2 Reception FInal Cropped](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/0023a237-112b-407a-936d-c728aad8b350)
+<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/0023a237-112b-407a-936d-c728aad8b350">
+
 # Behaviour Tree AI Study: Mr X - Resident Evil 2 Remake
 A technical exploration and recreation of the 'Mr X' AI system from Resident Evil 2 Remake (2019) using my own implementation of a Behaviour Tree system. This project serves as my first foray into studying video game AI, starting with creating a Behaviour Tree from the ground up.
 
@@ -41,7 +42,7 @@ _Breadth-first search (BFS)_. After getting the Player's current Room, using the
 It's a simple solution. There will always be a more elegant or performant solution, but for this project, it worked.
 
 ## Screenshots
-<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/8749b7df-8b43-4339-83db-11c641b21eb1" width="1000">
+<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/6b096b8a-cef7-4652-ad73-45f8fa285a8d" width="1000">
 <img src="https://user-images.githubusercontent.com/36480371/234687024-6575be4c-a1e5-4218-a503-e924fd352fd2.png" width="1000">
 <img src="https://user-images.githubusercontent.com/36480371/181758495-9e50acea-ed20-44f9-9d3a-646dfe399be5.jpg" width="1000">
 <img src="https://user-images.githubusercontent.com/36480371/181758507-ceb21fde-157d-4287-97bc-9019e13e3b86.jpg" width="1000">
