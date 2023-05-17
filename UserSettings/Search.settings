@@ -26,9 +26,9 @@ scopes = {
 	"last_search.110DEAF1" = "h: t="
 	"OpenInspectorPreview.110DEAF1" = "0"
 	"currentGroup.110DEAF1" = "scene"
-	"last_search.E8DA15E5" = "tray"
+	"last_search.E8DA15E5" = "lamp fbx"
 	"OpenInspectorPreview.E8DA15E5" = "0"
-	"currentGroup.E8DA15E5" = "all"
+	"currentGroup.E8DA15E5" = "asset"
 }
 providers = {
 	adb = {
