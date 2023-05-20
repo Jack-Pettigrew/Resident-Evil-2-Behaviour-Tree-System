@@ -126,9 +126,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213752948811516777}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.8025222, y: 2.9999995, z: 0.13800004}
   m_Center: {x: 0.40177178, y: 1.4999998, z: -2.7280766e-24}
 --- !u!65 &6213752948811516771
@@ -139,9 +147,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213752948811516777}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.81381273, y: 2.9999995, z: 0.13800004}
   m_Center: {x: 3.59, y: 1.4999998, z: 0}
 --- !u!65 &6213752948811516770
@@ -152,9 +168,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213752948811516777}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 0
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 4, y: 0.9025836, z: 0.13800004}
   m_Center: {x: 2, y: 2.55, z: 0}
 --- !u!1 &6213752948906468920
@@ -252,9 +276,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213752948906468920}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1.2, y: 2.1, z: 0.21800014}
   m_Center: {x: 3.8322184e-24, y: 1.05, z: 0}
 --- !u!114 &6213752948906468917
@@ -280,12 +312,42 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 6213752950103872126}
   roomB: {fileID: 0}
   roomBEntryPoint: {fileID: 6213752948637131622}
+  openingDoorEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 933569393206556464}
+        m_TargetAssemblyTypeName: UnityEngine.OcclusionPortal, UnityEngine
+        m_MethodName: set_open
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closingDoorEvent:
     m_PersistentCalls:
       m_Calls: []
   closeDoorEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 933569393206556464}
+        m_TargetAssemblyTypeName: UnityEngine.OcclusionPortal, UnityEngine
+        m_MethodName: set_open
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!208 &7406864741453870804
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -506,9 +568,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213752949800001523}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1.2, y: 2.1, z: 0.21800014}
   m_Center: {x: 3.8322184e-24, y: 1.05, z: 0}
 --- !u!114 &6213752949800001484
@@ -534,12 +604,42 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 6213752950103872126}
   roomB: {fileID: 0}
   roomBEntryPoint: {fileID: 6213752948637131622}
+  openingDoorEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1080748628922948421}
+        m_TargetAssemblyTypeName: UnityEngine.OcclusionPortal, UnityEngine
+        m_MethodName: set_open
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   openDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closingDoorEvent:
     m_PersistentCalls:
       m_Calls: []
   closeDoorEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1080748628922948421}
+        m_TargetAssemblyTypeName: UnityEngine.OcclusionPortal, UnityEngine
+        m_MethodName: set_open
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!208 &7633227502443437788
 NavMeshObstacle:
   m_ObjectHideFlags: 0

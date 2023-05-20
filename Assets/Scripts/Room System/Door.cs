@@ -33,7 +33,6 @@ namespace DD.Systems.Room
         // Components
         [Header("Components")]
         private Transform hingeParentTransform;
-        private OcclusionPortal occlusionPortal;
 
         // ROOMS
         [Header("Connecting Rooms")]
@@ -47,13 +46,13 @@ namespace DD.Systems.Room
 
         // EVENTS
         [Header("Events")]
-        [SerializeField] protected UnityEvent openDoorEvent;
-        [SerializeField] protected UnityEvent closeDoorEvent;
+        [SerializeField] protected UnityEvent openingDoorEvent;
+        [SerializeField] protected UnityEvent openedDoorEvent;
+        [SerializeField] protected UnityEvent closingDoorEvent;
+        [SerializeField] protected UnityEvent closedDoorEvent;
 
         private void Awake() {            
             hingeParentTransform = transform.parent;
-
-            occlusionPortal = GetComponent<OcclusionPortal>();
 
             if(!hingeParentTransform)
             {
@@ -148,7 +147,7 @@ namespace DD.Systems.Room
             IsOpen = true;
             IsChangingState = true;
 
-            occlusionPortal.open = true;
+            openingDoorEvent?.Invoke();
                         
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
             yield return RotateToAngle(
@@ -156,7 +155,7 @@ namespace DD.Systems.Room
             );
 
             IsChangingState = false;
-            openDoorEvent?.Invoke();
+            openedDoorEvent?.Invoke();
 
             runningCoroutine = StartCoroutine(OpenDoorCooldown());
         }
@@ -191,13 +190,15 @@ namespace DD.Systems.Room
         private IEnumerator CloseDoorCoroutine()
         {
             IsChangingState = true;
+
+            closingDoorEvent?.Invoke();
             
             yield return RotateToAngle(0.0f);
             
             IsOpen = false;
             IsChangingState = false;
-            occlusionPortal.open = false;
-            closeDoorEvent?.Invoke();
+
+            closedDoorEvent?.Invoke();
         }
 
         /// <summary>
