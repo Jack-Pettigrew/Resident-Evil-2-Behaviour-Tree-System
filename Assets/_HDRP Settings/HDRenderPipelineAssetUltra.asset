@@ -120,7 +120,7 @@ MonoBehaviour:
           m_Id: With4Levels
       maxDirectionalShadowMapResolution: 2048
       maxPunctualShadowMapResolution: 2048
-      maxAreaShadowMapResolution: 2048
+      maxAreaShadowMapResolution: 4096
       supportScreenSpaceShadows: 0
       maxScreenSpaceShadowSlots: 4
       screenSpaceShadowBufferFormat: 48
