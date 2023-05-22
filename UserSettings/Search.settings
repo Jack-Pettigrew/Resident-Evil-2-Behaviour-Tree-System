@@ -20,7 +20,7 @@ scopes = {
 	"last_search.2138236A" = ""
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
-	"last_search.3BE40471" = "light"
+	"last_search.3BE40471" = "t:Light"
 	"OpenInspectorPreview.3BE40471" = "0"
 	"currentGroup.3BE40471" = "scene"
 	"last_search.110DEAF1" = "h: t="
@@ -80,11 +80,13 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"t:Light"
+	""
+	"t:Light Light"
 	"h: t="
 	"h: t=Component>=1024"
 	"h: t=C vertices>=1024"
 	"h: t=MeshFilter vertices>=1024"
-	""
 	"h:"
 	"shelf"
 	"receptio"
@@ -97,7 +99,7 @@ showSavedSearchPanel = false
 hideTabs = false
 expandedQueries = [
 ]
-queryBuilder = false
+queryBuilder = true
 ignoredProperties = "id;name;classname;imagecontentshash"
 helperWidgetCurrentArea = "h:"
 disabledIndexers = ""
