@@ -304,6 +304,7 @@ MonoBehaviour:
   openSiblingInUnison: 1
   doorSibling: {fileID: 6213752949800001484}
   <CanInteract>k__BackingField: 1
+  <CanAIUse>k__BackingField: 1
   <IsLocked>k__BackingField: 0
   doorSpeed: 3
   openDoorCooldown: 5
@@ -327,27 +328,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  openDoorEvent:
+  openedDoorEvent:
     m_PersistentCalls:
       m_Calls: []
   closingDoorEvent:
     m_PersistentCalls:
       m_Calls: []
-  closeDoorEvent:
+  closedDoorEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 933569393206556464}
-        m_TargetAssemblyTypeName: UnityEngine.OcclusionPortal, UnityEngine
-        m_MethodName: set_open
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!208 &7406864741453870804
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -596,6 +585,7 @@ MonoBehaviour:
   openSiblingInUnison: 1
   doorSibling: {fileID: 6213752948906468917}
   <CanInteract>k__BackingField: 1
+  <CanAIUse>k__BackingField: 1
   <IsLocked>k__BackingField: 0
   doorSpeed: 3
   openDoorCooldown: 5
@@ -619,27 +609,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  openDoorEvent:
+  openedDoorEvent:
     m_PersistentCalls:
       m_Calls: []
   closingDoorEvent:
     m_PersistentCalls:
       m_Calls: []
-  closeDoorEvent:
+  closedDoorEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1080748628922948421}
-        m_TargetAssemblyTypeName: UnityEngine.OcclusionPortal, UnityEngine
-        m_MethodName: set_open
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!208 &7633227502443437788
 NavMeshObstacle:
   m_ObjectHideFlags: 0

@@ -36,7 +36,7 @@ namespace DD.AI.Controllers
             behaviourTree.Blackboard.AddToBlackboard("TargetDoorPath", null);
             behaviourTree.Blackboard.AddToBlackboard("TargetDoor", null);
             behaviourTree.Blackboard.AddToBlackboard("TargetRoom", null);
-            behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 0.0f);
+            behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 3.0f);
             behaviourTree.Blackboard.AddToBlackboard("LastKnownLocation", Vector3.zero);
             behaviourTree.Blackboard.AddToBlackboard("TargetSearchRoom", null);
             behaviourTree.Blackboard.AddToBlackboard("SearchRoomCounter", 0);
@@ -89,14 +89,30 @@ namespace DD.AI.Controllers
                                     new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
                                     new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
                                     new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                                    new Sequence(behaviourTree, new List<Node> {
-                                        new OpenDoor(behaviourTree, "TargetDoor"),
-                                        new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.ENABLE),
-                                        new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
-                                        new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                                        new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
-                                        new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-                                    }, true)
+
+                                    // Room Transition
+                                    new Selector(behaviourTree, new List<Node> {
+                                        // Locked Door?
+                                        new Sequence(behaviourTree, new List<Node> {
+                                            new Invertor(behaviourTree, new CanUseDoor(behaviourTree, "TargetDoor")),
+                                            // Bang on Door
+                                            new IdleNode(behaviourTree, "IdleTimerLength"),
+                                            new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.SEARCHING),
+                                            new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
+                                        }),
+
+                                        // Use Door
+                                        new Sequence(behaviourTree, new List<Node> {
+                                            new OpenDoor(behaviourTree, "TargetDoor"),
+                                            new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.ENABLE),
+                                            new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
+                                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+                                            new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
+                                            new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
+                                        }, true)
+                                    })
+
+
                                 })
                             })
 
@@ -145,14 +161,28 @@ namespace DD.AI.Controllers
                                     new GetDoorFromPath(behaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
                                     new GetDoorEntryExitPoint(behaviourTree, true, "TargetDoor", "MoveTarget"),
                                     new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                                    new Sequence(behaviourTree, new List<Node> {
-                                        new OpenDoor(behaviourTree, "TargetDoor"),
-                                        new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.ENABLE),
-                                        new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
-                                        new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
-                                        new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
-                                        new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
-                                    }, true)
+
+                                    new Selector(behaviourTree, new List<Node> {
+                                        // Locked Door?
+                                        new Sequence(behaviourTree, new List<Node> {
+                                            new Invertor(behaviourTree, new CanUseDoor(behaviourTree, "TargetDoor")),
+                                            // Bang on Door
+                                            new IdleNode(behaviourTree, "IdleTimerLength"),
+                                            new GetRandomRoom(behaviourTree, "TargetSearchRoom")
+                                        }),
+
+                                        // Use Door
+                                        new Sequence(behaviourTree, new List<Node> {
+                                            new OpenDoor(behaviourTree, "TargetDoor"),
+                                            new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.ENABLE),
+                                            new GetDoorEntryExitPoint(behaviourTree, false, "TargetDoor", "MoveTarget"),
+                                            new Repeater(behaviourTree, new MoveTo<Component>(behaviourTree, "MoveTarget"), new IsAtTarget<Component>(behaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+                                            new SendAnimationRigSignal(behaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
+                                            new IncrementDoorPathIndex(behaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
+                                        }, true)
+                                    })
+
+
                                 })
                             })
                         })

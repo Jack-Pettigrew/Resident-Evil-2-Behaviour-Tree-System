@@ -102,6 +102,7 @@ MonoBehaviour:
   openSiblingInUnison: 0
   doorSibling: {fileID: 0}
   <CanInteract>k__BackingField: 1
+  <CanAIUse>k__BackingField: 1
   <IsLocked>k__BackingField: 0
   doorSpeed: 3
   openDoorCooldown: 3
@@ -110,10 +111,16 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 0}
   roomBEntryPoint: {fileID: 0}
-  openDoorEvent:
+  openingDoorEvent:
     m_PersistentCalls:
       m_Calls: []
-  closeDoorEvent:
+  openedDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closingDoorEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  closedDoorEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &4856563137107919710
@@ -124,9 +131,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5738874144013827596}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1.2, y: 2.1, z: 0.21800014}
   m_Center: {x: 3.8322184e-24, y: 1.05, z: 0}
 --- !u!208 &7298866529671135858
