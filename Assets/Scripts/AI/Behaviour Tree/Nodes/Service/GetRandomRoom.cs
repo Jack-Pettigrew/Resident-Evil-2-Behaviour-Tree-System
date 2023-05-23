@@ -8,11 +8,11 @@ namespace DD.AI.BehaviourTreeSystem
 {
     public class GetRandomRoom : UpdateBlackboardService
     {
-        public readonly string targetDoorBlackboardVariable;
+        public readonly string targetRoomBlackboardVariable;
 
-        public GetRandomRoom(BehaviourTree behaviourTree, string targetDoorBlackboardVariable) : base(behaviourTree)
+        public GetRandomRoom(BehaviourTree behaviourTree, string targetRoomBlackboardVariable) : base(behaviourTree)
         {
-            this.targetDoorBlackboardVariable = targetDoorBlackboardVariable;
+            this.targetRoomBlackboardVariable = targetRoomBlackboardVariable;
         }
 
         protected override bool UpdateBlackboard()
@@ -31,7 +31,7 @@ namespace DD.AI.BehaviourTreeSystem
                 result = RoomManager.GetRandomRoom();
             } while (result == currentRoom);
 
-            return behaviourTree.Blackboard.UpdateBlackboardVariable(targetDoorBlackboardVariable, result);
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(targetRoomBlackboardVariable, result);
         }
     }
 }
