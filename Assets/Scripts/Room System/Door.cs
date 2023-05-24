@@ -33,7 +33,13 @@ namespace DD.Systems.Room
 
         // Components
         [Header("Components")]
+        [SerializeField] private AudioSource audioSource;
         private Transform hingeParentTransform;
+
+        [Header("Sounds")]
+        [SerializeField] private AudioClip bangingSound;
+        [SerializeField] private AudioClip openingSound;
+        [SerializeField] private AudioClip closedSound;
 
         // ROOMS
         [Header("Connecting Rooms")]
@@ -200,6 +206,15 @@ namespace DD.Systems.Room
             IsChangingState = false;
 
             closedDoorEvent?.Invoke();
+        }
+
+        [ContextMenu("Test Bang Door")]
+        public void BangDoor()
+        {
+            if(audioSource && bangingSound)
+            {
+                audioSource.PlayOneShot(bangingSound);
+            }
         }
 
         /// <summary>

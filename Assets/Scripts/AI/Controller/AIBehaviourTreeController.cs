@@ -36,7 +36,7 @@ namespace DD.AI.Controllers
             behaviourTree.Blackboard.AddToBlackboard("TargetDoorPath", null);
             behaviourTree.Blackboard.AddToBlackboard("TargetDoor", null);
             behaviourTree.Blackboard.AddToBlackboard("TargetRoom", null);
-            behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 3.0f);
+            behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 5.0f);
             behaviourTree.Blackboard.AddToBlackboard("LastKnownLocation", Vector3.zero);
             behaviourTree.Blackboard.AddToBlackboard("TargetSearchRoom", null);
             behaviourTree.Blackboard.AddToBlackboard("SearchRoomCounter", 0);
@@ -55,7 +55,7 @@ namespace DD.AI.Controllers
                                 new Sequence(behaviourTree, new List<Node> {
                                     new IsAtTarget<Component>(behaviourTree, "Player", 1.0f),
                                     new PlayAnimation(behaviourTree, "right_hook", true)
-                                }),
+                                }),                                
 
                                 // Move To Player
                                 new Sequence(behaviourTree, new List<Node> {
@@ -95,10 +95,10 @@ namespace DD.AI.Controllers
                                         // Locked Door?
                                         new Sequence(behaviourTree, new List<Node> {
                                             new Invertor(behaviourTree, new CanUseDoor(behaviourTree, "TargetDoor")),
-                                            // Bang on Door
+                                            new BangDoor(behaviourTree, "TargetDoor"),
                                             new IdleNode(behaviourTree, "IdleTimerLength"),
-                                            new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.SEARCHING),
-                                            new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
+                                            new GetRandomRoomAdjacentToTarget(behaviourTree, false, "Player", "TargetSearchRoom"),
+                                            new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.SEARCHING)
                                         }),
 
                                         // Use Door
@@ -166,9 +166,9 @@ namespace DD.AI.Controllers
                                         // Locked Door?
                                         new Sequence(behaviourTree, new List<Node> {
                                             new Invertor(behaviourTree, new CanUseDoor(behaviourTree, "TargetDoor")),
-                                            // Bang on Door
+                                            new BangDoor(behaviourTree, "TargetDoor"),
                                             new IdleNode(behaviourTree, "IdleTimerLength"),
-                                            new GetRandomRoom(behaviourTree, "TargetSearchRoom")
+                                            new GetRandomRoomAdjacentToTarget(behaviourTree, false, "Player", "TargetSearchRoom")
                                         }),
 
                                         // Use Door
