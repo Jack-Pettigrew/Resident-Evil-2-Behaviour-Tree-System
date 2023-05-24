@@ -24,7 +24,6 @@ namespace DD.Systems.Room
 
         public float doorSpeed = 3.0f;
         [SerializeField] private float openDoorCooldown = 5.0f;
-        private float closedTargetRotation;
         [SerializeField, Range(0, 0.5f), Tooltip("The threshold of which the door is considered closed during it's angular Lerp.")]
         private float doorClosedThreshold = 0.1f;
 
@@ -65,10 +64,6 @@ namespace DD.Systems.Room
             {
                 Debug.LogWarning($"Door '{name}' does not have a hinge parent assigned. Please assign a parent to act as a hinge for this Door.");
             }
-        }
-
-        private void Start() {
-            closedTargetRotation = transform.localRotation.eulerAngles.y;
         }
 
         /// <summary>
@@ -188,9 +183,11 @@ namespace DD.Systems.Room
         {
             if(!siblingInduced && openSiblingInUnison && doorSibling)
             {
+                doorSibling.ResetRunningCoroutines();
                 doorSibling.CloseDoor(true);
             }
             
+            ResetRunningCoroutines();
             runningCoroutine = StartCoroutine(CloseDoorCoroutine());
         }
 

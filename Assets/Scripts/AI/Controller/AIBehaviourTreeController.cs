@@ -95,6 +95,7 @@ namespace DD.AI.Controllers
                                         // Locked Door?
                                         new Sequence(behaviourTree, new List<Node> {
                                             new Invertor(behaviourTree, new CanUseDoor(behaviourTree, "TargetDoor")),
+                                            new CloseDoor(behaviourTree, "TargetDoor"),
                                             new BangDoor(behaviourTree, "TargetDoor"),
                                             new IdleNode(behaviourTree, "IdleTimerLength"),
                                             new GetRandomRoomAdjacentToTarget(behaviourTree, false, "Player", "TargetSearchRoom"),
@@ -166,6 +167,7 @@ namespace DD.AI.Controllers
                                         // Locked Door?
                                         new Sequence(behaviourTree, new List<Node> {
                                             new Invertor(behaviourTree, new CanUseDoor(behaviourTree, "TargetDoor")),
+                                            new CloseDoor(behaviourTree, "TargetDoor"),
                                             new BangDoor(behaviourTree, "TargetDoor"),
                                             new IdleNode(behaviourTree, "IdleTimerLength"),
                                             new GetRandomRoomAdjacentToTarget(behaviourTree, false, "Player", "TargetSearchRoom")
