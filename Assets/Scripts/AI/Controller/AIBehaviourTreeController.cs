@@ -57,14 +57,13 @@ namespace DD.AI.Controllers
                                     new PlayAnimation(behaviourTree, "right_hook", true)
                                 }),                                
 
-                                // Move To Player
+                                // Log LKL + Move To Player
                                 new Sequence(behaviourTree, new List<Node> {
                                     new CanSeeObject(behaviourTree),
-                                    new SetLastKnownLocation(behaviourTree, "LastKnownLocation", "Player"),
+                                    new SetLastKnownLocation(behaviourTree, "LastKnownLocation", "Player"),                                    
                                     new IsInSameRoomAs<Component>(behaviourTree, "Player"),
                                     new MoveTo<Component>(behaviourTree, "Player")
-                                })
-
+                                }),
                             }),
 
                             // ! LKL
@@ -98,7 +97,7 @@ namespace DD.AI.Controllers
                                             new CloseDoor(behaviourTree, "TargetDoor"),
                                             new BangDoor(behaviourTree, "TargetDoor"),
                                             new IdleNode(behaviourTree, "IdleTimerLength"),
-                                            new GetRandomRoomAdjacentToTarget(behaviourTree, false, "Player", "TargetSearchRoom"),
+                                            new GetRandomRoom(behaviourTree, "TargetSearchRoom"),
                                             new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.SEARCHING)
                                         }),
 
@@ -170,7 +169,7 @@ namespace DD.AI.Controllers
                                             new CloseDoor(behaviourTree, "TargetDoor"),
                                             new BangDoor(behaviourTree, "TargetDoor"),
                                             new IdleNode(behaviourTree, "IdleTimerLength"),
-                                            new GetRandomRoomAdjacentToTarget(behaviourTree, false, "Player", "TargetSearchRoom")
+                                            new GetRandomRoom(behaviourTree, "TargetSearchRoom")
                                         }),
 
                                         // Use Door

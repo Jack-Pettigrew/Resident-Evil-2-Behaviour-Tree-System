@@ -105,7 +105,7 @@ MonoBehaviour:
   <CanInteract>k__BackingField: 1
   <CanAIUse>k__BackingField: 1
   <IsLocked>k__BackingField: 0
-  doorSpeed: 3
+  doorSpeed: 5
   openDoorCooldown: 3
   doorClosedThreshold: 0.2
   audioSource: {fileID: 4918217502508952767}

@@ -434,8 +434,8 @@ MonoBehaviour:
   <CanInteract>k__BackingField: 1
   <CanAIUse>k__BackingField: 1
   <IsLocked>k__BackingField: 0
-  doorSpeed: 3
-  openDoorCooldown: 5
+  doorSpeed: 5
+  openDoorCooldown: 3
   doorClosedThreshold: 0.1
   audioSource: {fileID: 8080603101859098488}
   bangingSound: {fileID: 8300000, guid: 7d790110ed4a6e34199acccc0c07fb3e, type: 3}
@@ -720,8 +720,8 @@ MonoBehaviour:
   <CanInteract>k__BackingField: 1
   <CanAIUse>k__BackingField: 1
   <IsLocked>k__BackingField: 0
-  doorSpeed: 3
-  openDoorCooldown: 5
+  doorSpeed: 5
+  openDoorCooldown: 3
   doorClosedThreshold: 0.1
   audioSource: {fileID: 8080603101859098488}
   bangingSound: {fileID: 8300000, guid: 7d790110ed4a6e34199acccc0c07fb3e, type: 3}
