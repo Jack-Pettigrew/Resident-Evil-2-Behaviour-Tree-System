@@ -201,7 +201,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6339154361077254297
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -218,7 +218,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5378814400148172223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2434,9 +2435,17 @@ CharacterController:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7082594427839628682}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Height: 1.8
   m_Radius: 0.15
   m_SlopeLimit: 45
@@ -2459,8 +2468,8 @@ MonoBehaviour:
   inputManager: {fileID: 0}
   gravity: -9.81
   groundedGravity: -0.2
-  walkSpeed: 3
-  runSpeed: 6
+  walkSpeed: 2.5
+  runSpeed: 5
   locomotionTurnSpeedScalar: 0.1
   cameraTransform: {fileID: 0}
 --- !u!114 &4551202807226567530
