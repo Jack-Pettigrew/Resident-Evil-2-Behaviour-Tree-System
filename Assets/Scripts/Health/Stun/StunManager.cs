@@ -10,7 +10,7 @@ namespace DD.Core
     /// </summary>
     public class StunManager : MonoBehaviour
     {
-        [field: ReadOnly, SerializeField] public bool IsStunned { get; private set; }
+        [field: SerializeField] public bool IsStunned { get; private set; }
 
         // STUN VARIABLES
         [SerializeField, ReadOnly] private float currentStunAmount = 0.0f;
@@ -21,7 +21,8 @@ namespace DD.Core
         [SerializeField, Min(1)] private float stunDepletionSpeed = 1.0f;
 
         // STUN COOLDOWN
-        [SerializeField, Min(0)] private readonly float stunTimerLength = 5.0f;
+        [Space]
+        [SerializeField, Min(0)] private float stunTimerLength = 8.0f;
         private float stunTimer = 0.0f;
 
         // EVENTS
@@ -43,6 +44,12 @@ namespace DD.Core
                     depleteStun = false;
                 }
             }
+        }
+
+        [ContextMenu("Test Stun")]
+        public void TestStun()
+        {
+            Stun(100.0f);
         }
 
         public void Stun(float stunAmount)

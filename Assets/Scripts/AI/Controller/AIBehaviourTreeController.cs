@@ -44,6 +44,12 @@ namespace DD.AI.Controllers
             // Creating actual behaviour tree
             Selector root = new Selector(behaviourTree,
                 new List<Node> {
+                    // ! Stunned
+                    new Sequence(behaviourTree, new List<Node> {
+                        new IsStunned(behaviourTree),
+                        new PlayAnimation(behaviourTree, "stunned", true)
+                    }),
+                    
                     // ! Attack
                     new ConditionalBranch(behaviourTree, new CompareBlackboardVariable<MrXState>(behaviourTree, MrXState.ATTACKING, "State"),
                         new Selector(behaviourTree, new List<Node> {
@@ -55,7 +61,7 @@ namespace DD.AI.Controllers
                                 new Sequence(behaviourTree, new List<Node> {
                                     new IsAtTarget<Component>(behaviourTree, "Player", 1.0f),
                                     new PlayAnimation(behaviourTree, "right_hook", true)
-                                }),                                
+                                }),
 
                                 // Log LKL + Move To Player
                                 new Sequence(behaviourTree, new List<Node> {
