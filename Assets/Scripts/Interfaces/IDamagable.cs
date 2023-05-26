@@ -7,6 +7,5 @@ namespace DD.Core
         bool IsDamagable { get; set; }
         
         void TakeDamage(float damageAmount);
-        IEnumerator DamageCooldown();
     }
 }
