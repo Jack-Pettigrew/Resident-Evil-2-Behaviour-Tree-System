@@ -30,7 +30,7 @@ namespace DD.Animation.RigEvents
                     break;
 
                 case AnimRigEventType.STOP:
-                    OnDisable?.Invoke(null);
+                    OnStop?.Invoke(null);
                     break;
 
                 case AnimRigEventType.TRIGGER:
