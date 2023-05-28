@@ -11,6 +11,6 @@ public class RoomPathTest : MonoBehaviour
 
     private void Start()
     {
-        doors.AddRange(RoomPathFinder.FindDoorPathToRoom(startRoom, goalRoom));
+        doors.AddRange(RoomPathFinder.FindDoorPathToRoom(startRoom, goalRoom, false));
     }
 }

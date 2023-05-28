@@ -23,7 +23,7 @@ namespace DD.AI.BehaviourTreeSystem
             }
 
             return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, 
-                RoomPathFinder.FindDoorPathToRoom(targetRoom, behaviourTree.Blackboard.GetFromBlackboard<Room>(targetObjectBlackBoardKey))
+                RoomPathFinder.FindDoorPathToRoom(targetRoom, behaviourTree.Blackboard.GetFromBlackboard<Room>(targetObjectBlackBoardKey), false)
             );
         }
     }

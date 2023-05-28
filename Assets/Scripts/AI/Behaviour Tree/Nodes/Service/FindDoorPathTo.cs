@@ -30,7 +30,7 @@ namespace DD.AI.BehaviourTreeSystem
                 return false;
             }
 
-            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, RoomPathFinder.FindDoorPathToRoom(startRoom, goalRoom));
+            return behaviourTree.Blackboard.UpdateBlackboardVariable(doorPathBlackboardKey, RoomPathFinder.FindDoorPathToRoom(startRoom, goalRoom, false));
 
         }
 

@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6213752948811516768}
   - component: {fileID: 6213752948811516771}
   - component: {fileID: 6213752948811516770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Double
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ Transform:
   m_Children:
   - {fileID: 6213752949146523438}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6213752948811516772
 MeshFilter:

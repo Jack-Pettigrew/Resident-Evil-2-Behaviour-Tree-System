@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4190831442771342262}
   - component: {fileID: 6935762486918427513}
   - component: {fileID: 7129844083051286019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door_Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 5475449498296536541}
   - {fileID: 4910800826807717278}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2147132593110026108
 MeshFilter:

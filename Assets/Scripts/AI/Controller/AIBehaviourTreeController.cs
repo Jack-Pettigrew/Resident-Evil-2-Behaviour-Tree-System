@@ -35,7 +35,6 @@ namespace DD.AI.Controllers
             behaviourTree.Blackboard.AddToBlackboard("TargetDoorPathIndex", 0);
             behaviourTree.Blackboard.AddToBlackboard("TargetDoorPath", null);
             behaviourTree.Blackboard.AddToBlackboard("TargetDoor", null);
-            behaviourTree.Blackboard.AddToBlackboard("TargetRoom", null);
             behaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 5.0f);
             behaviourTree.Blackboard.AddToBlackboard("LastKnownLocation", Vector3.zero);
             behaviourTree.Blackboard.AddToBlackboard("TargetSearchRoom", null);
@@ -66,7 +65,7 @@ namespace DD.AI.Controllers
                                 // Log LKL + Move To Player
                                 new Sequence(behaviourTree, new List<Node> {
                                     new CanSeeObject(behaviourTree),
-                                    new SetLastKnownLocation(behaviourTree, "LastKnownLocation", "Player"),                                    
+                                    new SetLastKnownLocation(behaviourTree, "LastKnownLocation", "Player"),
                                     new IsInSameRoomAs<Component>(behaviourTree, "Player"),
                                     new MoveTo<Component>(behaviourTree, "Player")
                                 }),
@@ -78,6 +77,17 @@ namespace DD.AI.Controllers
                                 new Sequence(behaviourTree, new List<Node> {
                                     new IsAtPoint(behaviourTree, "LastKnownLocation", 1.0f),
                                     new PlayAnimation(behaviourTree, "looking_around", true),
+
+                                    // Is Player in an inaccessible room?
+                                    new Selector(behaviourTree, new List<Node> {
+                                        new Sequence(behaviourTree, new List<Node> {
+                                            new CanReachPlayerRoom(behaviourTree, "Player"),
+                                            new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
+                                        }),
+
+                                        new GetRandomRoom(behaviourTree, "TargetSearchRoom")
+                                    }),
+
                                     new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.SEARCHING)
                                 }),
 
@@ -147,6 +157,7 @@ namespace DD.AI.Controllers
                                 // Search Room
                                 new Sequence(behaviourTree, new List<Node> {
                                     new IsInRoom(behaviourTree, "TargetSearchRoom"),
+                                    // Search Spots
                                     new Repeater(behaviourTree,
                                         new Sequence(behaviourTree, new List<Node> {
                                             new GetRandomRoomSearchSpot(behaviourTree, "TargetSearchRoom", "MoveTarget"),
@@ -158,7 +169,16 @@ namespace DD.AI.Controllers
                                         NodeState.SUCCESSFUL
                                     ),
                                     new SetBlackboardVariable<int>(behaviourTree, "SearchRoomCounter", 0),
-                                    new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
+
+                                    // Is Player in an inaccessible room?
+                                    new Selector(behaviourTree, new List<Node> {
+                                        new Sequence(behaviourTree, new List<Node> {
+                                            new CanReachPlayerRoom(behaviourTree, "Player"),
+                                            new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
+                                        }),
+
+                                        new GetRandomRoom(behaviourTree, "TargetSearchRoom")
+                                    }),
                                 }),
                                 
                                 // Room Transition

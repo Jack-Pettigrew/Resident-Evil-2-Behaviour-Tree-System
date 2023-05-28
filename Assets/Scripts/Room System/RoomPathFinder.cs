@@ -16,12 +16,13 @@ namespace DD.Systems.Room
         /// </summary>
         /// <param name="startingRoom">The starting Room of the path.</param>
         /// <param name="goalRoom">The goal/destination of the path.</param>
-        /// <returns>Array of Doors as waypoints to the Goal Room.</returns>
-        public static Door[] FindDoorPathToRoom(Room startingRoom, Room goalRoom)
+        /// <param name="accountForCanUse">Whether to account for if the Door can be used.</param>
+        /// <returns>Array of Doors as waypoints to the Goal Room or null if no path was found.</returns>
+        public static Door[] FindDoorPathToRoom(Room startingRoom, Room goalRoom, bool accountForCanUse = true)
         {
             Reset();
 
-            if(!BFSCalculateDoorCosts(startingRoom, goalRoom))
+            if(!BFSCalculateDoorCosts(startingRoom, goalRoom, accountForCanUse))
             {
                 //throw new System.Exception("RoomPathFinder: BFS Path unable to calculate.");
                 return null;
@@ -30,8 +31,8 @@ namespace DD.Systems.Room
             return FindLowestCostPath(startingRoom, goalRoom);
         }
 
-        private static bool BFSCalculateDoorCosts(Room startingRoom, Room goalRoom)
-        {            
+        private static bool BFSCalculateDoorCosts(Room startingRoom, Room goalRoom, bool accountForCanUse = true)
+        {
             int currentDistCost = 0;
             roomsToCheck.Add(goalRoom);
             while (roomsToCheck.Count > 0)
@@ -44,7 +45,10 @@ namespace DD.Systems.Room
                     if(!room || room.Doors == null || room.Doors.Length == 0) continue;
                                         
                     foreach (Door door in room.Doors)
-                    {                        
+                    {                                        
+                        // Account for Door's CanAIUse
+                        if(accountForCanUse && !door.CanAIUse) continue;
+                        
                         // Is Door locked OR already accounting for Door?
                         if (door.IsLocked || doorCostDictionary.ContainsKey(door))
                         {
@@ -115,6 +119,20 @@ namespace DD.Systems.Room
             doorCostDictionary.Clear();
             roomsToCheck.Clear();
             roomsCurrentlyChecking.Clear();
+        }
+
+        /// <summary>
+        /// Determines whether a path to the provided Room exists.
+        /// </summary>
+        /// <param name="startingRoom">The starting Room of the path.</param>
+        /// <param name="goalRoom">The goal/destination of the path.</param>
+        /// <param name="accountForCanUse">Whether to account for if the Door can be used.</param>
+        /// <returns></returns>
+        public static bool DoesPathToRoomExist(Room startingRoom, Room goalRoom, bool accountForCanUse = true)
+        {
+            Reset();
+            bool result = BFSCalculateDoorCosts(startingRoom, goalRoom, accountForCanUse);
+            return result;
         }
     }
 }
