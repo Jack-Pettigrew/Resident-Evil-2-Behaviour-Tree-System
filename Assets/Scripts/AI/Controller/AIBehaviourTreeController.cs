@@ -154,7 +154,7 @@ namespace DD.AI.Controllers
                                             new PlayAnimation(behaviourTree, "looking_around", true),
                                             new IncrementBlackboardVariable(behaviourTree, "SearchRoomCounter", 1)
                                         }),
-                                        new CompareBlackboardVariable<int>(behaviourTree, 2, "SearchRoomCounter"),
+                                        new CompareBlackboardVariable<int>(behaviourTree, 1, "SearchRoomCounter"),
                                         NodeState.SUCCESSFUL
                                     ),
                                     new SetBlackboardVariable<int>(behaviourTree, "SearchRoomCounter", 0),

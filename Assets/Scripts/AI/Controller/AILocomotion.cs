@@ -56,15 +56,9 @@ namespace DD.AI.Controllers
 
             controller.Move(velocity * Time.deltaTime);
 
-            // ANIMATION
-            UpdateAnimator();
 
             // Reset after setting Anim variables so AI stops playing walk anim (workaround)
             velocity = Vector3.zero + Vector3.up * yVelocity;
-        }
-
-        private void UpdateAnimator()
-        {
             animator.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
         }
 
@@ -101,6 +95,8 @@ namespace DD.AI.Controllers
                 transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentRotVel, rotSpeedScalar);
 
                 velocity = transform.forward * moveSpeed;
+
+                animator.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
             }
         }
     }
