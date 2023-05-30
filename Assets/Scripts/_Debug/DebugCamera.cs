@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Control;
-using Cinemachine;
-using UnityEngine.Animations.Rigging;
+using DD.AI.Controllers;
 
 public class DebugCamera : MonoBehaviour
 {
@@ -20,10 +17,14 @@ public class DebugCamera : MonoBehaviour
     private float pitch = 0;
     private float yaw = 0;
 
+    private AIBehaviourTreeController tree = null;
+
     private void Awake() {
         debugCamera = GetComponent<Camera>();
         debugCamera.enabled = false;
         debugCamera.GetComponent<AudioListener>().enabled = active;
+
+        tree = FindObjectOfType<AIBehaviourTreeController>();
     }
 
     private void Update() {
@@ -31,6 +32,13 @@ public class DebugCamera : MonoBehaviour
         {
             ToggleDebugCamera();
         }
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            PauseTime();
+        }
+
+        if(Input.GetKeyDown(KeyCode.T)) tree.enabled = !tree.enabled;
 
         if(active)
         {
@@ -40,11 +48,6 @@ public class DebugCamera : MonoBehaviour
                 Cursor.lockState = Cursor.lockState == CursorLockMode.None ? CursorLockMode.Locked : CursorLockMode.None;
             }
             
-            if(Input.GetKeyDown(KeyCode.O))
-            {
-                PauseTime();
-            }
-
             float verticalMovement = Input.GetKey(KeyCode.Q) ? -1 : Input.GetKey(KeyCode.E) ? 1 : 0;
             
             transform.position += debugCamera.transform.rotation * new Vector3(Input.GetAxisRaw("Horizontal"), verticalMovement, Input.GetAxisRaw("Vertical")) * speed;
