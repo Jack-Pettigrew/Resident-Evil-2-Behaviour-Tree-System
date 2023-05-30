@@ -10,6 +10,8 @@ namespace DD.Core.Combat
         private int bulletDamage;
         private bool activeBullet = false;
         private Rigidbody rb;
+
+        // VFX
         private ParticleSystem bulletHitParticleSystem;
 
         private void Awake() {
@@ -21,27 +23,23 @@ namespace DD.Core.Combat
             this.bulletHitParticleSystem = bulletHitParticleSystem;
         }
 
-        public void Fire(int bulletDamage, Vector3 firePosition, Vector3 direction, float bulletSpeed)
+        public void Fire(int bulletDamage, float bulletSpeed)
         {
             if(!gameObject.activeInHierarchy) gameObject.SetActive(true);
 
-            activeBullet = true;
             this.bulletDamage = bulletDamage;
+            activeBullet = true;
 
             // Reset rigidbody velocity
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            transform.position = firePosition;
-            transform.forward = direction;
 
-            rb.AddForce(direction * bulletSpeed, ForceMode.Impulse);
+            rb.AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
         }
 
         private void OnCollisionEnter(Collision other) {
             if(activeBullet)
-            {
-                Debug.Log($"Hit: {other.gameObject.name}");
-                
+            {                
                 activeBullet = false;
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;

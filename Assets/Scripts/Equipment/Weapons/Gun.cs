@@ -15,6 +15,7 @@ namespace DD.Core.Combat
         [field: Header("Ammo")]
         [field: SerializeField] public AmmoItem GunAmmoItem { private set; get; }
         [field: SerializeField] public int MaxAmmoCapacity { private set; get; }
+        [field: SerializeField] public bool HasInfiniteAmmo { get; private set; }
         public int CurrentAmmo { private set; get; }
         public bool IsReloading { private set; get; }
         [SerializeField] private float reloadTime = 1.0f;
@@ -26,7 +27,7 @@ namespace DD.Core.Combat
         [SerializeField, Min(0.0f)] private float bulletSpeed = 10.0f;
 
         // Bullet Pool
-        private List<Bullet> bulletPool;
+        private Bullet[] bulletPool;
         private int bulletPoolIndex = 0;
 
         [Tooltip("Cooldown in seconds between each time the gun can be fired")]
@@ -46,7 +47,7 @@ namespace DD.Core.Combat
         public event Action OnReloading;
         public event Action OnReloaded;
 
-        protected override void Awake() 
+        protected override void Awake()
         {
             base.Awake();
 
@@ -62,13 +63,13 @@ namespace DD.Core.Combat
             }
 
             // Bullet Instantiation
-            if(bulletPrefab)
-            {
-                bulletPool = new List<Bullet>();
+            if(bulletPrefab) 
+            {                
+                bulletPool = new Bullet[MaxAmmoCapacity];
 
                 for (int i = 0; i < MaxAmmoCapacity; i++)
                 {
-                    bulletPool.Add(Instantiate<Bullet>(bulletPrefab, Vector3.zero, Quaternion.identity));
+                    bulletPool[i] = Instantiate<Bullet>(bulletPrefab, Vector3.zero, Quaternion.identity);
                     bulletPool[i].gameObject.SetActive(false);
                     bulletPool[i].SetBulletHitParticleSystem(bulletHitParticles);
                 }
@@ -82,6 +83,14 @@ namespace DD.Core.Combat
             FindObjectOfType<PlayerAnimationController>()?.InitAnimationEvent(this);
         }
 
+        private void OnDestroy() {
+            // Remove associated bullets from scene
+            foreach (Bullet bullet in bulletPool)
+            {
+                Destroy(bullet.gameObject);
+            }
+        }
+
         /// <summary>
         /// Shoots the gun.
         /// </summary>
@@ -93,16 +102,20 @@ namespace DD.Core.Combat
                 RaycastHit hit;
                 Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
                 Physics.Raycast(ray.origin, ray.direction, out hit, 100.0f);
-
+                
                 // Weapon Effects
                 muzzleFlashParticles.Play();
 
                 // Fire bullet from pool
                 Vector3 bulletDirection = hit.collider ? hit.point - bulletOrigin.position : bulletOrigin.forward;
-                bulletPool[bulletPoolIndex].Fire(weaponDamage, bulletOrigin.position, bulletDirection, bulletSpeed);
-                bulletPoolIndex = (bulletPoolIndex + 1) % bulletPool.Count;
 
-                CurrentAmmo -= 1;
+                bulletPool[bulletPoolIndex].transform.position = bulletOrigin.position;
+                bulletPool[bulletPoolIndex].transform.rotation = Quaternion.LookRotation(bulletDirection);
+                
+                bulletPool[bulletPoolIndex].Fire(weaponDamage, bulletSpeed);
+                bulletPoolIndex = (bulletPoolIndex + 1) % bulletPool.Length;
+
+                CurrentAmmo -= HasInfiniteAmmo ? 0 : 1;
                 attackCooldownCoroutine = StartCoroutine(AttackCooldown());
                 OnShot?.Invoke();
             }
