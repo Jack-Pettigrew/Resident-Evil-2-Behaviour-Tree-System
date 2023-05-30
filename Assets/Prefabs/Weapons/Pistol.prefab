@@ -201,9 +201,17 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4749683148265081472}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 3d87184bf4725b841b26693d2234fffd, type: 3}
@@ -354,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8164db8632eef4ae782f7d4b209e1266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDamage: 1
+  weaponDamage: 25
   <WeaponType>k__BackingField: 0
   <GunAmmoItem>k__BackingField: {fileID: 11400000, guid: 80e1476323d52834b9b502257b08e0dc,
     type: 2}
