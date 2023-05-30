@@ -9,7 +9,7 @@ namespace DD.Core
     {
         [field: SerializeField] public bool IsDamagable { get; set; }
 
-        [SerializeField, Min(1.0f)] private float stunMultiplyer = 1.0f;
+        [SerializeField, Min(1.0f)] private float stunMultiplier = 1.0f;
         [SerializeField] private StunManager stunManager;
 
         private void Awake() {
@@ -23,7 +23,7 @@ namespace DD.Core
         {
             if(!IsDamagable) return;
 
-            stunManager.Stun(damageAmount * stunMultiplyer);
+            stunManager.Stun(damageAmount * stunMultiplier);
         }
     }
 }
