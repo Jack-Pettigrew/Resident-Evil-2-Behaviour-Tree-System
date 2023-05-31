@@ -12,7 +12,7 @@ namespace DD.Systems.InventorySystem
         public int ItemQuantity { private set; get; }
 
         // Events
-        public event Action<ItemSlot> OnItemSlotDepleted;
+        public event Action<ItemSlot> OnItemSlotEmptied;
 
         public ItemSlot(ItemData item, int amount)
         {
@@ -33,7 +33,7 @@ namespace DD.Systems.InventorySystem
 
             if(ItemQuantity <= 0)
             {
-                OnItemSlotDepleted?.Invoke(this);
+                OnItemSlotEmptied?.Invoke(this);
             }
         }
     }

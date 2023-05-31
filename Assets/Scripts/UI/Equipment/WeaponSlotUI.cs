@@ -8,7 +8,7 @@ using DD.Core.Combat;
 
 namespace DD.UI
 {
-    public class WeaponSlotUI : MonoBehaviour, IPointerClickHandler
+    public class WeaponSlotUI : MenuItem
     {
         [SerializeField] private WeaponSlot associatedWeaponSlot;
 
@@ -33,7 +33,7 @@ namespace DD.UI
                 return;
             }
             
-            Item item = weapon.WorldItem.Item;
+            ItemData item = weapon.WorldItem.Item;
 
             if(item)
             {
@@ -48,8 +48,8 @@ namespace DD.UI
             }
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {            
+        public override void Select()
+        {
             weaponSlotPickerUI.SelectEquipWeapon(associatedWeaponSlot);
         }
     }

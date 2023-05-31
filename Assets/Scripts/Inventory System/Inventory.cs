@@ -22,7 +22,7 @@ namespace DD.Systems.InventorySystem
         /// <summary>
         /// When the inventory is updated in general
         /// </summary>
-        public event Action OnInvetoryUpdated;
+        public event Action OnInventoryUpdated;
 
         /// <summary> 
         /// When a new ItemSlot has been given an ItemSlot slot and the amount added
@@ -68,7 +68,7 @@ namespace DD.Systems.InventorySystem
             if(!added && inventory.Count < MaxInventorySize)
             {
                 itemSlot = new ItemSlot(item, amountToAdd);
-                itemSlot.OnItemSlotDepleted += RemoveItemSlot;
+                itemSlot.OnItemSlotEmptied += RemoveItemSlot;
                 
                 inventory.Add(itemSlot);
                 added = true;
@@ -96,7 +96,7 @@ namespace DD.Systems.InventorySystem
                 inventory.Remove(ItemSlot);
             }
             
-            OnInvetoryUpdated?.Invoke();
+            OnInventoryUpdated?.Invoke();
         }
 
         public void DropItem(ItemData item, int amount = 1)

@@ -28,7 +28,7 @@ namespace DD.UI
             InputManager.Instance.OnInventoryToggle += () => gameObject.SetActive(!gameObject.activeInHierarchy);
 
             // Inventory Updated
-            Inventory.Instance.OnInvetoryUpdated += UpdateUI;
+            Inventory.Instance.OnInventoryUpdated += UpdateUI;
 
             // Inventory Added Item UI
             // Inventory.Instance.OnItemAdded += HandleAddedItemUI;

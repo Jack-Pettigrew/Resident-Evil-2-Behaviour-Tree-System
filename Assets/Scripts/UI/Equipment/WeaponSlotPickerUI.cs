@@ -37,15 +37,3 @@ namespace DD.UI
         void Cancel();
     }
 }
-
-
-// Menu menus should record their active status to the menu manager.
-// MenuManager closes active menus if button is pressed (calls IClosable which runs logic for cancelling menus in process)
-
-// WeaponItem::Use() => WeaponSlotPickerUI::SelectWeaponForEquip(WeaponItem)
-// SelectWeaponForEquip:
-// - Opens weapon slot picker UI of which each of the weapon slots ui objects calls WeaponSlotPickerUI::SelectWeaponSlot(enum WeaponSlot)
-// 
-// SelectWeaponSlot:
-// - Calls EquipmentManager::EquipWeapon(WeaponSlot, WeaponItem)
-// - Closes weapon slot picker UI
