@@ -10,7 +10,7 @@ namespace DD.Core.Items
     {
         [field: SerializeField] public bool CanInteract { set; get; }
 
-        [field: SerializeField] public Item Item { private set; get; }
+        [field: SerializeField] public ItemData Item { private set; get; }
         [SerializeField] private int itemQuantity;
 
         public void SetItemQuantity(int quantity) => itemQuantity = quantity;

@@ -8,13 +8,13 @@ namespace DD.Systems.InventorySystem
 {
     public class ItemSlot
     {
-        public Item Item { private set; get; }
+        public ItemData Item { private set; get; }
         public int ItemQuantity { private set; get; }
 
         // Events
         public event Action<ItemSlot> OnItemSlotDepleted;
 
-        public ItemSlot(Item item, int amount)
+        public ItemSlot(ItemData item, int amount)
         {
             this.Item = item;
             this.ItemQuantity = amount;

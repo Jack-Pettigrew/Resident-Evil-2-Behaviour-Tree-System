@@ -6,7 +6,7 @@ using DD.Systems.InventorySystem;
 
 namespace DD.Core.Items
 {   
-    public abstract class Item : ScriptableObject
+    public abstract class ItemData : ScriptableObject
     {
         [Header("Item Info")]
         [ReadOnly] public int itemID;
@@ -15,7 +15,7 @@ namespace DD.Core.Items
         public Texture itemIcon;
         public WorldItem itemPrefab;
 
-        [Header("Inventory Settings")]
+        [Space, Header("Inventory Settings")]
         public bool isStackable;
         [Tooltip("Controls whether an Item is droppable from the Inventory. Drop context menu option is automatically included.")]
         public bool isDroppable;

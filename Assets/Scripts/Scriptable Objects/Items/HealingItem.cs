@@ -6,7 +6,7 @@ using DD.Systems.InventorySystem;
 namespace DD.Core.Items
 {
     [CreateAssetMenu(fileName = "Healing Item", menuName = "Items/Healing Item", order = 1)]
-    public class HealingItem : Item
+    public class HealingItem : ItemData
     {
         [field: Header("Healing Properties")]
         [field: SerializeField] public int HealAmount { private set; get; }

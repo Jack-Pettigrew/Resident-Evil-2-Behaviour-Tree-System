@@ -32,7 +32,7 @@ namespace DD.Systems.InventorySystem
         /// <summary>
         /// When an ItemSlot failed being added to the inventory
         /// </summary>
-        public event Action<Item> OnCantAddItem;
+        public event Action<ItemData> OnCantAddItem;
 
         private void Awake()
         {
@@ -46,7 +46,7 @@ namespace DD.Systems.InventorySystem
 
         // GET ITEM FUNCTION SIMILAR TO ITEM DATABASE GENERIC WHERE T : ITEM ????????????
 
-        public bool AddItem(Item item, int amountToAdd)
+        public bool AddItem(ItemData item, int amountToAdd)
         {
             bool added = false;
 
@@ -86,7 +86,7 @@ namespace DD.Systems.InventorySystem
             return added;
         }
 
-        public void RemoveItem(Item item, int amount = 1)
+        public void RemoveItem(ItemData item, int amount = 1)
         {
             ItemSlot ItemSlot = FindItemSlot(item);
             ItemSlot.RemoveItem(amount);
@@ -99,7 +99,7 @@ namespace DD.Systems.InventorySystem
             OnInvetoryUpdated?.Invoke();
         }
 
-        public void DropItem(Item item, int amount = 1)
+        public void DropItem(ItemData item, int amount = 1)
         {
             if(!item.isDroppable) return;
 
@@ -117,7 +117,7 @@ namespace DD.Systems.InventorySystem
             inventory.Remove(itemSlot);
         }
 
-        public bool HasItem(Item item)
+        public bool HasItem(ItemData item)
         {
             return FindItemSlot(item) != null ? true : false;
         }
@@ -127,7 +127,7 @@ namespace DD.Systems.InventorySystem
         /// </summary>
         /// <param name="ItemSlotData">The ItemSlot data of the ItemSlot to find.</param>
         /// <returns>The ItemSlot slot the ItemSlot is in OR null if not found.</returns>
-        public ItemSlot FindItemSlot(Item item)
+        public ItemSlot FindItemSlot(ItemData item)
         {
             foreach (ItemSlot ItemSlot in inventory)
             {

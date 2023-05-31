@@ -7,9 +7,9 @@ namespace DD.Core.Items
     [CreateAssetMenu(menuName = "Items/Item Database", fileName = "ItemDatabase", order = 0)]
     public class ItemDatabase : ScriptableObject
     {
-        [SerializeField] private List<Item> itemDatabase;
+        [SerializeField] private List<ItemData> itemDatabase;
 
-        public T GetItem<T>(int itemID) where T : Item
+        public T GetItem<T>(int itemID) where T : ItemData
         {
             if(itemID < 0 || itemID >= itemDatabase.Count) return null;
 
@@ -18,7 +18,7 @@ namespace DD.Core.Items
 
         private void OnValidate() 
         {
-            HashSet<Item> set = new HashSet<Item>();
+            HashSet<ItemData> set = new HashSet<ItemData>();
 
             for (int id = 0; id < itemDatabase.Count; id++)
             {

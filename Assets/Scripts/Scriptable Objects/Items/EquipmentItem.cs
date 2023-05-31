@@ -6,7 +6,7 @@ using DD.Core.Combat;
 namespace DD.Core.Items
 {
     [CreateAssetMenu(fileName = "EquipmentItem", menuName = "Items/Equipment Item", order = 2)]
-    public class EquipmentItem : Item
+    public class EquipmentItem : ItemData
     {
         [field: Header("Equipment")]
         [field: SerializeField] public EquipmentType EquipmentType { private set; get; }
