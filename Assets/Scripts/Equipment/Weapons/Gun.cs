@@ -47,10 +47,8 @@ namespace DD.Core.Combat
         public event Action OnReloading;
         public event Action OnReloaded;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
-
             CurrentAmmo = MaxAmmoCapacity;
 
             // Particles
@@ -96,7 +94,7 @@ namespace DD.Core.Combat
         /// </summary>
         public override void Attack()
         {
-            if (InputManager.Instance.Aim && CanUse && isEquipped && CurrentAmmo > 0)
+            if (InputManager.Instance.Aim && CanUse && CurrentAmmo > 0)
             {                
                 // Fire Ray
                 RaycastHit hit;

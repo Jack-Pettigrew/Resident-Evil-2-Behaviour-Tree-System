@@ -30,6 +30,11 @@ namespace DD.Systems.InventorySystem
         public event Action<ItemSlot> OnItemAdded;
 
         /// <summary>
+        /// When an Item has been dropped from the inventory
+        /// </summary>
+        public event Action<ItemData> OnItemDropped;
+
+        /// <summary>
         /// When an ItemSlot failed being added to the inventory
         /// </summary>
         public event Action<ItemData> OnCantAddItem;
@@ -104,11 +109,13 @@ namespace DD.Systems.InventorySystem
             if(!item.isDroppable) return;
 
             ItemSlot itemSlot = FindItemSlot(item);
+
             if (itemSlot != null)
             {
-                WorldItem worldItem = Instantiate<WorldItem>(itemSlot.Item.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
+                WorldItem worldItem = Instantiate<WorldItem>(itemSlot.ItemData.itemPrefab, player.transform.position + (player.transform.forward + player.transform.right * UnityEngine.Random.Range(-1.0f, 1.0f)), Quaternion.identity);
                 worldItem.SetItemQuantity(amount);
                 RemoveItem(item, amount);
+                OnItemDropped?.Invoke(itemSlot.ItemData);
             }
         }
 
@@ -131,7 +138,7 @@ namespace DD.Systems.InventorySystem
         {
             foreach (ItemSlot ItemSlot in inventory)
             {
-                if (ItemSlot.Item == item)
+                if (ItemSlot.ItemData == item)
                 {
                     return ItemSlot;
                 }

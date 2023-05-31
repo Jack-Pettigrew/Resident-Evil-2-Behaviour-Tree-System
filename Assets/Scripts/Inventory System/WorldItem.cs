@@ -10,14 +10,14 @@ namespace DD.Core.Items
     {
         [field: SerializeField] public bool CanInteract { set; get; }
 
-        [field: SerializeField] public ItemData Item { private set; get; }
+        [field: SerializeField] public ItemData ItemData { private set; get; }
         [SerializeField] private int itemQuantity;
 
         public void SetItemQuantity(int quantity) => itemQuantity = quantity;
 
         public void Interact(Interactor interactor)
         {
-            Inventory.Instance.AddItem(Item, itemQuantity);
+            Inventory.Instance.AddItem(ItemData, itemQuantity);
             Destroy(gameObject);
         }
     }

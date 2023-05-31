@@ -39,7 +39,7 @@ namespace DD.UI
             }
 
             amountText.text = ItemSlot.ItemQuantity.ToString();
-            itemImage.texture = ItemSlot.Item.itemIcon;
+            itemImage.texture = ItemSlot.ItemData.itemIcon;
             itemUI.SetActive(true);
         }
 
@@ -57,7 +57,7 @@ namespace DD.UI
             if(ItemSlot == null) return;
 
             // Item Context Menu
-            List<ContextMenuOption> contextMenuOptions = ItemSlot.Item.GetContextMenuOptions();
+            List<ContextMenuOption> contextMenuOptions = ItemSlot.ItemData.GetContextMenuOptions();
 
             if(contextMenuOptions.Count == 0) return;
             

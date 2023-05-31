@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CanInteract>k__BackingField: 1
-  <Item>k__BackingField: {fileID: 11400000, guid: 5a52b851c756d488bb434b9b35e6ece9,
+  <ItemData>k__BackingField: {fileID: 11400000, guid: 5a52b851c756d488bb434b9b35e6ece9,
     type: 2}
   itemQuantity: 1
 --- !u!114 &4749683148606245484
@@ -367,6 +367,7 @@ MonoBehaviour:
   <GunAmmoItem>k__BackingField: {fileID: 11400000, guid: 80e1476323d52834b9b502257b08e0dc,
     type: 2}
   <MaxAmmoCapacity>k__BackingField: 7
+  <HasInfiniteAmmo>k__BackingField: 0
   reloadTime: 3
   bulletOrigin: {fileID: 4749683149073268147}
   bulletPrefab: {fileID: 6865335181609130190, guid: b8f340fe57e69439dadc8562ebbab3f8,

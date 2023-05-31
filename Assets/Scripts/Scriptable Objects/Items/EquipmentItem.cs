@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DD.Core.Combat;
+using DD.UI;
 
 namespace DD.Core.Items
 {
@@ -13,7 +14,7 @@ namespace DD.Core.Items
 
         public override void Use()
         {
-            EquipmentManager.Instance.OpenWeaponSlotPicker(this);
+            WeaponSlotPickerUI.Instance.SelectWeaponForEquip(this);
         }
     }
 }

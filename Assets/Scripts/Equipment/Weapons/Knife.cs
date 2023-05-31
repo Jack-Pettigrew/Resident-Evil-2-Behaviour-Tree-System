@@ -10,10 +10,8 @@ namespace DD.Core.Combat
     {
         public event Action OnAttack;
         
-        protected override void Awake() 
+        protected void Awake() 
         {
-            base.Awake();
-
             FindObjectOfType<PlayerAnimationController>()?.InitAnimationEvent(this);
         }
         

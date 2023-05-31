@@ -33,7 +33,12 @@ namespace DD.UI
                 return;
             }
             
-            ItemData item = weapon.WorldItem.Item;
+            if(!weapon.TryGetComponent<WorldItem>(out WorldItem worldItem))
+            {
+                Debug.LogError($"{weapon.name}: No WorldItem attched to object.", weapon);
+            }
+
+            ItemData item = worldItem.ItemData;
 
             if(item)
             {

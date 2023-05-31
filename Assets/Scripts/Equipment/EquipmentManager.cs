@@ -6,6 +6,8 @@ using DD.Core.Control;
 using DD.Core.Items;
 using DD.UI;
 using DD.Animation;
+using DD.Core.Items;
+using DD.Systems.InventorySystem;
 
 namespace DD.Core.Combat
 {
@@ -28,37 +30,74 @@ namespace DD.Core.Combat
         public event Action OnWeaponSwapping;
         public event Action OnWeaponSwapped;
 
-        private void Awake() {
+        private void Awake()
+        {
             Instance = this;
         }
 
-        private void Start() {
+        private void Start()
+        {
             // Input Swap
             InputManager.Instance.OnQuickSlotChange += SwapWeapon;
             InputManager.Instance.OnShoot += UseWeapon;
             InputManager.Instance.OnReload += UseWeaponAction;
+            
+            // Inventory Events
+            Inventory.Instance.OnItemDropped += itemData => {
+                if(itemData is EquipmentItem)
+                {
+                    UnequipWeapon((EquipmentItem) itemData);
+                }
+            };
         }
 
         public void UseWeapon()
         {
             ActiveWeapon?.Attack();
         }
-        
+
         public void UseWeaponAction()
         {
             ActiveWeapon?.UseWeaponAction();
         }
 
-        public bool HasEquipmentEquipped(EquipmentItem equipmentItem)
+        public bool IsEquipmentEquipped(EquipmentItem equipmentItem)
         {
             foreach (Weapon weapon in weaponSlots)
             {
-                if(weapon != null && weapon.WorldItem.Item == equipmentItem)
+                if(weapon == null) continue;
+                
+                if (weapon.TryGetComponent<WorldItem>(out WorldItem worldItem) && worldItem.ItemData == equipmentItem)
                 {
                     return true;
                 }
+                else
+                {
+                    Debug.LogError($"{weapon.name}: No WorldItem component attached to this Equipment.", weapon);
+                }
             }
 
+            return false;
+        }
+
+        public bool IsEquipmentEquipped(EquipmentItem equipmentItem, out WeaponSlot weaponSlot)
+        {
+            for (int i = 0; i < weaponSlots.Length; i++)
+            {
+                if(weaponSlots[i] == null) continue;
+                
+                if (weaponSlots[i].TryGetComponent<WorldItem>(out WorldItem worldItem) && worldItem.ItemData == equipmentItem)
+                {
+                    weaponSlot = (WeaponSlot)i;
+                    return true;
+                }
+                else
+                {
+                    Debug.LogError($"{weaponSlots[i].name}: No WorldItem component attached to this Equipment.", weaponSlots[i]);
+                }
+            }
+
+            weaponSlot = WeaponSlot.One;
             return false;
         }
 
@@ -67,22 +106,22 @@ namespace DD.Core.Combat
         /// </summary>
         /// <param name="equipmentSlotID">ID of the equipment slot to set the weapon to.</param>
         /// <param name="weaponToEquip">Weapon to equip.</param>
-        public void EquipWeapon(EquipmentItem equipmentItem, WeaponSlot weaponSlot)
+        public void EquipWeaponToSlot(EquipmentItem equipmentItem, WeaponSlot weaponSlot)
         {
-            int weaponSlotID = (int) weaponSlot;
+            int weaponSlotID = (int)weaponSlot;
 
             // Handle moving weapon slots
-            if(HasEquipmentEquipped(equipmentItem))
+            if (IsEquipmentEquipped(equipmentItem))
             {
-                MoveEquipmentWeaponSlot(equipmentItem, weaponSlot);
+                MoveEquipmentToSlot(equipmentItem, weaponSlot);
             }
             else
             {
-                // Remove previous Weapon
-                GameObject previousWeapon = weaponSlots[weaponSlotID]?.GetComponent<GameObject>();
-                if(!previousWeapon)
+                // Remove previous physical weapon
+                if (weaponSlots[weaponSlotID] != null)
                 {
-                    Destroy(previousWeapon);
+                    Destroy(weaponSlots[weaponSlotID].gameObject);
+                    weaponSlots[weaponSlotID] = null;
                 }
 
                 // Spawn weapon to hand position + disable
@@ -91,12 +130,32 @@ namespace DD.Core.Combat
                 newWeapon.transform.localRotation = Quaternion.identity;
                 newWeapon.gameObject.SetActive(false);
 
+                if (!newWeapon.TryGetComponent<WorldItem>(out WorldItem worldItem))
+                {
+                    Debug.LogError($"{newWeapon.name}: No WorldItem component attached to this Equipment.", newWeapon);
+                }
+                worldItem.CanInteract = false;
+
                 // Assign spawned weapon to weapon slot
                 weaponSlots[weaponSlotID] = newWeapon;
             }
 
             // Update current active weapon if we've changed it
-            if(weaponSlotID == activeWeaponSlotID)
+            if (weaponSlotID == activeWeaponSlotID)
+            {
+                SwapWeapon(weaponSlot);
+            }
+        }
+
+        public void UnequipWeapon(EquipmentItem equipmentItem)
+        {
+            if(IsEquipmentEquipped(equipmentItem, out WeaponSlot weaponSlot) && weaponSlots[(int) weaponSlot] != null)
+            {
+                Destroy(weaponSlots[(int) weaponSlot].gameObject);
+                weaponSlots[(int) weaponSlot] = null;
+            }
+
+            if (((int) weaponSlot) == activeWeaponSlotID)
             {
                 SwapWeapon(weaponSlot);
             }
@@ -108,12 +167,15 @@ namespace DD.Core.Combat
         /// <param name="equipmentSlotID">ID of the slot to unequip.</param>
         public void UnequipWeaponFromSlot(WeaponSlot weaponSlot)
         {
-            int weaponSlotID = (int) weaponSlot;
+            int weaponSlotID = (int)weaponSlot;
 
-            Destroy(weaponSlots[weaponSlotID].gameObject);
-            weaponSlots[weaponSlotID] = null;
+            if (weaponSlots[weaponSlotID] != null)
+            {
+                Destroy(weaponSlots[weaponSlotID].gameObject);
+                weaponSlots[weaponSlotID] = null;
+            }
 
-            if(weaponSlotID == activeWeaponSlotID)
+            if (weaponSlotID == activeWeaponSlotID)
             {
                 SwapWeapon(weaponSlot);
             }
@@ -126,14 +188,13 @@ namespace DD.Core.Combat
         public void SwapWeapon(WeaponSlot weaponSlot)
         {
             OnWeaponSwapping?.Invoke();
-            
-            int weaponSlotID = (int) weaponSlot;
+
+            int weaponSlotID = (int)weaponSlot;
 
             // If we currently have an active weapon...
-            if(ActiveWeapon != null)
+            if (ActiveWeapon != null)
             {
                 // Unequip current weapon
-                ActiveWeapon.SetEquipped(false);
                 ActiveWeapon.SetCanUse(false);
 
                 // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
@@ -141,20 +202,19 @@ namespace DD.Core.Combat
                 // **** TEST SWAP ****
                 ActiveWeapon.gameObject.SetActive(false);
             }
-            
+
             // switch the active equipment slot
             activeWeaponSlotID = weaponSlotID;
 
             // If weapon occupies this slot...
-            if(ActiveWeapon != null)
+            if (ActiveWeapon != null)
             {
                 // Set weapon equiped
-                ActiveWeapon.SetEquipped(true);
                 ActiveWeapon.SetCanUse(true);
 
                 // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
                 // TODO: Update animator with appropriate weapon hold pose (including idle if no weapon)
-                
+
                 // **** TEST SWAP ****
                 ActiveWeapon.gameObject.SetActive(true);
             }
@@ -169,22 +229,28 @@ namespace DD.Core.Combat
             OnWeaponSwapped?.Invoke();
         }
 
-        public void MoveEquipmentWeaponSlot(EquipmentItem equipmentItem, WeaponSlot weaponSlot)
+        /// <summary>
+        /// Moves the given equipment item to another slot.
+        /// </summary>
+        /// <param name="equipmentItem"></param>
+        /// <param name="weaponSlot"></param>
+        public void MoveEquipmentToSlot(EquipmentItem equipmentItem, WeaponSlot weaponSlot)
         {
             for (int i = 0; i < weaponSlots.Length; i++)
             {
-                if(weaponSlots[i] != null && weaponSlots[i].WorldItem.Item == equipmentItem)
+                if (weaponSlots[i] != null && weaponSlots[i].TryGetComponent<WorldItem>(out WorldItem worldItem))
                 {
-                    weaponSlots[(int)weaponSlot] = weaponSlots[i];
-                    weaponSlots[i] = null;
-                    return;
+                    if (worldItem.ItemData == equipmentItem)
+                    {
+                        weaponSlots[(int)weaponSlot] = weaponSlots[i];
+                        weaponSlots[i] = null;
+                        return;
+                    }
+                }
+                else {
+                    Debug.LogError($"{weaponSlots[i].name}: No WorldItem component attached to this Equipment.", weaponSlots[i]);
                 }
             }
-        }
-
-        public void OpenWeaponSlotPicker(EquipmentItem weaponItem)
-        {
-            weaponSlotPickerUI.SelectWeaponForEquip(weaponItem);
         }
 
         public void SubscribeAnimator(PlayerAnimationController animationController)

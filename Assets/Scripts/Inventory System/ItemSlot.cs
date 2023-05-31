@@ -8,7 +8,7 @@ namespace DD.Systems.InventorySystem
 {
     public class ItemSlot
     {
-        public ItemData Item { private set; get; }
+        public ItemData ItemData { private set; get; }
         public int ItemQuantity { private set; get; }
 
         // Events
@@ -16,7 +16,7 @@ namespace DD.Systems.InventorySystem
 
         public ItemSlot(ItemData item, int amount)
         {
-            this.Item = item;
+            this.ItemData = item;
             this.ItemQuantity = amount;
         }
 

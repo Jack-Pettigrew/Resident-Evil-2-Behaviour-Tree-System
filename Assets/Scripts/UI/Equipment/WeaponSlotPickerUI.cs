@@ -8,8 +8,14 @@ namespace DD.UI
 {
     public class WeaponSlotPickerUI : MonoBehaviour, ICancelable
     {
+        public static WeaponSlotPickerUI Instance;
+        
         [SerializeField] private RectTransform weaponSlotsParent;
         private EquipmentItem selectedWeapon;
+
+        private void Awake() {
+            Instance = this;
+        }
 
         public void SelectWeaponForEquip(EquipmentItem weaponItem)
         {
@@ -21,7 +27,7 @@ namespace DD.UI
         {
             if(selectedWeapon == null) return;
 
-            EquipmentManager.Instance.EquipWeapon(selectedWeapon, weaponSlot);
+            EquipmentManager.Instance.EquipWeaponToSlot(selectedWeapon, weaponSlot);
             Cancel();
         }
 

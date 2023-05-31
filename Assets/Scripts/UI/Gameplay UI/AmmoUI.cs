@@ -28,7 +28,7 @@ namespace DD.UI
 
         public void CheckAddedItem(ItemSlot itemSlot)
         {
-            if(itemSlot.Item is AmmoItem)
+            if(itemSlot.ItemData is AmmoItem)
             {
                 UpdateUI();
             }
