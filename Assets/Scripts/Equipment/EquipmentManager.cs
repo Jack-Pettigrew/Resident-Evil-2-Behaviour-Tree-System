@@ -165,7 +165,7 @@ namespace DD.Core.Combat
         /// Unequips the weapon associated with the equipment slot.
         /// </summary>
         /// <param name="equipmentSlotID">ID of the slot to unequip.</param>
-        public void UnequipWeaponFromSlot(WeaponSlot weaponSlot)
+        public void UnequipWeapon(WeaponSlot weaponSlot)
         {
             int weaponSlotID = (int)weaponSlot;
 
