@@ -75,13 +75,13 @@ namespace DD.AI.Controllers
                             new Selector(behaviourTree, new List<Node> {
                                 // End Search
                                 new Sequence(behaviourTree, new List<Node> {
-                                    new IsAtPoint(behaviourTree, "LastKnownLocation", 1.0f),
+                                    new IsAtPoint(behaviourTree, "LastKnownLocation", 2.0f),
                                     new PlayAnimation(behaviourTree, "looking_around", true),
 
                                     // Is Player in an inaccessible room?
                                     new Selector(behaviourTree, new List<Node> {
                                         new Sequence(behaviourTree, new List<Node> {
-                                            new CanReachPlayerRoom(behaviourTree, "Player"),
+                                            new CanReachObjectRoom(behaviourTree, "Player"),
                                             new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
                                         }),
 
@@ -173,7 +173,7 @@ namespace DD.AI.Controllers
                                     // Is Player in an inaccessible room?
                                     new Selector(behaviourTree, new List<Node> {
                                         new Sequence(behaviourTree, new List<Node> {
-                                            new CanReachPlayerRoom(behaviourTree, "Player"),
+                                            new CanReachObjectRoom(behaviourTree, "Player"),
                                             new GetRandomRoomAdjacentToTarget(behaviourTree, true, "Player", "TargetSearchRoom")
                                         }),
 

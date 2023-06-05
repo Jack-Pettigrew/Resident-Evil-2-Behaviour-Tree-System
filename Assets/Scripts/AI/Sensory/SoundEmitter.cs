@@ -15,7 +15,7 @@ namespace DD.AI.Sensors
         /// <summary>
         /// Raises OnEmittedSound event with this components current position.
         /// </summary>
-        [ContextMenu("EmitSound")]
+        [ContextMenu("Emit Sound")]
         public void EmitSound()
         {
             colliders = Physics.OverlapSphere(transform.position, soundRadius, soundLayer);
@@ -25,6 +25,7 @@ namespace DD.AI.Sensors
                 if(collider.TryGetComponent<AIHear>(out AIHear aiHear))
                 {
                     aiHear.HearSound();
+                    Debug.Log("Triggered");
                 }
             }
         }
