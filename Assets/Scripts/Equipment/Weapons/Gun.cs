@@ -6,6 +6,7 @@ using DD.Core.Items;
 using DD.Systems.InventorySystem;
 using DD.Animation;
 using DD.Core.Control;
+using UnityEngine.Events;
 
 namespace DD.Core.Combat
 {
@@ -43,7 +44,8 @@ namespace DD.Core.Combat
         private Coroutine reloadCoroutine;
 
         // EVENTS
-        public event Action OnShot;
+        [Space]
+        public UnityEvent OnShoot;
         public event Action OnReloading;
         public event Action OnReloaded;
 
@@ -115,7 +117,7 @@ namespace DD.Core.Combat
 
                 CurrentAmmo -= HasInfiniteAmmo ? 0 : 1;
                 attackCooldownCoroutine = StartCoroutine(AttackCooldown());
-                OnShot?.Invoke();
+                OnShoot?.Invoke();
             }
         }
 
@@ -169,13 +171,15 @@ namespace DD.Core.Combat
         public override void SubscribeAnimator(PlayerAnimationController animationController)
         {
             OnReloading += animationController.TriggerReload;
-            OnShot += animationController.TriggerShoot;
+
+            OnShoot.AddListener(animationController.TriggerShoot);
         }
 
         public override void UnsubscribeAnimator(PlayerAnimationController animationController)
         {
             OnReloading -= animationController.TriggerReload;
-            OnShot -= animationController.TriggerShoot;
+
+            OnShoot.RemoveListener(animationController.TriggerShoot);
         }
     }
 }

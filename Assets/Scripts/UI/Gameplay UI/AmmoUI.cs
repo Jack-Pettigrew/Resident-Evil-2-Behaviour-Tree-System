@@ -42,7 +42,7 @@ namespace DD.UI
             if(EquipmentManager.Instance.ActiveWeapon is Gun)
             {
                 Gun gun = (Gun) EquipmentManager.Instance.ActiveWeapon;
-                gun.OnShot += UpdateUI;
+                gun.OnShoot.AddListener(UpdateUI);
                 gun.OnReloaded += UpdateUI;
             }
         }
