@@ -152,6 +152,14 @@ namespace DD.AI.Controllers
                                 new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.ATTACKING)
                             }),
 
+                            // ! Can Hear Player?
+                            new Sequence(behaviourTree, new List<Node> {
+                                new HasHeardSound(behaviourTree),
+                                new CanReachObjectRoom(behaviourTree, "Player"),
+                                new SetLastKnownLocation(behaviourTree, "LastKnownLocation", "Player"),
+                                new SetBlackboardVariable<MrXState>(behaviourTree, "State", MrXState.ATTACKING)
+                            }),
+
                             // ! Search Room + Go to Room
                             new Selector(behaviourTree, new List<Node> {
                                 // Search Room
