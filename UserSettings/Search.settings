@@ -20,9 +20,9 @@ scopes = {
 	"last_search.2138236A" = ""
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
-	"last_search.3BE40471" = "t:Light"
+	"last_search.3BE40471" = "ref:\"Assets/Scripts/Room System/RoomEnvironmentObject.cs\""
 	"OpenInspectorPreview.3BE40471" = "0"
-	"currentGroup.3BE40471" = "scene"
+	"currentGroup.3BE40471" = "all"
 	"last_search.110DEAF1" = "h: t="
 	"OpenInspectorPreview.110DEAF1" = "0"
 	"currentGroup.110DEAF1" = "scene"
@@ -80,6 +80,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"ref:\"Assets/Scripts/Room System/RoomEnvironmentObject.cs\""
 	"t:Light"
 	""
 	"t:Light Light"
