@@ -1,7 +1,5 @@
-using DD.AI;
-using DD.AI.Controllers;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DD.Core.Control;
@@ -52,10 +50,10 @@ namespace DD.Systems.Room
 
         // EVENTS
         [Header("Events")]
-        [SerializeField] protected UnityEvent openingDoorEvent;
-        [SerializeField] protected UnityEvent openedDoorEvent;
-        [SerializeField] protected UnityEvent closingDoorEvent;
-        [SerializeField] protected UnityEvent closedDoorEvent;
+        public UnityEvent<Door> openingDoorEvent;
+        public UnityEvent<Door> openedDoorEvent;
+        public UnityEvent<Door> closingDoorEvent;
+        public UnityEvent <Door>closedDoorEvent;
 
         private void Awake() {            
             hingeParentTransform = transform.parent;
@@ -149,7 +147,7 @@ namespace DD.Systems.Room
             IsOpen = true;
             IsChangingState = true;
 
-            openingDoorEvent?.Invoke();
+            openingDoorEvent?.Invoke(this);
                         
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
             yield return RotateToAngle(
@@ -157,7 +155,7 @@ namespace DD.Systems.Room
             );
 
             IsChangingState = false;
-            openedDoorEvent?.Invoke();
+            openedDoorEvent?.Invoke(this);
 
             runningCoroutine = StartCoroutine(OpenDoorCooldown());
         }
@@ -195,14 +193,14 @@ namespace DD.Systems.Room
         {
             IsChangingState = true;
 
-            closingDoorEvent?.Invoke();
+            closingDoorEvent?.Invoke(this);
             
             yield return RotateToAngle(0.0f);
             
             IsOpen = false;
             IsChangingState = false;
 
-            closedDoorEvent?.Invoke();
+            closedDoorEvent?.Invoke(this);
         }
 
         [ContextMenu("Test Bang Door")]

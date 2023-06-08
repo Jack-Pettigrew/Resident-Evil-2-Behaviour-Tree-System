@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.SceneManagement;
+using UnityEditor.Events;
 using DD.Systems.Room;
 
 namespace DD.Editor.Rooms
@@ -71,7 +71,7 @@ namespace DD.Editor.Rooms
             }
         }
 
-        [MenuItem("Room System/Auto-link all Doors")]
+        [MenuItem("Tools/Room System/Auto-link all Doors")]
         private static void AutoLinkAllDoors()
         {
             ClearAllRoomDoorLinks();
@@ -126,7 +126,7 @@ namespace DD.Editor.Rooms
             }
         }
 
-        [MenuItem("Room System/Clear all Room Door links")]
+        [MenuItem("Tools/Room System/Clear all Room Door links")]
         private static void ClearAllRoomDoorLinks()
         {
             foreach (var room in FindObjectsOfType<Room>())
