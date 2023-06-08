@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD.Systems.InventorySystem;
 using DD.Core.Control;
+using System;
 
 namespace DD.Core.Items
 {
     public class WorldItem : MonoBehaviour, IInteractable
-    {
+    {        
         [field: SerializeField] public bool CanInteract { set; get; }
 
         [field: SerializeField] public ItemData ItemData { private set; get; }
+
         [SerializeField] private int itemQuantity;
 
         public void SetItemQuantity(int quantity) => itemQuantity = quantity;

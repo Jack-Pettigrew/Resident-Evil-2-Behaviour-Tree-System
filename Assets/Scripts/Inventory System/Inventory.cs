@@ -86,6 +86,7 @@ namespace DD.Systems.InventorySystem
             else
             {
                 OnItemAdded?.Invoke(itemSlot);
+                GlobalEvents.OnPickupItem?.Invoke(item);
             }
 
             return added;
