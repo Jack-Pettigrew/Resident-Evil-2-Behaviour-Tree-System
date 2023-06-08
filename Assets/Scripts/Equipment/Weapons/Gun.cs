@@ -87,7 +87,10 @@ namespace DD.Core.Combat
             // Remove associated bullets from scene
             foreach (Bullet bullet in bulletPool)
             {
-                Destroy(bullet.gameObject);
+                if(bullet)
+                {
+                    Destroy(bullet.gameObject);
+                }
             }
         }
 
