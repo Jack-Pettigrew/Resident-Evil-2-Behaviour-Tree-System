@@ -12,7 +12,7 @@ public class ObjectiveArrive : Objective
     
     public override void InitObjective()
     {
-        arriveTrigger.OnTriggered += EvaluateObjective;
+        arriveTrigger.OnTriggered.AddListener(EvaluateObjective);
         arriveTrigger.StartTracking(trackingGameObject);
     }
 
@@ -26,7 +26,7 @@ public class ObjectiveArrive : Objective
 
     public override void CleanUpObjective()
     {
-        arriveTrigger.OnTriggered -= EvaluateObjective;
+        arriveTrigger.OnTriggered.RemoveListener(EvaluateObjective);
         arriveTrigger.StopTracking();
     }
 }

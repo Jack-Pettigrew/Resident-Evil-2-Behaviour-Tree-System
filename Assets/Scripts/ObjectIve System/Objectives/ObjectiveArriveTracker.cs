@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ObjectiveArriveTracker : MonoBehaviour
 {
     [SerializeField] private float arrivedRadius = 2.0f;
     private GameObject objectToTrack;
     private Coroutine trackingCoroutine;
-    public event Action<ObjectiveArriveTriggerStatus> OnTriggered;
+    public UnityEvent<ObjectiveArriveTriggerStatus> OnTriggered;
 
     public void StartTracking(GameObject objectToTrack)
     {
