@@ -1,14 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public abstract class Objective
 {
     [field: SerializeField] public string ObjectiveTitle { private set; get; }
     public bool IsComplete { private set; get; }
-    public event Action OnObjectiveComplete;
+    public UnityEvent OnObjectiveComplete;
 
     /// <summary>
     /// Initialises this Objective to register event based goals.

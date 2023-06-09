@@ -1,22 +1,20 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DD.Core.Control;
-using DD.Core.Items;
 
 public class Quest : MonoBehaviour
 {
     public string questName = "";
+    [field: SerializeField] public bool AutoProceedToNextObjective { private set; get; } = true;
     [SerializeField] public bool IsComplete { private set; get; }
 
     private int currentObjectiveIndex = 0;
     [SerializeReference] private List<Objective> objectives;
-    [SerializeReference] private List<ItemData> items;
     public Objective CurrentObjective { get { return objectives[currentObjectiveIndex]; } }
 
     // EVENTS
-    public event Action<Quest> OnQuestProgressed;
+    public static event Action<Objective> OnObjectiveComplete;
+    public static event Action<Quest> OnQuestProgressed;
 
     [ContextMenu("Add Interact Objective")]
     public void AddInteractObjective()
@@ -39,7 +37,11 @@ public class Quest : MonoBehaviour
     [ContextMenu("Start Test Quest")]
     public void StartQuest()
     {
-        CurrentObjective.OnObjectiveComplete += ProgressToNextObjective;
+        if (AutoProceedToNextObjective)
+        {
+            CurrentObjective.OnObjectiveComplete.AddListener(AutoProgressToNextObjective);
+        }
+
         CurrentObjective.InitObjective();
     }
 
@@ -56,13 +58,37 @@ public class Quest : MonoBehaviour
         return true;
     }
 
-    public void ProgressToNextObjective()
-    {        
-        // Unsub from previous objective
-        if (CurrentObjective.IsComplete)
+    public void ToggleAutoProceedObjectives(bool toggle)
+    {
+        if(AutoProceedToNextObjective == toggle) return;
+        
+        if(CurrentObjective.IsComplete)
         {
-            CurrentObjective.OnObjectiveComplete -= ProgressToNextObjective;
+            AutoProgressToNextObjective();
         }
+        else
+        {
+            CurrentObjective.OnObjectiveComplete.RemoveListener(AutoProgressToNextObjective);
+        }
+    }
+
+    public void ProgressToNextObjective()
+    {
+        if (IsQuestComplete())
+        {
+            EndQuest();
+            return;
+        }
+
+        currentObjectiveIndex++;
+        CurrentObjective.InitObjective();
+        OnQuestProgressed?.Invoke(this);
+    }
+
+    private void AutoProgressToNextObjective()
+    {
+        // Unsub from previous objective
+        CurrentObjective.OnObjectiveComplete.RemoveListener(AutoProgressToNextObjective);
 
         if (IsQuestComplete())
         {
@@ -71,7 +97,7 @@ public class Quest : MonoBehaviour
         }
 
         currentObjectiveIndex++;
-        CurrentObjective.OnObjectiveComplete += ProgressToNextObjective;
+        CurrentObjective.OnObjectiveComplete.AddListener(AutoProgressToNextObjective);
         CurrentObjective.InitObjective();
         OnQuestProgressed?.Invoke(this);
     }
