@@ -16,25 +16,25 @@ public class Quest : MonoBehaviour
     public static event Action<Objective> OnObjectiveComplete;
     public static event Action<Quest> OnQuestProgressed;
 
-    [ContextMenu("Add Interact Objective")]
+    [ContextMenu("Add Interact Objective", false, 2)]
     public void AddInteractObjective()
     {
         objectives.Add(new ObjectiveInteract());
     }
 
-    [ContextMenu("Add Pickup Objective")]
+    [ContextMenu("Add Pickup Objective", false, 3)]
     public void AddPickupObjective()
     {
         objectives.Add(new ObjectivePickup());
     }
 
-    [ContextMenu("Add Arrive Objective")]
+    [ContextMenu("Add Arrive Objective", false, 4)]
     public void AddArriveObjective()
     {
         objectives.Add(new ObjectiveArrive());
     }
 
-    [ContextMenu("Start Test Quest")]
+    [ContextMenu("Start Test Quest", false, 1)]
     public void StartQuest()
     {
         if (AutoProceedToNextObjective)
