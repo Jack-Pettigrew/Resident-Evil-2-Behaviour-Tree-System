@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Quest : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class Quest : MonoBehaviour
     public Objective CurrentObjective { get { return objectives[currentObjectiveIndex]; } }
 
     // EVENTS
-    public static event Action<Objective> OnObjectiveComplete;
-    public static event Action<Quest> OnQuestProgressed;
+    public event Action<Objective> OnObjectiveComplete;
+    public event Action<Quest> OnQuestProgressed;
+    public UnityEvent<Quest> OnQuestComplete;
 
     [ContextMenu("Add Interact Objective", false, 2)]
     public void AddInteractObjective()

@@ -16,7 +16,7 @@ namespace DD.Systems.Room
         [field: Header("Interaction")]
         [field: SerializeField] public bool CanInteract { set; get; }
         [field: SerializeField] public bool CanAIUse { set; get; }
-        [field: SerializeField] public bool IsLocked { private set; get; }
+        [field: SerializeField] public bool IsLocked { set; get; }
         public bool IsChangingState { private set; get; }
         public bool IsOpen { private set; get; }
 

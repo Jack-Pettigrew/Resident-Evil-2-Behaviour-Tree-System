@@ -20,9 +20,7 @@ namespace DD.AI.BehaviourTreeSystem
             if(!aiHear)
             {
                 aiHear = behaviourTree.ai.GetAIComponent<AIHear>();
-
-                Debug.Log(aiHear, aiHear);
-                
+            
                 if(!aiHear) return false;
 
                 aiHear.OnSoundHeard += HeardSound;
