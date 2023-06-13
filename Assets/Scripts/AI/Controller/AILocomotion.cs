@@ -55,11 +55,12 @@ namespace DD.AI.Controllers
             velocity.y = yVelocity;
 
             controller.Move(velocity * Time.deltaTime);
+        }
 
-
+        private void LateUpdate() {
             // Reset after setting Anim variables so AI stops playing walk anim (workaround)
             velocity = Vector3.zero + Vector3.up * yVelocity;
-            animator.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
+            animator.SetFloat("Speed", 0);
         }
 
         public bool UpdatePath(Vector3 goalPosition)
