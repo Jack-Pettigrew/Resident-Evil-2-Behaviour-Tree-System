@@ -14,7 +14,6 @@ public class Quest : MonoBehaviour
     public Objective CurrentObjective { get { return objectives[currentObjectiveIndex]; } }
 
     // EVENTS
-    public event Action<Objective> OnObjectiveComplete;
     public event Action<Quest> OnQuestProgressed;
     public UnityEvent<Quest> OnQuestComplete;
 
@@ -84,7 +83,11 @@ public class Quest : MonoBehaviour
 
         currentObjectiveIndex++;
         CurrentObjective.InitObjective();
-        OnQuestProgressed?.Invoke(this);
+
+        if(!CurrentObjective.IsSilentObjective)
+        {
+            OnQuestProgressed?.Invoke(this);
+        }
     }
 
     private void AutoProgressToNextObjective()
@@ -101,7 +104,11 @@ public class Quest : MonoBehaviour
         currentObjectiveIndex++;
         CurrentObjective.OnObjectiveComplete.AddListener(AutoProgressToNextObjective);
         CurrentObjective.InitObjective();
-        OnQuestProgressed?.Invoke(this);
+
+        if(!CurrentObjective.IsSilentObjective)
+        {
+            OnQuestProgressed?.Invoke(this);
+        }
     }
 
     public void EndQuest()

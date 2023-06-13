@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public abstract class Objective
 {
     [field: SerializeField] public string ObjectiveTitle { private set; get; }
+    [field: SerializeField] public bool IsSilentObjective { private set; get; } = false;
     public bool IsComplete { private set; get; }
     public UnityEvent OnObjectiveComplete;
 
