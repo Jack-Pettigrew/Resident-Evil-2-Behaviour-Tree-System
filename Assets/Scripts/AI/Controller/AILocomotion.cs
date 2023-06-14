@@ -52,9 +52,11 @@ namespace DD.AI.Controllers
                 yVelocity += gravity * Time.deltaTime;
             }
 
-            velocity.y = yVelocity;
+            // velocity.y = yVelocity;
 
-            controller.Move(velocity * Time.deltaTime);
+            // Gravity
+            velocity += Vector3.up * yVelocity;
+            controller.Move((Vector3.up * yVelocity) * Time.deltaTime);
         }
 
         private void LateUpdate() {
@@ -98,6 +100,9 @@ namespace DD.AI.Controllers
                 velocity = transform.forward * moveSpeed;
 
                 animator.SetFloat("Speed", Mathf.Clamp01(new Vector3(velocity.x, 0, velocity.z).magnitude));
+                
+                // Horizontal Movement
+                controller.Move(velocity * Time.deltaTime);
             }
         }
     }
