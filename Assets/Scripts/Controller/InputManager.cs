@@ -56,11 +56,10 @@ namespace DD.Core.Control
         {
             if (Input.GetKeyDown(pauseKey)) OnPause?.Invoke();
 
-            // Global
-            if (ignoreInput) return;
 
             // Locomotion
             InputDirection = ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+            
             if (Sprint && InputDirection.sqrMagnitude <= 0 || Aim)
             {
                 Sprint = false;
@@ -72,6 +71,10 @@ namespace DD.Core.Control
 
             // Combat
             Aim = Input.GetKey(aimKeyCode);
+
+            // Global
+            if (ignoreInput) return;
+            
             if (Input.GetKeyDown(aimKeyCode)) OnAimDown?.Invoke();
             if (Input.GetKeyUp(aimKeyCode)) OnAimUp?.Invoke();
             if (Input.GetKeyDown(shootKeyCode)) OnShoot?.Invoke();
