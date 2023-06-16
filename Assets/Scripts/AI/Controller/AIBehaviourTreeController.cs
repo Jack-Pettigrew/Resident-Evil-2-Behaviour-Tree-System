@@ -36,9 +36,10 @@ namespace DD.AI.Controllers
             BehaviourTree.Blackboard.AddToBlackboard("TargetDoorPath", null);
             BehaviourTree.Blackboard.AddToBlackboard("TargetDoor", null);
             BehaviourTree.Blackboard.AddToBlackboard("IdleTimerLength", 5.0f);
-            BehaviourTree.Blackboard.AddToBlackboard("LastKnownLocation", Vector3.zero);
+            // BehaviourTree.Blackboard.AddToBlackboard("LastKnownLocation", Vector3.zero);     // Commented out due to attach tree change
             BehaviourTree.Blackboard.AddToBlackboard("TargetSearchRoom", null);
             BehaviourTree.Blackboard.AddToBlackboard("SearchRoomCounter", 0);
+            BehaviourTree.Blackboard.AddToBlackboard("ChaseTimer", 5.0f);
 
             // Creating actual behaviour tree
             Selector root = new Selector(BehaviourTree,
@@ -48,6 +49,12 @@ namespace DD.AI.Controllers
                         new IsStunned(BehaviourTree),
                         new PlayAnimation(BehaviourTree, "stunned", true)
                     }),
+
+                    // ! Player Dead
+                    // new Sequence(BehaviourTree, new List<Node> {
+                    //     new IsPlayerDead(BehaviourTree),
+                    //     new IdleNode(BehaviourTree)
+                    // }),
 
                     // ! Retreat
                     new Sequence(BehaviourTree, new List<Node> {
@@ -82,33 +89,24 @@ namespace DD.AI.Controllers
                         })
                     }),
                     
-                    // ! Attack
+                    // ! NEW ATTACK
                     new ConditionalBranch(BehaviourTree, new CompareBlackboardVariable<MrXState>(BehaviourTree, MrXState.ATTACKING, "State"),
+                        // Timer Selector
                         new Selector(BehaviourTree, new List<Node> {
-                            
-                            // ! Attacking Player + Move to Player
-                            new Selector(BehaviourTree, new List<Node> {
 
-                                // Atttacking Player
-                                new Sequence(BehaviourTree, new List<Node> {
-                                    new IsAtTarget<Component>(BehaviourTree, "Player", 1.0f),
-                                    new PlayAnimation(BehaviourTree, "right_hook", true)
-                                }),
-
-                                // Log LKL + Move To Player
-                                new Sequence(BehaviourTree, new List<Node> {
-                                    new CanSeeObject(BehaviourTree),
-                                    new SetLastKnownLocation(BehaviourTree, "LastKnownLocation", "Player"),
-                                    new IsInSameRoomAs<Component>(BehaviourTree, "Player"),
-                                    new MoveTo<Component>(BehaviourTree, "Player")
-                                }),
+                            // Reset Chase Timer if seen
+                            new Sequence(BehaviourTree, new List<Node> {
+                                new CanSeeObject(BehaviourTree),
+                                new Invertor(BehaviourTree, new SetBlackboardVariable<float>(BehaviourTree, "ChaseTimer", 5.0f))
                             }),
 
-                            // ! LKL
+                            // Usual Attacking Selector
                             new Selector(BehaviourTree, new List<Node> {
-                                // End Search
+                                // * BECAUSE THIS IS ABOVE THE ATTACK MOVE LOGIC HE DOESN'T MOVE WHEN PLAYER IS IN VIEW WHEN ANIMATION IS PLAYING - maybe make selector between this and attacking selector?
+                                // Decrement Chase Timer
                                 new Sequence(BehaviourTree, new List<Node> {
-                                    new IsAtPoint(BehaviourTree, "LastKnownLocation", 2.0f),
+                                    new AlterBlackboardVariableByDeltaTimeFloat(BehaviourTree, "ChaseTimer", AffectValueType.DECREMENT),
+                                    new CompareBlackboardVariable<float>(BehaviourTree, 0.0f, "ChaseTimer", CompareType.LESS_THAN_EQUAL),
                                     new PlayAnimation(BehaviourTree, "looking_around", true),
 
                                     // Is Player in an inaccessible room?
@@ -120,20 +118,26 @@ namespace DD.AI.Controllers
 
                                         new GetRandomRoom(BehaviourTree, "TargetSearchRoom")
                                     }),
-
+                                    
                                     new SetBlackboardVariable<MrXState>(BehaviourTree, "State", MrXState.SEARCHING)
-                                }),
-
-                                // Go to LKL directly
+                                }, false, true),
+                                
+                                // Atttacking Player
                                 new Sequence(BehaviourTree, new List<Node> {
-                                    new IsInSameRoomAsVector3(BehaviourTree, "LastKnownLocation"),
-                                    new MoveToVector3(BehaviourTree, "LastKnownLocation")
+                                    new IsAtTarget<Component>(BehaviourTree, "Player", 1.0f),
+                                    new PlayAnimation(BehaviourTree, "right_hook", true)
                                 }),
 
-                                // Go to LKL via Rooms
+                                // Move To Player
+                                new Sequence(BehaviourTree, new List<Node> {
+                                    new IsInSameRoomAs<Component>(BehaviourTree, "Player"),
+                                    new MoveTo<Component>(BehaviourTree, "Player")
+                                }),
+
+                                // Room Navigation
                                 new Sequence(BehaviourTree, new List<Node> {
                                     // Room Transition
-                                    new FindDoorPathToVector3(BehaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "LastKnownLocation"),
+                                    new FindDoorPathTo<Component>(BehaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "Player"),
                                     new GetDoorFromPath(BehaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
                                     new GetDoorEntryExitPoint(BehaviourTree, true, "TargetDoor", "MoveTarget"),
                                     new Repeater(BehaviourTree, new MoveTo<Component>(BehaviourTree, "MoveTarget"), new IsAtTarget<Component>(BehaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
@@ -160,11 +164,8 @@ namespace DD.AI.Controllers
                                             new IncrementDoorPathIndex(BehaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
                                         }, true)
                                     })
-
-
                                 })
                             })
-
                         })
                     ),
 
@@ -181,7 +182,7 @@ namespace DD.AI.Controllers
                             // ! Can See Player?
                             new Sequence(BehaviourTree, new List<Node> {
                                 new CanSeeObject(BehaviourTree),
-                                new SetLastKnownLocation(BehaviourTree, "LastKnownLocation", "Player"),
+                                // new SetLastKnownLocation(BehaviourTree, "LastKnownLocation", "Player"),
                                 new SetBlackboardVariable<MrXState>(BehaviourTree, "State", MrXState.ATTACKING)
                             }),
 
@@ -189,7 +190,7 @@ namespace DD.AI.Controllers
                             new Sequence(BehaviourTree, new List<Node> {
                                 new HasHeardSound(BehaviourTree),
                                 new CanReachObjectRoom(BehaviourTree, "Player"),
-                                new SetLastKnownLocation(BehaviourTree, "LastKnownLocation", "Player"),
+                                // new SetLastKnownLocation(BehaviourTree, "LastKnownLocation", "Player"),
                                 new SetBlackboardVariable<MrXState>(BehaviourTree, "State", MrXState.ATTACKING)
                             }),
 
@@ -298,3 +299,109 @@ namespace DD.AI.Controllers
         }
     }
 }
+
+// new attack Selector
+
+// Selector
+    // can see player? (conditional branch) - might need new decorator node type that always returns a given node status
+        // reset timer
+
+    // decrement timer
+    // is timer over
+    // play animation search
+    // state change to search
+
+// Selector
+    // is at target at target
+    // attack
+
+    // in same room?
+    // move to
+
+    // same old room navigation node structure
+
+// ! LKL Attack
+// new ConditionalBranch(BehaviourTree, new CompareBlackboardVariable<MrXState>(BehaviourTree, MrXState.ATTACKING, "State"),
+//     new Selector(BehaviourTree, new List<Node> {
+        
+//         // ! Attacking Player + Move to Player
+//         new Selector(BehaviourTree, new List<Node> {
+
+//             // Atttacking Player
+//             new Sequence(BehaviourTree, new List<Node> {
+//                 new IsAtTarget<Component>(BehaviourTree, "Player", 1.0f),
+//                 new PlayAnimation(BehaviourTree, "right_hook", true)
+//             }),
+
+//             // Log LKL + Move To Player
+//             new Sequence(BehaviourTree, new List<Node> {
+//                 new CanSeeObject(BehaviourTree),
+//                 new SetLastKnownLocation(BehaviourTree, "LastKnownLocation", "Player"),
+//                 new IsInSameRoomAs<Component>(BehaviourTree, "Player"),
+//                 new MoveTo<Component>(BehaviourTree, "Player")
+//             }),
+//         }),
+
+//         // ! LKL
+//         new Selector(BehaviourTree, new List<Node> {
+//             // End Search
+//             new Sequence(BehaviourTree, new List<Node> {
+//                 new IsAtPoint(BehaviourTree, "LastKnownLocation", 2.0f),
+//                 new PlayAnimation(BehaviourTree, "looking_around", true),
+
+//                 // Is Player in an inaccessible room?
+//                 new Selector(BehaviourTree, new List<Node> {
+//                     new Sequence(BehaviourTree, new List<Node> {
+//                         new CanReachObjectRoom(BehaviourTree, "Player"),
+//                         new GetRandomRoomAdjacentToTarget(BehaviourTree, true, "Player", "TargetSearchRoom")
+//                     }),
+
+//                     new GetRandomRoom(BehaviourTree, "TargetSearchRoom")
+//                 }),
+
+//                 new SetBlackboardVariable<MrXState>(BehaviourTree, "State", MrXState.SEARCHING)
+//             }),
+
+//             // Go to LKL directly
+//             new Sequence(BehaviourTree, new List<Node> {
+//                 new IsInSameRoomAsVector3(BehaviourTree, "LastKnownLocation"),
+//                 new MoveToVector3(BehaviourTree, "LastKnownLocation")
+//             }),
+
+//             // Go to LKL via Rooms
+//             new Sequence(BehaviourTree, new List<Node> {
+//                 // Room Transition
+//                 new FindDoorPathToVector3(BehaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "LastKnownLocation"),
+//                 new GetDoorFromPath(BehaviourTree, "TargetDoorPath", "TargetDoorPathIndex", "TargetDoor"),
+//                 new GetDoorEntryExitPoint(BehaviourTree, true, "TargetDoor", "MoveTarget"),
+//                 new Repeater(BehaviourTree, new MoveTo<Component>(BehaviourTree, "MoveTarget"), new IsAtTarget<Component>(BehaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+
+//                 // Room Transition
+//                 new Selector(BehaviourTree, new List<Node> {
+//                     // Locked Door?
+//                     new Sequence(BehaviourTree, new List<Node> {
+//                         new Invertor(BehaviourTree, new CanUseDoor(BehaviourTree, "TargetDoor")),
+//                         new CloseDoor(BehaviourTree, "TargetDoor"),
+//                         new BangDoor(BehaviourTree, "TargetDoor"),
+//                         new IdleNode(BehaviourTree, "IdleTimerLength"),
+//                         new GetRandomRoom(BehaviourTree, "TargetSearchRoom"),
+//                         new SetBlackboardVariable<MrXState>(BehaviourTree, "State", MrXState.SEARCHING)
+//                     }),
+
+//                     // Use Door
+//                     new Sequence(BehaviourTree, new List<Node> {
+//                         new OpenDoor(BehaviourTree, "TargetDoor"),
+//                         new SendAnimationRigSignal(BehaviourTree, "door", Animation.RigEvents.AnimRigEventType.ENABLE),
+//                         new GetDoorEntryExitPoint(BehaviourTree, false, "TargetDoor", "MoveTarget"),
+//                         new Repeater(BehaviourTree, new MoveTo<Component>(BehaviourTree, "MoveTarget"), new IsAtTarget<Component>(BehaviourTree, "MoveTarget", 0.2f), NodeState.SUCCESSFUL),
+//                         new SendAnimationRigSignal(BehaviourTree, "door", Animation.RigEvents.AnimRigEventType.DISABLE),
+//                         new IncrementDoorPathIndex(BehaviourTree, "TargetDoorPathIndex", "TargetDoorPath"),
+//                     }, true)
+//                 })
+
+
+//             })
+//         })
+
+//     })
+// ),
