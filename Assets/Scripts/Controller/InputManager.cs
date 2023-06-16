@@ -15,6 +15,9 @@ namespace DD.Core.Control
         [SerializeField] private bool ignoreInput = false;
         public Vector3 InputDirection { private set; get; }
 
+        [Header("Camera")]
+        public Vector2 pitchYaw = Vector2.zero;
+
         [Header("Keys")]
         public KeyCode pauseKey;
         public event Action OnPause;
@@ -56,7 +59,8 @@ namespace DD.Core.Control
         {
             if (Input.GetKeyDown(pauseKey)) OnPause?.Invoke();
 
-
+            pitchYaw = ignoreInput ? Vector2.zero : new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            
             // Locomotion
             InputDirection = ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
             

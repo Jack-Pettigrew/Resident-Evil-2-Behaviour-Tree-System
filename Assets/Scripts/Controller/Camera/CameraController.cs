@@ -32,8 +32,8 @@ namespace DD.Core.Control
         private void LateUpdate()
         {
             // Camera input
-            yaw += Input.GetAxis("Mouse X") * sensitivity;
-            pitch += Input.GetAxis("Mouse Y") * sensitivity;
+            yaw += inputManager.pitchYaw.x * sensitivity;
+            pitch += inputManager.pitchYaw.y * sensitivity;
 
             // Virtual camera swapping
             if (inputManager.Aim && !aimingCamera.gameObject.activeInHierarchy)
