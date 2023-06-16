@@ -8,8 +8,15 @@ namespace DD.AI.BehaviourTreeSystem
         // Used for maintaining position on RUNNING states and continuation from uninterruptable
         private int currentNodeIndex = 0;
 
-        public Sequence(BehaviourTree behaviourTree, List<Node> childNodes, bool uninterruptable = false) : base(behaviourTree, childNodes, uninterruptable)
-        { }
+        /// <summary>
+        /// Defines whether this Sequence node checks each child when asked to evaluate, otherwise it'll continue from last RUNNING child.
+        /// </summary>
+        private bool checkAllChildrenEachTime;
+
+        public Sequence(BehaviourTree behaviourTree, List<Node> childNodes, bool uninterruptable = false, bool checkAllChildrenEachTime = false) : base(behaviourTree, childNodes, uninterruptable)
+        { 
+            this.checkAllChildrenEachTime = checkAllChildrenEachTime;
+        }
 
         protected override NodeState Evaluate()
         {            
@@ -17,6 +24,7 @@ namespace DD.AI.BehaviourTreeSystem
             switch (UpdateChildNode(childNodes[currentNodeIndex]))
             {
                 case NodeState.RUNNING:
+                    if(checkAllChildrenEachTime) OnReset();
                     return NodeState.RUNNING;
 
                 case NodeState.SUCCESSFUL:
