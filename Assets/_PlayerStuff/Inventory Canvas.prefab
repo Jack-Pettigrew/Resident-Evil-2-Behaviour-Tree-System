@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 6879095949740747823}
   - component: {fileID: 6879095949740747822}
   - component: {fileID: 6879095949740747817}
-  - component: {fileID: 6879095949740747821}
+  - component: {fileID: 8409855478225024611}
   m_Layer: 5
   m_Name: Inventory Canvas
   m_TagString: Untagged
@@ -680,7 +680,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -724,7 +726,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6879095949740747821
+--- !u!114 &8409855478225024611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -736,6 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8125eedd6f17374459623837d609a354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryCanvas: {fileID: 6879095949740747823}
   itemSlotUIPrefab: {fileID: 8264109230246826861, guid: fbf96f03d69df9241a5cae9a8a755530,
     type: 3}
   itemGroup: {fileID: 6879095950426783992}

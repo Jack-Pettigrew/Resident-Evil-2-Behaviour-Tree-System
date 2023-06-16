@@ -8,24 +8,26 @@ namespace DD.UI
 {
     public class InventoryUI : MonoBehaviour
     {
+        [SerializeField] private Canvas inventoryCanvas;
         [SerializeField] private GameObject itemSlotUIPrefab;
         [SerializeField] private RectTransform itemGroup;
 
+
         private List<ItemSlotUI> uiItemSlots = new List<ItemSlotUI>();
-        
-        private void OnEnable() {
-            UpdateUI();
-        }
-        
+                
         private void Start() {
             // Setup
             for (int i = 0; i < Inventory.Instance.MaxInventorySize; i++)
             {
                 uiItemSlots.Add(Instantiate(itemSlotUIPrefab, itemGroup).GetComponent<ItemSlotUI>());
             }
-
+            
             // Inventory UI Toggle
-            InputManager.Instance.OnInventoryToggle += () => gameObject.SetActive(!gameObject.activeInHierarchy);
+            InputManager.Instance.OnInventoryToggle += () => 
+            {
+                inventoryCanvas.enabled = !inventoryCanvas.enabled;
+                UpdateUI();
+            };
 
             // Inventory Updated
             Inventory.Instance.OnInventoryUpdated += UpdateUI;
