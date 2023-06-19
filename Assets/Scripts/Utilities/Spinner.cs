@@ -6,7 +6,6 @@ namespace DD.Utilities
 {
     public class Spinner : MonoBehaviour
     {
-        [Min(0)]
         public float speed = 1.0f;
         public bool xAxis = false;
         public bool yAxis = false;
@@ -16,14 +15,13 @@ namespace DD.Utilities
         private int  y = 0;
         private int  z = 0;
 
-        private void Start() {
+        private void Update() {
             x = xAxis ? 1 : 0;
             y = yAxis ? 1 : 0;
             z = zAxis ? 1 : 0;
-        }
-
-        private void Update() {
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(x * speed, y * speed, z * speed));
+            
+            float tempSpeed = speed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(x * tempSpeed, y * tempSpeed, z * tempSpeed));
         }
     }
 }
