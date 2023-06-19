@@ -1,7 +1,9 @@
+using System.Collections;
+
 namespace DD.UI
 {   
     public interface IFadable
     {
-        void StartFadeTransition(float startValue, float endValue, float fadeLength);
+        IEnumerator Fade(float startValue, float endValue, float fadeLength);
     }
 }

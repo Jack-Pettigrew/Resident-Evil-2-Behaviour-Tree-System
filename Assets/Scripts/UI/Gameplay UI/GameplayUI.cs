@@ -23,10 +23,10 @@ namespace DD.UI
         
         public void StartFadeTransition(float startValue, float endValue, float fadeLength)
         {
-            fadeCoroutine = StartCoroutine(FadeCorountine(startValue, endValue, fadeLength));
+            fadeCoroutine = StartCoroutine(Fade(startValue, endValue, fadeLength));
         }
 
-        protected virtual IEnumerator FadeCorountine(float startValue, float endValue, float fadeLength)
+        public IEnumerator Fade(float startValue, float endValue, float fadeLength)
         {
             if(isTransitioning)
             {
