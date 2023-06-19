@@ -7,11 +7,12 @@ using UnityEngine.Events;
 
 public class SceneLoader : MonoBehaviour
 {
-    private static SceneLoader sceneLoader;
+    public static SceneLoader Instance { private set; get; }
 
     [Header("Transition Settings")]
     [SerializeField] private CanvasGroup transitionCanvasGroup;
-    [SerializeField] private float fadeTime = 1.0f;
+    [SerializeField, Min(0)] private float fadeDelay = 0.0f;
+    [SerializeField] private float transitionFadeTime = 1.0f;
 
     public bool IsLoading { private set; get; } = false;
 
@@ -24,9 +25,9 @@ public class SceneLoader : MonoBehaviour
 
     private void Awake()
     {
-        if (sceneLoader != this)
+        if (Instance != this)
         {
-            sceneLoader = this;
+            Instance = this;
         }
     }
 
@@ -45,12 +46,12 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator TransitionCoroutine()
     {
         IsLoading = true;
-        
-        yield return FadeCorountine(0, 1, fadeTime);
+
+        yield return FadeCorountine(0, 1, transitionFadeTime);
 
         OnLoadStarted?.Invoke();
 
-        if(activeSceneBuildIndex > -1)
+        if (activeSceneBuildIndex > -1)
         {
             asyncOperation = SceneManager.UnloadSceneAsync(activeSceneBuildIndex);
             yield return new WaitUntil(() => asyncOperation.progress >= 1.0f);
@@ -67,7 +68,9 @@ public class SceneLoader : MonoBehaviour
 
         OnLoadFinished?.Invoke();
 
-        yield return FadeCorountine(1, 0, fadeTime);
+        yield return new WaitForSeconds(fadeDelay);
+
+        yield return FadeCorountine(1, 0, transitionFadeTime);
 
         IsLoading = true;
         activeSceneBuildIndex = sceneBuildIndexTransitioningTo;
@@ -86,11 +89,11 @@ public class SceneLoader : MonoBehaviour
             // Fade Direction
             if (endValue > startValue)
             {
-                transitionCanvasGroup.alpha += (1 / fadeTime) * Time.deltaTime;
+                transitionCanvasGroup.alpha += (1 / transitionFadeTime) * Time.deltaTime;
             }
             else
             {
-                transitionCanvasGroup.alpha -= (1 / fadeTime) * Time.deltaTime;
+                transitionCanvasGroup.alpha -= (1 / transitionFadeTime) * Time.deltaTime;
             }
 
             yield return null;
