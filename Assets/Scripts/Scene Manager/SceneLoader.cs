@@ -65,6 +65,7 @@ public class SceneLoader : MonoBehaviour
 
         asyncOperation.allowSceneActivation = true;
         yield return new WaitUntil(() => asyncOperation.isDone);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneBuildIndexTransitioningTo));
 
         OnLoadFinished?.Invoke();
 

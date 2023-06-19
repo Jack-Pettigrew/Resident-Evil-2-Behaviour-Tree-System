@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DD.Core.Control;
 
 namespace DD.UI
@@ -12,8 +13,15 @@ namespace DD.UI
         public float fadeTime = 1.0f;
         [SerializeField] protected CanvasGroup fadingCavasGroup;
 
+        // Button Logic
+        [SerializeField] private Button retryButton;
+
         // COROUTINE
         protected Coroutine fadeCoroutine;
+
+        private void Awake() {
+            retryButton.onClick.AddListener(() => SceneLoader.Instance.LoadSceneAsync(1));
+        }
 
         public void ToggleUI(bool toggle)
         {
