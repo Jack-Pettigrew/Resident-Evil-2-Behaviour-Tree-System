@@ -13,6 +13,7 @@ namespace DD.Core.Control
 
         [Header("Management")]
         [SerializeField] private bool ignoreInput = false;
+        [SerializeField] private bool ignoreMovement = false;
         public Vector3 InputDirection { private set; get; }
 
         [Header("Camera")]
@@ -59,10 +60,10 @@ namespace DD.Core.Control
         {
             if (Input.GetKeyDown(pauseKey)) OnPause?.Invoke();
 
-            pitchYaw = ignoreInput ? Vector2.zero : new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            pitchYaw = ignoreInput || ignoreMovement ? Vector2.zero : new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
             
             // Locomotion
-            InputDirection = ignoreInput ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+            InputDirection = ignoreInput || ignoreMovement ? Vector3.zero : new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
             
             if (Sprint && InputDirection.sqrMagnitude <= 0 || Aim)
             {
@@ -93,6 +94,8 @@ namespace DD.Core.Control
             if (Input.GetKeyDown(quickSlotThreeKey)) OnQuickSlotChange?.Invoke(WeaponSlot.Three);
             if (Input.GetKeyDown(quickSlotFourKey)) OnQuickSlotChange?.Invoke(WeaponSlot.Four);
         }
+
+        public void ToggleIgnoreMovement(bool toggle) => ignoreMovement = toggle;
 
         public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;
 

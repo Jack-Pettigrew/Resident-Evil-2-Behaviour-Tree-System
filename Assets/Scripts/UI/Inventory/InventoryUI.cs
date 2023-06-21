@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DD.Core.Control;
 using DD.Systems.InventorySystem;
 
@@ -12,6 +13,8 @@ namespace DD.UI
         [SerializeField] private GameObject itemSlotUIPrefab;
         [SerializeField] private RectTransform itemGroup;
 
+        public UnityEvent OnInventoryDisplayed;
+        public UnityEvent OnInventoryHidden;
 
         private List<ItemSlotUI> uiItemSlots = new List<ItemSlotUI>();
                 
@@ -26,7 +29,16 @@ namespace DD.UI
             InputManager.Instance.OnInventoryToggle += () => 
             {
                 inventoryCanvas.enabled = !inventoryCanvas.enabled;
-                UpdateUI();
+
+                if(inventoryCanvas.enabled)
+                {
+                    UpdateUI();
+                    OnInventoryDisplayed?.Invoke();
+                }
+                else
+                {
+                    OnInventoryHidden?.Invoke();
+                }
             };
 
             // Inventory Updated
