@@ -210,7 +210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 256570442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c442de9e51a144f8151879fe831597, type: 3}
+  m_Script: {fileID: 11500000, guid: 96e05f9944f0a35468f22aa7d433e91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneBuildIndexToLoad: 1
