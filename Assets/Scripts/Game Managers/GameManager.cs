@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
         SceneLoader.Instance.LoadSceneAsync(1);
     }
     
+    public void ReturnToMainMenu()
+    {
+        SceneLoader.Instance.LoadSceneAsync(1);
+    }
+    
     public void RestartLevel(int levelBuildIndex)
     {
         SceneLoader.Instance.OnLoadFinished.AddListener(HandleFinishLevelRestart);

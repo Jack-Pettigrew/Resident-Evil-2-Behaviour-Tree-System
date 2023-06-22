@@ -8,6 +8,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int restartLevelBuildIndex;
     public UnityEvent OnLevelRestarted;
         
+    public void RequestReturnToMainMenu()
+    {
+        GameManager.Instance.ReturnToMainMenu();
+    }
+        
     /// <summary>
     /// Requests the GameManager to restart the level.
     /// </summary>
