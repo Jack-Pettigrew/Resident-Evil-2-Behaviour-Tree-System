@@ -19,10 +19,6 @@ namespace DD.UI
         // COROUTINE
         protected Coroutine fadeCoroutine;
 
-        private void Awake() {
-            retryButton.onClick.AddListener(() => SceneLoader.Instance.LoadSceneAsync(1));
-        }
-
         public void ToggleUI(bool toggle)
         {
             if(toggle)

@@ -39,6 +39,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadSceneAsync(int sceneBuildIndex)
     {
+        if(IsLoading) return;
+        
         sceneBuildIndexTransitioningTo = sceneBuildIndex;
         StartCoroutine(TransitionCoroutine());
     }
@@ -73,7 +75,7 @@ public class SceneLoader : MonoBehaviour
 
         yield return FadeCorountine(1, 0, transitionFadeTime);
 
-        IsLoading = true;
+        IsLoading = false;
         activeSceneBuildIndex = sceneBuildIndexTransitioningTo;
         sceneBuildIndexTransitioningTo = -1;
     }
