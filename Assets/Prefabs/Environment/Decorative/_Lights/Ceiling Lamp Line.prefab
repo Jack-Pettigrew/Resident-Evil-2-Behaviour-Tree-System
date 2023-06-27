@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 2899898832361694016}
   - component: {fileID: 744863767212424067}
   - component: {fileID: 5362004414271551930}
+  - component: {fileID: 2381835275167048722}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -301,3 +302,46 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
+--- !u!114 &2381835275167048722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2890360085444566387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf7028a40a86d24cb56106b996c6385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomEnvironmentController: {fileID: 0}
+  OnObjectActivated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 744863767212424067}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnObjectDeactivated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 744863767212424067}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
