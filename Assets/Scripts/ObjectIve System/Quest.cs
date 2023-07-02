@@ -35,7 +35,7 @@ public class Quest : MonoBehaviour
         objectives.Add(new ObjectiveArrive());
     }
 
-    [ContextMenu("Start Test Quest", false, 1)]
+    [ContextMenu("Start Quest", false, 1)]
     public void StartQuest()
     {
         if (AutoProceedToNextObjective)

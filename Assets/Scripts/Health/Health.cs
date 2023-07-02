@@ -63,13 +63,11 @@ namespace DD.Core
         {
             IsDead = true;
             OnDeath?.Invoke();
-            StartCoroutine(CleanUp());
         }
 
         public virtual IEnumerator CleanUp()
         {
-            yield return new WaitForSeconds(3.0f);
-            Destroy(gameObject);
+            yield return null;
         }
     }
 }

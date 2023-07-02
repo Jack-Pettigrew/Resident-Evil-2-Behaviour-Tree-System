@@ -31,7 +31,6 @@ namespace DD.Core.Combat
 
             foreach (var collider in colliders)
             {
-                Debug.Log(collider.name);
                 collider.GetComponent<IDamagable>().TakeDamage(damageAmount);
             }
         }
