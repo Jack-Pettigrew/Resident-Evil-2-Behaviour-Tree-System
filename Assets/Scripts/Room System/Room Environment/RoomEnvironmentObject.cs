@@ -19,15 +19,15 @@ namespace DD.Systems.Room
         private void OnEnable() {
             if(!roomEnvironmentController) return;
             
-            roomEnvironmentController.OnRoomActivated += OnObjectActivated.Invoke;
-            roomEnvironmentController.OnRoomDeactivated += OnObjectDeactivated.Invoke;
+            roomEnvironmentController.OnRoomActivated += (room) => OnObjectActivated?.Invoke();
+            roomEnvironmentController.OnRoomDeactivated += (room) => OnObjectDeactivated?.Invoke();
         }
 
         private void OnDisable() {
             if(!roomEnvironmentController) return;
             
-            roomEnvironmentController.OnRoomActivated -= OnObjectActivated.Invoke;
-            roomEnvironmentController.OnRoomDeactivated -= OnObjectDeactivated.Invoke;
+            roomEnvironmentController.OnRoomActivated -= (room) => OnObjectActivated?.Invoke();
+            roomEnvironmentController.OnRoomDeactivated -= (room) => OnObjectDeactivated?.Invoke();
         }
     }
 }

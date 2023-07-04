@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,18 +16,19 @@ namespace DD.Systems.Room
     {
         // PLAYER
         private GameObject playerGameObject;
-        
+
         // CONTROLLER VARIABLES
         private Room linkedRoom;
         public bool IsActive { private set; get; } = false;
         [SerializeField] private Room[] connectedRooms;
-        private Dictionary<Room, RoomEnvironmentController> roomEnvironmentControllerDictionary = new Dictionary<Room, RoomEnvironmentController>();
+        public List<Door> connectedDoorsInUse {private set; get; } = new List<Door>(4);
 
-        private List<Door> connectedDoorsInUse = new List<Door>(4);
+        // COMPONENTS
+        private Dictionary<Room, RoomEnvironmentController> connectedRoomEnvControllers = new Dictionary<Room, RoomEnvironmentController>();
 
         // EVENTS
-        public event Action OnRoomActivated;
-        public event Action OnRoomDeactivated;
+        public event Action<Room> OnRoomActivated;
+        public event Action<Room> OnRoomDeactivated;
 
         private void Awake()
         {
@@ -39,7 +41,7 @@ namespace DD.Systems.Room
             {
                 if (connectedRoom.TryGetComponent<RoomEnvironmentController>(out RoomEnvironmentController envController))
                 {
-                    roomEnvironmentControllerDictionary.Add(connectedRoom, envController);
+                    connectedRoomEnvControllers.Add(connectedRoom, envController);
                 }
             }
         }
@@ -64,69 +66,79 @@ namespace DD.Systems.Room
             }
         }
 
-        private void Start() {
+        private void Start()
+        {
             // Ensure all default to deactivated
-            OnRoomDeactivated?.Invoke();
+            DeactivateRoom();
 
             if (RoomManager.GetRoomOfObject(playerGameObject) == linkedRoom)
             {
-                OnRoomActivated?.Invoke();
-
-                foreach (Room room in connectedRooms)
-                {
-                    roomEnvironmentControllerDictionary[room].OnRoomActivated?.Invoke();
-                }
+                ActivateRoom();
+                ActivateConnectedRooms();
             }
         }
 
-        private void HandleDoorOpened(Door connectingRoomDoor)
+        private void HandleDoorOpened(Door openedDoor)
         {
-            connectedDoorsInUse.Add(connectingRoomDoor);
-
-            HandleRoomActive();
-        }
-
-        private void HandleDoorClosed(Door connectingRoomDoor)
-        {
-            connectedDoorsInUse.Remove(connectingRoomDoor);
-
-            if(connectedDoorsInUse.Count <= 0)
+            if (!connectedDoorsInUse.Contains(openedDoor))
             {
-                HandleRoomDeactivated();
+                connectedDoorsInUse.Add(openedDoor);
             }
+
+            ActivateRoom();
+            ActivateConnectedRooms();
         }
 
-        private void HandleRoomActive()
+        private void HandleDoorClosed(Door closedDoor)
         {
-            if(IsActive) return;
-            
+            if (connectedDoorsInUse.Contains(closedDoor))
+            {
+                connectedDoorsInUse.Remove(closedDoor);
+            }
+
+            Room playerRoom = RoomManager.GetRoomOfObject(playerGameObject);
+
+            // Using LINQ here which isn't ideal but annoyingly it works and reduces a lot code in exchange for performance
+            if (playerRoom == linkedRoom || connectedRooms.Count(room => room == playerRoom) > 0 || connectedDoorsInUse.Count > 0 || connectedRoomEnvControllers.Where((value) => value.Value.connectedDoorsInUse.Count > 0).Count() > 0)
+            {
+                return;
+            }
+
+            DeactivateRoom();
+            DeactivateConnectedRooms();
+        }
+
+        /// <summary>
+        /// Activating Self
+        /// </summary>
+        private void ActivateRoom()
+        {
             IsActive = true;
-            OnRoomActivated?.Invoke();
+            OnRoomActivated?.Invoke(linkedRoom);
+        }
 
-            // Handle connected rooms
-            foreach (Room room in connectedRooms)
+        private void DeactivateRoom()
+        {
+            IsActive = false;
+            OnRoomDeactivated?.Invoke(linkedRoom);
+        }
+
+        /// <summary>
+        /// Activating connected
+        /// </summary>
+        private void ActivateConnectedRooms()
+        {
+            foreach (var controller in connectedRoomEnvControllers)
             {
-                if(roomEnvironmentControllerDictionary.TryGetValue(room, out RoomEnvironmentController controller))
-                {
-                    controller.HandleRoomActive();
-                }
+                controller.Value.ActivateRoom(); //HandleConnectedActivation(linkedRoom);
             }
         }
 
-        private void HandleRoomDeactivated()
+        private void DeactivateConnectedRooms()
         {
-            if(!IsActive || RoomManager.GetRoomOfObject(playerGameObject) == linkedRoom) return;
-            
-            IsActive = false;
-            OnRoomDeactivated?.Invoke();
-
-            // Handle connected rooms
-            foreach (Room room in connectedRooms)
+            foreach (var controller in connectedRoomEnvControllers)
             {
-                if(roomEnvironmentControllerDictionary.TryGetValue(room, out RoomEnvironmentController controller))
-                {
-                    controller.HandleRoomDeactivated();
-                }
+                controller.Value.DeactivateRoom(); // HandleConnectedDeactivation(linkedRoom);
             }
         }
     }
