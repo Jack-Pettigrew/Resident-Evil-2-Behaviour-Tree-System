@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Quest : MonoBehaviour
 {
+    public static Quest Instance { private set; get; }
+
     public string questName = "";
     [field: SerializeField] public bool AutoProceedToNextObjective { private set; get; } = true;
     [SerializeField] public bool IsComplete { private set; get; }
@@ -16,6 +18,13 @@ public class Quest : MonoBehaviour
     // EVENTS
     public event Action<Quest> OnQuestProgressed;
     public UnityEvent<Quest> OnQuestComplete;
+
+    private void Awake() {
+        if(Instance != this)
+        {
+            Instance = this;
+        }
+    }
 
     [ContextMenu("Add Interact Objective", false, 2)]
     public void AddInteractObjective()
@@ -44,6 +53,8 @@ public class Quest : MonoBehaviour
         }
 
         CurrentObjective.InitObjective();
+
+        OnQuestProgressed.Invoke(this);
     }
 
     public bool IsQuestComplete()
@@ -61,9 +72,9 @@ public class Quest : MonoBehaviour
 
     public void ToggleAutoProceedObjectives(bool toggle)
     {
-        if(AutoProceedToNextObjective == toggle) return;
-        
-        if(CurrentObjective.IsComplete)
+        if (AutoProceedToNextObjective == toggle) return;
+
+        if (CurrentObjective.IsComplete)
         {
             AutoProgressToNextObjective();
         }
@@ -84,7 +95,7 @@ public class Quest : MonoBehaviour
         currentObjectiveIndex++;
         CurrentObjective.InitObjective();
 
-        if(!CurrentObjective.IsSilentObjective)
+        if (!CurrentObjective.IsSilentObjective)
         {
             OnQuestProgressed?.Invoke(this);
         }
@@ -105,7 +116,7 @@ public class Quest : MonoBehaviour
         CurrentObjective.OnObjectiveComplete.AddListener(AutoProgressToNextObjective);
         CurrentObjective.InitObjective();
 
-        if(!CurrentObjective.IsSilentObjective)
+        if (!CurrentObjective.IsSilentObjective)
         {
             OnQuestProgressed?.Invoke(this);
         }
