@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,17 +24,17 @@ namespace DD.UI
         {
             if(toggle)
             {
-                StartCoroutine(FadeCorountine(0, 1, fadeTime));
+                StartCoroutine(FadeCorountine(0, 1, fadeTime, () => fadingCavasGroup.blocksRaycasts = true));
                 InputManager.Instance.CursorToggle();
             }
             else
             {
-                StartCoroutine(FadeCorountine(1, 0, fadeTime));
+                StartCoroutine(FadeCorountine(1, 0, fadeTime, () => fadingCavasGroup.blocksRaycasts = false));
                 InputManager.Instance.CursorToggle();
             }
         }
 
-        protected virtual IEnumerator FadeCorountine(float startValue, float endValue, float fadeLength)
+        protected virtual IEnumerator FadeCorountine(float startValue, float endValue, float fadeLength, Action onComplete = null)
         {
             if(isTransitioning)
             {
@@ -64,6 +65,7 @@ namespace DD.UI
             }
 
             isTransitioning = false;
+            onComplete?.Invoke();
         }        
     }
 }
