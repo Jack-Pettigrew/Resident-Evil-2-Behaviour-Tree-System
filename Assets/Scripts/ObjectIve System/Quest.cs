@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Quest : MonoBehaviour
 {
-    // Singleton for this project use case only - only one ever one quest
+    // Singleton for this project use case only - only ever one quest
     public static Quest Instance { private set; get; }
 
     public string questName = "";
