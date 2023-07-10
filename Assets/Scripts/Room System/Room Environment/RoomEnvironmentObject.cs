@@ -11,23 +11,35 @@ namespace DD.Systems.Room
     public class RoomEnvironmentObject : MonoBehaviour
     {
         public RoomEnvironmentController roomEnvironmentController;
-        
+
         // UNITY EVENTS - in addition to RoomEnvironmentController for editor serialisation
         public UnityEvent OnObjectActivated;
         public UnityEvent OnObjectDeactivated;
 
-        private void OnEnable() {
-            if(!roomEnvironmentController) return;
-            
-            roomEnvironmentController.OnRoomActivated += (room) => OnObjectActivated?.Invoke();
-            roomEnvironmentController.OnRoomDeactivated += (room) => OnObjectDeactivated?.Invoke();
+        private void OnEnable()
+        {
+            if (!roomEnvironmentController) return;
+
+            roomEnvironmentController.OnRoomActivated += HandleObjectActivated;
+            roomEnvironmentController.OnRoomDeactivated += HandleObjectDeactivated;
         }
 
-        private void OnDisable() {
-            if(!roomEnvironmentController) return;
-            
-            roomEnvironmentController.OnRoomActivated -= (room) => OnObjectActivated?.Invoke();
-            roomEnvironmentController.OnRoomDeactivated -= (room) => OnObjectDeactivated?.Invoke();
+        private void OnDisable()
+        {
+            if (!roomEnvironmentController) return;
+
+            roomEnvironmentController.OnRoomActivated -= HandleObjectActivated;
+            roomEnvironmentController.OnRoomDeactivated -= HandleObjectDeactivated;
+        }
+
+        protected virtual void HandleObjectActivated(Room room)
+        {
+            OnObjectActivated?.Invoke();
+        }
+
+        protected virtual void HandleObjectDeactivated(Room room)
+        {
+            OnObjectDeactivated?.Invoke();
         }
     }
 }

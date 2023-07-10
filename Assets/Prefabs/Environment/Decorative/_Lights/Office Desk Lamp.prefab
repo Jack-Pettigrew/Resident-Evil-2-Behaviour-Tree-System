@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7224113343979232447}
   - component: {fileID: 7224113343979232445}
   - component: {fileID: 7224113343979232446}
-  - component: {fileID: 2892556199391850823}
+  - component: {fileID: 2254674095202708468}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
---- !u!114 &2892556199391850823
+--- !u!114 &2254674095202708468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7224113343979232440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf7028a40a86d24cb56106b996c6385, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d787955ab3fc624b93a1614ef978d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomEnvironmentController: {fileID: 0}
@@ -261,6 +261,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  <IsPowered>k__BackingField: 0
+  <IsOn>k__BackingField: 1
 --- !u!1 &7530120961332655095
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +295,7 @@ Transform:
   m_Children:
   - {fileID: 7224113343979232447}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!33 &6081080126308345576
 MeshFilter:
