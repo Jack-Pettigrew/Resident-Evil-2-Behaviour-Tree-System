@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2899898832361694016}
   - component: {fileID: 744863767212424067}
   - component: {fileID: 5362004414271551930}
-  - component: {fileID: 2381835275167048722}
+  - component: {fileID: 194703031600796721}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
---- !u!114 &2381835275167048722
+--- !u!114 &194703031600796721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2890360085444566387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf7028a40a86d24cb56106b996c6385, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d787955ab3fc624b93a1614ef978d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomEnvironmentController: {fileID: 0}
@@ -345,3 +345,5 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  <IsPowered>k__BackingField: 0
+  <IsOn>k__BackingField: 1
