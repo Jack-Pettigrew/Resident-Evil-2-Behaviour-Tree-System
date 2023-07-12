@@ -42,4 +42,9 @@ public class GameManager : MonoBehaviour
 
         levelManager.TriggerLevelHasRestarted();
     }
+
+    public static void QuitGame()
+    {
+        Application.Quit();
+    }
 }
