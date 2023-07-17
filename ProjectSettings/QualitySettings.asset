@@ -56,7 +56,7 @@ QualitySettings:
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
   - serializedVersion: 3
-    name: Ultra
+    name: High
     pixelLightCount: 4
     shadows: 2
     shadowResolution: 2
