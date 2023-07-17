@@ -48,13 +48,11 @@ namespace DD.Core.Control
             Instance = this;
         }
 
-#if UNITY_EDITOR
         private void Start()
         {
             OnPause += CursorToggle;
             OnInventoryToggle += CursorToggle;
         }
-#endif
 
         private void Update()
         {

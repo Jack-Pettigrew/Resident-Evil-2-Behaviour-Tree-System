@@ -23,7 +23,6 @@ namespace DD.Systems.Room
             }
         }
 
-#if UNITY_EDITOR
         /// <summary>
         /// An Editor tool method for setting the this Room's Floor to those selected.
         /// </summary>
@@ -35,7 +34,6 @@ namespace DD.Systems.Room
                 floor.SetOwnerRoom(this);
             }
         }
-#endif
 
         private void OnDrawGizmosSelected()
         {

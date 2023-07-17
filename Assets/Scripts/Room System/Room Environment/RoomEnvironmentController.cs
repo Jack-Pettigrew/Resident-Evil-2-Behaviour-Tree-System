@@ -30,7 +30,7 @@ namespace DD.Systems.Room
         public event Action<Room> OnRoomActivated;
         public event Action<Room> OnRoomDeactivated;
 
-        private void Awake()
+        private void Start()
         {
             LinkedRoom = GetComponent<Room>();
 
@@ -47,10 +47,10 @@ namespace DD.Systems.Room
 
             // Ensure all default to deactivated
             ForceDeactivateRoom();
-        }
 
-        private void Start()
-        {
+            
+            
+            
             if (RoomManager.GetRoomOfObject(playerGameObject) == LinkedRoom)
             {
                 ActivateRoom();

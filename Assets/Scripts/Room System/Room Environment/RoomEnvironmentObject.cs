@@ -15,7 +15,7 @@ namespace DD.Systems.Room
         // UNITY EVENTS - in addition to RoomEnvironmentController for editor serialisation
         public UnityEvent OnObjectActivated;
         public UnityEvent OnObjectDeactivated;
-
+        
         private void OnEnable()
         {
             if (!roomEnvironmentController) return;
