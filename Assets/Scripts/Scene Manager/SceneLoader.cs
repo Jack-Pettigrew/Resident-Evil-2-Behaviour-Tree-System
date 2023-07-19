@@ -22,6 +22,8 @@ public class SceneLoader : MonoBehaviour
 
     public UnityEvent OnLoadStarted;
     public UnityEvent OnLoadFinished;
+    
+    private Action onCompleteLoadAction;
 
     private void Awake()
     {
@@ -37,11 +39,12 @@ public class SceneLoader : MonoBehaviour
         LoadSceneAsync(1);
     }
 
-    public void LoadSceneAsync(int sceneBuildIndex)
+    public void LoadSceneAsync(int sceneBuildIndex, Action onComplete = null)
     {
         if(IsLoading) return;
         
         sceneBuildIndexTransitioningTo = sceneBuildIndex;
+        onCompleteLoadAction = onComplete;
         StartCoroutine(TransitionCoroutine());
     }
 
@@ -70,6 +73,8 @@ public class SceneLoader : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneBuildIndexTransitioningTo));
 
         OnLoadFinished?.Invoke();
+        onCompleteLoadAction?.Invoke();
+        onCompleteLoadAction = null;
 
         yield return new WaitForSeconds(fadeDelay);
 

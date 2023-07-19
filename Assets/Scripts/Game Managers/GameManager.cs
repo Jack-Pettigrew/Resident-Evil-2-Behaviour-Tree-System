@@ -15,23 +15,24 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         // Start Game
-        SceneLoader.Instance.LoadSceneAsync(1);
+        SceneLoader.Instance.LoadSceneAsync(1, () => GameState = GameState.MAIN_MENU);
+    }
     }
     
     public void ReturnToMainMenu()
     {
-        SceneLoader.Instance.LoadSceneAsync(1);
+        SceneLoader.Instance.LoadSceneAsync(1, () => GameState = GameState.MAIN_MENU);
     }
     
     public void RestartLevel(int levelBuildIndex)
     {
-        SceneLoader.Instance.OnLoadFinished.AddListener(HandleFinishLevelRestart);
-        SceneLoader.Instance.LoadSceneAsync(levelBuildIndex);
+        // SceneLoader.Instance.OnLoadFinished.AddListener(HandleFinishLevelRestart);
+        SceneLoader.Instance.LoadSceneAsync(levelBuildIndex, HandleFinishLevelRestart);
     }
 
     private void HandleFinishLevelRestart()
     {
-        SceneLoader.Instance.OnLoadFinished.RemoveListener(HandleFinishLevelRestart);
+        // SceneLoader.Instance.OnLoadFinished.RemoveListener(HandleFinishLevelRestart);
         LevelManager levelManager = FindAnyObjectByType<LevelManager>();
 
         if(!levelManager)
