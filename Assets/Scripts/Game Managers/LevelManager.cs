@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DD.Core.Control;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private int restartLevelBuildIndex;
     public UnityEvent OnLevelRestarted;
-        
+                
     public void RequestReturnToMainMenu()
     {
         GameManager.Instance.ReturnToMainMenu();
@@ -25,8 +26,18 @@ public class LevelManager : MonoBehaviour
     /// Called by the GameManager to perform level restart logic.
     /// This may contain logic to skip intro cutscenes or move the player.
     /// </summary>
-    public void TriggerLevelHasRestarted()
+    public void HandleLevelRestarted()
     {
         OnLevelRestarted?.Invoke();
+    }
+
+    public void RequestPauseGame()
+    {
+        GameManager.PauseGame();
+    }
+
+    public void RequestUnpauseGame()
+    {
+        GameManager.UnpauseGame();
     }
 }

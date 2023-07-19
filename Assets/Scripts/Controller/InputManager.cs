@@ -9,7 +9,17 @@ namespace DD.Core.Control
     public class InputManager : MonoBehaviour
     {
         // Singleton
-        public static InputManager Instance;
+        private static InputManager instance;
+        public static InputManager Instance
+        {
+            get {
+                if(instance == null) {
+                    instance = FindObjectOfType<InputManager>();
+                }
+
+                return instance;
+            }
+        }
 
         [Header("Management")]
         [SerializeField] private bool ignoreInput = false;
@@ -21,7 +31,6 @@ namespace DD.Core.Control
 
         [Header("Keys")]
         public KeyCode pauseKey;
-        public event Action OnPause;
 
         public KeyCode sprintKeyCode;
         public bool Sprint { private set; get; }
@@ -38,25 +47,34 @@ namespace DD.Core.Control
         public event Action OnReload;
 
         public KeyCode inventoryKeyCode;
-        public event Action OnInventoryToggle;
+        public event Action OnInventoryPressed;
 
         public KeyCode quickSlotOneKey, quickSlotTwoKey, quickSlotThreeKey, quickSlotFourKey;
         public event Action<WeaponSlot> OnQuickSlotChange;
 
-        private void Awake()
-        {
-            Instance = this;
+        private void OnEnable() {
+            GameManager.OnGamePause += CursorToggle;
+            GameManager.OnGamePause += ToggleIgnoreInput;
         }
 
-        private void Start()
-        {
-            OnPause += CursorToggle;
-            OnInventoryToggle += CursorToggle;
+        private void OnDisable() {
+            GameManager.OnGamePause -= CursorToggle;
+            GameManager.OnGamePause -= ToggleIgnoreInput;
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(pauseKey)) OnPause?.Invoke();
+            if (Input.GetKeyDown(pauseKey))
+            {
+                if(GameManager.GameState == GameState.PLAYING)
+                {
+                    GameManager.PauseGame();
+                }
+                else
+                {
+                    GameManager.UnpauseGame();
+                }
+            } 
 
             pitchYaw = ignoreInput || ignoreMovement ? Vector2.zero : new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
             
@@ -84,7 +102,7 @@ namespace DD.Core.Control
             if (Input.GetKeyDown(reloadKeyCode)) OnReload?.Invoke();
 
             // Inventory
-            if (Input.GetKeyDown(inventoryKeyCode)) OnInventoryToggle?.Invoke();
+            if (Input.GetKeyDown(inventoryKeyCode)) OnInventoryPressed?.Invoke();
 
             // Quick Slots
             if (Input.GetKeyDown(quickSlotOneKey)) OnQuickSlotChange?.Invoke(WeaponSlot.One);
@@ -97,10 +115,12 @@ namespace DD.Core.Control
 
         public void ToggleIgnoreInput(bool toggle) => ignoreInput = toggle;
 
-        public void CursorToggle()
+        public void CursorToggle(bool toggle)
         {
-            Cursor.visible = !Cursor.visible;
-            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+            if(GameManager.GameState == GameState.MAIN_MENU) return;
+            
+            Cursor.visible = toggle;
+            Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
 }

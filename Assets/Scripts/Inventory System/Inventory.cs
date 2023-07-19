@@ -9,7 +9,17 @@ namespace DD.Systems.InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        public static Inventory Instance { get; private set; }
+        private static Inventory instance;
+        public static Inventory Instance {
+            get {
+                if(instance == null)
+                {
+                    instance = FindObjectOfType<Inventory>();
+                }
+
+                return instance;
+            } 
+        }
 
         // PLAYER
         private PlayerController player;
@@ -41,9 +51,6 @@ namespace DD.Systems.InventorySystem
 
         private void Awake()
         {
-            // Singleton
-            Instance = this;
-
             inventory = new List<ItemSlot>();
 
             player = FindObjectOfType<PlayerController>();

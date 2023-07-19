@@ -25,12 +25,12 @@ namespace DD.UI
             if(toggle)
             {
                 StartCoroutine(FadeCorountine(0, 1, fadeTime, () => fadingCavasGroup.blocksRaycasts = true));
-                InputManager.Instance.CursorToggle();
+                InputManager.Instance.CursorToggle(toggle);
             }
             else
             {
                 StartCoroutine(FadeCorountine(1, 0, fadeTime, () => fadingCavasGroup.blocksRaycasts = false));
-                InputManager.Instance.CursorToggle();
+                InputManager.Instance.CursorToggle(toggle);
             }
         }
 
