@@ -32,18 +32,6 @@ namespace DD.UI
             // Inventory.Instance.OnItemAdded += HandleAddedItemUI;
         }
 
-        private void OnDisable() {
-            // UI Toggle
-            GameManager.OnGamePause -= (toggle) => {if(toggle) HideMenu();};
-            InputManager.Instance.OnInventoryPressed -= HandleInventoryKeyPressed;
-
-            // Inventory Updated
-            Inventory.Instance.OnInventoryUpdated -= UpdateUI;
-
-            // Inventory Added Item UI
-            // Inventory.Instance.OnItemAdded -= HandleAddedItemUI;
-        }
-
         private void Start()
         {
             // Setup
