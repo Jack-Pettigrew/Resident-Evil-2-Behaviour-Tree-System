@@ -527,7 +527,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce798d422404b074999e691200cfee64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relativeFilePath: /Resources/test_credits.txt
+  relativeFilePath: /Resources/assets_credits.txt
+  creditSectionTitlePrefab: {fileID: 1051972780712278394, guid: f2b4f97d66a7b404a8585902fd716e7f,
+    type: 3}
   creditPrefab: {fileID: 2148029610829177852, guid: 9957743597fcad047aaf8a99277e9d51,
     type: 3}
   creditsParent: {fileID: 5585926491485477567}
