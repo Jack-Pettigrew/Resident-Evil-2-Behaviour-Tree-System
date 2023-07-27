@@ -52,11 +52,11 @@ namespace DD.UI
 
         private void HandleQueue()
         {
-            Debug.Log("Handling Queue");
+            // Debug.Log("Handling Queue");
             
             if(questUpdateQueue.TryDequeue(out Quest quest))
             {
-                Debug.Log("Dequeued queue");
+                // Debug.Log("Dequeued queue");
                 
                 questUIText.text = quest.CurrentObjective.ObjectiveTitle;
                 questUpdateSequence.Restart();
