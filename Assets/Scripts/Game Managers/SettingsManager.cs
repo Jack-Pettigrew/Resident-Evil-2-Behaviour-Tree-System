@@ -7,11 +7,27 @@ using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
+    private static SettingsManager instance;
+    public static SettingsManager Instance {
+        get {
+            if(instance == null)
+            {
+                instance = FindObjectOfType<SettingsManager>(true);
+            }
+
+            return instance;
+        }
+    }
+    
     [Header("Graphics Settings Fields")]
     [SerializeField] private TMP_Dropdown fullscreenMode;
     [SerializeField] private TMP_Dropdown resolution;
     [SerializeField] private TMP_Dropdown quality;
     [SerializeField] private Toggle vsync;
+
+    [Header("Particles")]
+    [SerializeField] private TMP_Dropdown rainQuality;
+    [SerializeField] private ParticleSystem rainParticleSystem;
 
     [Header("Audio Settings Fields")]
     [SerializeField] private Slider masterAudioSlider;
@@ -45,6 +61,22 @@ public class SettingsManager : MonoBehaviour
         QualitySettings.SetQualityLevel(quality.value, true);
         QualitySettings.vSyncCount = vsync.isOn ? 1 : 0;
 
+        ParticleSystem.EmissionModule emissionModule = rainParticleSystem.emission;
+        ParticleSystem.CollisionModule collisionModule = rainParticleSystem.collision;
+
+        if(rainQuality.value == 0)
+        {
+            // High
+            emissionModule.rateOverTime = 800;
+            collisionModule.maxCollisionShapes = 750;
+        }
+        else
+        {
+            // Low
+            emissionModule.rateOverTime = 100;
+            collisionModule.maxCollisionShapes = 256;
+        }
+
         AudioListener.volume = masterAudioSlider.value;
         
         SaveSettings();
@@ -63,6 +95,26 @@ public class SettingsManager : MonoBehaviour
         if(PlayerPrefs.HasKey("graphics_quality"))
         {
             QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("graphics_quality"), true);
+        }
+
+        if(PlayerPrefs.HasKey("rain_quality"))
+        {
+            ParticleSystem.EmissionModule emissionModule = rainParticleSystem.emission;
+            ParticleSystem.CollisionModule collisionModule = rainParticleSystem.collision;
+
+            if(PlayerPrefs.GetInt("rain_quality") == 0)
+            {
+                // High
+                emissionModule.rateOverTime = 800;
+                collisionModule.maxCollisionShapes = 750;
+            }
+            else
+            {
+                // Low
+                emissionModule.rateOverTime = 100;
+                collisionModule.maxCollisionShapes = 256;
+                
+            }
         }
 
         if(PlayerPrefs.HasKey("vsync"))
@@ -87,16 +139,17 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("graphics_quality", quality.value);
         PlayerPrefs.SetInt("vsync", vsync.isOn ? 1 : 0);
 
+        PlayerPrefs.SetInt("rain_quality", rainQuality.value);
+
         // Audio
         PlayerPrefs.SetFloat("master_audio", masterAudioSlider.value);
     }
-    
+
     /// <summary>
-    /// Loads the setting field options and their current values from PlayerPrefs.
+    /// Fills the settings fields with their options.
     /// </summary>
-    public void LoadSettingsFields()
+    private void GetFieldOptions()
     {
-        #region Getting Field Options
         // Fullscreen Mode Options
         fullscreenMode.ClearOptions();
         List<TMP_Dropdown.OptionData> fullscreenOptions = new List<TMP_Dropdown.OptionData>();
@@ -123,9 +176,24 @@ public class SettingsManager : MonoBehaviour
             qualityOptions.Add(new TMP_Dropdown.OptionData(qualityLevelName));
         }
         quality.AddOptions(qualityOptions);
-        #endregion
+
+        // Rain Quality Options
+        rainQuality.ClearOptions();
+        List<TMP_Dropdown.OptionData> rainQualityOptions = new() {
+            new TMP_Dropdown.OptionData("High"),
+            new TMP_Dropdown.OptionData("Low")
+        };
+        rainQuality.AddOptions(rainQualityOptions);
+    }
+    
+    /// <summary>
+    /// Loads the setting field options and their current values from PlayerPrefs.
+    /// </summary>
+    public void LoadSettingsFields()
+    {
+        GetFieldOptions();
         
-        #region Setting Select Options
+        #region Setting Field Options From Saved
         // Set preferences
         if(PlayerPrefs.HasKey("fullscreen_mode"))
         {
@@ -154,7 +222,16 @@ public class SettingsManager : MonoBehaviour
             quality.SetValueWithoutNotify(QualitySettings.GetQualityLevel());
         }
 
-        if(PlayerPrefs.HasKey("graphics_quality"))
+        if(PlayerPrefs.HasKey("rain_quality"))
+        {
+            rainQuality.SetValueWithoutNotify(PlayerPrefs.GetInt("rain_quality"));
+        }
+        else
+        {
+            rainQuality.SetValueWithoutNotify(0); // High
+        }
+
+        if(PlayerPrefs.HasKey("vsync"))
         {
             vsync.SetIsOnWithoutNotify(PlayerPrefs.GetInt("vsync") > 0 ? true : false);
         }

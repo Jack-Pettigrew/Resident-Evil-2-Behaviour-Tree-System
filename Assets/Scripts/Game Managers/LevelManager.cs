@@ -9,6 +9,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int restartLevelBuildIndex;
     public UnityEvent OnLevelRestarted;
                 
+    private void Start() {
+        // Level started request most up to date settings
+        SettingsManager.Instance.ApplySavedSettings();
+    }
+                
     public void RequestReturnToMainMenu()
     {
         GameManager.Instance.ReturnToMainMenu();
