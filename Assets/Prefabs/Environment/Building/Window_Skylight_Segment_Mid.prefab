@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2565436391189480222}
   - component: {fileID: 1456238672536571067}
   - component: {fileID: 3733886592250181745}
-  m_Layer: 0
+  - component: {fileID: -2997712095444366387}
+  m_Layer: 8
   m_Name: Window_Skylight_Segment_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2941292984140159396}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 391212176618802036}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1456238672536571067
 MeshFilter:
@@ -84,6 +85,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-2997712095444366387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941292984140159396}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1000001, y: 1.66, z: 2.2536333}
+  m_Center: {x: 0, y: 0.81, z: 0}
 --- !u!1 &8592295935907456013
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,12 +117,12 @@ GameObject:
   - component: {fileID: 391212176618802036}
   - component: {fileID: 1249558320166825301}
   - component: {fileID: 9077683623801050810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window_Skylight_Segment_Mid_Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &391212176618802036
 Transform:
