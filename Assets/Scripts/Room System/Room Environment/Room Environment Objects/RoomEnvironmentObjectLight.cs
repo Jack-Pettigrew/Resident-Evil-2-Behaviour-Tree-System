@@ -9,33 +9,20 @@ namespace DD.Systems.Room
     /// </summary>
     public class RoomEnvironmentObjectLight : RoomEnvironmentObject
     {
-        [field: SerializeField] public bool IsPowered { private set; get; } = true;
+        [field: SerializeField] private PowerSource powerSource;
         [field: SerializeField] public bool IsOn { private set; get; } = true;
 
-        private void Update() {
-            if(Input.GetKeyDown(KeyCode.Backspace))
+        private void Awake() {
+            if(powerSource)
             {
-                TogglePower(true);
-            }
-        }
+                powerSource.OnPoweredOn += () => ToggleLightOn(true);
+                powerSource.OnPoweredOff += () => ToggleLightOn(false);
 
-        /// <summary>
-        /// Toggles whether the light is powered.
-        /// </summary>
-        /// <param name="toggle"></param>
-        public void TogglePower(bool toggle)
-        {
-            if (toggle == IsPowered) return;
-
-            IsPowered = toggle;
-
-            if (IsPowered && IsOn)
-            {
-                OnObjectActivated?.Invoke();
+                ToggleLightOn(powerSource.IsPoweredOn);
             }
             else
             {
-                OnObjectDeactivated?.Invoke();
+                ToggleLightOn(false);
             }
         }
 
@@ -49,7 +36,7 @@ namespace DD.Systems.Room
 
             IsOn = toggle;
 
-            if (IsOn && IsPowered)
+            if (IsOn && powerSource.IsPoweredOn)
             {
                 OnObjectActivated?.Invoke();
 
@@ -62,7 +49,7 @@ namespace DD.Systems.Room
 
         protected override void HandleObjectActivated(Room room)
         {
-            if (IsPowered && IsOn)
+            if (powerSource && powerSource.IsPoweredOn && IsOn)
             {
                 base.HandleObjectActivated(room);
             }
