@@ -39,7 +39,7 @@ namespace DD.UI
 
         private void HandleQuestUpdated(Quest progressedQuest)
         {
-            Debug.Log(progressedQuest.CurrentObjective.ObjectiveTitle);
+            // Debug.Log(progressedQuest.CurrentObjective.ObjectiveTitle);
             
             questUpdateQueue.Enqueue(progressedQuest);
 
