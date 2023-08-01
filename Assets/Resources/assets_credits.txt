@@ -1,11 +1,24 @@
+#Music
+Save Room Theme (George Baker) []
+
 #Materials
 Many materials were found at https://ambientcg.com/ (ambientcg) [https://ambientcg.com/]
 
 #SFX
 Door Bang 1 (iamslenderman) [https://freesound.org/people/iamslenderman/sounds/315935/]
 Rain on Windows, Interior, B (InspectorJ) [https://freesound.org/people/InspectorJ/sounds/346641/]
+Generator 1 (Adam Wayne Gistarb) [https://freesound.org/people/deleted_user_4401185/sounds/346654/]
+Machine Shutdown (Patrick Lieberkind) [https://freesound.org/people/PatrickLieberkind/sounds/207321/]
+Power Down (themfish) [https://freesound.org/people/themfish/sounds/34203/]
+Grab Item (1bob) [https://freesound.org/people/1bob/sounds/651515/]
+Automatic Pistol (DE1977) [https://freesound.org/people/DE1977/sounds/656527/]
+Additional sound effects from zapsplat.com (zapsplat) [https://www.zapsplat.com]
 
-#Models
+#Character Models
+Gas Mask (Mixamo) [https://www.mixamo.com/#/]
+Tyrant Mr. X (DollyMolly323 & Red Menace) [https://www.deviantart.com/dollymolly323/art/Tyrant-Mr-X-RE2-REMAKE-Model-DL-MMD-801218024]
+
+#Environment Models
 Retro Computer Setup (Brandon Westlake) [https://skfb.ly/orUQM]
 Chest (Aki_Kato) [https://skfb.ly/66CvU]
 Office Desk (bappoiscool) [https://skfb.ly/6ZRvs]
@@ -39,6 +52,6 @@ wooden Wall Books Shelf (Sanzid) [https://skfb.ly/6WB9L]
 Plastic Tray (Aullwen) [https://skfb.ly/6RQZq]
 Chopping board (1-3D.com) [https://skfb.ly/otGqK]
 Classic Knife (Blender3D) [https://skfb.ly/6zDUy]
-Low Poly Storage Pack https://brokenvector.itch.io/low-poly-storage-pack - Broken Vector
+Low Poly Storage Pack (Broken Vector) [https://brokenvector.itch.io/low-poly-storage-pack]
 Detective Office - Assets Pack (aleksandcazal) [https://aleksandcazal.itch.io/detective-room]
 Bookcase (Michael Singh) [https://www.turbosquid.com/3d-models/bookcase-ase-books-free/688367]

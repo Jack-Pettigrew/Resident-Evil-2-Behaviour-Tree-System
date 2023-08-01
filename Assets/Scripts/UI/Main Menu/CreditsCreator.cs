@@ -40,6 +40,8 @@ public class CreditsCreator : MonoBehaviour
                         result.Add(item);
                     }
                 }
+                
+                if(result.Count == 0) continue;
 
                 switch (result.Count)
                 {
@@ -53,17 +55,18 @@ public class CreditsCreator : MonoBehaviour
                         }
                         break;
 
-                    // Credit
-                    case 3:
+                    // Credit                        
+                    default:
                         Credit credit = Instantiate(creditPrefab, Vector3.zero, Quaternion.identity, creditsParent).GetComponent<Credit>();
                         credit.SetTitle(result[0]);
                         credit.SetAuthor(result[1]);
-                        credit.SetLink(result[2]);
+
+                        if(result.Count == 3)
+                        {
+                            credit.SetLink(result[2]);
+                        }
                         
                         creditList.Add(credit.gameObject);
-                        break;
-                        
-                    default:
                         break;
                 }
             }
