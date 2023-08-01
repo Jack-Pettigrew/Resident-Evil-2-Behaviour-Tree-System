@@ -656,7 +656,7 @@ RectTransform:
   m_Children:
   - {fileID: 6879095948939389158}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -742,6 +742,36 @@ MonoBehaviour:
   itemSlotUIPrefab: {fileID: 8264109230246826861, guid: fbf96f03d69df9241a5cae9a8a755530,
     type: 3}
   itemGroup: {fileID: 6879095950426783992}
+  OnInventoryDisplayed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DD.Core.Control.InputManager, Assembly-CSharp
+        m_MethodName: ToggleIgnoreMovement
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnInventoryHidden:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DD.Core.Control.InputManager, Assembly-CSharp
+        m_MethodName: ToggleIgnoreMovement
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6879095949840345560
 GameObject:
   m_ObjectHideFlags: 0
