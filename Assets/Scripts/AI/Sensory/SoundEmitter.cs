@@ -25,7 +25,6 @@ namespace DD.AI.Sensors
                 if(collider.TryGetComponent<AIHear>(out AIHear aiHear))
                 {
                     aiHear.HearSound();
-                    Debug.Log("Triggered");
                 }
             }
         }
