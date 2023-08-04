@@ -18,7 +18,17 @@ Additional sound effects from zapsplat.com (zapsplat) [https://www.zapsplat.com]
 Gas Mask (Mixamo) [https://www.mixamo.com/#/]
 Tyrant Mr. X (DollyMolly323 & Red Menace) [https://www.deviantart.com/dollymolly323/art/Tyrant-Mr-X-RE2-REMAKE-Model-DL-MMD-801218024]
 
-#Environment Models
+#Unity Asset Store
+Hisu knife (Helica) [https://assetstore.unity.com/packages/3d/props/weapons/hisu-knife-54058]
+Police Car & Helicopter (SICS Games) [https://assetstore.unity.com/packages/3d/vehicles/land/police-car-helicopter-52496]
+Rifle (Game-Ready Studios) [https://assetstore.unity.com/packages/3d/props/guns/rifle-25668]
+Road Blocker (Pixel Games) [https://assetstore.unity.com/packages/3d/props/exterior/road-blocker-663]
+Road Props - Low Poly (Laxer) [https://assetstore.unity.com/packages/3d/props/exterior/road-props-low-poly-123340]
+Simple City pack plain (255 pixel studios) [https://assetstore.unity.com/packages/3d/environments/urban/simple-city-pack-plain-100348]
+Stone Fence (Ben Droste) [https://assetstore.unity.com/packages/3d/props/exterior/stone-fence-2437]
+Street Lamps (SpaceZeta) [https://assetstore.unity.com/packages/3d/props/exterior/street-lamps-165658]
+
+#Miscellaneous Models
 Retro Computer Setup (Brandon Westlake) [https://skfb.ly/orUQM]
 Chest (Aki_Kato) [https://skfb.ly/66CvU]
 Office Desk (bappoiscool) [https://skfb.ly/6ZRvs]
