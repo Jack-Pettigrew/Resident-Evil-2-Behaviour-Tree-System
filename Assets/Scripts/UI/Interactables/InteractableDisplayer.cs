@@ -30,7 +30,7 @@ public class InteractableDisplayer : MonoBehaviour
 
     private void DisplayInteractor(IInteractable interactable, GameObject gameObject)
     {
-        Debug.Log("Displaying...");
+        // Debug.Log("Displaying...");
         active = true;
         image.enabled = active;
         targetGameObject = gameObject;
@@ -39,7 +39,7 @@ public class InteractableDisplayer : MonoBehaviour
 
     private void HideInteractor()
     {
-        Debug.Log("Hiding...");
+        // Debug.Log("Hiding...");
         active = false;
         image.enabled = active;
         targetGameObject = null;
