@@ -19,9 +19,9 @@ public class ObjectiveArriveTracker : MonoBehaviour
 
     private IEnumerator UpdateTracking()
     {
-        while(true)
+        while (true)
         {
-            if(Vector3.Distance(transform.position, objectToTrack.transform.position) <= arrivedRadius)
+            if (Vector3.Distance(transform.position, objectToTrack.transform.position) <= arrivedRadius)
             {
                 OnTriggered?.Invoke(ObjectiveArriveTriggerStatus.ARRIVED);
             }
@@ -32,11 +32,15 @@ public class ObjectiveArriveTracker : MonoBehaviour
 
     public void StopTracking()
     {
-        StopCoroutine(trackingCoroutine);
-        objectToTrack = null;
+        if (trackingCoroutine != null)
+        {
+            StopCoroutine(trackingCoroutine);
+            objectToTrack = null;
+        }
     }
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, arrivedRadius);
     }
