@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace DD.Systems.Room
 {
+    /// <summary>
+    /// The overarching manager class for RoomEnvironmentControllers.
+    /// </summary>
     public class RoomEnvironmentManager : MonoBehaviour
     {
         public GameObject player;
@@ -13,6 +16,9 @@ namespace DD.Systems.Room
         private List<Door> activeDoors = new List<Door>();
         private Dictionary<Room, RoomEnvironmentController> roomEnvironmentControllers = new Dictionary<Room, RoomEnvironmentController>();
         private List<RoomEnvironmentController> activatedRoomControllers = new List<RoomEnvironmentController>();
+
+        // Component
+        private PowerSource powerSource;
 
         private void Awake()
         {
@@ -25,10 +31,15 @@ namespace DD.Systems.Room
                     roomEnvironmentControllers.Add(room, controller);
                 }
             }
+
+            powerSource = FindObjectOfType<PowerSource>();
         }
 
         private void OnEnable()
         {
+            powerSource.OnPoweredOn += HandlePowerOn;
+            powerSource.OnPoweredOff += HandlePowerOff;
+            
             foreach (Door door in doors)
             {
                 door.openingDoorEvent.AddListener(HandleDoorOpening);
@@ -36,8 +47,46 @@ namespace DD.Systems.Room
             }
         }
 
-        private void HandleDoorOpening(Door openingDoor)
+        private void OnDisable()
         {
+            powerSource.OnPoweredOn -= HandlePowerOn;
+            powerSource.OnPoweredOff -= HandlePowerOff;
+            
+            foreach (Door door in doors)
+            {
+                door.openingDoorEvent.RemoveListener(HandleDoorOpening);
+                door.closedDoorEvent.RemoveListener(HandleDoorClosed);
+            }
+        }
+
+        private void HandlePowerOn()
+        {
+            // Activate Player's current Room
+            if(RoomManager.GetRoomOfObject(player).TryGetComponent(out Room playerRoom))
+            {
+                roomEnvironmentControllers[playerRoom].ForceActivateRoom();
+            }
+
+            // Activate any active
+            foreach (RoomEnvironmentController roomEnvironmentController in activatedRoomControllers)
+            {
+                roomEnvironmentController.ForceActivateRoom();
+            }
+        }
+
+        private void HandlePowerOff()
+        {
+            // Deactivate all active room env controllers
+            foreach ((Room room, RoomEnvironmentController roomEnvironmentController) in roomEnvironmentControllers)
+            {
+                roomEnvironmentController.DeactivateRoom();
+            }
+
+            activatedRoomControllers.Clear();
+        }
+
+        private void HandleDoorOpening(Door openingDoor)
+        {            
             if(!activeDoors.Contains(openingDoor))
             {
                 activeDoors.Add(openingDoor);

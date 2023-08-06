@@ -12,19 +12,19 @@ namespace DD.Systems.Room
         [field: SerializeField] private PowerSource powerSource;
         [field: SerializeField] public bool IsOn { private set; get; } = true;
 
-        private void Awake() {
-            if(powerSource)
-            {
-                powerSource.OnPoweredOn += () => ToggleLightOn(true);
-                powerSource.OnPoweredOff += () => ToggleLightOn(false);
+        // private void Awake() {
+        //     if(powerSource)
+        //     {
+        //         powerSource.OnPoweredOn += () => ToggleLightOn(true);
+        //         powerSource.OnPoweredOff += () => ToggleLightOn(false);
 
-                ToggleLightOn(powerSource.IsPoweredOn);
-            }
-            else
-            {
-                ToggleLightOn(false);
-            }
-        }
+        //         ToggleLightOn(powerSource.IsPoweredOn);
+        //     }
+        //     else
+        //     {
+        //         ToggleLightOn(false);
+        //     }
+        // }
 
         /// <summary>
         /// Toggle whether the Light is turned on.

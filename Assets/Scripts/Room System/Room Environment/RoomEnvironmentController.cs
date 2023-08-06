@@ -10,13 +10,10 @@ namespace DD.Systems.Room
 {
     [RequireComponent(typeof(Room))]
     /// <summary>
-    /// A Component dedicated to updating registered RoomEnvironmentObjects of the status of the Room they're owned by.
+    /// A Component dedicated to informing registered RoomEnvironmentObjects as to when they're triggered.
     /// </summary>
     public class RoomEnvironmentController : MonoBehaviour
     {
-        // PLAYER
-        private GameObject playerGameObject;
-
         // CONTROLLER VARIABLES
         public Room LinkedRoom { private set; get; }
         public bool IsActive { private set; get; } = false;
@@ -25,16 +22,22 @@ namespace DD.Systems.Room
 
         // COMPONENTS
         private Dictionary<Room, RoomEnvironmentController> connectedRoomEnvControllers = new Dictionary<Room, RoomEnvironmentController>();
+        private PowerSource powerSource;
 
         // EVENTS
         public event Action<Room> OnRoomActivated;
         public event Action<Room> OnRoomDeactivated;
 
+        private void Awake()
+        {
+            powerSource = GetComponent<PowerSource>();
+        }
+
         private void Start()
         {
             LinkedRoom = GetComponent<Room>();
 
-            playerGameObject = FindAnyObjectByType<PlayerController>().gameObject;
+            PlayerController playerGameObject = FindAnyObjectByType<PlayerController>();
 
             // Setup up connecting rooms
             foreach (Room connectedRoom in ConnectedRooms)
@@ -48,10 +51,10 @@ namespace DD.Systems.Room
             // Ensure all default to deactivated
             ForceDeactivateRoom();
 
-            
-            
-            
-            if (RoomManager.GetRoomOfObject(playerGameObject) == LinkedRoom)
+
+
+
+            if (RoomManager.GetRoomOfObject(playerGameObject.gameObject) == LinkedRoom)
             {
                 ActivateRoom();
                 ActivateConnectedRooms();
@@ -65,6 +68,12 @@ namespace DD.Systems.Room
         {
             if (IsActive) return;
 
+            IsActive = true;
+            OnRoomActivated?.Invoke(LinkedRoom);
+        }
+
+        public void ForceActivateRoom()
+        {
             IsActive = true;
             OnRoomActivated?.Invoke(LinkedRoom);
         }
