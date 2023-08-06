@@ -11,7 +11,7 @@ namespace DD.Systems.Room
         [Header("Door Sibling")]
         [SerializeField] private bool openSiblingInUnison = false;
         [SerializeField] private Door doorSibling;
-        
+
         // STATE
         [field: Header("Interaction")]
         [field: SerializeField] public bool CanInteract { set; get; }
@@ -138,7 +138,8 @@ namespace DD.Systems.Room
             {
                 doorSibling.OpenDoor(openerPosition, true);
             }
-            
+
+            ResetRunningCoroutines();
             runningCoroutine = StartCoroutine(OpenDoorCoroutine(openerPosition));
         }
 
