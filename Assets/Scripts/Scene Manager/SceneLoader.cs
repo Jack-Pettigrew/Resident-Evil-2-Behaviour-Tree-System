@@ -7,19 +7,22 @@ using UnityEngine.Events;
 
 public class SceneLoader : MonoBehaviour
 {
+    // SINGLETON
     public static SceneLoader Instance { private set; get; }
 
+    // Variables
+    public bool IsLoading { private set; get; } = false;
+    private int sceneBuildIndexTransitioningTo = -1;
+    private int activeSceneBuildIndex = -1;
+    private AsyncOperation asyncOperation;
+
+    // UI
     [Header("Transition Settings")]
     [SerializeField] private CanvasGroup transitionCanvasGroup;
     [SerializeField, Min(0)] private float fadeDelay = 0.0f;
     [SerializeField] private float transitionFadeTime = 1.0f;
 
-    public bool IsLoading { private set; get; } = false;
-
-    private int sceneBuildIndexTransitioningTo = -1;
-    private int activeSceneBuildIndex = -1;
-    private AsyncOperation asyncOperation;
-
+    // EVENTS
     public UnityEvent OnLoadStarted;
     public UnityEvent OnLoadFinished;
     
@@ -56,6 +59,7 @@ public class SceneLoader : MonoBehaviour
 
         OnLoadStarted?.Invoke();
 
+        // Unload active scene if there is one
         if (activeSceneBuildIndex > -1)
         {
             asyncOperation = SceneManager.UnloadSceneAsync(activeSceneBuildIndex);
@@ -63,6 +67,7 @@ public class SceneLoader : MonoBehaviour
             activeSceneBuildIndex = -1;
         }
 
+        // Load new Scene
         asyncOperation = SceneManager.LoadSceneAsync(sceneBuildIndexTransitioningTo, LoadSceneMode.Additive);
         asyncOperation.allowSceneActivation = false;
 
@@ -97,11 +102,11 @@ public class SceneLoader : MonoBehaviour
             // Fade Direction
             if (endValue > startValue)
             {
-                transitionCanvasGroup.alpha += (1 / transitionFadeTime) * Time.deltaTime;
+                transitionCanvasGroup.alpha += 1 / fadeLength * Time.deltaTime;
             }
             else
             {
-                transitionCanvasGroup.alpha -= (1 / transitionFadeTime) * Time.deltaTime;
+                transitionCanvasGroup.alpha -= 1 / fadeLength * Time.deltaTime;
             }
 
             yield return null;
