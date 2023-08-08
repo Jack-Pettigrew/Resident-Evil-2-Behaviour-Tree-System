@@ -123,8 +123,10 @@ public class Quest : MonoBehaviour
         }
     }
 
+    [ContextMenu("End Quest")]
     public void EndQuest()
     {
         IsComplete = true;
+        OnQuestComplete?.Invoke(this);
     }
 }

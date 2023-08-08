@@ -8,12 +8,18 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private int restartLevelBuildIndex;
     public UnityEvent OnLevelRestarted;
+    public UnityEvent OnLevelEnded;
                 
     private void Start() {
         // Level started request most up to date settings
         SettingsManager.Instance.ApplySavedSettings();
     }
-                
+
+    public void EndLevel()
+    {
+        SceneLoader.Instance.LoadSceneAsync(2);
+    }
+
     public void RequestReturnToMainMenu()
     {
         GameManager.Instance.ReturnToMainMenu();
