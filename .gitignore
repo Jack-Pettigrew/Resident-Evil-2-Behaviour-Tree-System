@@ -60,3 +60,5 @@ crashlytics-build.properties
 
 # Mac OS Files
 .DS_STORE
+Assets/Models/External
+Assets/Models/External.meta
