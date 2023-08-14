@@ -20,15 +20,15 @@ scopes = {
 	"last_search.2138236A" = ""
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
-	"last_search.3BE40471" = "ref:\"Assets/Scripts/Room System/RoomEnvironmentObject.cs\""
+	"last_search.3BE40471" = ""
 	"OpenInspectorPreview.3BE40471" = "0"
-	"currentGroup.3BE40471" = "all"
+	"currentGroup.3BE40471" = "scene"
 	"last_search.110DEAF1" = "h: t:MeshRenderer"
 	"OpenInspectorPreview.110DEAF1" = "0"
 	"currentGroup.110DEAF1" = "scene"
-	"last_search.E8DA15E5" = "lamp fbx"
+	"last_search.E8DA15E5" = "sceneloader"
 	"OpenInspectorPreview.E8DA15E5" = "0"
-	"currentGroup.E8DA15E5" = "asset"
+	"currentGroup.E8DA15E5" = "all"
 }
 providers = {
 	adb = {
@@ -80,9 +80,9 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	""
 	"h: t:MeshRenderer"
 	"h:"
-	""
 	"h: t:MeshRenderer #m_RenderingLayerMask>0"
 	"h: t:SkinnedMeshRenderer"
 	"h: t:MeshRenderer t:SkinnedMeshRenderer"
