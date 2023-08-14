@@ -6,13 +6,12 @@ using DD.Core.Control;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private int restartLevelBuildIndex;
     public UnityEvent OnLevelRestarted;
     public UnityEvent OnLevelEnded;
                 
     private void Start() {
         // Level started request most up to date settings
-        SettingsManager.Instance.ApplySavedSettings();
+        SettingsManager.Instance?.ApplySavedSettings();
     }
 
     public void EndLevel()
@@ -30,7 +29,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void RequestLevelRestart()
     {
-        GameManager.Instance.RestartLevel(restartLevelBuildIndex);
+        GameManager.Instance.RestartLevel(SceneLoader.Instance.ActiveScene.Value.buildIndex);
     }
     
     /// <summary>

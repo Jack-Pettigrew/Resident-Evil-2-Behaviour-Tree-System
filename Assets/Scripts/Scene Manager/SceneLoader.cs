@@ -14,6 +14,7 @@ public class SceneLoader : MonoBehaviour
     public bool IsLoading { private set; get; } = false;
     private int sceneBuildIndexTransitioningTo = -1;
     private int activeSceneBuildIndex = -1;
+    public Scene? ActiveScene { private set; get; } = null;
     private AsyncOperation asyncOperation;
 
     // UI
@@ -25,7 +26,7 @@ public class SceneLoader : MonoBehaviour
     // EVENTS
     public UnityEvent OnLoadStarted;
     public UnityEvent OnLoadFinished;
-    
+
     private Action onCompleteLoadAction;
 
     private void Awake()
@@ -44,8 +45,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadSceneAsync(int sceneBuildIndex, Action onComplete = null)
     {
-        if(IsLoading) return;
-        
+        if (IsLoading) return;
+
         sceneBuildIndexTransitioningTo = sceneBuildIndex;
         onCompleteLoadAction = onComplete;
         StartCoroutine(TransitionCoroutine());
@@ -87,6 +88,7 @@ public class SceneLoader : MonoBehaviour
 
         IsLoading = false;
         activeSceneBuildIndex = sceneBuildIndexTransitioningTo;
+        ActiveScene = SceneManager.GetSceneByBuildIndex(activeSceneBuildIndex);
         sceneBuildIndexTransitioningTo = -1;
     }
 
