@@ -149,4 +149,5 @@ MonoBehaviour:
   <CanInteract>k__BackingField: 1
   <ItemData>k__BackingField: {fileID: 11400000, guid: 80e1476323d52834b9b502257b08e0dc,
     type: 2}
+  <InteractionIconOffset>k__BackingField: {x: 0, y: 0.2, z: 0}
   itemQuantity: 21
