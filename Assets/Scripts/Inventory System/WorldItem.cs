@@ -12,6 +12,7 @@ namespace DD.Core.Items
         [field: SerializeField] public bool CanInteract { set; get; }
 
         [field: SerializeField] public ItemData ItemData { private set; get; }
+        [field: SerializeField] public Vector3 InteractionIconOffset { set; get; }
 
         [SerializeField] private int itemQuantity;
 
@@ -21,6 +22,12 @@ namespace DD.Core.Items
         {
             Inventory.Instance.AddItem(ItemData, itemQuantity);
             Destroy(gameObject);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position + InteractionIconOffset, .1f);
         }
     }
 }

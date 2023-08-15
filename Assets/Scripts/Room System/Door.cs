@@ -48,17 +48,20 @@ namespace DD.Systems.Room
         public Room RoomB { get { return roomB; } }
         [Tooltip("The point where characters can start entering the Door from.")] public Transform roomBEntryPoint;
 
+        [field: SerializeField, Space] public Vector3 InteractionIconOffset { set; get; }
+
         // EVENTS
         [Header("Events")]
         public UnityEvent<Door> openingDoorEvent;
         public UnityEvent<Door> openedDoorEvent;
         public UnityEvent<Door> closingDoorEvent;
-        public UnityEvent <Door>closedDoorEvent;
+        public UnityEvent<Door> closedDoorEvent;
 
-        private void Awake() {            
+        private void Awake()
+        {
             hingeParentTransform = transform.parent;
 
-            if(!hingeParentTransform)
+            if (!hingeParentTransform)
             {
                 Debug.LogWarning($"Door '{name}' does not have a hinge parent assigned. Please assign a parent to act as a hinge for this Door.");
             }
@@ -69,14 +72,14 @@ namespace DD.Systems.Room
         /// </summary>
         public void Interact(Interactor interactor)
         {
-            if(interactor.InteractorType == InteractorType.AI)
+            if (interactor.InteractorType == InteractorType.AI)
             {
                 ResetRunningCoroutines();
                 OpenDoor(interactor.gameObject.transform.position);
                 return;
             }
-            
-            if(!CanInteract || IsChangingState)
+
+            if (!CanInteract || IsChangingState)
             {
                 return;
             }
@@ -86,10 +89,10 @@ namespace DD.Systems.Room
                 // play locked noise
                 return;
             }
-            
+
             ResetRunningCoroutines();
 
-            if(!IsOpen)
+            if (!IsOpen)
             {
                 OpenDoor(interactor.InteractorTransform.position);
             }
@@ -97,17 +100,17 @@ namespace DD.Systems.Room
             {
                 CloseDoor();
             }
-            
+
         }
 
         public void ResetRunningCoroutines()
         {
-            if(runningCoroutine != null)
+            if (runningCoroutine != null)
             {
                 StopCoroutine(runningCoroutine);
                 runningCoroutine = null;
             }
-        }        
+        }
 
         /// <summary>
         /// Uses the HingeJoint Motor to drive the door to it's offset.
@@ -120,7 +123,7 @@ namespace DD.Systems.Room
             targetAngle = Mathf.Repeat(targetAngle, 360);
 
             // Wait until door has rotated to target angle
-            while(Mathf.Abs(Mathf.DeltaAngle(hingeParentTransform.localEulerAngles.y, targetAngle)) > doorClosedThreshold)
+            while (Mathf.Abs(Mathf.DeltaAngle(hingeParentTransform.localEulerAngles.y, targetAngle)) > doorClosedThreshold)
             {
                 yield return new WaitForFixedUpdate();
 
@@ -133,8 +136,8 @@ namespace DD.Systems.Room
         /// </summary>
         /// <returns></returns>
         public virtual void OpenDoor(Vector3 openerPosition, bool siblingInduced = false)
-        {            
-            if(!siblingInduced && openSiblingInUnison && doorSibling)
+        {
+            if (!siblingInduced && openSiblingInUnison && doorSibling)
             {
                 doorSibling.OpenDoor(openerPosition, true);
             }
@@ -144,12 +147,12 @@ namespace DD.Systems.Room
         }
 
         private IEnumerator OpenDoorCoroutine(Vector3 openerPosition)
-        {            
+        {
             IsOpen = true;
             IsChangingState = true;
 
             openingDoorEvent?.Invoke(this);
-                        
+
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
             yield return RotateToAngle(
                 Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? 90.0f : -90.0f
@@ -180,12 +183,12 @@ namespace DD.Systems.Room
         /// <returns></returns>
         public virtual void CloseDoor(bool siblingInduced = false)
         {
-            if(!siblingInduced && openSiblingInUnison && doorSibling)
+            if (!siblingInduced && openSiblingInUnison && doorSibling)
             {
                 doorSibling.ResetRunningCoroutines();
                 doorSibling.CloseDoor(true);
             }
-            
+
             ResetRunningCoroutines();
             runningCoroutine = StartCoroutine(CloseDoorCoroutine());
         }
@@ -195,9 +198,9 @@ namespace DD.Systems.Room
             IsChangingState = true;
 
             closingDoorEvent?.Invoke(this);
-            
+
             yield return RotateToAngle(0.0f);
-            
+
             IsOpen = false;
             IsChangingState = false;
 
@@ -207,7 +210,7 @@ namespace DD.Systems.Room
         [ContextMenu("Test Bang Door")]
         public void BangDoor()
         {
-            if(audioSource && bangingSound)
+            if (audioSource && bangingSound)
             {
                 audioSource.PlayOneShot(bangingSound);
             }
@@ -224,7 +227,7 @@ namespace DD.Systems.Room
 
             if (roomOfObject == RoomA) return roomAEntryPoint;
 
-            if(roomOfObject == RoomB) return roomBEntryPoint;
+            if (roomOfObject == RoomB) return roomBEntryPoint;
 
             return null;
         }
@@ -240,7 +243,7 @@ namespace DD.Systems.Room
 
             if (roomOfObject == RoomA) return roomBEntryPoint;
 
-            if(roomOfObject == RoomB) return roomAEntryPoint;
+            if (roomOfObject == RoomB) return roomAEntryPoint;
 
             return null;
         }
@@ -250,15 +253,19 @@ namespace DD.Systems.Room
             // Draw lines to associated Rooms
             Gizmos.color = Color.green;
 
-            if(RoomA)
+            if (RoomA)
             {
                 Gizmos.DrawLine(transform.position, RoomA.transform.position);
             }
 
-            if(RoomB)
+            if (RoomB)
             {
                 Gizmos.DrawLine(transform.position, RoomB.transform.position);
+
             }
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position + transform.rotation * InteractionIconOffset, .1f);
         }
     }
 }

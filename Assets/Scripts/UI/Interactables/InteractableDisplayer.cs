@@ -8,7 +8,7 @@ public class InteractableDisplayer : MonoBehaviour
 {
     [SerializeField] private Interactor interactor;
     private RawImage image;
-    [SerializeField] private Vector3 positionOffset = Vector3.zero;
+    private Vector3 positionOffset = Vector3.zero;
 
     private bool active = false;
     private GameObject targetGameObject = null;
@@ -34,7 +34,8 @@ public class InteractableDisplayer : MonoBehaviour
         active = true;
         image.enabled = active;
         targetGameObject = gameObject;
-        transform.position = gameObject.transform.position + positionOffset;
+        positionOffset = interactable.InteractionIconOffset;
+        transform.position = gameObject.transform.position + gameObject.transform.rotation * positionOffset;
     }
 
     private void HideInteractor()
@@ -55,7 +56,7 @@ public class InteractableDisplayer : MonoBehaviour
             return;
         }
         
-        transform.position = targetGameObject.transform.position + positionOffset;
         transform.LookAt(Camera.main.transform);
+        transform.position = targetGameObject.transform.position + targetGameObject.transform.rotation * positionOffset;
     }
 }

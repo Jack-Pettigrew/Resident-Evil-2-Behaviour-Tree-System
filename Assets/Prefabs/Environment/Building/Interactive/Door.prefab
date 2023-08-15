@@ -116,6 +116,7 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 0}
   roomBEntryPoint: {fileID: 0}
+  <InteractionIconOffset>k__BackingField: {x: -0.46, y: 1.08, z: 0}
   openingDoorEvent:
     m_PersistentCalls:
       m_Calls: []

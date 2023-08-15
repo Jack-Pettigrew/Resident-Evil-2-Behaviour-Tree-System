@@ -445,6 +445,7 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 6213752950103872126}
   roomB: {fileID: 0}
   roomBEntryPoint: {fileID: 6213752948637131622}
+  <InteractionIconOffset>k__BackingField: {x: -0.46, y: 1.11, z: 0}
   openingDoorEvent:
     m_PersistentCalls:
       m_Calls:
@@ -731,6 +732,7 @@ MonoBehaviour:
   roomAEntryPoint: {fileID: 6213752950103872126}
   roomB: {fileID: 0}
   roomBEntryPoint: {fileID: 6213752948637131622}
+  <InteractionIconOffset>k__BackingField: {x: -0.46, y: 1.11, z: 0}
   openingDoorEvent:
     m_PersistentCalls:
       m_Calls:
