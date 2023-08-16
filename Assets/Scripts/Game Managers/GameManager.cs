@@ -1,3 +1,4 @@
+using DD.Core.Control;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     
     public void ReturnToMainMenu()
     {
-        SceneLoader.Instance.LoadSceneAsync(1, () => GameState = GameState.MAIN_MENU);
+        SceneLoader.Instance.LoadSceneAsync(1, HandleFinishReturnToMenu);
     }
     
     public void RestartLevel(int levelBuildIndex)
@@ -57,6 +58,12 @@ public class GameManager : MonoBehaviour
 
         levelManager.HandleLevelRestarted();
         GameState = GameState.PLAYING;
+    }
+
+    private void HandleFinishReturnToMenu()
+    {
+        InputManager.Instance.CursorToggle(true);
+        GameState = GameState.MAIN_MENU;
     }
 
     public static void PauseGame()
