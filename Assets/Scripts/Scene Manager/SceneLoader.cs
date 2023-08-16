@@ -82,7 +82,7 @@ public class SceneLoader : MonoBehaviour
         onCompleteLoadAction?.Invoke();
         onCompleteLoadAction = null;
 
-        yield return new WaitForSeconds(fadeDelay);
+        yield return new WaitForSecondsRealtime(fadeDelay);
 
         yield return FadeCorountine(1, 0, transitionFadeTime);
 
@@ -104,11 +104,11 @@ public class SceneLoader : MonoBehaviour
             // Fade Direction
             if (endValue > startValue)
             {
-                transitionCanvasGroup.alpha += 1 / fadeLength * Time.deltaTime;
+                transitionCanvasGroup.alpha += 1 / fadeLength * Time.unscaledDeltaTime;
             }
             else
             {
-                transitionCanvasGroup.alpha -= 1 / fadeLength * Time.deltaTime;
+                transitionCanvasGroup.alpha -= 1 / fadeLength * Time.unscaledDeltaTime;
             }
 
             yield return null;
