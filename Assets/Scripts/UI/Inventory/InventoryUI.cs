@@ -22,14 +22,20 @@ namespace DD.UI
 
         private void OnEnable() {           
             // UI Toggle
-            GameManager.OnGamePause += (toggle) => {if(toggle) HideMenu();};
-            InputManager.Instance.OnInventoryPressed += HandleInventoryKeyPressed;
+            GameManager.OnGamePause += HideMenu;
+            InputManager.Instance.OnInventoryPressed += ToggleDisplay;
 
             // Inventory Updated
             Inventory.Instance.OnInventoryUpdated += UpdateUI;
 
             // Inventory Added Item UI
             // Inventory.Instance.OnItemAdded += HandleAddedItemUI;
+        }
+
+        private void OnDisable()
+        {
+            // UI Toggle
+            GameManager.OnGamePause -= HideMenu;
         }
 
         private void Start()
@@ -58,32 +64,40 @@ namespace DD.UI
                 }
             }
         }
+        private void ToggleDisplay()
+        {
+            IsDisplaying = !IsDisplaying;
+
+            ToggleDisplay(IsDisplaying);
+        }
+
+        private void ToggleDisplay(bool toggle = false)
+        {
+            if (toggle)
+            {
+                ShowMenu();
+            }
+            else
+            {
+                HideMenu();
+            }
+        }
 
         private void HideMenu()
         {
             IsDisplaying = false;
-            inventoryCanvas.enabled = IsDisplaying;
+            inventoryCanvas.enabled = false;
             InputManager.Instance.CursorToggle(false);
             OnInventoryHidden?.Invoke();
         }
 
-        private void HandleInventoryKeyPressed()
+        private void ShowMenu()
         {            
-            IsDisplaying = !IsDisplaying;
-            
-            inventoryCanvas.enabled = IsDisplaying;
-
-            if (inventoryCanvas.enabled)
-            {
-                UpdateUI();
-                InputManager.Instance.CursorToggle(true);
-                OnInventoryDisplayed?.Invoke();
-            }
-            else
-            {
-                InputManager.Instance.CursorToggle(false);
-                OnInventoryHidden?.Invoke();
-            }
+            IsDisplaying = true;
+            UpdateUI();
+            inventoryCanvas.enabled = true;
+            InputManager.Instance.CursorToggle(true);
+            OnInventoryDisplayed?.Invoke();
         }
     }
 }

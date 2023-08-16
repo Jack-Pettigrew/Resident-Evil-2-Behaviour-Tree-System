@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
     private static PauseMenu pauseMenu;
 
     // RUNTIME EVENTS
-    public static event Action<bool> OnGamePause;
+    public static event Action OnGamePause;
+    public static event Action<bool> OnGamePaused;  // This is here because this project needs to end im going insane
+    public static event Action OnGameUnpaused;
     public static event Action OnGameQuitting;
 
     private void Awake() {
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleFinishReturnToMenu()
     {
+        Time.timeScale = 1.0f;
         InputManager.Instance.CursorToggle(true);
         GameState = GameState.MAIN_MENU;
     }
@@ -84,7 +87,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         pauseMenu.ShowMenu();
         GameState = GameState.PAUSED;
-        OnGamePause?.Invoke(true);
+        OnGamePause?.Invoke();
+        OnGamePaused?.Invoke(true);
     }
 
     public static void UnpauseGame()
@@ -105,7 +109,8 @@ public class GameManager : MonoBehaviour
         pauseMenu.HideMenu();
         Time.timeScale = 1.0f;
         GameState = GameState.PLAYING;
-        OnGamePause?.Invoke(false);
+        OnGameUnpaused?.Invoke();
+        OnGamePaused?.Invoke(false);
     }
 
     public static void QuitGame()

@@ -53,13 +53,13 @@ namespace DD.Core.Control
         public event Action<WeaponSlot> OnQuickSlotChange;
 
         private void OnEnable() {
-            GameManager.OnGamePause += CursorToggle;
-            GameManager.OnGamePause += ToggleIgnoreInput;
+            GameManager.OnGamePaused += CursorToggle;
+            GameManager.OnGamePaused += ToggleIgnoreInput;
         }
 
-        private void OnDisable() {
-            GameManager.OnGamePause -= CursorToggle;
-            GameManager.OnGamePause -= ToggleIgnoreInput;
+        private void OnDisable() { 
+            GameManager.OnGamePaused -= CursorToggle;
+            GameManager.OnGamePaused -= ToggleIgnoreInput;
         }
 
         private void Update()
