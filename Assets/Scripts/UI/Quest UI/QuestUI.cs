@@ -37,6 +37,11 @@ namespace DD.UI
             Quest.Instance.OnQuestProgressed += HandleQuestUpdated;
         }
 
+        private void OnDisable()
+        {
+            questUpdateSequence.Kill();
+        }
+
         private void HandleQuestUpdated(Quest progressedQuest)
         {
             // Debug.Log(progressedQuest.CurrentObjective.ObjectiveTitle);
