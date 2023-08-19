@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,18 +12,35 @@ public class FootstepAudioSource : MonoBehaviour
     
     [SerializeField] private AudioClip footstepSound;
     [SerializeField] private AudioSource leftFoot, rightFoot;
+    private bool leftStepped, rightStepped = false;
 
     private void LateUpdate()
     {
-        if (Mathf.Abs((comparisonTransform.position - leftFoot.transform.position).y) <= 0.15f)
+        //if (Mathf.Abs((comparisonTransform.position - leftFoot.transform.position).y) <= 0.15f)
+        if (!leftStepped && leftFoot.transform.position.y <= comparisonTransform.position.y)
         {
             PlayFootstep(Foot.LEFT);
+            leftStepped = true;
+        }
+        else if(leftStepped)
+        {
+            leftStepped = false;
         }
 
-        if (Mathf.Abs((comparisonTransform.position - rightFoot.transform.position).y) <= 0.15f)
+        if (!rightStepped && rightFoot.transform.position.y <= comparisonTransform.position.y)
         {
             PlayFootstep(Foot.RIGHT);
+            rightStepped = true;
         }
+        else if (rightStepped)
+        {
+            rightStepped = false;
+        }
+
+        //if (Mathf.Abs((comparisonTransform.position - rightFoot.transform.position).y) <= 0.15f)
+        //{
+        //    PlayFootstep(Foot.RIGHT);
+        //}
     }
 
     public void PlayFootstep(Foot foot)
