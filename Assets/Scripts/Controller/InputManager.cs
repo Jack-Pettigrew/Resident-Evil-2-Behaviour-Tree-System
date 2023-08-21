@@ -90,11 +90,11 @@ namespace DD.Core.Control
                 Sprint = Input.GetKeyDown(sprintKeyCode);
             }
 
-            // Combat
-            Aim = Input.GetKey(aimKeyCode);
-
             // Global
             if (ignoreInput) return;
+
+            // Combat
+            Aim = Input.GetKey(aimKeyCode);
             
             if (Input.GetKeyDown(aimKeyCode)) OnAimDown?.Invoke();
             if (Input.GetKeyUp(aimKeyCode)) OnAimUp?.Invoke();
