@@ -35,8 +35,8 @@ namespace DD.Systems.Room
 
         [Header("Sounds")]
         [SerializeField] private AudioClip bangingSound;
+        [SerializeField] private AudioClip lockedSound;
         [SerializeField] private AudioClip openingSound;
-        [SerializeField] private AudioClip closedSound;
 
         // ROOMS
         [Header("Connecting Rooms")]
@@ -86,7 +86,7 @@ namespace DD.Systems.Room
 
             if (IsLocked)
             {
-                // play locked noise
+                PlayDoorSound(lockedSound, true);
                 return;
             }
 
@@ -153,6 +153,8 @@ namespace DD.Systems.Room
 
             openingDoorEvent?.Invoke(this);
 
+            PlayDoorSound(openingSound, true);
+
             // Rotate door towards the offset (-90 = +Z | 90 = -Z)
             yield return RotateToAngle(
                 Vector3.Dot(transform.forward, (openerPosition - transform.position).normalized) < 0 ? 90.0f : -90.0f
@@ -210,10 +212,7 @@ namespace DD.Systems.Room
         [ContextMenu("Test Bang Door")]
         public void BangDoor()
         {
-            if (audioSource && bangingSound)
-            {
-                audioSource.PlayOneShot(bangingSound);
-            }
+            PlayDoorSound(bangingSound);
         }
 
         /// <summary>
@@ -246,6 +245,29 @@ namespace DD.Systems.Room
             if (roomOfObject == RoomB) return roomAEntryPoint;
 
             return null;
+        }
+
+        // Only adding this function here to avoid adding another custom component to this project
+        private void PlayDoorSound(AudioClip clip, bool randomPitch = false)
+        {
+            if (audioSource && clip)
+            {
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                }
+
+                if(randomPitch)
+                {
+                    audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.0f);
+                }
+                else
+                {
+                    audioSource.pitch = 1.0f;
+                }
+
+                audioSource.PlayOneShot(clip);
+            }
         }
 
         private void OnDrawGizmosSelected()

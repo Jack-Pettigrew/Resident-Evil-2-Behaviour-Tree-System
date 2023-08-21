@@ -256,16 +256,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
         type: 3}
-      propertyPath: closedDoorEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
-        type: 3}
-      propertyPath: openingDoorEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2986951634267820035, guid: ab8342bcfccdc8d4f916d0fd7e47e463,
-        type: 3}
       propertyPath: closeDoorEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}

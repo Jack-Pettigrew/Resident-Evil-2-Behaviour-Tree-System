@@ -110,8 +110,8 @@ MonoBehaviour:
   doorClosedThreshold: 0.2
   audioSource: {fileID: 4918217502508952767}
   bangingSound: {fileID: 8300000, guid: 7d790110ed4a6e34199acccc0c07fb3e, type: 3}
-  openingSound: {fileID: 0}
-  closedSound: {fileID: 0}
+  lockedSound: {fileID: 8300000, guid: a70701f4e11c89e479fdf930791a207c, type: 3}
+  openingSound: {fileID: 8300000, guid: 24a9a94f4aede6a4ab5ead9900041313, type: 3}
   roomA: {fileID: 0}
   roomAEntryPoint: {fileID: 0}
   roomB: {fileID: 0}
@@ -119,7 +119,32 @@ MonoBehaviour:
   <InteractionIconOffset>k__BackingField: {x: -0.46, y: 1.08, z: 0}
   openingDoorEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
+      - m_Target: {fileID: 4918217502508952767}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 24a9a94f4aede6a4ab5ead9900041313,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   openedDoorEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -128,7 +153,32 @@ MonoBehaviour:
       m_Calls: []
   closedDoorEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
+      - m_Target: {fileID: 4918217502508952767}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 23f32fa120aab8c49afc7ccdee9809a6,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &4856563137107919710
 BoxCollider:
   m_ObjectHideFlags: 0
