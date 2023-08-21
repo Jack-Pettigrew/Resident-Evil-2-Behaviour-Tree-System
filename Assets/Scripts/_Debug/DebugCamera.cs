@@ -80,5 +80,6 @@ public class DebugCamera : MonoBehaviour
     {
         frozenTime = !frozenTime;
         Time.timeScale = frozenTime ? 0 : 1;
+        InputManager.Instance.ToggleIgnoreInput(!frozenTime);
     }
 }
