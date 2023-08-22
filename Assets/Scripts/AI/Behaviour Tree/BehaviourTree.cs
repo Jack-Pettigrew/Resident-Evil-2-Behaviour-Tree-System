@@ -46,6 +46,7 @@ namespace DD.AI.BehaviourTreeSystem
             }
             catch (System.Exception)
             {
+#if UNITY_EDITOR
                 string nodePath = string.Empty;
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -56,6 +57,7 @@ namespace DD.AI.BehaviourTreeSystem
 
                 Debug.LogError("Behaviour Tree Breakage reported:\n" + sb.ToString());
                 throw;
+#endif
             }
 
             HandleBranchChange();
