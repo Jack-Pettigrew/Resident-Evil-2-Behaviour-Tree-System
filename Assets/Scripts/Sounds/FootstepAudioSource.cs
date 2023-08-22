@@ -16,6 +16,8 @@ public class FootstepAudioSource : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!comparisonTransform) return;
+
         //if (Mathf.Abs((comparisonTransform.position - leftFoot.transform.position).y) <= 0.15f)
         if (!leftStepped && leftFoot.transform.position.y <= comparisonTransform.position.y)
         {

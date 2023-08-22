@@ -39,9 +39,9 @@ public class SaveRoomMusic : MonoBehaviour
     {
         if (behaviourTreeInspectable == null) return;
 
-        // If this room AND MR. X not in attack state
+        // If this room
             // Begin
-        if(updatedRoom == conditionalRoom && (behaviourTreeInspectable.PeekAtBlackBoardVariable<MrXState>("State") != MrXState.ATTACKING))
+        if(updatedRoom == conditionalRoom)
         {
             IsActive = true;
 
@@ -52,10 +52,9 @@ public class SaveRoomMusic : MonoBehaviour
 
             musicCoroutine = StartCoroutine(PlaySaveMusic());
         }
-
         // If not this room AND not currently active
             // fade out and stop
-        if(updatedRoom != conditionalRoom && IsActive)
+        else if(updatedRoom != conditionalRoom && IsActive)
         {
             if (musicCoroutine != null)
             {
@@ -68,6 +67,12 @@ public class SaveRoomMusic : MonoBehaviour
 
     private IEnumerator PlaySaveMusic()
     {
+        // Wait for Mr X to no longer be attacking
+        if(behaviourTreeInspectable.PeekAtBlackBoardVariable<MrXState>("State") == MrXState.ATTACKING)
+        {
+            yield return new WaitUntil(() => behaviourTreeInspectable.PeekAtBlackBoardVariable<MrXState>("State") != MrXState.ATTACKING);
+        }
+
         yield return new WaitForSeconds(playDelay);
 
         audioSource.volume = 1.0f;
