@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7376027860990396202}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -104,7 +103,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7376027860990396202}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -245,7 +243,6 @@ RectTransform:
   - {fileID: 6293738336251093211}
   - {fileID: 178775353413631979}
   m_Father: {fileID: 5627300236285346086}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 4.891, y: -10.218, z: -0.118}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -334,7 +331,6 @@ RectTransform:
   m_Children:
   - {fileID: 7376027860990396202}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -435,7 +431,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7376027860990396202}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -563,8 +558,8 @@ GameObject:
   m_Component:
   - component: {fileID: 178775353413631979}
   - component: {fileID: 7580057447803938402}
+  - component: {fileID: 7900382873702660305}
   - component: {fileID: 3441698249567099731}
-  - component: {fileID: 2950338373582052356}
   - component: {fileID: 4483184779931600227}
   m_Layer: 5
   m_Name: Press any key to continue
@@ -586,7 +581,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7376027860990396202}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -601,6 +595,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8731590127409928882}
   m_CullTransparentMesh: 1
+--- !u!114 &7900382873702660305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731590127409928882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b434cc35b157dc047954a58d3365764b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentToFlicker: {fileID: 4483184779931600227}
+  flickerWaitSecs: 1
 --- !u!114 &3441698249567099731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,21 +625,19 @@ MonoBehaviour:
   keyCode: 0
   OnContinue:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2950338373582052356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731590127409928882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0de1876541183e24188c19d337ab84ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  componentToFlicker: {fileID: 4483184779931600227}
-  flickerWaitSecs: 1
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: RequestReturnToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4483184779931600227
 MonoBehaviour:
   m_ObjectHideFlags: 0

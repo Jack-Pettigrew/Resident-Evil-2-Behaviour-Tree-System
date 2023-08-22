@@ -7,8 +7,9 @@ public class Flicker : MonoBehaviour
     [SerializeField] private MonoBehaviour componentToFlicker;
     [SerializeField, Min(0)] private float flickerWaitSecs = 1.0f;
     private Coroutine flickerCorountine;
-    
-    private void OnEnable() {
+
+    private void OnEnable()
+    {
         if (componentToFlicker != null)
         {
             flickerCorountine = StartCoroutine(UpdateFlicker());
@@ -16,19 +17,20 @@ public class Flicker : MonoBehaviour
     }
 
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         if (flickerCorountine != null)
         {
             StopCoroutine(flickerCorountine);
         }
     }
-    
+
     private IEnumerator UpdateFlicker()
     {
         while (true)
         {
             componentToFlicker.enabled = !componentToFlicker.enabled;
-            
+
             yield return new WaitForSeconds(flickerWaitSecs);
         }
     }

@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701c334d85d6d5e419d7d5e237877a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 3.5
   rotSpeedScalar: 0.1
   groundedGravity: -0.2
   gravity: -9.81
@@ -1539,11 +1539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackOriginTransform: {fileID: 2182218961027780001}
-  originOffset: {x: 0, y: 1, z: 1}
+  originOffset: {x: 0, y: 1, z: 0.73}
   attackableLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackRadius: 0.78
+  attackRadius: 1.13
   damageAmount: 25
 --- !u!114 &7465119692173693978
 MonoBehaviour:

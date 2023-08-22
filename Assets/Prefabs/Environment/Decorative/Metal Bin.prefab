@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6966256457812677745}
   - component: {fileID: 6269792174896651220}
   - component: {fileID: 8135244246776934174}
+  - component: {fileID: 1750877183541114743}
   m_Layer: 0
   m_Name: Metal Bin
   m_TagString: Untagged
@@ -58,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 3
+  m_RenderingLayerMask: 515
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0c9bd3368d380cc4fba0c465e02e3142, type: 2}
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1750877183541114743
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775128282281955019}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.47568816, y: 0.8615293, z: 0.47568828}
+  m_Center: {x: 0, y: 0.4319668, z: -0.0000009611249}
