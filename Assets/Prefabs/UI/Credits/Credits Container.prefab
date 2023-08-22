@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4067858764078559699}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -165,7 +164,6 @@ RectTransform:
   m_Children:
   - {fileID: 5585926491485477567}
   m_Father: {fileID: 6836253341284499423}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -203,7 +201,6 @@ RectTransform:
   m_Children:
   - {fileID: 5319896231419834967}
   m_Father: {fileID: 3096346867003894043}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -273,7 +270,6 @@ RectTransform:
   m_Children:
   - {fileID: 2424015506396392382}
   m_Father: {fileID: 3096346867003894043}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -429,7 +425,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5319896231419834967}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -508,7 +503,6 @@ RectTransform:
   - {fileID: 6836253341284499423}
   - {fileID: 4067858764078559699}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -527,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce798d422404b074999e691200cfee64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relativeFilePath: /Resources/assets_credits.txt
+  resourceFileName: assets_credits
   creditSectionTitlePrefab: {fileID: 1051972780712278394, guid: f2b4f97d66a7b404a8585902fd716e7f,
     type: 3}
   creditPrefab: {fileID: 2148029610829177852, guid: 9957743597fcad047aaf8a99277e9d51,

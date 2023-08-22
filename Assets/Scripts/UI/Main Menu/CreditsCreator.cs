@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public class CreditsCreator : MonoBehaviour
 {
-    [SerializeField] private string relativeFilePath;
-    public string FilePath { get { return Application.dataPath + relativeFilePath; } }
+    [SerializeField] private string resourceFileName;
 
     [SerializeField] private GameObject creditSectionTitlePrefab;
     [SerializeField] private GameObject creditPrefab;
@@ -24,9 +24,11 @@ public class CreditsCreator : MonoBehaviour
 
     public void UpdateCredits()
     {
-        if (File.Exists(FilePath))
+        TextAsset textAsset = Resources.Load(resourceFileName, typeof(TextAsset)) as TextAsset;
+        
+        if (textAsset)
         {
-            IEnumerable<string> lines = File.ReadLines(FilePath);
+            IEnumerable<string> lines = Regex.Split(textAsset.text, "\n|\r|\r\n");
 
             foreach (var line in lines)
             {
