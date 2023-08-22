@@ -56,8 +56,6 @@ namespace DD.Systems.InventorySystem
             player = FindObjectOfType<PlayerController>();
         }
 
-        // GET ITEM FUNCTION SIMILAR TO ITEM DATABASE GENERIC WHERE T : ITEM ????????????
-
         public bool AddItem(ItemData item, int amountToAdd)
         {
             bool added = false;
