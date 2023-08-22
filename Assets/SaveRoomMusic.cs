@@ -11,6 +11,7 @@ public class SaveRoomMusic : MonoBehaviour
     [SerializeField] private AudioClip songIntro, songLoop;
     private AudioSource audioSource;
     private float playDelay = 2.0f;
+    private float defaultAudioVolume = 1.0f;
 
     public bool IsActive { private set; get; }
     private Coroutine musicCoroutine = null;
@@ -23,6 +24,7 @@ public class SaveRoomMusic : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        defaultAudioVolume = audioSource.volume;
     }
 
     private void OnEnable()
@@ -75,7 +77,7 @@ public class SaveRoomMusic : MonoBehaviour
 
         yield return new WaitForSeconds(playDelay);
 
-        audioSource.volume = 1.0f;
+        audioSource.volume = defaultAudioVolume;
         audioSource.clip = songIntro;
         audioSource.loop = false;
         audioSource.Play();
