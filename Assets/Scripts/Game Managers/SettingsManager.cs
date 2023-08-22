@@ -164,7 +164,7 @@ public class SettingsManager : MonoBehaviour
         List<TMP_Dropdown.OptionData> resolutionOptions = new List<TMP_Dropdown.OptionData>();
         foreach (Resolution res in Screen.resolutions)
         {
-            resolutionOptions.Add(new TMP_Dropdown.OptionData($"{res.width}x{res.height}"));
+            resolutionOptions.Add(new TMP_Dropdown.OptionData($"{res.width}x{res.height} - {res.refreshRateRatio}"));
         }
         resolution.AddOptions(resolutionOptions);
 
