@@ -11,9 +11,54 @@ namespace DD.Systems.Room
 
         private static Dictionary<Room, Room[]> roomConnections = new Dictionary<Room, Room[]>();
 
+        // Tracking Player's Current Room
+        // Can use this feature to optimise other scripts that call GetRoomOfObject for the Player (i.e. RoomEnvironmentController)
+        [SerializeField] private GameObject playerObjectToTrack;
+        private Room playersCurrentRoom = null;
+        private Coroutine trackPlayerRoomCoroutine;
+        public static event Action<Room> OnPlayerRoomChanged;
+
         private void Awake()
         {
             GatherAllRooms();
+        }
+
+        private void OnEnable()
+        {
+            trackPlayerRoomCoroutine = StartCoroutine(TrackPlayerRoom());
+        }
+
+        private void OnDisable()
+        {
+            if(trackPlayerRoomCoroutine != null)
+            {
+                StopCoroutine(trackPlayerRoomCoroutine);
+                trackPlayerRoomCoroutine = null;
+            }
+        }
+
+        private IEnumerator TrackPlayerRoom()
+        {
+            bool check = true;
+            while (true)
+            {
+                // Wait for every other frame
+                if (!check)
+                {
+                    check = true;
+                    yield return null;
+                }
+
+                yield return new WaitUntil(() => check == true);
+
+                Room currentRoom = GetRoomOfObject(playerObjectToTrack);
+
+                if(currentRoom != playersCurrentRoom)
+                {
+                    playersCurrentRoom = currentRoom;
+                    OnPlayerRoomChanged?.Invoke(playersCurrentRoom);
+                }
+            }
         }
 
         /// <summary>
