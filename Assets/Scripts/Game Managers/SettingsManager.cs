@@ -210,7 +210,7 @@ public class SettingsManager : MonoBehaviour
         }
         else
         {
-            resolution.SetValueWithoutNotify(resolution.options.FindIndex((option) => option.text == $"{Screen.currentResolution.width}x{Screen.currentResolution.height}"));
+            resolution.SetValueWithoutNotify(resolution.options.FindIndex((option) => option.text == $"{Screen.currentResolution.width}x{Screen.currentResolution.height} - {Screen.currentResolution.refreshRateRatio}"));
         }
 
         if(PlayerPrefs.HasKey("graphics_quality"))
@@ -248,7 +248,7 @@ public class SettingsManager : MonoBehaviour
         }
         else
         {
-            AudioListener.volume = 1.0f;
+            masterAudioSlider.SetValueWithoutNotify(1.0f);
             masterAudioSliderValue.UpdateIndicator(1.0f);
         }
         #endregion
