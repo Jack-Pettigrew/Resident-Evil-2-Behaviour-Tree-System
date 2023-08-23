@@ -26,6 +26,7 @@ namespace DD.Core.Combat
         [SerializeField] private Transform bulletOrigin;
         [SerializeField] private Bullet bulletPrefab;
         [SerializeField, Min(0.0f)] private float bulletSpeed = 10.0f;
+        [SerializeField] private LayerMask shootingLayerMask;
 
         // Bullet Pool
         private Bullet[] bulletPool;
@@ -104,7 +105,7 @@ namespace DD.Core.Combat
                 // Fire Ray
                 RaycastHit hit;
                 Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-                Physics.Raycast(ray.origin, ray.direction, out hit, 100.0f);
+                Physics.Raycast(ray.origin, ray.direction, out hit, 100.0f, shootingLayerMask);
                 
                 // Weapon Effects
                 muzzleFlashParticles.Play();

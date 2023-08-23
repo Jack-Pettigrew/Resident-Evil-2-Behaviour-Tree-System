@@ -376,6 +376,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6865335181609130190, guid: b8f340fe57e69439dadc8562ebbab3f8,
     type: 3}
   bulletSpeed: 100
+  shootingLayerMask:
+    serializedVersion: 2
+    m_Bits: 16311
   rateOfFire: 0.7
   gunEffects: {fileID: 11400000, guid: 362be78cfe2384e55937b25ae09afbcd, type: 2}
   OnShoot:
