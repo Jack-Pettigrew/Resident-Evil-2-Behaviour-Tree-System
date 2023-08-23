@@ -251,9 +251,6 @@ namespace DD.Core.Combat
                         return;
                     }
                 }
-                else {
-                    Debug.LogError($"{weaponSlots[i].name}: No WorldItem component attached to this Equipment.", weaponSlots[i]);
-                }
             }
         }
 

@@ -75,7 +75,7 @@ public class SaveRoomMusic : MonoBehaviour
             yield return new WaitUntil(() => behaviourTreeInspectable.PeekAtBlackBoardVariable<MrXState>("State") != MrXState.ATTACKING);
         }
 
-        yield return new WaitForSeconds(playDelay);
+        yield return new WaitForSecondsRealtime(playDelay);
 
         audioSource.volume = defaultAudioVolume;
         audioSource.clip = songIntro;
