@@ -1,6 +1,10 @@
 #Music
 Save Room Theme (George Baker) []
 
+#Character Models
+Gas Mask (Mixamo) [https://www.mixamo.com/#/]
+Tyrant Mr. X (DollyMolly323 & Red Menace) [https://www.deviantart.com/dollymolly323/art/Tyrant-Mr-X-RE2-REMAKE-Model-DL-MMD-801218024]
+
 #Materials
 Many materials were found at https://ambientcg.com/ (ambientcg) [https://ambientcg.com/]
 
@@ -14,10 +18,6 @@ Grab Item (1bob) [https://freesound.org/people/1bob/sounds/651515/]
 Automatic Pistol (DE1977) [https://freesound.org/people/DE1977/sounds/656527/]
 Additional sound effects from zapsplat.com (zapsplat) [https://www.zapsplat.com]
 
-#Character Models
-Gas Mask (Mixamo) [https://www.mixamo.com/#/]
-Tyrant Mr. X (DollyMolly323 & Red Menace) [https://www.deviantart.com/dollymolly323/art/Tyrant-Mr-X-RE2-REMAKE-Model-DL-MMD-801218024]
-
 #Unity Asset Store
 Hisu knife (Helica) [https://assetstore.unity.com/packages/3d/props/weapons/hisu-knife-54058]
 Police Car & Helicopter (SICS Games) [https://assetstore.unity.com/packages/3d/vehicles/land/police-car-helicopter-52496]
@@ -28,7 +28,7 @@ Simple City pack plain (255 pixel studios) [https://assetstore.unity.com/package
 Stone Fence (Ben Droste) [https://assetstore.unity.com/packages/3d/props/exterior/stone-fence-2437]
 Street Lamps (SpaceZeta) [https://assetstore.unity.com/packages/3d/props/exterior/street-lamps-165658]
 
-#Miscellaneous Models
+#Miscellaneous
 Retro Computer Setup (Brandon Westlake) [https://skfb.ly/orUQM]
 Chest (Aki_Kato) [https://skfb.ly/66CvU]
 Office Desk (bappoiscool) [https://skfb.ly/6ZRvs]
