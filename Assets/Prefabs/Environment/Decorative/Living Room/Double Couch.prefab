@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4114036148790473428}
   - component: {fileID: 2230136537190057502}
   - component: {fileID: 4079263962075656596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Double Couch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
