@@ -1554,6 +1554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7374748982084012011}
   - component: {fileID: 5589874768773403501}
+  - component: {fileID: 6147473705767005014}
   - component: {fileID: 9164163779754492854}
   - component: {fileID: 3983449726059155668}
   - component: {fileID: 4354565095354824937}
@@ -1593,6 +1594,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4271597613483697901}
   m_CullTransparentMesh: 1
+--- !u!114 &6147473705767005014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4271597613483697901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248a1a7e80a87914e8b4b723ea96a4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9164163779754492854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2759,18 +2772,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DD.Core.Control.InputManager, Assembly-CSharp
-        m_MethodName: CursorToggle
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3571390774618038888}
         m_TargetAssemblyTypeName: StartGameButton, Assembly-CSharp
         m_MethodName: StartGame
@@ -2792,6 +2793,18 @@ MonoBehaviour:
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Playables.PlayableAsset,
             UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DD.Core.Control.InputManager, Assembly-CSharp
+        m_MethodName: CursorToggle
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
