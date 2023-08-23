@@ -15,26 +15,10 @@ MonoBehaviour:
   itemID: 0
   itemName: Test Ammo Item
   itemDescription: 
-  itemIcon: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+  itemIcon: {fileID: 2800000, guid: 9fae895f6fef2ab489f30c863257805e, type: 3}
   itemPrefab: {fileID: 4539353995082467048, guid: 58cd50910a3ffe742be14ed051ee999a,
     type: 3}
   isStackable: 1
   isDroppable: 1
-  contextMenuOptions:
-  - menuOptionTitle: Combine
-    onClickCallback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000}
-          m_TargetAssemblyTypeName: DD.Core.Items.AmmoItem, Assembly-CSharp
-          m_MethodName: Use
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  contextMenuOptions: []
   <EquipmentType>k__BackingField: 0
