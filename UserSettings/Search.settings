@@ -26,9 +26,9 @@ scopes = {
 	"last_search.110DEAF1" = "h: t:MeshRenderer"
 	"OpenInspectorPreview.110DEAF1" = "0"
 	"currentGroup.110DEAF1" = "scene"
-	"last_search.E8DA15E5" = "checkif"
+	"last_search.E8DA15E5" = "find: assets/models/*fbx"
 	"OpenInspectorPreview.E8DA15E5" = "0"
-	"currentGroup.E8DA15E5" = "all"
+	"currentGroup.E8DA15E5" = "asset"
 	"last_search.310DEAF1" = "RoomManager"
 	"OpenInspectorPreview.310DEAF1" = "0"
 	"currentGroup.310DEAF1" = "all"
@@ -83,8 +83,8 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
-	"R"
 	""
+	"R"
 	"h: t:MeshRenderer"
 	"h:"
 	"h: t:MeshRenderer #m_RenderingLayerMask>0"
@@ -110,7 +110,7 @@ expandedQueries = [
 ]
 queryBuilder = true
 ignoredProperties = "id;name;classname;imagecontentshash"
-helperWidgetCurrentArea = "h:"
+helperWidgetCurrentArea = "p:"
 disabledIndexers = ""
 minIndexVariations = 2
 findProviderIndexHelper = true
