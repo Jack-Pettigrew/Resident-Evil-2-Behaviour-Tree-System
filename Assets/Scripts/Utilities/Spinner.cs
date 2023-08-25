@@ -21,7 +21,7 @@ namespace DD.Utilities
             z = zAxis ? 1 : 0;
             
             float tempSpeed = speed * Time.deltaTime;
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(x * tempSpeed, y * tempSpeed, z * tempSpeed));
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + new Vector3(x * tempSpeed, y * tempSpeed, z * tempSpeed));
         }
     }
 }
