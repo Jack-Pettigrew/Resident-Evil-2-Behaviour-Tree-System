@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     private void Start() {
         // Level started request most up to date settings
         SettingsManager.Instance?.ApplySavedSettings();
+
+        AudioListener.pause = false;
     }
 
     public void EndLevel()

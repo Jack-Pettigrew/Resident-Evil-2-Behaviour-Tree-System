@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ending_Scene.unity
     guid: 2b5549759938ace4eb496911af1a1c0d
+  - enabled: 0
+    path: Assets/Scenes/OST Scene.unity
+    guid: 26f9a748e3161e54883356e64f62ad7f
   m_configObjects: {}
