@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 1927
+  controlID: 51896
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -45,9 +45,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 363
+    x: 367
     y: 73
-    width: 1654
+    width: 1650
     height: 821
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 0
+  m_EnterPlayModeBehavior: 1
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
@@ -101,23 +101,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1654
+      width: 1650
       height: 800
     m_Scale: {x: 0.5555556, y: 0.5555556}
-    m_Translation: {x: 827, y: 399.99994}
+    m_Translation: {x: 825, y: 399.99994}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1488.6
+      x: -1484.9999
       y: -719.9999
-      width: 2977.2
+      width: 2969.9998
       height: 1439.9999
     m_MinimalGUI: 1
   m_defaultScale: 0.5555556
-  m_LastWindowPixelSize: {x: 1654, y: 821}
+  m_LastWindowPixelSize: {x: 1650, y: 821}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 1928
+  controlID: 51897
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,12 +168,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 363
+    width: 367
     height: 1299
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 1851
+  controlID: 51750
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -191,7 +191,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 363
+    width: 367
     height: 648
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
@@ -223,7 +223,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 362
+    width: 366
     height: 627
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -237,10 +237,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 96710000
-      m_LastClickedID: 29078
-      m_ExpandedIDs: 22f7ffff0efbffff
+      scrollPos: {x: 0, y: 1070}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 5c0bfeff8c28feff3e9fffff16abffff40acffff3cb4ffff5ab4ffff32b5ffff3eb5ffff42b5ffff72b5ffff86b5ffffeec5ffff18cdffff28e7ffff40f1ffff16f4ffff1af4ffff1ef4ffff64f7ffff0efbffff827200001a740000f07400001a790000a87c000080860000248b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -281,7 +281,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 648
-    width: 363
+    width: 367
     height: 651
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
@@ -313,7 +313,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 721
-    width: 362
+    width: 366
     height: 630
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -335,8 +335,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders:
-    - Assets/Scenes
+    m_Folders: []
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -352,7 +351,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: da9f0000
     m_LastClickedID: 40922
-    m_ExpandedIDs: ffffffff00000000bc6e0000be6e0000c06e0000c26e0000c46e0000c66e0000c86e0000ca6e0000cc6e0000ce6e0000d06e0000d26e0000d46e0000d66e0000d86e0000da6e0000dc6e0000de6e0000e06e0000e26e0000e46e0000e66e0000e86e0000ea6e0000ec6e0000ee6e0000f06e0000f26e0000f46e0000f66e0000f86e0000fa6e0000fc6e0000fe6e0000006f0000026f0000046f0000066f0000086f00000a6f00000c6f00000e6f0000106f0000126f0000146f0000166f0000186f00001a6f00001c6f00001e6f0000206f0000226f0000246f0000266f0000286f00002a6f00002c6f00002e6f0000306f0000326f0000346f0000366f0000386f00003a6f00003c6f00003e6f0000406f0000426f0000446f0000466f0000486f00004a6f00004c6f00004e6f0000
+    m_ExpandedIDs: ffffffff00000000bc6e0000be6e0000c06e0000c26e0000c46e0000c66e0000c86e0000ca6e0000cc6e0000ce6e0000d06e0000d26e0000d46e0000d66e0000d86e0000da6e0000dc6e0000de6e0000e06e0000e26e0000e46e0000e66e0000e86e0000ea6e0000ec6e0000ee6e0000f06e0000f26e0000f46e0000f66e0000f86e0000fa6e0000fc6e0000fe6e0000006f0000026f0000046f0000066f0000086f00000a6f00000c6f00000e6f0000106f0000126f0000146f0000166f0000186f00001a6f00001c6f00001e6f0000206f0000226f0000246f0000266f0000286f00002a6f00002c6f00002e6f0000306f0000326f0000346f0000366f0000386f00003a6f00003c6f00003e6f0000406f0000426f0000446f0000466f0000486f00004a6f00004c6f0000e8700000ccd30200a48c0700f48c0700fe8c0700228d0700588d070056ae07009a350a00
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -378,9 +377,9 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 96710000
+    m_SelectedIDs: c602fdff
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000bc6e0000be6e0000c06e0000c26e0000c46e0000c66e0000c86e0000ca6e0000cc6e0000ce6e0000d06e0000d26e0000d46e0000d66e0000d86e0000da6e0000dc6e0000de6e0000e06e0000e26e0000e46e0000e66e0000e86e0000ea6e0000ec6e0000ee6e0000f06e0000f26e0000f46e0000f66e0000f86e0000fa6e0000fc6e0000fe6e0000006f0000026f0000046f0000066f0000086f00000a6f00000c6f00000e6f0000106f0000126f0000146f0000166f0000186f00001a6f00001c6f00001e6f0000206f0000226f0000246f0000266f0000286f00002a6f00002c6f00002e6f0000306f0000326f0000346f0000366f0000386f00003a6f00003c6f00003e6f0000406f0000426f0000446f0000466f0000486f00004a6f00004c6f00004e6f0000
+    m_ExpandedIDs: ffffffff00000000bc6e0000be6e0000c06e0000c26e0000c46e0000c66e0000c86e0000ca6e0000cc6e0000ce6e0000d06e0000d26e0000d46e0000d66e0000d86e0000da6e0000dc6e0000de6e0000e06e0000e26e0000e46e0000e66e0000e86e0000ea6e0000ec6e0000ee6e0000f06e0000f26e0000f46e0000f66e0000f86e0000fa6e0000fc6e0000fe6e0000006f0000026f0000046f0000066f0000086f00000a6f00000c6f00000e6f0000106f0000126f0000146f0000166f0000186f00001a6f00001c6f00001e6f0000206f0000226f0000246f0000266f0000286f00002a6f00002c6f00002e6f0000306f0000326f0000346f0000366f0000386f00003a6f00003c6f00003e6f0000406f0000426f0000446f0000466f0000486f00004a6f00004c6f0000e8700000ccd30200a48c0700f48c0700fe8c0700228d0700588d070056ae07009a350a00
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -405,8 +404,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 96710000
-    m_LastClickedInstanceID: 29078
+    m_SelectedInstanceIDs: c602fdff
+    m_LastClickedInstanceID: -195898
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -453,14 +452,14 @@ MonoBehaviour:
   - {fileID: 13}
   m_Position:
     serializedVersion: 2
-    x: 363
+    x: 367
     y: 0
-    width: 1656
+    width: 1652
     height: 1299
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 1929
+  controlID: 51860
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -478,10 +477,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1656
+    width: 1652
     height: 842
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 11}
@@ -510,9 +509,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 363
+    x: 367
     y: 73
-    width: 1654
+    width: 1650
     height: 821
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -606,9 +605,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -111, y: 26}
+      snapOffset: {x: 31, y: 26}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 1
+      snapCorner: 0
       id: Orientation
       index: 0
       layout: 4
@@ -853,8 +852,8 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -216, y: -204}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffset: {x: -141, y: -204}
+      snapOffsetDelta: {x: -42, y: 0}
       snapCorner: 3
       id: AINavigationOverlay
       index: 11
@@ -915,7 +914,7 @@ MonoBehaviour:
       sizeOverriden: 0
     m_OverlaysVisible: 1
   m_WindowGUID: 8d0d5d711cea6fc41a7417a2ac9b1b93
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
@@ -924,9 +923,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.21534921, y: 1.4072857, z: 0.51624423}
+    m_Target: {x: 10.072935, y: 4.6363144, z: 34.30997}
     speed: 2
-    m_Value: {x: 0.21534921, y: 1.4072857, z: 0.51624423}
+    m_Value: {x: 10.072935, y: 4.6363144, z: 34.30997}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -972,9 +971,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.053934436, y: 0.08722245, z: -0.002963475, w: -0.99498016}
+    m_Target: {x: 0.14647268, y: 0.005934542, z: -0.0008901274, w: 0.9892196}
     speed: 2
-    m_Value: {x: -0.053934436, y: 0.08722246, z: -0.0029634752, w: -0.9949802}
+    m_Value: {x: 0.14646934, y: 0.005934407, z: -0.0008901071, w: 0.9891971}
   m_Size:
     m_Target: 0.8660254
     speed: 2
@@ -1144,13 +1143,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: bdf5fb6e2a4dd584aab2077063604bb4,
+  m_AnimatorController: {fileID: 9100000, guid: cbde278e691da72489b862c7983ee8b2,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 5316337870659927941, guid: bdf5fb6e2a4dd584aab2077063604bb4,
-      type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  - m_Target: {fileID: 8357778177034260528, guid: bdf5fb6e2a4dd584aab2077063604bb4,
+  - m_Target: {fileID: 4952022145816655370, guid: cbde278e691da72489b862c7983ee8b2,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -1181,10 +1177,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 842
-    width: 1656
+    width: 1652
     height: 457
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -1214,9 +1210,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 363
+    x: 367
     y: 915
-    width: 1654
+    width: 1650
     height: 436
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1265,7 +1261,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 29078
+  m_LastSelectedObjectID: 31872
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1355,7 +1351,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: InspectorWindow
+  m_Name: NavMeshEditorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -1364,17 +1360,17 @@ MonoBehaviour:
     y: 0
     width: 541
     height: 1299
-  m_MinSize: {x: 276, y: 71}
+  m_MinSize: {x: 301, y: 381}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 19}
+  m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 19}
   - {fileID: 20}
   - {fileID: 21}
   - {fileID: 22}
   - {fileID: 23}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 3
+  m_LastSelected: 0
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1416,7 +1412,7 @@ MonoBehaviour:
     m_CachedPref: 171
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: -195898
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -1564,205 +1560,86 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_WidgetStates:
     m_Keys:
-    - Display Stats -> Frame Stats
-    - Display Stats -> Bottlenecks
-    - Display Stats -> Update every second with average
-    - Display Stats -> Detailed Stats
-    - Display Stats -> Count Rays (MRays/Frame)
-    - Decals -> Decals Affecting Transparent Objects -> Display Atlas
-    - Decals -> Decals Affecting Transparent Objects -> Mip Level
-    - Material -> Common Material Properties
-    - Material -> Material
-    - Material -> Engine
-    - Material -> Attributes
-    - Material -> Properties
-    - Material -> GBuffer
-    - Material -> Material Validator
-    - Material ->  -> Too High Color
-    - Material ->  -> Too Low Color
-    - Material ->  -> Not A Pure Metal Color
-    - Material ->  -> Pure Metals
-    - Material ->  -> Override Global Material Texture Mip Bias
-    - Material ->  -> Debug Global Material Texture Mip Bias Value
-    - Lighting -> Shadows -> Shadow Debug Mode
-    - Lighting -> Shadows ->  -> Use Selection
-    - Lighting -> Shadows ->  -> Shadow Map Index
-    - Lighting -> Shadows -> Global Shadow Scale Factor
-    - Lighting -> Shadows -> Clear Shadow Atlas
-    - Lighting -> Shadows -> Shadow Range Minimum Value
-    - Lighting -> Shadows -> Shadow Range Maximum Value
-    - Lighting -> Lighting -> Show Lights By Type
-    - Lighting -> Lighting -> Show Lights By Type -> Directional Lights
-    - Lighting -> Lighting -> Show Lights By Type -> Punctual Lights
-    - Lighting -> Lighting -> Show Lights By Type -> Area Lights
-    - Lighting -> Lighting -> Show Lights By Type -> Reflection Probes
-    - Lighting -> Lighting -> Exposure
-    - Lighting -> Lighting -> Exposure -> DebugMode
-    - Lighting -> Lighting -> Exposure -> Display Mask Only
-    - Lighting -> Lighting -> Exposure ->  -> Show Scene Overlay
-    - Lighting -> Lighting -> Exposure ->  -> Show Tonemap Curve
-    - Lighting -> Lighting -> Exposure ->  -> Center Around Exposure
-    - Lighting -> Lighting -> Exposure -> Display RGB Histogram
-    - Lighting -> Lighting -> Exposure -> Debug Exposure Compensation
-    - Lighting -> Lighting -> HDR
-    - Lighting -> Lighting -> HDR -> DebugMode
-    - Lighting -> Lighting -> Lighting Debug Mode
-    - Lighting -> Lighting -> Light Hierarchy Debug Mode
-    - Lighting -> Lighting -> Light Layers Visualization
-    - Lighting -> Lighting ->  -> Use Selected Light
-    - Lighting -> Lighting ->  -> Switch To Light's Shadow Layers
-    - Lighting -> Lighting ->  -> Filter Layers
-    - Lighting -> Lighting ->  -> Layers Color
-    - 'Lighting -> Lighting ->  -> Layers Color -> 0: Light Layer default'
-    - 'Lighting -> Lighting ->  -> Layers Color -> 1: Light Layer 1'
-    - 'Lighting -> Lighting ->  -> Layers Color -> 2: Light Layer 2'
-    - 'Lighting -> Lighting ->  -> Layers Color -> 3: Light Layer 3'
-    - 'Lighting -> Lighting ->  -> Layers Color -> 4: Light Layer 4'
-    - 'Lighting -> Lighting ->  -> Layers Color -> 5: Light Layer 5'
-    - 'Lighting -> Lighting ->  -> Layers Color -> 6: Light Layer 6'
-    - 'Lighting -> Lighting ->  -> Layers Color -> 7: Light Layer 7'
-    - Lighting -> Material Overrides -> Override Smoothness
-    - Lighting -> Material Overrides ->  -> Smoothness
-    - Lighting -> Material Overrides -> Override Albedo
-    - Lighting -> Material Overrides ->  -> Albedo
-    - Lighting -> Material Overrides -> Override Normal
-    - Lighting -> Material Overrides -> Override Specular Color
-    - Lighting -> Material Overrides ->  -> Specular Color
-    - Lighting -> Material Overrides -> Override Ambient Occlusion
-    - Lighting -> Material Overrides ->  -> Ambient Occlusion
-    - Lighting -> Material Overrides -> Override Emissive Color
-    - Lighting -> Material Overrides ->  -> Emissive Color
-    - Lighting -> Fullscreen Debug Mode
-    - Lighting ->  -> Screen Space Shadow Index
-    - Lighting ->  -> Ray Tracing Acceleration Structure View
-    - Lighting ->  -> Ray Tracing Acceleration Structure Mode
-    - Lighting ->  -> Debug Mip
-    - Lighting ->  -> Enable Depth Remap
-    - Lighting ->  ->  -> Depth Range Min Value
-    - Lighting ->  ->  -> Depth Range Max Value
-    - Lighting ->  -> Light Index
-    - Lighting -> Tile/Cluster Debug
-    - Lighting ->  -> Tile/Cluster Debug By Category
-    - Lighting ->  ->  -> Cluster Debug Mode
-    - Lighting ->  ->  -> Cluster Distance
-    - Lighting -> Display Sky Reflection
-    - Lighting ->  -> Sky Reflection Mipmap
-    - Lighting -> Display Light Volumes
-    - Lighting ->  -> Light Volume Debug Type
-    - Lighting ->  -> Max Debug Light Count
-    - Lighting -> Display Cookie Atlas
-    - Lighting ->  -> Mip Level
-    - Lighting ->  -> Clear Cookie Atlas
-    - Lighting -> Display Reflection Probe Atlas
-    - Lighting ->  -> Slice
-    - Lighting ->  -> Clear Reflection Probe Atlas
-    - Lighting ->  -> Apply Exposure
-    - Lighting -> Debug Overlay Screen Ratio
-    - Rendering -> Fullscreen Debug Mode
-    - Rendering ->  -> Max Overdraw Count
-    - Rendering ->  -> Max Quad Cost
-    - Rendering ->  -> Max Vertex Density
-    - Rendering ->  -> Min Motion Vector Length (in pixels)
-    - Rendering -> Mip Maps
-    - Rendering ->  -> Terrain Texture
-    - Rendering -> Color Picker -> Debug Mode
-    - Rendering -> Color Picker -> Font Color
-    - Rendering -> False Color Mode
-    - Rendering ->  -> Range Threshold 0
-    - Rendering ->  -> Range Threshold 1
-    - Rendering ->  -> Range Threshold 2
-    - Rendering ->  -> Range Threshold 3
-    - Rendering -> Freeze Camera For Culling
-    - Rendering -> Color Monitors -> Waveform
-    - Rendering -> Color Monitors -> #WaveformContainer -> Exposure
-    - Rendering -> Color Monitors -> #WaveformContainer -> Parade mode
-    - Rendering -> Color Monitors -> Vectorscope
-    - Rendering -> Color Monitors -> #VectorscopeContainer -> Exposure
-    - Rendering -> Color Monitors -> Size
-    - Rendering -> HDRP Render Graph -> Clear Render Targets At Creation
-    - Rendering -> HDRP Render Graph -> Disable Pass Culling
-    - Rendering -> HDRP Render Graph -> Immediate Mode
-    - Rendering -> HDRP Render Graph -> Enable Logging
-    - Scene Camera -> Rendering
-    - Scene Camera -> Rendering -> Lit Shader Mode
-    - Scene Camera -> Rendering -> Depth Prepass within Deferred
-    - Scene Camera -> Rendering -> Clear GBuffers
-    - Scene Camera -> Rendering -> Opaque Objects
-    - Scene Camera -> Rendering -> Transparent Objects
-    - Scene Camera -> Rendering -> Decals
-    - Scene Camera -> Rendering -> Decal Layers
-    - Scene Camera -> Rendering -> Transparent Prepass
-    - Scene Camera -> Rendering -> Transparent Postpass
-    - Scene Camera -> Rendering -> Low Resolution Transparent
-    - Scene Camera -> Rendering -> Ray Tracing
-    - Scene Camera -> Rendering -> Custom Pass
-    - Scene Camera -> Rendering -> Motion Vectors
-    - Scene Camera -> Rendering -> Opaque Object Motion
-    - Scene Camera -> Rendering -> Transparent Object Motion
-    - Scene Camera -> Rendering -> Refraction
-    - Scene Camera -> Rendering -> Distortion
-    - Scene Camera -> Rendering -> Rough Distortion
-    - Scene Camera -> Rendering -> Post-process
-    - Scene Camera -> Rendering -> Custom Post-process
-    - Scene Camera -> Rendering -> Stop NaN
-    - Scene Camera -> Rendering -> Depth Of Field
-    - Scene Camera -> Rendering -> Motion Blur
-    - Scene Camera -> Rendering -> Panini Projection
-    - Scene Camera -> Rendering -> Bloom
-    - Scene Camera -> Rendering -> Lens Distortion
-    - Scene Camera -> Rendering -> Chromatic Aberration
-    - Scene Camera -> Rendering -> Vignette
-    - Scene Camera -> Rendering -> Color Grading
-    - Scene Camera -> Rendering -> Film Grain
-    - Scene Camera -> Rendering -> Dithering
-    - Scene Camera -> Rendering -> Anti-aliasing
-    - Scene Camera -> Rendering -> Tonemapping
-    - Scene Camera -> Rendering -> Lens Flare Data Driven
-    - Scene Camera -> Rendering -> After Post-process
-    - Scene Camera -> Rendering -> Depth Test
-    - Scene Camera -> Rendering -> Virtual Texturing
-    - Scene Camera -> Rendering -> Water
-    - Scene Camera -> Rendering -> Asymmetric Projection
-    - Scene Camera -> Rendering -> Screen Coordinates Override
-    - Scene Camera -> Lighting
-    - Scene Camera -> Lighting -> Shadow Maps
-    - Scene Camera -> Lighting -> Contact Shadows
-    - Scene Camera -> Lighting -> Probe Volume
-    - Scene Camera -> Lighting -> Normalize Reflection Probes
-    - Scene Camera -> Lighting -> Screen Space Shadows
-    - Scene Camera -> Lighting -> Shadowmask
-    - Scene Camera -> Lighting -> Screen Space Reflection
-    - Scene Camera -> Lighting -> Transparents
-    - Scene Camera -> Lighting -> Screen Space Global Illumination
-    - Scene Camera -> Lighting -> Screen Space Ambient Occlusion
-    - Scene Camera -> Lighting -> Transmission
-    - Scene Camera -> Lighting -> Fog
-    - Scene Camera -> Lighting -> Volumetrics
-    - Scene Camera -> Lighting -> Reprojection
-    - Scene Camera -> Lighting -> Light Layers
-    - Scene Camera -> Lighting -> Exposure Control
-    - Scene Camera -> Lighting -> Reflection Probe
-    - Scene Camera -> Lighting -> Planar Reflection Probe
-    - Scene Camera -> Lighting -> Metallic Indirect Fallback
-    - Scene Camera -> Lighting -> Sky Reflection
-    - Scene Camera -> Lighting -> Direct Specular Lighting
-    - Scene Camera -> Lighting -> Subsurface Scattering
-    - Scene Camera -> Lighting -> Volumetric Clouds
-    - Scene Camera -> Lighting -> Full Resolution Clouds For Sky
-    - Scene Camera -> Async Compute
-    - Scene Camera -> Async Compute -> Asynchronous Execution
-    - Scene Camera -> Async Compute -> Light List
-    - Scene Camera -> Async Compute -> SS Reflection
-    - Scene Camera -> Async Compute -> SS Ambient Occlusion
-    - Scene Camera -> Async Compute -> Contact Shadows
-    - Scene Camera -> Async Compute -> Volume Voxelizations
-    - Scene Camera -> Light Loop
-    - Scene Camera -> Light Loop -> FPTL For Forward Opaque
-    - Scene Camera -> Light Loop -> Big Tile Prepass
-    - Scene Camera -> Light Loop -> Deferred Tile
-    - Scene Camera -> Light Loop -> Compute Light Evaluation
-    - Scene Camera -> Light Loop -> Compute Light Variants
-    - Scene Camera -> Light Loop -> Compute Material Variants
+    - Debug Camera -> Rendering
+    - Debug Camera -> Rendering -> Lit Shader Mode
+    - Debug Camera -> Rendering -> Depth Prepass within Deferred
+    - Debug Camera -> Rendering -> Clear GBuffers
+    - Debug Camera -> Rendering -> Opaque Objects
+    - Debug Camera -> Rendering -> Transparent Objects
+    - Debug Camera -> Rendering -> Decals
+    - Debug Camera -> Rendering -> Decal Layers
+    - Debug Camera -> Rendering -> Transparent Prepass
+    - Debug Camera -> Rendering -> Transparent Postpass
+    - Debug Camera -> Rendering -> Low Resolution Transparent
+    - Debug Camera -> Rendering -> Ray Tracing
+    - Debug Camera -> Rendering -> Custom Pass
+    - Debug Camera -> Rendering -> Motion Vectors
+    - Debug Camera -> Rendering -> Opaque Object Motion
+    - Debug Camera -> Rendering -> Transparent Object Motion
+    - Debug Camera -> Rendering -> Refraction
+    - Debug Camera -> Rendering -> Distortion
+    - Debug Camera -> Rendering -> Rough Distortion
+    - Debug Camera -> Rendering -> Post-process
+    - Debug Camera -> Rendering -> Custom Post-process
+    - Debug Camera -> Rendering -> Stop NaN
+    - Debug Camera -> Rendering -> Depth Of Field
+    - Debug Camera -> Rendering -> Motion Blur
+    - Debug Camera -> Rendering -> Panini Projection
+    - Debug Camera -> Rendering -> Bloom
+    - Debug Camera -> Rendering -> Lens Distortion
+    - Debug Camera -> Rendering -> Chromatic Aberration
+    - Debug Camera -> Rendering -> Vignette
+    - Debug Camera -> Rendering -> Color Grading
+    - Debug Camera -> Rendering -> Film Grain
+    - Debug Camera -> Rendering -> Dithering
+    - Debug Camera -> Rendering -> Anti-aliasing
+    - Debug Camera -> Rendering -> Tonemapping
+    - Debug Camera -> Rendering -> Lens Flare Data Driven
+    - Debug Camera -> Rendering -> After Post-process
+    - Debug Camera -> Rendering -> Depth Test
+    - Debug Camera -> Rendering -> Virtual Texturing
+    - Debug Camera -> Rendering -> Water
+    - Debug Camera -> Rendering -> Asymmetric Projection
+    - Debug Camera -> Rendering -> Screen Coordinates Override
+    - Debug Camera -> Lighting
+    - Debug Camera -> Lighting -> Shadow Maps
+    - Debug Camera -> Lighting -> Contact Shadows
+    - Debug Camera -> Lighting -> Probe Volume
+    - Debug Camera -> Lighting -> Normalize Reflection Probes
+    - Debug Camera -> Lighting -> Screen Space Shadows
+    - Debug Camera -> Lighting -> Shadowmask
+    - Debug Camera -> Lighting -> Screen Space Reflection
+    - Debug Camera -> Lighting -> Transparents
+    - Debug Camera -> Lighting -> Screen Space Global Illumination
+    - Debug Camera -> Lighting -> Screen Space Ambient Occlusion
+    - Debug Camera -> Lighting -> Transmission
+    - Debug Camera -> Lighting -> Fog
+    - Debug Camera -> Lighting -> Volumetrics
+    - Debug Camera -> Lighting -> Reprojection
+    - Debug Camera -> Lighting -> Light Layers
+    - Debug Camera -> Lighting -> Exposure Control
+    - Debug Camera -> Lighting -> Reflection Probe
+    - Debug Camera -> Lighting -> Planar Reflection Probe
+    - Debug Camera -> Lighting -> Metallic Indirect Fallback
+    - Debug Camera -> Lighting -> Sky Reflection
+    - Debug Camera -> Lighting -> Direct Specular Lighting
+    - Debug Camera -> Lighting -> Subsurface Scattering
+    - Debug Camera -> Lighting -> Volumetric Clouds
+    - Debug Camera -> Lighting -> Full Resolution Clouds For Sky
+    - Debug Camera -> Async Compute
+    - Debug Camera -> Async Compute -> Asynchronous Execution
+    - Debug Camera -> Async Compute -> Light List
+    - Debug Camera -> Async Compute -> SS Reflection
+    - Debug Camera -> Async Compute -> SS Ambient Occlusion
+    - Debug Camera -> Async Compute -> Contact Shadows
+    - Debug Camera -> Async Compute -> Volume Voxelizations
+    - Debug Camera -> Light Loop
+    - Debug Camera -> Light Loop -> FPTL For Forward Opaque
+    - Debug Camera -> Light Loop -> Big Tile Prepass
+    - Debug Camera -> Light Loop -> Deferred Tile
+    - Debug Camera -> Light Loop -> Compute Light Evaluation
+    - Debug Camera -> Light Loop -> Compute Light Variants
+    - Debug Camera -> Light Loop -> Compute Material Variants
     - Main Camera -> Rendering
     - Main Camera -> Rendering -> Lit Shader Mode
     - Main Camera -> Rendering -> Depth Prepass within Deferred
@@ -1843,8 +1720,6 @@ MonoBehaviour:
     - Main Camera -> Light Loop -> Compute Light Evaluation
     - Main Camera -> Light Loop -> Compute Light Variants
     - Main Camera -> Light Loop -> Compute Material Variants
-    - Volume -> Component
-    - Volume -> Camera
     m_Values:
     - {fileID: 0}
     - {fileID: 0}
@@ -2006,126 +1881,5 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
   m_Settings: {fileID: 0}
-  m_DebugTreeState: 2039583031
+  m_DebugTreeState: 17

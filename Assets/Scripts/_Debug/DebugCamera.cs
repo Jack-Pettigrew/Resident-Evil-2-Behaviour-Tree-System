@@ -1,6 +1,7 @@
 using UnityEngine;
 using DD.Core.Control;
 using DD.AI.Controllers;
+using System;
 
 public class DebugCamera : MonoBehaviour
 {
@@ -42,6 +43,11 @@ public class DebugCamera : MonoBehaviour
 
         if(active)
         {
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                ScreenCapture.CaptureScreenshot(DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png", 1);
+            }
+
             if(Input.GetKeyDown(KeyCode.I))
             {
                 Cursor.visible = !Cursor.visible;
