@@ -1,4 +1,4 @@
-<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/0023a237-112b-407a-936d-c728aad8b350">
+![Cropped Reception Chase](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/c2dafdd8-13fe-43df-a983-789098821c8b)
 
 # Behaviour Tree AI Study: Mr X - Resident Evil 2 Remake
 A technical exploration and recreation of the '_Mr. X_' AI system from _Resident Evil 2 Remake (2019)_ using my own implementation of a _Behaviour Tree (BT)_ system. This project serves as my first dive into video game AI by creating a BT from the ground up.
@@ -27,8 +27,6 @@ Chris Simpson (one of two programmers on Project Zomboid) wrote a great [article
 
 #### Structure
 My BT consists of numerous Action Nodes (MoveTo, OpenDoor, Idle, etc.), Conditional Nodes (IsAt, CanSeeObject, IsInSameRoomAs, etc.), standard Composite Nodes (Selector, Sequence, etc.) and some Service Nodes (FindDoorPathTo, GetRandomRoom, SetBlackBoardVariable, etc.).
-
-<!-- Image: Code Banner -->
 
 These Nodes link together forming one of five different subtrees. Which subtree is run is determined by either Conditional Node either querying a _Blackboard_ variable ([see here for more](####Blackboard)) or the world state. For example, by querying whether the AI has been marked as stunned, we can branch off into playing the 'Stunned' animation and continue evaluating the rest of the tree on completion. _Keep in mind that some Nodes can be considered uninterruptable, meaning the tree cannot progress on subsequent ticks until the uninterruptable branch/node has been completed._
 
@@ -94,7 +92,7 @@ end
 
 _**Note:** The above is a simplified version of the tree. Please see the [code](Assets/Scripts/AI/Controller/AIBehaviourTreeController.cs) for a more 'code accurate' view._
 
-##### Branching
+#### Branching
 When the BT branches, there may be some Nodes with dependencies that need to be reset in order to be used again the next time the Node(s) is active. 
 
 Each tick, I log the Nodes being executed. Should the system determine some Nodes are no longer being executed, it will 'reset' those no longer active and log these new Nodes in their place. This helps when certain Nodes or sets of Branches are interrupted by branching further up the tree, causing these Nodes' context to be invalidated.
@@ -158,9 +156,8 @@ Starting over, there are things I'd do differently as I understand the workings 
 _Doors are very annoying._
 
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/36480371/234687024-6575be4c-a1e5-4218-a503-e924fd352fd2.png" width="1000">
-<img src="https://user-images.githubusercontent.com/36480371/181758495-9e50acea-ed20-44f9-9d3a-646dfe399be5.jpg" width="1000">
-<img src="https://user-images.githubusercontent.com/36480371/181758507-ceb21fde-157d-4287-97bc-9019e13e3b86.jpg" width="1000">
-<img src="https://user-images.githubusercontent.com/36480371/181758513-c8170b2c-ab1e-4ffc-9ff8-d363d104388c.jpg" width="1000">
-<img src="https://user-images.githubusercontent.com/36480371/234688986-258e5ff5-8179-40bd-a0fc-cd3af9686aee.png" width="1000">
-<img src="https://user-images.githubusercontent.com/36480371/234688991-a3a6ce31-5f04-42fd-b686-68c62700f222.png" width="1000">
+![2023-08-28 10-35-48](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/44a30342-99e3-49ef-a3c9-a631f2f476df)
+![2023-08-28 09-43-43](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/35dacd73-5344-4720-9997-040d97f3027b)
+![2023-08-28 10-14-40](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/503bc616-a1f7-4ef9-852c-3c114b0e6f84)
+![2023-08-28 10-29-32](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/1f756a98-73d1-444a-a302-744e13982ffb)
+![2023-08-28 09-58-48](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/76728b52-8bec-4b03-a448-3942e861878d)
