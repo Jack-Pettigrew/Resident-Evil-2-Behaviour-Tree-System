@@ -6,13 +6,6 @@ using DD.UI;
 using DD.Animation;
 using DD.Systems.InventorySystem;
 
-// ! NOTE TO SELF:
-// THIS CLASS SHOULD NOT BE USING WEAPONS
-// SEPARATE CLASS/COMPONENT SHOULD BE
-// AT MOST THE WEAPON SHOULD BE LISTENING TO THE INPUT MANAGER AFTER THIS CLASS HAS EQUIPPED IT
-// EQUIPMENT SHOULD BE RESPONSIBLE FOR SETTING UP THEIR OWN CONTROLS
-// THIS ALLOWS FOR WEAPONS TO OPTIONALLY HAVE RIGHT CLICK ACTIONS SINCE THEY'RE SETTING UP THE OPTIONS THEMSELVES
-
 namespace DD.Core.Combat
 {
     public class EquipmentManager : MonoBehaviour, IAnimatorEvent<PlayerAnimationController>
@@ -201,9 +194,8 @@ namespace DD.Core.Combat
                 // Unequip current weapon
                 ActiveWeapon.SetCanUse(false);
 
-                // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
+                // Animate weapon swap with gameobject hide/move callback on complete
 
-                // **** TEST SWAP ****
                 ActiveWeapon.gameObject.SetActive(false);
             }
 
@@ -216,10 +208,9 @@ namespace DD.Core.Combat
                 // Set weapon equiped
                 ActiveWeapon.SetCanUse(true);
 
-                // TODO: Animate weapon swap with gameobject hide/move callback on complete (possibly WeaponSlot class as helper?)
-                // TODO: Update animator with appropriate weapon hold pose (including idle if no weapon)
+                // Animate weapon swap with gameobject hide/move callback on complete
+                // Update animator with appropriate weapon hold pose (including idle if no weapon)
 
-                // **** TEST SWAP ****
                 ActiveWeapon.gameObject.SetActive(true);
             }
             // ...else ensure default idle anim + settings are being used
@@ -227,8 +218,6 @@ namespace DD.Core.Combat
             {
                 // ensure default
             }
-
-            // TODO: torso animations may need it's own state flow to ensure correct animations are selected e.g. gun idle, to aiming, to swap, to new gun pose, to disabled torso layer, to enabled torso layer
 
             OnWeaponSwapped?.Invoke();
         }

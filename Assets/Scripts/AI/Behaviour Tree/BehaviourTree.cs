@@ -89,18 +89,11 @@ namespace DD.AI.BehaviourTreeSystem
                 default:
                     break;
             }
-
-            /**
-            * TODO:
-            * Handle different Node States diferently
-            * - Failed
-            * - Reseted (needs accounting for within each node too)
-            * 
-            * Optimisation of Tree traversal and node execution
-            */
-
         }
 
+        /// <summary>
+        /// Updates any priority Nodes (such as those marked as uninterruptable).
+        /// </summary>
         private void UpdatePriorityNodes()
         {
             priorityNodes.Peek().UpdateNode();
