@@ -41,6 +41,8 @@ namespace DD.AI.Controllers
             BehaviourTree.Blackboard.AddToBlackboard("SearchRoomCounter", 0);
             BehaviourTree.Blackboard.AddToBlackboard("ChaseTimer", 5.0f);
 
+            return new MoveTo<PlayerController>(BehaviourTree, "Player");
+
             // Creating actual behaviour tree
             Selector root = new Selector(BehaviourTree,
                 new List<Node> {
