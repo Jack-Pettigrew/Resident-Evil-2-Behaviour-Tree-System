@@ -20,10 +20,10 @@ scopes = {
 	"last_search.2138236A" = ""
 	"OpenInspectorPreview.2138236A" = "0"
 	"currentGroup.2138236A" = "asset"
-	"last_search.3BE40471" = "t:PlayableDirector"
+	"last_search.3BE40471" = "t:FlickerLight"
 	"OpenInspectorPreview.3BE40471" = "0"
 	"currentGroup.3BE40471" = "all"
-	"last_search.110DEAF1" = "h: t:MeshRenderer"
+	"last_search.110DEAF1" = ""
 	"OpenInspectorPreview.110DEAF1" = "0"
 	"currentGroup.110DEAF1" = "scene"
 	"last_search.E8DA15E5" = "find: assets/models/*fbx"
@@ -83,8 +83,12 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
-	"t:PlayableDirector"
+	"t:FlickerLight"
 	""
+	"t:RoomEnvironmentObjectLight"
+	"p: t:RoomEnvironmentController"
+	"p:"
+	"t:PlayableDirector"
 	"t:CheckIfAudible"
 	"t:Camera"
 	"camera"
@@ -99,10 +103,6 @@ recentSearches = [
 	"t:Light Light"
 	"h: t="
 	"h: t=Component>=1024"
-	"h: t=C vertices>=1024"
-	"h: t=MeshFilter vertices>=1024"
-	"shelf"
-	"receptio"
 ]
 searchItemFavorites = [
 ]

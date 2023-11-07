@@ -41,8 +41,6 @@ namespace DD.AI.Controllers
             BehaviourTree.Blackboard.AddToBlackboard("SearchRoomCounter", 0);
             BehaviourTree.Blackboard.AddToBlackboard("ChaseTimer", 5.0f);
 
-            return new MoveTo<PlayerController>(BehaviourTree, "Player");
-
             // Creating actual behaviour tree
             Selector root = new Selector(BehaviourTree,
                 new List<Node> {
@@ -53,10 +51,10 @@ namespace DD.AI.Controllers
                     }),
 
                     // ! Player Dead
-                    // new Sequence(BehaviourTree, new List<Node> {
-                    //     new IsPlayerDead(BehaviourTree),
-                    //     new IdleNode(BehaviourTree)
-                    // }),
+                    new Sequence(BehaviourTree, new List<Node> {
+                        new IsPlayerDead(BehaviourTree),
+                        new IdleNode(BehaviourTree)
+                    }),
 
                     // ! Retreat
                     new Sequence(BehaviourTree, new List<Node> {
@@ -104,7 +102,6 @@ namespace DD.AI.Controllers
 
                             // Usual Attacking Selector
                             new Selector(BehaviourTree, new List<Node> {
-                                // * BECAUSE THIS IS ABOVE THE ATTACK MOVE LOGIC HE DOESN'T MOVE WHEN PLAYER IS IN VIEW WHEN ANIMATION IS PLAYING - maybe make selector between this and attacking selector?
                                 // Decrement Chase Timer
                                 new Sequence(BehaviourTree, new List<Node> {
                                     new AlterBlackboardVariableByDeltaTimeFloat(BehaviourTree, "ChaseTimer", AffectValueType.DECREMENT),

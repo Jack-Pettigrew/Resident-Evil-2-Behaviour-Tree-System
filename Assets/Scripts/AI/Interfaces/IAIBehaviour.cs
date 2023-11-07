@@ -19,5 +19,5 @@ namespace DD.AI.Controllers
         /// </summary>
         /// <returns>The component if found; otherwise null if not.</returns>
         public T GetAIComponent<T>();
-    } 
+    }
 }
