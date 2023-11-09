@@ -636,7 +636,7 @@ MonoBehaviour:
   <IsStunned>k__BackingField: 0
   currentStunAmount: 0
   stunThreshold: 100
-  stunDepletionSpeed: 1
+  stunDepletionSpeed: 5
   stunTimerLength: 8
   OnStunned:
     m_PersistentCalls:
