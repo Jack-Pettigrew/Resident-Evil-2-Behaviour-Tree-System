@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1349
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 116
+  controlID: 7655
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 117
+  controlID: 7656
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 64
+  controlID: 7573
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 118
+  controlID: 7657
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -265,13 +265,13 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1612
-    height: 939
+    height: 848
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 14}
   m_Panes:
-  - {fileID: 17}
   - {fileID: 14}
+  - {fileID: 17}
   - {fileID: 18}
   m_Selected: 0
   m_LastSelected: 1
@@ -291,11 +291,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 939
+    y: 848
     width: 1612
-    height: 360
-  m_MinSize: {x: 562, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+    height: 451
+  m_MinSize: {x: 560, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 19}
@@ -324,8 +324,8 @@ MonoBehaviour:
     y: 0
     width: 581
     height: 1299
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 24}
@@ -336,315 +336,6 @@ MonoBehaviour:
   m_Selected: 0
   m_LastSelected: 3
 --- !u!114 &14
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Game
-    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000,
-      type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 367
-    y: 73
-    width: 1610
-    height: 918
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_SerializedViewNames: []
-  m_SerializedViewValues: []
-  m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
-  m_TargetDisplay: 0
-  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 2560, y: 1440}
-  m_TextureFilterMode: 0
-  m_TextureHideFlags: 61
-  m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 0
-  m_UseMipMap: 0
-  m_VSyncEnabled: 0
-  m_Gizmos: 0
-  m_Stats: 0
-  m_SelectedSizes: 05000000000000000000000000000000000000000000000000000000000000000000000000000000
-  m_ZoomArea:
-    m_HRangeLocked: 0
-    m_VRangeLocked: 0
-    hZoomLockedByDefault: 0
-    vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -1280
-    m_HBaseRangeMax: 1280
-    m_VBaseRangeMin: -720
-    m_VBaseRangeMax: 720
-    m_HAllowExceedBaseRangeMin: 1
-    m_HAllowExceedBaseRangeMax: 1
-    m_VAllowExceedBaseRangeMin: 1
-    m_VAllowExceedBaseRangeMax: 1
-    m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
-    m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
-    m_EnableSliderZoomHorizontal: 0
-    m_EnableSliderZoomVertical: 0
-    m_UniformScale: 1
-    m_UpDirection: 1
-    m_DrawArea:
-      serializedVersion: 2
-      x: 0
-      y: 21
-      width: 1610
-      height: 897
-    m_Scale: {x: 0.62291664, y: 0.62291664}
-    m_Translation: {x: 805, y: 448.50003}
-    m_MarginLeft: 0
-    m_MarginRight: 0
-    m_MarginTop: 0
-    m_MarginBottom: 0
-    m_LastShownAreaInsideMargins:
-      serializedVersion: 2
-      x: -1292.3077
-      y: -720.00006
-      width: 2584.6155
-      height: 1440.0001
-    m_MinimalGUI: 1
-  m_defaultScale: 0.62291664
-  m_LastWindowPixelSize: {x: 1610, y: 918}
-  m_ClearInEditMode: 1
-  m_NoCameraWarning: 1
-  m_LowResolutionForAspectRatios: 01000000000000000000
-  m_XRRenderMode: 0
-  m_RenderTexture: {fileID: 0}
---- !u!114 &15
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12061, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Hierarchy
-    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000,
-      type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 0
-    y: 73
-    width: 366
-    height: 626
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_SceneHierarchy:
-    m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f4860000
-      m_LastClickedID: 34548
-      m_ExpandedIDs: 28b4ffff2cb4ffff90b4ffff9cb4ffffa0b4ffffd0b4ffffe4b4ffff0efbffff58720000a68100005c890000
-      m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        m_UserData: 0
-        m_IsWaitingForDelay: 0
-        m_IsRenaming: 0
-        m_OriginalEventType: 11
-        m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 8}
-      m_SearchString: 
-    m_ExpandedScenes: []
-    m_CurrenRootInstanceID: 0
-    m_LockTracker:
-      m_IsLocked: 0
-    m_CurrentSortingName: TransformSorting
-  m_WindowGUID: 831d63bce71fa394da98bd08c75253e5
---- !u!114 &16
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
-  m_TitleContent:
-    m_Text: Project
-    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000,
-      type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 0
-    y: 720
-    width: 366
-    height: 631
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_SearchFilter:
-    m_NameFilter: 
-    m_ClassNames: []
-    m_AssetLabels: []
-    m_AssetBundleNames: []
-    m_ReferencingInstanceIDs: 
-    m_SceneHandles: 
-    m_ShowAllHits: 0
-    m_SkipHidden: 0
-    m_SearchArea: 1
-    m_Folders:
-    - Assets
-    m_Globs: []
-    m_OriginalText: 
-    m_ImportLogFlags: 0
-    m_FilterByTypeIntersection: 0
-  m_ViewMode: 0
-  m_StartGridSize: 64
-  m_LastFolders: []
-  m_LastFoldersGridSize: -1
-  m_LastProjectPath: F:\_GitHub\Resident-Evil-2-Hunting-System
-  m_LockTracker:
-    m_IsLocked: 0
-  m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: da9f0000
-    m_LastClickedID: 40922
-    m_ExpandedIDs: 00000000f8a60000bcb30000beb30000c0b30000c2b30000c4b30000c6b30000c8b30000cab30000ccb30000ceb30000d0b30000d2b30000d4b30000d6b30000d8b30000dab30000dcb30000deb30000e0b30000e2b30000e4b30000e6b30000e8b30000eab30000ecb30000eeb30000f0b30000f2b30000f4b30000f6b30000f8b30000fab30000fcb30000feb3000000b4000002b4000004b4000006b4000008b400000ab400000cb400000eb4000010b4000012b4000014b4000016b4000018b400001ab400001cb400001eb4000020b4000022b4000024b4000026b4000028b400002ab400002cb400002eb4000030b4000032b4000034b4000036b4000038b400003ab400003cb400003eb4000040b4000042b4000044b4000046b4000048b400004ab400004cb400004eb4000050b4000052b4000054b4000056b4000058b400005ab400005cb40000
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
-    m_SearchString: 
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-  m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000f8a60000bcb30000beb30000c0b30000c2b30000c4b30000c6b30000c8b30000cab30000ccb30000ceb30000d0b30000d2b30000d4b30000d6b30000d8b30000dab30000dcb30000deb30000e0b30000e2b30000e4b30000e6b30000e8b30000eab30000ecb30000eeb30000f0b30000f2b30000f4b30000f6b30000f8b30000fab30000fcb30000feb3000000b4000002b4000004b4000006b4000008b400000ab400000cb400000eb4000010b4000012b4000014b4000016b4000018b400001ab400001cb400001eb4000020b4000022b4000024b4000026b4000028b400002ab400002cb400002eb4000030b4000032b4000034b4000036b4000038b400003ab400003cb400003eb4000040b4000042b4000044b4000046b4000048b400004ab400004cb400004eb4000050b4000052b4000054b4000056b4000058b400005ab400005cb40000
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 9}
-    m_SearchString: 
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-  m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-    m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 64
-  m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 115
---- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -668,7 +359,7 @@ MonoBehaviour:
     x: 367
     y: 73
     width: 1610
-    height: 918
+    height: 827
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1079,9 +770,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.33985612, y: 1.2393869, z: 24.915976}
+    m_Target: {x: -2.3709557, y: 1.9868081, z: 0.27171516}
     speed: 2
-    m_Value: {x: 0.33985612, y: 1.2393869, z: 24.915976}
+    m_Value: {x: -2.3709557, y: 1.9868081, z: 0.27171516}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1127,13 +818,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.00938327, y: -0.21138671, z: -0.0020357904, w: 0.977386}
+    m_Target: {x: 0.06733922, y: 0.83762926, z: -0.10610169, w: 0.5315908}
     speed: 2
-    m_Value: {x: -0.009382989, y: -0.21138039, z: -0.0020357294, w: 0.97735673}
+    m_Value: {x: 0.06749818, y: 0.8368294, z: -0.10600038, w: 0.53284574}
   m_Size:
-    m_Target: 0.23414764
+    m_Target: 0.19873635
     speed: 2
-    m_Value: 0.23414764
+    m_Value: 0.19873635
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1158,6 +849,315 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
+--- !u!114 &15
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12061, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Hierarchy
+    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 73
+    width: 366
+    height: 626
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SceneHierarchy:
+    m_TreeViewState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 925effff0a61ffff4e65ffff1c80ffff8cf4ffff
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 8}
+      m_SearchString: 
+    m_ExpandedScenes: []
+    m_CurrenRootInstanceID: 0
+    m_LockTracker:
+      m_IsLocked: 0
+    m_CurrentSortingName: TransformSorting
+  m_WindowGUID: 831d63bce71fa394da98bd08c75253e5
+--- !u!114 &16
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_TitleContent:
+    m_Text: Project
+    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 720
+    width: 366
+    height: 631
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SearchFilter:
+    m_NameFilter: 
+    m_ClassNames: []
+    m_AssetLabels: []
+    m_AssetBundleNames: []
+    m_ReferencingInstanceIDs: 
+    m_SceneHandles: 
+    m_ShowAllHits: 0
+    m_SkipHidden: 0
+    m_SearchArea: 1
+    m_Folders:
+    - Assets/Scenes/_Video Scenes
+    m_Globs: []
+    m_OriginalText: 
+    m_ImportLogFlags: 0
+    m_FilterByTypeIntersection: 0
+  m_ViewMode: 0
+  m_StartGridSize: 64
+  m_LastFolders: []
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: F:\_GitHub\Resident-Evil-2-Hunting-System
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: da9f0000
+    m_LastClickedID: 40922
+    m_ExpandedIDs: ffffffff00000000ea2e0000f22e0000eead000010b6000012b6000014b6000016b6000018b600001ab600001cb600001eb6000020b6000022b6000024b6000026b6000028b600002ab600002cb600002eb6000030b6000032b6000034b6000036b6000038b600003ab600003cb600003eb6000040b6000042b6000044b6000046b6000048b600004ab600004cb600004eb6000050b6000052b6000054b6000056b6000058b600005ab600005cb600005eb6000060b6000062b6000064b6000066b6000068b600006ab600006cb600006eb6000070b6000072b6000074b6000076b6000078b600007ab600007cb600007eb6000080b6000082b6000084b6000086b6000088b600008ab600008cb600008eb6000090b6000092b6000094b6000096b6000098b600009ab600009cb600009eb60000a0b60000a2b60000a4b60000a6b60000a8b60000aab60000acb60000aeb60000b0b6000042b80000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 0}
+    m_SearchString: 
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+  m_AssetTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: ffffffff00000000ea2e0000f22e0000eead000010b6000012b6000014b6000016b6000018b600001ab600001cb600001eb6000020b6000022b6000024b6000026b6000028b600002ab600002cb600002eb6000030b6000032b6000034b6000036b6000038b600003ab600003cb600003eb6000040b6000042b6000044b6000046b6000048b600004ab600004cb600004eb6000050b6000052b6000054b6000056b6000058b600005ab600005cb600005eb6000060b6000062b6000064b6000066b6000068b600006ab600006cb600006eb6000070b6000072b6000074b6000076b6000078b600007ab600007cb600007eb6000080b6000082b6000084b6000086b6000088b600008ab600008cb600008eb6000090b6000092b6000094b6000096b6000098b600009ab600009cb600009eb60000a0b60000a2b60000a4b60000a6b60000a8b60000aab60000acb60000aeb60000b0b6000042b80000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 9}
+    m_SearchString: 
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+  m_ListAreaState:
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c6230000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 0}
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+    m_NewAssetIndexInList: -1
+    m_ScrollPosition: {x: 0, y: 0}
+    m_GridSize: 64
+  m_SkipHiddenPackages: 0
+  m_DirectoriesAreaWidth: 115
+--- !u!114 &17
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Game
+    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 367
+    y: 73
+    width: 1610
+    height: 827
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 2560, y: 1440}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 0
+  m_Stats: 0
+  m_SelectedSizes: 05000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -1280
+    m_HBaseRangeMax: 1280
+    m_VBaseRangeMin: -720
+    m_VBaseRangeMax: 720
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 0
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 1610
+      height: 806
+    m_Scale: {x: 0.55972224, y: 0.55972224}
+    m_Translation: {x: 805, y: 403.00003}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -1438.2134
+      y: -720
+      width: 2876.4268
+      height: 1440
+    m_MinimalGUI: 1
+  m_defaultScale: 0.55972224
+  m_LastWindowPixelSize: {x: 1610, y: 827}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 01000000000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1391,7 +1391,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 627702
+  m_LastSelectedObjectID: -41854
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1492,9 +1492,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 367
-    y: 1012
+    y: 921
     width: 1610
-    height: 339
+    height: 430
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1694,167 +1694,409 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_WidgetStates:
     m_Keys:
-    - Debug Camera -> Rendering
-    - Debug Camera -> Rendering -> Lit Shader Mode
-    - Debug Camera -> Rendering -> Depth Prepass within Deferred
-    - Debug Camera -> Rendering -> Clear GBuffers
-    - Debug Camera -> Rendering -> Opaque Objects
-    - Debug Camera -> Rendering -> Transparent Objects
-    - Debug Camera -> Rendering -> Decals
-    - Debug Camera -> Rendering -> Decal Layers
-    - Debug Camera -> Rendering -> Transparent Prepass
-    - Debug Camera -> Rendering -> Transparent Postpass
-    - Debug Camera -> Rendering -> Low Resolution Transparent
-    - Debug Camera -> Rendering -> Ray Tracing
-    - Debug Camera -> Rendering -> Custom Pass
-    - Debug Camera -> Rendering -> Motion Vectors
-    - Debug Camera -> Rendering -> Opaque Object Motion
-    - Debug Camera -> Rendering -> Transparent Object Motion
-    - Debug Camera -> Rendering -> Refraction
-    - Debug Camera -> Rendering -> Distortion
-    - Debug Camera -> Rendering -> Rough Distortion
-    - Debug Camera -> Rendering -> Post-process
-    - Debug Camera -> Rendering -> Custom Post-process
-    - Debug Camera -> Rendering -> Stop NaN
-    - Debug Camera -> Rendering -> Depth Of Field
-    - Debug Camera -> Rendering -> Motion Blur
-    - Debug Camera -> Rendering -> Panini Projection
-    - Debug Camera -> Rendering -> Bloom
-    - Debug Camera -> Rendering -> Lens Distortion
-    - Debug Camera -> Rendering -> Chromatic Aberration
-    - Debug Camera -> Rendering -> Vignette
-    - Debug Camera -> Rendering -> Color Grading
-    - Debug Camera -> Rendering -> Film Grain
-    - Debug Camera -> Rendering -> Dithering
-    - Debug Camera -> Rendering -> Anti-aliasing
-    - Debug Camera -> Rendering -> Tonemapping
-    - Debug Camera -> Rendering -> Lens Flare Data Driven
-    - Debug Camera -> Rendering -> After Post-process
-    - Debug Camera -> Rendering -> Depth Test
-    - Debug Camera -> Rendering -> Virtual Texturing
-    - Debug Camera -> Rendering -> Water
-    - Debug Camera -> Rendering -> Asymmetric Projection
-    - Debug Camera -> Rendering -> Screen Coordinates Override
-    - Debug Camera -> Lighting
-    - Debug Camera -> Lighting -> Shadow Maps
-    - Debug Camera -> Lighting -> Contact Shadows
-    - Debug Camera -> Lighting -> Probe Volume
-    - Debug Camera -> Lighting -> Normalize Reflection Probes
-    - Debug Camera -> Lighting -> Screen Space Shadows
-    - Debug Camera -> Lighting -> Shadowmask
-    - Debug Camera -> Lighting -> Screen Space Reflection
-    - Debug Camera -> Lighting -> Transparents
-    - Debug Camera -> Lighting -> Screen Space Global Illumination
-    - Debug Camera -> Lighting -> Screen Space Ambient Occlusion
-    - Debug Camera -> Lighting -> Transmission
-    - Debug Camera -> Lighting -> Fog
-    - Debug Camera -> Lighting -> Volumetrics
-    - Debug Camera -> Lighting -> Reprojection
-    - Debug Camera -> Lighting -> Light Layers
-    - Debug Camera -> Lighting -> Exposure Control
-    - Debug Camera -> Lighting -> Reflection Probe
-    - Debug Camera -> Lighting -> Planar Reflection Probe
-    - Debug Camera -> Lighting -> Metallic Indirect Fallback
-    - Debug Camera -> Lighting -> Sky Reflection
-    - Debug Camera -> Lighting -> Direct Specular Lighting
-    - Debug Camera -> Lighting -> Subsurface Scattering
-    - Debug Camera -> Lighting -> Volumetric Clouds
-    - Debug Camera -> Lighting -> Full Resolution Clouds For Sky
-    - Debug Camera -> Async Compute
-    - Debug Camera -> Async Compute -> Asynchronous Execution
-    - Debug Camera -> Async Compute -> Light List
-    - Debug Camera -> Async Compute -> SS Reflection
-    - Debug Camera -> Async Compute -> SS Ambient Occlusion
-    - Debug Camera -> Async Compute -> Contact Shadows
-    - Debug Camera -> Async Compute -> Volume Voxelizations
-    - Debug Camera -> Light Loop
-    - Debug Camera -> Light Loop -> FPTL For Forward Opaque
-    - Debug Camera -> Light Loop -> Big Tile Prepass
-    - Debug Camera -> Light Loop -> Deferred Tile
-    - Debug Camera -> Light Loop -> Compute Light Evaluation
-    - Debug Camera -> Light Loop -> Compute Light Variants
-    - Debug Camera -> Light Loop -> Compute Material Variants
-    - Random Cam -> Rendering
-    - Random Cam -> Rendering -> Lit Shader Mode
-    - Random Cam -> Rendering -> Depth Prepass within Deferred
-    - Random Cam -> Rendering -> Clear GBuffers
-    - Random Cam -> Rendering -> Opaque Objects
-    - Random Cam -> Rendering -> Transparent Objects
-    - Random Cam -> Rendering -> Decals
-    - Random Cam -> Rendering -> Decal Layers
-    - Random Cam -> Rendering -> Transparent Prepass
-    - Random Cam -> Rendering -> Transparent Postpass
-    - Random Cam -> Rendering -> Low Resolution Transparent
-    - Random Cam -> Rendering -> Ray Tracing
-    - Random Cam -> Rendering -> Custom Pass
-    - Random Cam -> Rendering -> Motion Vectors
-    - Random Cam -> Rendering -> Opaque Object Motion
-    - Random Cam -> Rendering -> Transparent Object Motion
-    - Random Cam -> Rendering -> Refraction
-    - Random Cam -> Rendering -> Distortion
-    - Random Cam -> Rendering -> Rough Distortion
-    - Random Cam -> Rendering -> Post-process
-    - Random Cam -> Rendering -> Custom Post-process
-    - Random Cam -> Rendering -> Stop NaN
-    - Random Cam -> Rendering -> Depth Of Field
-    - Random Cam -> Rendering -> Motion Blur
-    - Random Cam -> Rendering -> Panini Projection
-    - Random Cam -> Rendering -> Bloom
-    - Random Cam -> Rendering -> Lens Distortion
-    - Random Cam -> Rendering -> Chromatic Aberration
-    - Random Cam -> Rendering -> Vignette
-    - Random Cam -> Rendering -> Color Grading
-    - Random Cam -> Rendering -> Film Grain
-    - Random Cam -> Rendering -> Dithering
-    - Random Cam -> Rendering -> Anti-aliasing
-    - Random Cam -> Rendering -> Tonemapping
-    - Random Cam -> Rendering -> Lens Flare Data Driven
-    - Random Cam -> Rendering -> After Post-process
-    - Random Cam -> Rendering -> Depth Test
-    - Random Cam -> Rendering -> Virtual Texturing
-    - Random Cam -> Rendering -> Water
-    - Random Cam -> Rendering -> Asymmetric Projection
-    - Random Cam -> Rendering -> Screen Coordinates Override
-    - Random Cam -> Lighting
-    - Random Cam -> Lighting -> Shadow Maps
-    - Random Cam -> Lighting -> Contact Shadows
-    - Random Cam -> Lighting -> Probe Volume
-    - Random Cam -> Lighting -> Normalize Reflection Probes
-    - Random Cam -> Lighting -> Screen Space Shadows
-    - Random Cam -> Lighting -> Shadowmask
-    - Random Cam -> Lighting -> Screen Space Reflection
-    - Random Cam -> Lighting -> Transparents
-    - Random Cam -> Lighting -> Screen Space Global Illumination
-    - Random Cam -> Lighting -> Screen Space Ambient Occlusion
-    - Random Cam -> Lighting -> Transmission
-    - Random Cam -> Lighting -> Fog
-    - Random Cam -> Lighting -> Volumetrics
-    - Random Cam -> Lighting -> Reprojection
-    - Random Cam -> Lighting -> Light Layers
-    - Random Cam -> Lighting -> Exposure Control
-    - Random Cam -> Lighting -> Reflection Probe
-    - Random Cam -> Lighting -> Planar Reflection Probe
-    - Random Cam -> Lighting -> Metallic Indirect Fallback
-    - Random Cam -> Lighting -> Sky Reflection
-    - Random Cam -> Lighting -> Direct Specular Lighting
-    - Random Cam -> Lighting -> Subsurface Scattering
-    - Random Cam -> Lighting -> Volumetric Clouds
-    - Random Cam -> Lighting -> Full Resolution Clouds For Sky
-    - Random Cam -> Async Compute
-    - Random Cam -> Async Compute -> Asynchronous Execution
-    - Random Cam -> Async Compute -> Light List
-    - Random Cam -> Async Compute -> SS Reflection
-    - Random Cam -> Async Compute -> SS Ambient Occlusion
-    - Random Cam -> Async Compute -> Contact Shadows
-    - Random Cam -> Async Compute -> Volume Voxelizations
-    - Random Cam -> Light Loop
-    - Random Cam -> Light Loop -> FPTL For Forward Opaque
-    - Random Cam -> Light Loop -> Big Tile Prepass
-    - Random Cam -> Light Loop -> Deferred Tile
-    - Random Cam -> Light Loop -> Compute Light Evaluation
-    - Random Cam -> Light Loop -> Compute Light Variants
-    - Random Cam -> Light Loop -> Compute Material Variants
+    - Display Stats -> Frame Stats
+    - Display Stats -> Bottlenecks
+    - Display Stats -> Update every second with average
+    - Display Stats -> Detailed Stats
+    - Display Stats -> Count Rays (MRays/Frame)
+    - Decals -> Decals Affecting Transparent Objects -> Display Atlas
+    - Decals -> Decals Affecting Transparent Objects -> Mip Level
+    - Material -> Common Material Properties
+    - Material -> Material
+    - Material -> Engine
+    - Material -> Attributes
+    - Material -> Properties
+    - Material -> GBuffer
+    - Material -> Material Validator
+    - Material ->  -> Too High Color
+    - Material ->  -> Too Low Color
+    - Material ->  -> Not A Pure Metal Color
+    - Material ->  -> Pure Metals
+    - Material ->  -> Override Global Material Texture Mip Bias
+    - Material ->  -> Debug Global Material Texture Mip Bias Value
+    - Lighting -> Shadows -> Shadow Debug Mode
+    - Lighting -> Shadows ->  -> Use Selection
+    - Lighting -> Shadows ->  -> Shadow Map Index
+    - Lighting -> Shadows -> Global Shadow Scale Factor
+    - Lighting -> Shadows -> Clear Shadow Atlas
+    - Lighting -> Shadows -> Shadow Range Minimum Value
+    - Lighting -> Shadows -> Shadow Range Maximum Value
+    - Lighting -> Lighting -> Show Lights By Type
+    - Lighting -> Lighting -> Show Lights By Type -> Directional Lights
+    - Lighting -> Lighting -> Show Lights By Type -> Punctual Lights
+    - Lighting -> Lighting -> Show Lights By Type -> Area Lights
+    - Lighting -> Lighting -> Show Lights By Type -> Reflection Probes
+    - Lighting -> Lighting -> Exposure
+    - Lighting -> Lighting -> Exposure -> DebugMode
+    - Lighting -> Lighting -> Exposure -> Display Mask Only
+    - Lighting -> Lighting -> Exposure ->  -> Show Scene Overlay
+    - Lighting -> Lighting -> Exposure ->  -> Show Tonemap Curve
+    - Lighting -> Lighting -> Exposure ->  -> Center Around Exposure
+    - Lighting -> Lighting -> Exposure -> Display RGB Histogram
+    - Lighting -> Lighting -> Exposure -> Debug Exposure Compensation
+    - Lighting -> Lighting -> HDR
+    - Lighting -> Lighting -> HDR -> DebugMode
+    - Lighting -> Lighting -> Lighting Debug Mode
+    - Lighting -> Lighting -> Light Hierarchy Debug Mode
+    - Lighting -> Lighting -> Light Layers Visualization
+    - Lighting -> Lighting ->  -> Use Selected Light
+    - Lighting -> Lighting ->  -> Switch To Light's Shadow Layers
+    - Lighting -> Lighting ->  -> Filter Layers
+    - Lighting -> Lighting ->  -> Layers Color
+    - 'Lighting -> Lighting ->  -> Layers Color -> 0: Light Layer default'
+    - 'Lighting -> Lighting ->  -> Layers Color -> 1: Light Layer 1'
+    - 'Lighting -> Lighting ->  -> Layers Color -> 2: Light Layer 2'
+    - 'Lighting -> Lighting ->  -> Layers Color -> 3: Light Layer 3'
+    - 'Lighting -> Lighting ->  -> Layers Color -> 4: Light Layer 4'
+    - 'Lighting -> Lighting ->  -> Layers Color -> 5: Light Layer 5'
+    - 'Lighting -> Lighting ->  -> Layers Color -> 6: Light Layer 6'
+    - 'Lighting -> Lighting ->  -> Layers Color -> 7: Light Layer 7'
+    - Lighting -> Material Overrides -> Override Smoothness
+    - Lighting -> Material Overrides ->  -> Smoothness
+    - Lighting -> Material Overrides -> Override Albedo
+    - Lighting -> Material Overrides ->  -> Albedo
+    - Lighting -> Material Overrides -> Override Normal
+    - Lighting -> Material Overrides -> Override Specular Color
+    - Lighting -> Material Overrides ->  -> Specular Color
+    - Lighting -> Material Overrides -> Override Ambient Occlusion
+    - Lighting -> Material Overrides ->  -> Ambient Occlusion
+    - Lighting -> Material Overrides -> Override Emissive Color
+    - Lighting -> Material Overrides ->  -> Emissive Color
+    - Lighting -> Fullscreen Debug Mode
+    - Lighting ->  -> Screen Space Shadow Index
+    - Lighting ->  -> Ray Tracing Acceleration Structure View
+    - Lighting ->  -> Ray Tracing Acceleration Structure Mode
+    - Lighting ->  -> Debug Mip
+    - Lighting ->  -> Enable Depth Remap
+    - Lighting ->  ->  -> Depth Range Min Value
+    - Lighting ->  ->  -> Depth Range Max Value
+    - Lighting ->  -> Light Index
+    - Lighting -> Tile/Cluster Debug
+    - Lighting ->  -> Tile/Cluster Debug By Category
+    - Lighting ->  ->  -> Cluster Debug Mode
+    - Lighting ->  ->  -> Cluster Distance
+    - Lighting -> Display Sky Reflection
+    - Lighting ->  -> Sky Reflection Mipmap
+    - Lighting -> Display Light Volumes
+    - Lighting ->  -> Light Volume Debug Type
+    - Lighting ->  -> Max Debug Light Count
+    - Lighting -> Display Cookie Atlas
+    - Lighting ->  -> Mip Level
+    - Lighting ->  -> Clear Cookie Atlas
+    - Lighting -> Display Reflection Probe Atlas
+    - Lighting ->  -> Slice
+    - Lighting ->  -> Clear Reflection Probe Atlas
+    - Lighting ->  -> Apply Exposure
+    - Lighting -> Debug Overlay Screen Ratio
+    - Rendering -> Fullscreen Debug Mode
+    - Rendering ->  -> Max Overdraw Count
+    - Rendering ->  -> Max Quad Cost
+    - Rendering ->  -> Max Vertex Density
+    - Rendering ->  -> Min Motion Vector Length (in pixels)
+    - Rendering -> Mip Maps
+    - Rendering ->  -> Terrain Texture
+    - Rendering -> Color Picker -> Debug Mode
+    - Rendering -> Color Picker -> Font Color
+    - Rendering -> False Color Mode
+    - Rendering ->  -> Range Threshold 0
+    - Rendering ->  -> Range Threshold 1
+    - Rendering ->  -> Range Threshold 2
+    - Rendering ->  -> Range Threshold 3
+    - Rendering -> Freeze Camera For Culling
+    - Rendering -> Color Monitors -> Waveform
+    - Rendering -> Color Monitors -> #WaveformContainer -> Exposure
+    - Rendering -> Color Monitors -> #WaveformContainer -> Parade mode
+    - Rendering -> Color Monitors -> Vectorscope
+    - Rendering -> Color Monitors -> #VectorscopeContainer -> Exposure
+    - Rendering -> Color Monitors -> Size
+    - Rendering -> HDRP Render Graph -> Clear Render Targets At Creation
+    - Rendering -> HDRP Render Graph -> Disable Pass Culling
+    - Rendering -> HDRP Render Graph -> Immediate Mode
+    - Rendering -> HDRP Render Graph -> Enable Logging
+    - Scene Camera -> Rendering
+    - Scene Camera -> Rendering -> Lit Shader Mode
+    - Scene Camera -> Rendering -> Depth Prepass within Deferred
+    - Scene Camera -> Rendering -> Clear GBuffers
+    - Scene Camera -> Rendering -> Opaque Objects
+    - Scene Camera -> Rendering -> Transparent Objects
+    - Scene Camera -> Rendering -> Decals
+    - Scene Camera -> Rendering -> Decal Layers
+    - Scene Camera -> Rendering -> Transparent Prepass
+    - Scene Camera -> Rendering -> Transparent Postpass
+    - Scene Camera -> Rendering -> Low Resolution Transparent
+    - Scene Camera -> Rendering -> Ray Tracing
+    - Scene Camera -> Rendering -> Custom Pass
+    - Scene Camera -> Rendering -> Motion Vectors
+    - Scene Camera -> Rendering -> Opaque Object Motion
+    - Scene Camera -> Rendering -> Transparent Object Motion
+    - Scene Camera -> Rendering -> Refraction
+    - Scene Camera -> Rendering -> Distortion
+    - Scene Camera -> Rendering -> Rough Distortion
+    - Scene Camera -> Rendering -> Post-process
+    - Scene Camera -> Rendering -> Custom Post-process
+    - Scene Camera -> Rendering -> Stop NaN
+    - Scene Camera -> Rendering -> Depth Of Field
+    - Scene Camera -> Rendering -> Motion Blur
+    - Scene Camera -> Rendering -> Panini Projection
+    - Scene Camera -> Rendering -> Bloom
+    - Scene Camera -> Rendering -> Lens Distortion
+    - Scene Camera -> Rendering -> Chromatic Aberration
+    - Scene Camera -> Rendering -> Vignette
+    - Scene Camera -> Rendering -> Color Grading
+    - Scene Camera -> Rendering -> Film Grain
+    - Scene Camera -> Rendering -> Dithering
+    - Scene Camera -> Rendering -> Anti-aliasing
+    - Scene Camera -> Rendering -> Tonemapping
+    - Scene Camera -> Rendering -> Lens Flare Data Driven
+    - Scene Camera -> Rendering -> After Post-process
+    - Scene Camera -> Rendering -> Depth Test
+    - Scene Camera -> Rendering -> Virtual Texturing
+    - Scene Camera -> Rendering -> Water
+    - Scene Camera -> Rendering -> Asymmetric Projection
+    - Scene Camera -> Rendering -> Screen Coordinates Override
+    - Scene Camera -> Lighting
+    - Scene Camera -> Lighting -> Shadow Maps
+    - Scene Camera -> Lighting -> Contact Shadows
+    - Scene Camera -> Lighting -> Probe Volume
+    - Scene Camera -> Lighting -> Normalize Reflection Probes
+    - Scene Camera -> Lighting -> Screen Space Shadows
+    - Scene Camera -> Lighting -> Shadowmask
+    - Scene Camera -> Lighting -> Screen Space Reflection
+    - Scene Camera -> Lighting -> Transparents
+    - Scene Camera -> Lighting -> Screen Space Global Illumination
+    - Scene Camera -> Lighting -> Screen Space Ambient Occlusion
+    - Scene Camera -> Lighting -> Transmission
+    - Scene Camera -> Lighting -> Fog
+    - Scene Camera -> Lighting -> Volumetrics
+    - Scene Camera -> Lighting -> Reprojection
+    - Scene Camera -> Lighting -> Light Layers
+    - Scene Camera -> Lighting -> Exposure Control
+    - Scene Camera -> Lighting -> Reflection Probe
+    - Scene Camera -> Lighting -> Planar Reflection Probe
+    - Scene Camera -> Lighting -> Metallic Indirect Fallback
+    - Scene Camera -> Lighting -> Sky Reflection
+    - Scene Camera -> Lighting -> Direct Specular Lighting
+    - Scene Camera -> Lighting -> Subsurface Scattering
+    - Scene Camera -> Lighting -> Volumetric Clouds
+    - Scene Camera -> Lighting -> Full Resolution Clouds For Sky
+    - Scene Camera -> Async Compute
+    - Scene Camera -> Async Compute -> Asynchronous Execution
+    - Scene Camera -> Async Compute -> Light List
+    - Scene Camera -> Async Compute -> SS Reflection
+    - Scene Camera -> Async Compute -> SS Ambient Occlusion
+    - Scene Camera -> Async Compute -> Contact Shadows
+    - Scene Camera -> Async Compute -> Volume Voxelizations
+    - Scene Camera -> Light Loop
+    - Scene Camera -> Light Loop -> FPTL For Forward Opaque
+    - Scene Camera -> Light Loop -> Big Tile Prepass
+    - Scene Camera -> Light Loop -> Deferred Tile
+    - Scene Camera -> Light Loop -> Compute Light Evaluation
+    - Scene Camera -> Light Loop -> Compute Light Variants
+    - Scene Camera -> Light Loop -> Compute Material Variants
+    - Camera Closer -> Rendering
+    - Camera Closer -> Rendering -> Lit Shader Mode
+    - Camera Closer -> Rendering -> Depth Prepass within Deferred
+    - Camera Closer -> Rendering -> Clear GBuffers
+    - Camera Closer -> Rendering -> Opaque Objects
+    - Camera Closer -> Rendering -> Transparent Objects
+    - Camera Closer -> Rendering -> Decals
+    - Camera Closer -> Rendering -> Decal Layers
+    - Camera Closer -> Rendering -> Transparent Prepass
+    - Camera Closer -> Rendering -> Transparent Postpass
+    - Camera Closer -> Rendering -> Low Resolution Transparent
+    - Camera Closer -> Rendering -> Ray Tracing
+    - Camera Closer -> Rendering -> Custom Pass
+    - Camera Closer -> Rendering -> Motion Vectors
+    - Camera Closer -> Rendering -> Opaque Object Motion
+    - Camera Closer -> Rendering -> Transparent Object Motion
+    - Camera Closer -> Rendering -> Refraction
+    - Camera Closer -> Rendering -> Distortion
+    - Camera Closer -> Rendering -> Rough Distortion
+    - Camera Closer -> Rendering -> Post-process
+    - Camera Closer -> Rendering -> Custom Post-process
+    - Camera Closer -> Rendering -> Stop NaN
+    - Camera Closer -> Rendering -> Depth Of Field
+    - Camera Closer -> Rendering -> Motion Blur
+    - Camera Closer -> Rendering -> Panini Projection
+    - Camera Closer -> Rendering -> Bloom
+    - Camera Closer -> Rendering -> Lens Distortion
+    - Camera Closer -> Rendering -> Chromatic Aberration
+    - Camera Closer -> Rendering -> Vignette
+    - Camera Closer -> Rendering -> Color Grading
+    - Camera Closer -> Rendering -> Film Grain
+    - Camera Closer -> Rendering -> Dithering
+    - Camera Closer -> Rendering -> Anti-aliasing
+    - Camera Closer -> Rendering -> Tonemapping
+    - Camera Closer -> Rendering -> Lens Flare Data Driven
+    - Camera Closer -> Rendering -> After Post-process
+    - Camera Closer -> Rendering -> Depth Test
+    - Camera Closer -> Rendering -> Virtual Texturing
+    - Camera Closer -> Rendering -> Water
+    - Camera Closer -> Rendering -> Asymmetric Projection
+    - Camera Closer -> Rendering -> Screen Coordinates Override
+    - Camera Closer -> Lighting
+    - Camera Closer -> Lighting -> Shadow Maps
+    - Camera Closer -> Lighting -> Contact Shadows
+    - Camera Closer -> Lighting -> Probe Volume
+    - Camera Closer -> Lighting -> Normalize Reflection Probes
+    - Camera Closer -> Lighting -> Screen Space Shadows
+    - Camera Closer -> Lighting -> Shadowmask
+    - Camera Closer -> Lighting -> Screen Space Reflection
+    - Camera Closer -> Lighting -> Transparents
+    - Camera Closer -> Lighting -> Screen Space Global Illumination
+    - Camera Closer -> Lighting -> Screen Space Ambient Occlusion
+    - Camera Closer -> Lighting -> Transmission
+    - Camera Closer -> Lighting -> Fog
+    - Camera Closer -> Lighting -> Volumetrics
+    - Camera Closer -> Lighting -> Reprojection
+    - Camera Closer -> Lighting -> Light Layers
+    - Camera Closer -> Lighting -> Exposure Control
+    - Camera Closer -> Lighting -> Reflection Probe
+    - Camera Closer -> Lighting -> Planar Reflection Probe
+    - Camera Closer -> Lighting -> Metallic Indirect Fallback
+    - Camera Closer -> Lighting -> Sky Reflection
+    - Camera Closer -> Lighting -> Direct Specular Lighting
+    - Camera Closer -> Lighting -> Subsurface Scattering
+    - Camera Closer -> Lighting -> Volumetric Clouds
+    - Camera Closer -> Lighting -> Full Resolution Clouds For Sky
+    - Camera Closer -> Async Compute
+    - Camera Closer -> Async Compute -> Asynchronous Execution
+    - Camera Closer -> Async Compute -> Light List
+    - Camera Closer -> Async Compute -> SS Reflection
+    - Camera Closer -> Async Compute -> SS Ambient Occlusion
+    - Camera Closer -> Async Compute -> Contact Shadows
+    - Camera Closer -> Async Compute -> Volume Voxelizations
+    - Camera Closer -> Light Loop
+    - Camera Closer -> Light Loop -> FPTL For Forward Opaque
+    - Camera Closer -> Light Loop -> Big Tile Prepass
+    - Camera Closer -> Light Loop -> Deferred Tile
+    - Camera Closer -> Light Loop -> Compute Light Evaluation
+    - Camera Closer -> Light Loop -> Compute Light Variants
+    - Camera Closer -> Light Loop -> Compute Material Variants
+    - Volume -> Component
+    - Volume -> Camera
     m_Values:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
