@@ -21,6 +21,12 @@ public class DebugCamera : MonoBehaviour
     private AIBehaviourTreeController tree = null;
 
     private void Awake() {
+        if(!Application.isEditor)
+        {
+            Destroy(this);
+            return;
+        }
+        
         debugCamera = GetComponent<Camera>();
         debugCamera.enabled = false;
         debugCamera.GetComponent<AudioListener>().enabled = active;
@@ -28,7 +34,7 @@ public class DebugCamera : MonoBehaviour
         tree = FindObjectOfType<AIBehaviourTreeController>();
     }
 
-    private void Update() {
+    private void Update() {        
         if(Input.GetKeyDown(KeyCode.P))
         {
             ToggleDebugCamera();
@@ -38,8 +44,6 @@ public class DebugCamera : MonoBehaviour
         {
             PauseTime();
         }
-
-        if(Input.GetKeyDown(KeyCode.T)) tree.enabled = !tree.enabled;
 
         if(active)
         {
