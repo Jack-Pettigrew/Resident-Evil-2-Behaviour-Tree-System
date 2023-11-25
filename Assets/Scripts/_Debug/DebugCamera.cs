@@ -41,12 +41,12 @@ public class DebugCamera : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.T)) tree.enabled = !tree.enabled;
 
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            ScreenCapture.CaptureScreenshot(DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png", 1);
+        }
         if(active)
         {
-            if(Input.GetKeyDown(KeyCode.Return))
-            {
-                ScreenCapture.CaptureScreenshot(DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".png", 1);
-            }
 
             if(Input.GetKeyDown(KeyCode.I))
             {

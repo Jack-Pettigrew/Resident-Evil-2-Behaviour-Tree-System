@@ -49,11 +49,20 @@ namespace DD.Systems.InventorySystem
         /// </summary>
         public event Action<ItemData> OnCantAddItem;
 
+        public EquipmentItem equipmentItem;
+
         private void Awake()
         {
             inventory = new List<ItemSlot>();
 
             player = FindObjectOfType<PlayerController>();
+        }
+
+        private void Update() {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                AddItem(equipmentItem, 1);
+            }
         }
 
         public bool AddItem(ItemData item, int amountToAdd)
