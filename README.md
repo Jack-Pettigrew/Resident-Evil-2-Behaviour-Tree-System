@@ -1,22 +1,23 @@
 ![Cropped Reception Chase](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/c2dafdd8-13fe-43df-a983-789098821c8b)
 
 # Behaviour Tree AI Study: Mr X - Resident Evil 2 Remake
-A technical exploration and recreation of the '_Mr. X_' AI system from _Resident Evil 2 Remake (2019)_ using my own implementation of a _Behaviour Tree (BT)_ system. This project serves as my first dive into video game AI by creating a BT from the ground up.
+A technical exploration and recreation of the '_Mr. X_' AI system from _Resident Evil 2 Remake (2019)_ using my own implementation of a _Behaviour Tree (BT)_ system within Unity. This project serves as my first proper dive into video game AI outside of Finite State Machines (FSM).
 
-_Mr. X_ is a video game AI that hunts the player through the level, stalking the halls and searching rooms. I've attempted to reproduce that behaviour to learn how to create a basic BT system.
+_Mr. X_, a character from _Capcom's_ hit game _Resident Evil 2 Remake (2019)_, is a video game AI that hunts the player through the level, moving through halls to search each room for them. Using my BT system, I've attempted to reproduce this behaviour to deepen my understanding of how BT systems work.
 
 ## Features
-- A project exploring video game AI, recreating _RE2’s Mr. X_ with a Behaviour Tree **built from scratch** within Unity.
-- **Composite** and **Action nodes** resembling patrol, search, chase, attack and other behaviours.
+- Custom Behaviour Tree **built from the ground up** with behaviour mimicking _RE2’s Mr. X_ within Unity.
+- Various Node types such as **Composite**, **Action**, **Decorator** and more to create patrol, search, chase and attack behaviours.
 - **Room System** with AI Door handling for Room-to-Room navigation.
+- **Door Handling solution** enabling the AI to interact with and navigate through Doors effectively.
 - **Object-Oriented architecture** using inheritance to define type-based and **abstract logic**.
 - Room **real-time lighting optimisation** techniques.
 - **Fully playable vertical slice** with **traditional gameplay systems** to test AI implementation in an in-game setting.
 
 ## The AI of Mr X
-_Resident Evil 2 Remake (2019)_ reintroduces the innovative series staple hunter AI character prowling room to room, searching for the player, chasing them down until they escape or... he squashes their face.
+_Resident Evil 2 Remake (2019)_ reintroduces the innovative series staple stalker AI character prowling from room to room, searching for the player and then chasing them down until they escape or... he squashes their face.
 
-The official AI model of _Mr. X_ has yet to be publically disclosed (as far as I'm aware). It could be a Finite State Machine (FSM) as much as it could be a _Behaviour Tree_. Having already experimented with FSMs before, I wanted to see if I could recreate this behaviour by creating my very first BT from the ground up.
+The official AI model of _Mr. X_ has yet to be officially disclosed (as far as I'm aware). It could be a _Finite State Machine_ (FSM) as much as it could be a _Behaviour Tree_. Having already experimented with FSMs before, I wanted to see if I could recreate this behaviour by creating my very first BT from the ground up.
 
 ### Behaviour Tree System
 _Behaviour Trees (BT)_ are an AI model that gets its name from its tree-like structure and has been very popular within game development. It consists of various types of Nodes linked together forming behaviours of mixed complexity.
