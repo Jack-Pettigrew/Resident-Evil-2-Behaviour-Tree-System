@@ -5,6 +5,10 @@ A technical exploration and recreation of the '_Mr. X_' AI system from _Resident
 
 _Mr. X_, a character from _Capcom's_ hit game _Resident Evil 2 Remake (2019)_, is a video game AI that hunts the player through the level, moving through halls to search each room for them. Using my BT system, I've attempted to reproduce this behaviour to deepen my understanding of how BT systems work.
 
+🎮 **Check it out:** [Itch.io](https://jackpettigrew.itch.io/game-ai-study-mr-x-re2)
+
+🖥️ **Watch the Devlog:** [I Made Mr X's AI from Resident Evil 2 Remake | Devlog](https://youtu.be/6pg5opPhGF4)
+
 ## Features
 - Custom Behaviour Tree **built from the ground up** with behaviour mimicking _RE2’s Mr. X_ within Unity.
 - Various Node types such as **Composite**, **Action**, **Decorator** and more to create patrol, search, chase and attack behaviours.
