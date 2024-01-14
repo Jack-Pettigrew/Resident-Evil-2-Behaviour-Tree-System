@@ -5,9 +5,9 @@ A technical exploration and recreation of the '_Mr. X_' AI system from _Resident
 
 _Mr. X_, a character from _Capcom's_ hit game _Resident Evil 2 Remake (2019)_, is a video game AI that hunts the player through the level, moving through halls to search each room for them. Using my BT system, I've attempted to reproduce this behaviour to deepen my understanding of how BT systems work.
 
-🎮 **Check it out:** [Itch.io](https://jackpettigrew.itch.io/game-ai-study-mr-x-re2)
+🎮 **Check it out:** <a href="https://jackpettigrew.itch.io/game-ai-study-mr-x-re2" target="_blank">Itch.io</a>
 
-🖥️ **Watch the Devlog:** [I Made Mr X's AI from Resident Evil 2 Remake | Devlog](https://youtu.be/6pg5opPhGF4)
+🖥️ **Watch the Devlog:** <a href="https://youtu.be/6pg5opPhGF4" target="_blank">I Made Mr X's AI from Resident Evil 2 Remake | Devlog</a>
 
 ## Features
 - Custom Behaviour Tree **built from the ground up** with behaviour mimicking _RE2’s Mr. X_ within Unity.
@@ -95,7 +95,8 @@ subgraph Room Navigation
 end
 ```
 
-_**Note:** The above is a simplified version of the tree. Please see the [code](Assets/Scripts/AI/Controller/AIBehaviourTreeController.cs) for a more 'code accurate' view._
+> [!NOTE]
+> The chart above is a simplified version of the tree. Please see the [code](Assets/Scripts/AI/Controller/AIBehaviourTreeController.cs) for the literal implementation.
 
 #### Branching
 When the BT branches, there may be some Nodes with dependencies that need to be reset in order to be used again the next time the Node(s) is active. 
@@ -161,8 +162,8 @@ Starting over, there are things I'd do differently as I understand the workings 
 _Doors are very annoying._
 
 ## Screenshots
-![2023-08-28 10-35-48](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/44a30342-99e3-49ef-a3c9-a631f2f476df)
-![2023-08-28 09-43-43](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/35dacd73-5344-4720-9997-040d97f3027b)
-![2023-08-28 10-14-40](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/503bc616-a1f7-4ef9-852c-3c114b0e6f84)
-![2023-08-28 10-29-32](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/1f756a98-73d1-444a-a302-744e13982ffb)
-![2023-08-28 09-58-48](https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/76728b52-8bec-4b03-a448-3942e861878d)
+<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/44a30342-99e3-49ef-a3c9-a631f2f476df" height="125px"/>
+<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/35dacd73-5344-4720-9997-040d97f3027b" height="125px"/>
+<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/503bc616-a1f7-4ef9-852c-3c114b0e6f84" height="125px"/>
+<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/1f756a98-73d1-444a-a302-744e13982ffb" height="125px"/>
+<img src="https://github.com/Jack-Pettigrew/Resident-Evil-2-Behaviour-Tree-System/assets/36480371/76728b52-8bec-4b03-a448-3942e861878d" height="125px"/>
