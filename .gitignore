@@ -73,8 +73,7 @@ crashlytics-build.properties
 
 # Mac OS Files
 .DS_STORE
-Assets/Models/External
-Assets/Models/External.meta
+[Ee]xternal
+[Ee]xternal.meta
 Assets/Scenes/*/Lightmap-*
 Assets/Scenes/*/ReflectionProbe-*
-Assets/Sprites/External
